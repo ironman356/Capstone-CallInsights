@@ -1,0 +1,118 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyInterpreterInspection" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="false" level="WARNING" enabled_by_default="false">
+      <option name="ignoredPackages">
+        <list>
+          <option value="blas" />
+          <option value="brotlipy" />
+          <option value="bzip2" />
+          <option value="ca-certificates" />
+          <option value="certifi" />
+          <option value="cffi" />
+          <option value="charset-normalizer" />
+          <option value="cpuonly" />
+          <option value="cryptography" />
+          <option value="ffmpeg" />
+          <option value="freetype" />
+          <option value="giflib" />
+          <option value="gmp" />
+          <option value="gnutls" />
+          <option value="idna" />
+          <option value="intel-openmp" />
+          <option value="jpeg" />
+          <option value="lame" />
+          <option value="lcms2" />
+          <option value="ld_impl_linux-64" />
+          <option value="lerc" />
+          <option value="libdeflate" />
+          <option value="libffi" />
+          <option value="libgcc-ng" />
+          <option value="libgomp" />
+          <option value="libiconv" />
+          <option value="libidn2" />
+          <option value="libpng" />
+          <option value="libstdcxx-ng" />
+          <option value="libtasn1" />
+          <option value="libtiff" />
+          <option value="libunistring" />
+          <option value="libwebp" />
+          <option value="libwebp-base" />
+          <option value="lz4-c" />
+          <option value="mkl" />
+          <option value="mkl-service" />
+          <option value="mkl_fft" />
+          <option value="mkl_random" />
+          <option value="ncurses" />
+          <option value="nettle" />
+          <option value="numpy-base" />
+          <option value="openh264" />
+          <option value="openssl" />
+          <option value="pip" />
+          <option value="pycparser" />
+          <option value="pyopenssl" />
+          <option value="pysocks" />
+          <option value="pytorch" />
+          <option value="pytorch-mutex" />
+          <option value="readline" />
+          <option value="requests" />
+          <option value="setuptools" />
+          <option value="six" />
+          <option value="sqlite" />
+          <option value="tk" />
+          <option value="torchaudio" />
+          <option value="torchvision" />
+          <option value="typing_extensions" />
+          <option value="tzdata" />
+          <option value="urllib3" />
+          <option value="wheel" />
+          <option value="xz" />
+          <option value="zlib" />
+          <option value="zstd" />
+          <option value="cloudpickle" />
+          <option value="cycler" />
+          <option value="fonttools" />
+          <option value="gym" />
+          <option value="gym-notices" />
+          <option value="importlib-metadata" />
+          <option value="kiwisolver" />
+          <option value="lz4" />
+          <option value="matplotlib" />
+          <option value="numpy" />
+          <option value="opencv-python" />
+          <option value="packaging" />
+          <option value="pillow" />
+          <option value="pygame" />
+          <option value="pyparsing" />
+          <option value="python-dateutil" />
+          <option value="zipp" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8Inspection" enabled="true" level="INFORMATION" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="E302" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N813" />
+          <option value="N802" />
+          <option value="N803" />
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="assignment2.assignment2.assignment2.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
