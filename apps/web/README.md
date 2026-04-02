@@ -4,7 +4,7 @@ This is a standalone frontend prototype mapping out the CallInsights framework a
 
 ## How to Run
 1. Open your terminal and navigate to this folder:
-   `cd /Users/hatt/Documents/ReactFlow/call-insights-ui`
+   `cd apps/web`
 2. Install dependencies (if not already installed):
    `npm install`
 3. Run the development server:
