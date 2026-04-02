@@ -1,0 +1,16 @@
+# Node modules
+node_modules/
+dist/
+
+# Python environments
+__pycache__/
+*.pyc
+venv/
+.env
+
+# MacOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
