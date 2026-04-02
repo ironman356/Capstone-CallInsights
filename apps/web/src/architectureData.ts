@@ -147,11 +147,11 @@ export const initialEdges: Edge[] = [
   { id: 'e-l3-l4', source: 'layer3', target: 'layer4', style: { strokeWidth: 2, stroke: '#0056b3' } },
   { id: 'e-l4-l6', source: 'layer4', target: 'layer6', style: { strokeWidth: 2, stroke: '#0056b3' } },
   { id: 'e-l6-l5', source: 'layer6', target: 'layer5', style: { strokeWidth: 2, stroke: '#0056b3' } },
-  
+
   // Strategy learning loop
   { id: 'e-l6-layer8', source: 'layer6', target: 'layer8', animated: true, style: { stroke: '#aaa' } },
   { id: 'e-layer8-sps', source: 'layer8', target: 'sps-infra', animated: true, style: { stroke: '#aaa' } },
-  
+
   // Reporting loop
   { id: 'e-l4-l5', source: 'layer4', target: 'layer5', style: { strokeDasharray: '5,5', stroke: '#0056b3' } },
 
@@ -162,7 +162,7 @@ export const initialEdges: Edge[] = [
   { id: 'e-trace4', source: 'layer4', target: 'trace-db', style: { strokeDasharray: '2,2', stroke: '#ccc' } },
   { id: 'e-trace5', source: 'layer6', target: 'trace-db', style: { strokeDasharray: '2,2', stroke: '#ccc' } },
   { id: 'e-trace6', source: 'layer5', target: 'trace-db', style: { strokeDasharray: '2,2', stroke: '#ccc' } },
-  
+
   // UI infrastructure lines
   { id: 'e-trace-api', source: 'trace-db', target: 'api1', style: { stroke: '#ccc' } },
   { id: 'e-api-web', source: 'api1', target: 'web-app', style: { stroke: '#ccc' } },

@@ -13,7 +13,7 @@ export default function PipelineNode({ data }: { data: any }) {
       fontFamily: 'sans-serif'
     }}>
       <Handle type="target" position={Position.Left} style={{ width: '8px', height: '8px', background: '#0056b3' }} />
-      
+
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
         <span style={{ fontSize: '10px', textTransform: 'uppercase', color: '#888', fontWeight: 600, letterSpacing: '0.5px' }}>
           Layer {data.layer}
