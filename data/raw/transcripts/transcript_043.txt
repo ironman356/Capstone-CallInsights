@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Elena. How can I help you today?
+Customer: Hi, this is Jordan Bennett. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Jordan Bennett, and the property zip code is 60618.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I need the payoff amount for closing.
+Agent: I can explain the payoff request process and timing.
+Customer: The title company needs it quickly.
+Agent: We can issue a payoff quote that includes principal, interest, and any applicable fees
+through the good-through date.
+Agent: I have submitted the request and explained the expected turnaround window.
+Customer: Good, that should keep the closing on track.
+Agent: If needed, the authorized third party can follow up using the same loan file reference.
+Customer: All right, I appreciate you explaining it.
+Agent: You are welcome. Is there anything else I can help with on the mortgage account today?
+Customer: No, that covers it.
+Agent: Thank you for calling SPS mortgage servicing. Have a good day.

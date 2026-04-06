@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Devon. How can I help you today?
+Customer: Hi, this is Casey Hayes. I am calling because I need help with my mortgage account.
+Agent: Before we get into the account, I need to verify your full name and property zip code.
+Customer: Sure, this is Casey Hayes, and the property zip code is 75024.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I want to know if I can set up a payment plan.
+Agent: I can go over the general process and the team that handles those reviews.
+Customer: I fell behind after a temporary income issue.
+Agent: Payment plan availability depends on delinquency status and investor guidelines.
+Agent: I outlined the request path and the documents you may need.
+Customer: That gives me something concrete to do.
+Agent: I also reviewed the best callback number for follow-up.
+Customer: All right, I appreciate you explaining it.
+Agent: You are welcome. Is there anything else I can help with on the mortgage account today?
+Customer: No, that covers it.
+Agent: Thank you for calling SPS mortgage servicing. Have a good day.

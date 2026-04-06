@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Tessa. How can I help you today?
+Customer: Hi, this is Drew Sullivan. I am calling because I need help with my mortgage account.
+Agent: Before we get into the account, I need to verify your full name and property zip code.
+Customer: Sure, this is Drew Sullivan, and the property zip code is 60618.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I was transferred before and I still do not have a clear answer.
+Agent: I am sorry about that. Let me review the notes so I do not repeat unnecessary questions.
+Customer: I keep getting bounced around.
+Agent: I can see prior transfer activity and I understand the frustration.
+Customer: If I am transferred again, I want a supervisor.
+Agent: I understand. I am escalating the call now to avoid another incomplete handoff.
+Customer: Please stay on until the handoff is complete.
+Customer: I need this handled quickly.
+Agent: I understand, and I am documenting the escalation before the handoff.
+Customer: Thank you.
+Agent: Please allow normal processing time once the review is completed.
+Agent: Please hold while I connect the next team.

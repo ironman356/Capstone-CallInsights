@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Devon. How can I help you today?
+Customer: Hi, this is Riley Foster. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Riley Foster, and the property zip code is 30318.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I sent proof of hazard insurance, but the account still shows lender-placed coverage.
+Agent: I will review the insurance tracking notes.
+Customer: My payment increased because of it.
+Agent: I see proof was received, but I cannot confirm the update has finished processing.
+Customer: I already sent documents twice and I am tired of repeating this.
+Agent: I understand. I am escalating it to the insurance review team.
+Customer: Thank you, because this should have been fixed.
+Customer: I need this handled quickly.
+Agent: I understand, and I am documenting the escalation before the handoff.
+Customer: Thank you.
+Agent: Please allow normal processing time once the review is completed.
+Agent: Please hold while I connect the next team.
