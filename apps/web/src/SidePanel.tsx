@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import type { FormEvent } from 'react';
+import type { FormEvent, ReactNode } from 'react';
 import type { Node } from '@xyflow/react';
 
 interface SidePanelProps {
@@ -34,32 +34,22 @@ export default function SidePanel({ selectedNode }: SidePanelProps) {
   return (
     <div className="side-panel">
       <h2>{data.label as string}</h2>
-      <p className="description" style={{ fontSize: '13px', color: '#666', marginBottom: '20px', lineHeight: '1.4' }}>
+      <p className="side-panel-description">
         {data.description as string}
       </p>
 
       {isContextNode ? (
-        <div className="context-note" style={{ padding: '15px', backgroundColor: '#f5f5f5', borderRadius: '4px', fontStyle: 'italic', color: '#555' }}>
+        <div className="context-note">
           This is an external integration point. Configuration is managed in a separate system.
         </div>
       ) : (
-        <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-          <h4 style={{ margin: 0, paddingBottom: '8px', borderBottom: '1px solid #eee' }}>Layer Settings</h4>
+        <form onSubmit={handleSave} className="side-panel-form">
+          <h4 className="side-panel-subheading">Layer Settings</h4>
           {renderLayerControls(data.layer as number)}
           
           <button 
             type="submit" 
-            style={{ 
-              marginTop: '15px', 
-              padding: '12px', 
-              backgroundColor: isSaved ? '#28a745' : '#0056b3', 
-              color: 'white', 
-              border: 'none', 
-              borderRadius: '4px', 
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              transition: 'background-color 0.2s'
-            }}
+            className={isSaved ? 'save-button is-saved' : 'save-button'}
           >
             {isSaved ? 'Settings Saved!' : 'Save Configuration'}
           </button>
@@ -71,13 +61,13 @@ export default function SidePanel({ selectedNode }: SidePanelProps) {
 
 // Helper to render realistic mock settings for each of the 6 middle layers
 function renderLayerControls(layerIndex: number) {
-  const Label = ({ children }: { children: React.ReactNode }) => (
-    <span style={{ display: 'block', marginBottom: '6px', fontWeight: 600, fontSize: '13px', color: '#333' }}>
+  const Label = ({ children }: { children: ReactNode }) => (
+    <span className="field-label">
       {children}
     </span>
   );
 
-  const selectStyle = { width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ccc' };
+  const selectStyle = { width: '100%' };
   const inputStyle = { ...selectStyle };
 
   switch (layerIndex) {

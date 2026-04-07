@@ -37,6 +37,7 @@ export default function FlowDiagram({ onNodeSelect }: FlowDiagramProps) {
 
   return (
     <ReactFlow
+      className="flow-canvas"
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}
