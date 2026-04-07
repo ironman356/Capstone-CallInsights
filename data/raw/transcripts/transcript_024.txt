@@ -1,0 +1,19 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Priya. How can I help you today?
+Customer: Hi, this is Taylor Hayes. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Taylor Hayes, and the property zip code is 15222.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I got a letter about escrow and I do not understand it.
+Agent: I can walk through that with you. I am seeing an escrow analysis that increased the projected
+disbursements.
+Customer: My monthly payment went up more than I expected.
+Agent: The analysis shows a shortage, which means taxes or insurance were higher than projected.
+Agent: I can explain the spread over the next twelve months and the option to pay the shortage
+separately.
+Customer: That makes more sense now.
+Agent: I will note that we reviewed the new monthly payment and your next due date remains the same.
+Customer: All right, I appreciate you explaining it.
+Agent: You are welcome. Is there anything else I can help with on the mortgage account today?
+Customer: No, that covers it.
+Agent: Thank you for calling SPS mortgage servicing. Have a good day.

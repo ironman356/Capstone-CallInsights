@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Alicia. How can I help you today?
+Customer: Hi, this is Jordan Ward. I am calling because I need help with my mortgage account.
+Agent: Before I review the loan, I need to verify your name and the zip code on file.
+Customer: Sure, this is Jordan Ward, and the property zip code is 15222.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: My payment still shows pending and I made it several days ago.
+Agent: I understand why that is frustrating. I am reviewing the recent payment activity now.
+Customer: I already called last week about this and I do not want another late mark because of
+processing.
+Agent: I see the payment was received in our system but it is still moving through posting review.
+Agent: I do not have the final posting confirmation yet.
+Customer: So I still have to wait without an answer?
+Agent: At this stage, yes, and I recommend checking back if it has not updated within two business
+days.
+Customer: I guess I will wait for the follow-up, but I am not happy about it.
+Agent: I understand, and I noted the concern in detail on the account.
+Customer: Okay.
+Agent: Please allow normal processing time once the review is completed.
+Agent: Thank you for calling SPS mortgage servicing.

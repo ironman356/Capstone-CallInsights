@@ -1,0 +1,50 @@
+{"call_id": "CALL-0001", "outcome": "callback requested"}
+{"call_id": "CALL-0002", "outcome": "resolved"}
+{"call_id": "CALL-0003", "outcome": "resolved"}
+{"call_id": "CALL-0004", "outcome": "resolved"}
+{"call_id": "CALL-0005", "outcome": "escalated"}
+{"call_id": "CALL-0006", "outcome": "resolved"}
+{"call_id": "CALL-0007", "outcome": "resolved"}
+{"call_id": "CALL-0008", "outcome": "escalated"}
+{"call_id": "CALL-0009", "outcome": "resolved"}
+{"call_id": "CALL-0010", "outcome": "resolved"}
+{"call_id": "CALL-0011", "outcome": "follow-up needed"}
+{"call_id": "CALL-0012", "outcome": "follow-up needed"}
+{"call_id": "CALL-0013", "outcome": "escalated"}
+{"call_id": "CALL-0014", "outcome": "escalated"}
+{"call_id": "CALL-0015", "outcome": "escalated"}
+{"call_id": "CALL-0016", "outcome": "resolved"}
+{"call_id": "CALL-0017", "outcome": "resolved"}
+{"call_id": "CALL-0018", "outcome": "escalated"}
+{"call_id": "CALL-0019", "outcome": "resolved"}
+{"call_id": "CALL-0020", "outcome": "resolved"}
+{"call_id": "CALL-0021", "outcome": "escalated"}
+{"call_id": "CALL-0022", "outcome": "resolved"}
+{"call_id": "CALL-0023", "outcome": "resolved"}
+{"call_id": "CALL-0024", "outcome": "resolved"}
+{"call_id": "CALL-0025", "outcome": "resolved"}
+{"call_id": "CALL-0026", "outcome": "resolved"}
+{"call_id": "CALL-0027", "outcome": "follow-up needed"}
+{"call_id": "CALL-0028", "outcome": "resolved"}
+{"call_id": "CALL-0029", "outcome": "follow-up needed"}
+{"call_id": "CALL-0030", "outcome": "follow-up needed"}
+{"call_id": "CALL-0031", "outcome": "follow-up needed"}
+{"call_id": "CALL-0032", "outcome": "escalated"}
+{"call_id": "CALL-0033", "outcome": "follow-up needed"}
+{"call_id": "CALL-0034", "outcome": "resolved"}
+{"call_id": "CALL-0035", "outcome": "resolved"}
+{"call_id": "CALL-0036", "outcome": "resolved"}
+{"call_id": "CALL-0037", "outcome": "escalated"}
+{"call_id": "CALL-0038", "outcome": "escalated"}
+{"call_id": "CALL-0039", "outcome": "escalated"}
+{"call_id": "CALL-0040", "outcome": "escalated"}
+{"call_id": "CALL-0041", "outcome": "escalated"}
+{"call_id": "CALL-0042", "outcome": "escalated"}
+{"call_id": "CALL-0043", "outcome": "resolved"}
+{"call_id": "CALL-0044", "outcome": "resolved"}
+{"call_id": "CALL-0045", "outcome": "escalated"}
+{"call_id": "CALL-0046", "outcome": "follow-up needed"}
+{"call_id": "CALL-0047", "outcome": "follow-up needed"}
+{"call_id": "CALL-0048", "outcome": "escalated"}
+{"call_id": "CALL-0049", "outcome": "resolved"}
+{"call_id": "CALL-0050", "outcome": "callback requested"}

@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Tessa. How can I help you today?
+Customer: Hi, this is Morgan Perry. I am calling because I need help with my mortgage account.
+Agent: Before we get into the account, I need to verify your full name and property zip code.
+Customer: Sure, this is Morgan Perry, and the property zip code is 60618.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Agent: I appreciate your patience while I pull up the servicing details.
+Customer: I sent proof of hazard insurance, but the account still shows lender-placed coverage.
+Agent: I will review the insurance tracking notes.
+Customer: My payment increased because of it.
+Agent: I see proof was received, but I cannot confirm the update has finished processing.
+Agent: I documented the policy details on file and explained the normal removal timeline.
+Customer: Okay, that sounds reasonable.
+Agent: If the premium is removed, the escrow portion will adjust on a future cycle.
+Customer: All right, I appreciate you explaining it.
+Agent: You are welcome. Is there anything else I can help with on the mortgage account today?
+Customer: No, that covers it.
+Agent: Thank you for calling SPS mortgage servicing. Have a good day.

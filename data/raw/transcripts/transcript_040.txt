@@ -1,0 +1,19 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Devon. How can I help you today?
+Customer: Hi, this is Riley Collins. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Riley Collins, and the property zip code is 80219.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I am checking on my refinance status because I thought the old loan would be paid off
+already.
+Agent: Let me review whether we received payoff funds or closing instructions.
+Customer: I do not want to send another payment if the refinance is in process.
+Agent: Until the prior loan is paid in full, the regular payment obligation can still remain in
+place.
+Customer: I keep getting different answers from everyone.
+Agent: I understand. I can escalate this to payoff support for a status review.
+Customer: Please do that.
+Customer: I need this handled quickly.
+Agent: I understand, and I am documenting the escalation before the handoff.
+Customer: Thank you.
+Agent: Please hold while I connect the next team.

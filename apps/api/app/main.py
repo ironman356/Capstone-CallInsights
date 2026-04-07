@@ -1,5 +1,7 @@
 from fastapi import FastAPI
-from .api import health
+from fastapi.middleware.cors import CORSMiddleware
+
+from .api import health, rank1
 
 app = FastAPI(
     title="CallInsights API",
@@ -7,9 +9,20 @@ app = FastAPI(
     version="0.1.0"
 )
 
-# Placeholder routers
 app.include_router(health.router, prefix="/health", tags=["system"])
+app.include_router(rank1.router, prefix="/api/rank1", tags=["rank1"])
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
-    return {"message": "Welcome to CallInsights API"}
+    return {"message": "Welcome to CallInsights API", "rank1": "/api/rank1/dashboard"}

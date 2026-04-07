@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Alicia. How can I help you today?
+Customer: Hi, this is Avery Bennett. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Avery Bennett, and the property zip code is 75024.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I was told autopay would come out automatically, but it did not.
+Agent: Let me review the recurring payment setup and effective date.
+Customer: I signed up because I was trying to avoid another missed payment.
+Agent: I see the enrollment request, but the draft was not scheduled for the cycle you expected.
+Agent: The enrollment is now active for the next due date, and I explained how one-time payments
+work until then.
+Customer: Okay, at least I know what to do this month.
+Agent: I am also documenting that explanation in the account notes.
+Customer: All right, I appreciate you explaining it.
+Agent: You are welcome. Is there anything else I can help with on the mortgage account today?
+Customer: No, that covers it.
+Agent: Thank you for calling SPS mortgage servicing. Have a good day.

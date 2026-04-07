@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. This is Priya. How can I help you today?
+Customer: Hi, this is Quinn Hayes. I am calling because I need help with my mortgage account.
+Agent: I can help with that. First, I need to verify your full name and the property zip code.
+Customer: Sure, this is Quinn Hayes, and the property zip code is 30318.
+Agent: Thank you. For your privacy, I will only discuss general account details needed to assist
+with this call.
+Customer: I am behind and I need to know what hardship options I have.
+Agent: I am sorry you are dealing with that. I can review the general assistance options available.
+Customer: I am trying to avoid another missed payment.
+Agent: We can discuss forbearance review or payment assistance, depending on your current status.
+Customer: I need a firm answer today, not just general information.
+Agent: I understand. I need to transfer you to the assistance team for a case-specific review.
+Customer: Please transfer me.
+Customer: I need this handled quickly.
+Agent: I understand, and I am documenting the escalation before the handoff.
+Customer: Thank you.
+Agent: Please hold while I connect the next team.
