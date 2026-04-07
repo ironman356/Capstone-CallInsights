@@ -8,8 +8,12 @@ interface AppHeaderProps {
 export default function AppHeader({ pages, activePageId }: AppHeaderProps) {
   return (
     <header className="app-header">
-      <a className="brand-mark" href={`#${pages[0]?.id ?? ''}`} aria-label="SPS home">
-        SPS
+      <a className="app-header__logoLink" href={`#${pages[0]?.id ?? ''}`} aria-label="SPS home">
+        <img
+          className="app-header__logo"
+          src="https://www.spservicing.com/Images/SPSLogoWhite.png"
+          alt="SPS"
+        />
       </a>
 
       <nav className="app-nav" aria-label="Primary">
