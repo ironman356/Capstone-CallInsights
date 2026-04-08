@@ -1,4 +1,20 @@
-#Some methods for the backend pipeline
+from fastapi import APIRouter
+from pydantic import BaseModel, Field
+
+router = APIRouter()
+
+
+class TranscriptPayload(BaseModel):
+    transcript: str = Field(default="", description="Raw transcript text from the frontend or ingestion layer SPS DB")
+
+
+@router.post("/transcript")
+def process_transcript(payload: TranscriptPayload):
+    transcript = payload.transcript or ""
+    return {"transcript_length": len(transcript)+10} # Placeholder response for testing endpoint
+
+
+# Some methods for the backend pipeline
 
 
 def GetDataFromFrontend():
@@ -120,7 +136,7 @@ def GenerateInsightsWithRAG(evidence_packs):
 def ManageStrategies(strategies):
     """
     Handle strategy lifecycle:
-    - proposed → accepted → in progress → evaluating → closed
+    - proposed -> accepted -> in progress -> evaluating -> closed
     - enable tracking and management workflows
     """
     pass
