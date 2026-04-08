@@ -11,7 +11,7 @@ class TranscriptPayload(BaseModel):
 @router.post("/transcript")
 def process_transcript(payload: TranscriptPayload):
     transcript = payload.transcript or ""
-    return {"transcript_length": len(transcript)+10} # Placeholder response for testing endpoint
+    return {"transcript_length": len(transcript)} # Placeholder response for testing endpoint
 
 
 # Some methods for the backend pipeline
