@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I keep getting transferred and nobody is telling me what is happening.
+Agent: I will be glad to review this with you once I complete verification.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am really trying to keep this current and I just need a straight answer.
+Agent: I understand why that would be frustrating.
+Agent: For this call, I am seeing that if a transfer is needed I will explain why and what team is best equipped to help.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: I am also going to note the account so the next team can see exactly what we reviewed today.
+Agent: In this case, the issue is partially addressed before the call is escalated
+Customer: I appreciate you checking that. Does that mean this is considered escalated?
+Agent: Based on what we completed today, The call ends with escalation to another team or supervisor for additional handling.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

@@ -1,0 +1,19 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, can someone tell me whether I can make partial payments on a plan.
+Agent: Before we continue, I do need to complete a quick verification on the account.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am frustrated because I thought this had already been handled.
+Agent: I can hear the concern in your voice, and I will walk through it carefully.
+Agent: For this call, I am seeing that I can explain the review process for repayment options.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: I was on hold earlier and I do not want to get bounced around again.
+Agent: I understand. I will stay with you and make sure the notes are clear if another team has to assist.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: I am also going to note the account so the next team can see exactly what we reviewed today.
+Agent: In this case, the customer remains anxious but agrees to complete the intake steps
+Customer: I appreciate you checking that. Does that mean this is considered resolved?
+Agent: Based on what we completed today, By the end of the call, the customer says the explanation makes sense and thanks the agent for helping.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

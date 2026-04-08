@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my income changed and I want to ask about forbearance or payment help.
+Agent: I can certainly look into that for you after a brief verification step.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I just want to understand what I need to do next so I do not miss anything.
+Agent: I can hear the concern in your voice, and I will walk through it carefully.
+Agent: For this call, I am seeing that I will explain what the assistance review process usually looks like.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: I am also going to note the account so the next team can see exactly what we reviewed today.
+Agent: In this case, the customer is relieved to hear there may be temporary help available
+Customer: I appreciate you checking that. Does that mean this is considered follow-up needed?
+Agent: Based on what we completed today, The agent documents follow-up steps and tells the customer a review is still pending.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

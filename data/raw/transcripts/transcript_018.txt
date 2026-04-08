@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, why am I being asked for insurance documents again.
+Agent: Before we continue, I do need to complete a quick verification on the account.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am really trying to keep this current and I just need a straight answer.
+Agent: I understand why that would be frustrating.
+Agent: For this call, I am seeing that the escrow team may still be updating the hazard insurance record.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: Let me explain what happens next and the timeframe you should expect.
+Agent: In this case, the customer is told the documents are in review and should update soon
+Customer: I appreciate you checking that. Does that mean this is considered unresolved?
+Agent: Based on what we completed today, The issue is not fully resolved during the call, and the customer leaves with lingering concern.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

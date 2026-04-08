@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I was on hold before and I do not want to start over again.
+Agent: I can certainly look into that for you after a brief verification step.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am frustrated because I thought this had already been handled.
+Agent: I can hear the concern in your voice, and I will walk through it carefully.
+Agent: For this call, I am seeing that I understand the frustration and I will stay with the issue as far as I can from this line.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: I will summarize the next steps clearly before we end the call.
+Agent: In this case, the customer remains upset but accepts a transfer with detailed notes attached
+Customer: I appreciate you checking that. Does that mean this is considered unresolved?
+Agent: Based on what we completed today, The issue is not fully resolved during the call, and the customer leaves with lingering concern.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

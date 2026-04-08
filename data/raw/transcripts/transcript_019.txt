@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, can someone tell me whether I can make partial payments on a plan.
+Agent: I can certainly look into that for you after a brief verification step.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am really trying to keep this current and I just need a straight answer.
+Agent: I can hear the concern in your voice, and I will walk through it carefully.
+Agent: For this call, I am seeing that payment plans depend on the delinquency status and available programs.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: Let me explain what happens next and the timeframe you should expect.
+Agent: In this case, the customer remains anxious but agrees to complete the intake steps
+Customer: I appreciate you checking that. Does that mean this is considered unresolved?
+Agent: Based on what we completed today, The issue is not fully resolved during the call, and the customer leaves with lingering concern.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

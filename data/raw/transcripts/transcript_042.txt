@@ -1,0 +1,19 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I need someone to explain why my escrow payment increased.
+Agent: I will be glad to review this with you once I complete verification.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I am really trying to keep this current and I just need a straight answer.
+Agent: I can hear the concern in your voice, and I will walk through it carefully.
+Agent: For this call, I am seeing that the annual escrow review recalculates the cushion and monthly collection.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: I was on hold earlier and I do not want to get bounced around again.
+Agent: I understand. I will stay with you and make sure the notes are clear if another team has to assist.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: I am also going to note the account so the next team can see exactly what we reviewed today.
+Agent: In this case, the agent offers next steps and explains when the new payment amount takes effect
+Customer: I appreciate you checking that. Does that mean this is considered resolved?
+Agent: Based on what we completed today, By the end of the call, the customer says the explanation makes sense and thanks the agent for helping.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.

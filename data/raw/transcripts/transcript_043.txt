@@ -1,0 +1,17 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I paid as soon as I could and now I see a fee that does not seem right.
+Agent: Before we continue, I do need to complete a quick verification on the account.
+Customer: Sure, that is fine.
+Agent: Thank you. I have the account pulled up now.
+Customer: I just want to understand what I need to do next so I do not miss anything.
+Agent: I understand why that would be frustrating.
+Agent: For this call, I am seeing that late fees are assessed based on the contractual due date and posting date.
+Customer: Okay, but that is not how I expected it to work.
+Agent: I understand. Let me explain the timeline and what is affecting the account this billing cycle.
+Customer: That helps some, but I still need to know what happens with the monthly payment and due dates.
+Agent: Let me explain what happens next and the timeframe you should expect.
+Agent: In this case, the customer asks for a supervisor when the fee cannot be removed immediately
+Customer: I appreciate you checking that. Does that mean this is considered resolved?
+Agent: Based on what we completed today, By the end of the call, the customer says the explanation makes sense and thanks the agent for helping.
+Customer: All right. Thank you for explaining it.
+Agent: You are welcome. Thank you for calling, and have a good day.
