@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I need to understand why there is a late fee on my account.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I have the billing cycle details up, so give me just a moment.
+Customer: I am asking if there is any way to review this instead of just telling me it stays.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that the system applies the late fee when the required amount is not posted by the end of the grace window.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If the history supports it, I can submit a courtesy waiver request for review.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: All right, I understand what happened now.
+Agent: I know it can be confusing, but I am glad we were able to go through it together.
+Customer: Thank you. That answers my question.
+Agent: Thank you for calling today.
+Customer: Thank you.

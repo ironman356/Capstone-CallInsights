@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I already sent in my insurance information and I want to know why the account still shows an issue.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can see the escrow and insurance tracking information from here.
+Customer: I just need to know if you actually have what you need from me.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that the notice can continue until the declaration page is matched and the review is completed.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If the documents were previously sent, I can note that and route it for review.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: At this point I really think I need a supervisor or the other team involved.
+Agent: I understand. I will document what we covered and get you to the correct escalation path.
+Customer: Okay. Please make sure they can see the notes.
+Agent: Thank you for calling today.
+Customer: Thank you.

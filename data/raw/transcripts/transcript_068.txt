@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I already sent in my insurance information and I want to know why the account still shows an issue.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me check whether proof of coverage has been received and updated.
+Customer: I do not want to keep getting notices if I already did what I was supposed to do.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that there can be a delay between document receipt and the escrow record showing cleared.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will explain the next step so you know whether to resend anything or wait for the update.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: I hear what you are saying, but I am still not comfortable with where this stands.
+Agent: That is fair, and I will note that the issue is still open from your perspective.
+Customer: All right. I will wait for the next update.
+Agent: Thank you for calling today.
+Customer: Thank you.

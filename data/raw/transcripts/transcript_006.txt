@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I am trying to avoid another missed payment and I need to know what hardship options are available.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am pulling up the assistance information so I can give you accurate next steps.
+Customer: I am not trying to ignore the loan, I just need a path forward.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that available options depend on the account status and a formal review by the assistance team.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will document that you called proactively about assistance so the next team sees that context.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: Once someone has the full answer, I would rather get a callback than keep checking.
+Agent: That is completely fine. I will note that a callback was requested after the review is completed.
+Customer: Thank you. That would help a lot.
+Agent: Thank you for calling today.
+Customer: Thank you.

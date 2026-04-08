@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, can somebody tell me if partial payments or a repayment plan are possible on my loan.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me go over what usually determines whether a payment plan can be offered.
+Customer: I just need something that feels manageable.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that there is usually an intake and review before specific terms are discussed.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If appropriate, I can transfer you after I note the account with today's conversation.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: I still do not feel like this is fully resolved.
+Agent: I understand. What I can do today is document everything we reviewed and note the remaining concern.
+Customer: Okay. I just do not want this to be dropped.
+Agent: Thank you for calling today.
+Customer: Thank you.

@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I have a question about the insurance documents and whether they were matched to my loan.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can see the escrow and insurance tracking information from here.
+Customer: I just need to know if you actually have what you need from me.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that sometimes the coverage is received but still pending review before the system updates.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will explain the next step so you know whether to resend anything or wait for the update.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: All right, I understand what happened now.
+Agent: I know it can be confusing, but I am glad we were able to go through it together.
+Customer: Thank you. That answers my question.
+Agent: Thank you for calling today.
+Customer: Thank you.

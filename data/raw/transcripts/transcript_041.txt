@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I made a payment this week and the website is still not showing it as posted.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am looking at the recent payment activity now, including the scheduled and posted dates.
+Customer: I just do not want that to turn into a late fee.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that there can be a short delay between the bank withdrawal and the loan servicing update.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If it has not updated by the next business day, we can escalate the posting review from here.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: Okay, that makes more sense now.
+Customer: I appreciate you taking the time to explain it.
+Agent: Of course. I am glad we could clear that up today.
+Agent: Thank you for calling today.
+Customer: Thank you.

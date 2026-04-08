@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my income dropped and I am calling to ask about forbearance or any temporary help.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me explain the hardship review path we have for situations like this.
+Customer: I want to handle this before I miss another payment.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that the hardship process usually requires supporting information before an option can be offered.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I can outline the next steps and tell you what to expect from the assistance review.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: At this point I really think I need a supervisor or the other team involved.
+Agent: I understand. I will document what we covered and get you to the correct escalation path.
+Customer: Okay. Please make sure they can see the notes.
+Agent: Thank you for calling today.
+Customer: Thank you.

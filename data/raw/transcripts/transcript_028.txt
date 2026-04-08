@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I got another notice about insurance even though I thought I already provided proof.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me check whether proof of coverage has been received and updated.
+Customer: I just need to know if you actually have what you need from me.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that the notice can continue until the declaration page is matched and the review is completed.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I was on hold earlier today, so I really do not want to get bounced around again.
+Agent: I understand. I will keep the notes detailed so you do not have to repeat yourself if another team is needed.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will explain the next step so you know whether to resend anything or wait for the update.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: At this point I really think I need a supervisor or the other team involved.
+Agent: I understand. I will document what we covered and get you to the correct escalation path.
+Customer: Okay. Please make sure they can see the notes.
+Agent: Thank you for calling today.
+Customer: Thank you.

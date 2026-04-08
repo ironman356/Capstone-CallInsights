@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my payment still shows pending even though I made it online three days ago.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am reviewing the payment history on the loan right now.
+Customer: My concern is I do not want this to show me past due when I already paid it.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that online payments can show as pending before they finish posting to the monthly billing history.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I do see the payment in process, and I do not see a late fee tied to it right now.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: Once someone has the full answer, I would rather get a callback than keep checking.
+Agent: That is completely fine. I will note that a callback was requested after the review is completed.
+Customer: Thank you. That would help a lot.
+Agent: Thank you for calling today.
+Customer: Thank you.
