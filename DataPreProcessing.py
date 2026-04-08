@@ -19,6 +19,10 @@ def clean_data(data):
     return cleaned_data
 
 def normalize_text(cleaned_data):
+    """
+    This method is used to make sure that capitalization, etc. does not
+    interfere or cause weird behaviors.
+    """
     def normalize(text):
         if not isinstance(text, str):
             return ""
@@ -33,6 +37,11 @@ def normalize_text(cleaned_data):
 
 
 def chunk_text(text, chunk_size=100, overlap=25):
+    """
+    Helper method for the chunk_transcripts method where the huge calls are
+    being transformed into smaller usable chunks, the chunk length
+    and other parameter are subject to variability.
+    """
     if overlap >= chunk_size:
         raise ValueError("overlap must be smaller than chunk_size")
 
@@ -50,6 +59,9 @@ def chunk_text(text, chunk_size=100, overlap=25):
 
 
 def chunk_transcripts(data):
+    """
+    Driver method to chunk the actual normalized dataset
+    """
     records = []
 
     for _, row in data.iterrows():
