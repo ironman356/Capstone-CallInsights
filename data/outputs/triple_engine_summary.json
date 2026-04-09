@@ -1,0 +1,3096 @@
+{
+  "overview": {
+    "metrics": [
+      {
+        "label": "Calls Indexed",
+        "value": 100,
+        "tone": "neutral"
+      },
+      {
+        "label": "Issue Types",
+        "value": 9,
+        "tone": "info"
+      },
+      {
+        "label": "Escalations",
+        "value": 32,
+        "tone": "risk"
+      },
+      {
+        "label": "Avg Sentiment Shift",
+        "value": -0.141,
+        "tone": "warning"
+      }
+    ],
+    "issue_counts": {
+      "payment confusion": 9,
+      "escrow issue": 14,
+      "late fee dispute": 12,
+      "autopay issue": 10,
+      "payoff request": 10,
+      "hardship / forbearance": 14,
+      "statement confusion": 7,
+      "insurance / tax escrow issue": 9,
+      "other": 15
+    },
+    "outcome_counts": {
+      "unresolved": 43,
+      "escalated": 32,
+      "resolved": 3,
+      "follow-up needed": 22
+    },
+    "sentiment_summary": {
+      "opening": 0.937,
+      "closing": 0.795,
+      "average_shift": -0.141
+    },
+    "top_patterns": [
+      {
+        "key": [
+          "other",
+          "used empathy",
+          "unresolved"
+        ],
+        "issue": "other",
+        "behavior": "used empathy",
+        "outcome": "unresolved",
+        "count": 8,
+        "lift": 1.442,
+        "evidence": [
+          "CALL-0010",
+          "CALL-0019",
+          "CALL-0030",
+          "CALL-0039",
+          "CALL-0040"
+        ],
+        "call_ids": [
+          "CALL-0010",
+          "CALL-0019",
+          "CALL-0030",
+          "CALL-0039",
+          "CALL-0040",
+          "CALL-0049",
+          "CALL-0060",
+          "CALL-0099"
+        ]
+      },
+      {
+        "key": [
+          "escrow issue",
+          "offered next steps",
+          "unresolved"
+        ],
+        "issue": "escrow issue",
+        "behavior": "offered next steps",
+        "outcome": "unresolved",
+        "count": 8,
+        "lift": 1.329,
+        "evidence": [
+          "CALL-0002",
+          "CALL-0022",
+          "CALL-0032",
+          "CALL-0042",
+          "CALL-0052"
+        ],
+        "call_ids": [
+          "CALL-0002",
+          "CALL-0022",
+          "CALL-0032",
+          "CALL-0042",
+          "CALL-0052",
+          "CALL-0068",
+          "CALL-0077",
+          "CALL-0082"
+        ]
+      },
+      {
+        "key": [
+          "other",
+          "offered next steps",
+          "unresolved"
+        ],
+        "issue": "other",
+        "behavior": "offered next steps",
+        "outcome": "unresolved",
+        "count": 8,
+        "lift": 1.24,
+        "evidence": [
+          "CALL-0010",
+          "CALL-0019",
+          "CALL-0030",
+          "CALL-0039",
+          "CALL-0040"
+        ],
+        "call_ids": [
+          "CALL-0010",
+          "CALL-0019",
+          "CALL-0030",
+          "CALL-0039",
+          "CALL-0040",
+          "CALL-0049",
+          "CALL-0060",
+          "CALL-0099"
+        ]
+      },
+      {
+        "key": [
+          "escrow issue",
+          "used empathy",
+          "unresolved"
+        ],
+        "issue": "escrow issue",
+        "behavior": "used empathy",
+        "outcome": "unresolved",
+        "count": 7,
+        "lift": 1.352,
+        "evidence": [
+          "CALL-0002",
+          "CALL-0022",
+          "CALL-0042",
+          "CALL-0052",
+          "CALL-0068"
+        ],
+        "call_ids": [
+          "CALL-0002",
+          "CALL-0022",
+          "CALL-0042",
+          "CALL-0052",
+          "CALL-0068",
+          "CALL-0077",
+          "CALL-0082"
+        ]
+      },
+      {
+        "key": [
+          "hardship / forbearance",
+          "offered next steps",
+          "unresolved"
+        ],
+        "issue": "hardship / forbearance",
+        "behavior": "offered next steps",
+        "outcome": "unresolved",
+        "count": 7,
+        "lift": 1.163,
+        "evidence": [
+          "CALL-0016",
+          "CALL-0029",
+          "CALL-0046",
+          "CALL-0056",
+          "CALL-0076"
+        ],
+        "call_ids": [
+          "CALL-0016",
+          "CALL-0029",
+          "CALL-0046",
+          "CALL-0056",
+          "CALL-0076",
+          "CALL-0086",
+          "CALL-0089"
+        ]
+      },
+      {
+        "key": [
+          "late fee dispute",
+          "transferred / escalated",
+          "escalated"
+        ],
+        "issue": "late fee dispute",
+        "behavior": "transferred / escalated",
+        "outcome": "escalated",
+        "count": 6,
+        "lift": 3.811,
+        "evidence": [
+          "CALL-0013",
+          "CALL-0033",
+          "CALL-0043",
+          "CALL-0063",
+          "CALL-0073"
+        ],
+        "call_ids": [
+          "CALL-0013",
+          "CALL-0033",
+          "CALL-0043",
+          "CALL-0063",
+          "CALL-0073",
+          "CALL-0093"
+        ]
+      },
+      {
+        "key": [
+          "late fee dispute",
+          "offered next steps",
+          "escalated"
+        ],
+        "issue": "late fee dispute",
+        "behavior": "offered next steps",
+        "outcome": "escalated",
+        "count": 6,
+        "lift": 1.562,
+        "evidence": [
+          "CALL-0013",
+          "CALL-0033",
+          "CALL-0043",
+          "CALL-0063",
+          "CALL-0073"
+        ],
+        "call_ids": [
+          "CALL-0013",
+          "CALL-0033",
+          "CALL-0043",
+          "CALL-0063",
+          "CALL-0073",
+          "CALL-0093"
+        ]
+      },
+      {
+        "key": [
+          "late fee dispute",
+          "offered next steps",
+          "unresolved"
+        ],
+        "issue": "late fee dispute",
+        "behavior": "offered next steps",
+        "outcome": "unresolved",
+        "count": 6,
+        "lift": 1.163,
+        "evidence": [
+          "CALL-0003",
+          "CALL-0023",
+          "CALL-0053",
+          "CALL-0061",
+          "CALL-0071"
+        ],
+        "call_ids": [
+          "CALL-0003",
+          "CALL-0023",
+          "CALL-0053",
+          "CALL-0061",
+          "CALL-0071",
+          "CALL-0083"
+        ]
+      },
+      {
+        "key": [
+          "hardship / forbearance",
+          "used empathy",
+          "unresolved"
+        ],
+        "issue": "hardship / forbearance",
+        "behavior": "used empathy",
+        "outcome": "unresolved",
+        "count": 6,
+        "lift": 1.159,
+        "evidence": [
+          "CALL-0016",
+          "CALL-0029",
+          "CALL-0056",
+          "CALL-0076",
+          "CALL-0086"
+        ],
+        "call_ids": [
+          "CALL-0016",
+          "CALL-0029",
+          "CALL-0056",
+          "CALL-0076",
+          "CALL-0086",
+          "CALL-0089"
+        ]
+      },
+      {
+        "key": [
+          "insurance / tax escrow issue",
+          "transferred / escalated",
+          "escalated"
+        ],
+        "issue": "insurance / tax escrow issue",
+        "behavior": "transferred / escalated",
+        "outcome": "escalated",
+        "count": 5,
+        "lift": 4.234,
+        "evidence": [
+          "CALL-0028",
+          "CALL-0038",
+          "CALL-0048",
+          "CALL-0058",
+          "CALL-0098"
+        ],
+        "call_ids": [
+          "CALL-0028",
+          "CALL-0038",
+          "CALL-0048",
+          "CALL-0058",
+          "CALL-0098"
+        ]
+      }
+    ],
+    "daily_brief": [
+      "Most common issue today: other (15 calls).",
+      "Escalated calls: 32; resolved calls: 3.",
+      "Most frequent behavior signal: offered next steps."
+    ]
+  },
+  "issues": [
+    {
+      "slug": "other",
+      "issue": "other",
+      "count": 15,
+      "summary": "Other appeared in 15 calls with unresolved as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 15
+        },
+        {
+          "behavior": "used empathy",
+          "count": 15
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 10
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 8,
+        "follow-up needed": 3,
+        "escalated": 4
+      },
+      "average_shift": -0.033,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0010",
+          "source_file": "transcript_010.txt",
+          "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.667 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 1.0,
+            "closing": 0.333,
+            "shift": -0.667
+          }
+        },
+        {
+          "call_id": "CALL-0019",
+          "source_file": "transcript_019.txt",
+          "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.667 from opening to close.",
+          "sentiments": {
+            "opening": 0.333,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.667
+          }
+        },
+        {
+          "call_id": "CALL-0020",
+          "source_file": "transcript_020.txt",
+          "summary": "Other call that ended as follow-up needed. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0030",
+          "source_file": "transcript_030.txt",
+          "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0039",
+          "source_file": "transcript_039.txt",
+          "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "escrow-issue",
+      "issue": "escrow issue",
+      "count": 14,
+      "summary": "Escrow Issue appeared in 14 calls with unresolved as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 14
+        },
+        {
+          "behavior": "used empathy",
+          "count": 13
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 4
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 8,
+        "escalated": 4,
+        "follow-up needed": 2
+      },
+      "average_shift": -0.214,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0002",
+          "source_file": "transcript_002.txt",
+          "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0012",
+          "source_file": "transcript_012.txt",
+          "summary": "Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0022",
+          "source_file": "transcript_022.txt",
+          "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.5,
+            "shift": -0.5
+          }
+        },
+        {
+          "call_id": "CALL-0032",
+          "source_file": "transcript_032.txt",
+          "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0042",
+          "source_file": "transcript_042.txt",
+          "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "hardship-forbearance",
+      "issue": "hardship / forbearance",
+      "count": 14,
+      "summary": "Hardship / Forbearance appeared in 14 calls with unresolved as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 14
+        },
+        {
+          "behavior": "used empathy",
+          "count": 12
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 5
+        },
+        {
+          "behavior": "resolved calmly",
+          "count": 3
+        }
+      ],
+      "outcome_breakdown": {
+        "resolved": 3,
+        "follow-up needed": 2,
+        "unresolved": 7,
+        "escalated": 2
+      },
+      "average_shift": 0.107,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0006",
+          "source_file": "transcript_006.txt",
+          "summary": "Hardship / Forbearance call that ended as resolved. Primary agent behaviors: offered next steps, resolved calmly, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0009",
+          "source_file": "transcript_009.txt",
+          "summary": "Hardship / Forbearance call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +1.000 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 1.0
+          }
+        },
+        {
+          "call_id": "CALL-0016",
+          "source_file": "transcript_016.txt",
+          "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0026",
+          "source_file": "transcript_026.txt",
+          "summary": "Hardship / Forbearance call that ended as resolved. Primary agent behaviors: offered next steps, resolved calmly, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0029",
+          "source_file": "transcript_029.txt",
+          "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "late-fee-dispute",
+      "issue": "late fee dispute",
+      "count": 12,
+      "summary": "Late Fee Dispute appeared in 12 calls with unresolved as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 12
+        },
+        {
+          "behavior": "used empathy",
+          "count": 8
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 6
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 6,
+        "escalated": 6
+      },
+      "average_shift": -0.292,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0003",
+          "source_file": "transcript_003.txt",
+          "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0013",
+          "source_file": "transcript_013.txt",
+          "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0023",
+          "source_file": "transcript_023.txt",
+          "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0033",
+          "source_file": "transcript_033.txt",
+          "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0043",
+          "source_file": "transcript_043.txt",
+          "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "autopay-issue",
+      "issue": "autopay issue",
+      "count": 10,
+      "summary": "Autopay Issue appeared in 10 calls with follow-up needed as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 10
+        },
+        {
+          "behavior": "used empathy",
+          "count": 7
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 2
+        }
+      ],
+      "outcome_breakdown": {
+        "escalated": 2,
+        "unresolved": 3,
+        "follow-up needed": 5
+      },
+      "average_shift": -0.25,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0004",
+          "source_file": "transcript_004.txt",
+          "summary": "Autopay Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        },
+        {
+          "call_id": "CALL-0014",
+          "source_file": "transcript_014.txt",
+          "summary": "Autopay Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.5,
+            "shift": -0.5
+          }
+        },
+        {
+          "call_id": "CALL-0024",
+          "source_file": "transcript_024.txt",
+          "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0034",
+          "source_file": "transcript_034.txt",
+          "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0044",
+          "source_file": "transcript_044.txt",
+          "summary": "Autopay Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "payoff-request",
+      "issue": "payoff request",
+      "count": 10,
+      "summary": "Payoff Request appeared in 10 calls with unresolved as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 10
+        },
+        {
+          "behavior": "used empathy",
+          "count": 10
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 1
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 5,
+        "escalated": 1,
+        "follow-up needed": 4
+      },
+      "average_shift": -0.08,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0005",
+          "source_file": "transcript_005.txt",
+          "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.400 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.6,
+            "shift": -0.4
+          }
+        },
+        {
+          "call_id": "CALL-0015",
+          "source_file": "transcript_015.txt",
+          "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0025",
+          "source_file": "transcript_025.txt",
+          "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.400 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.6,
+            "shift": -0.4
+          }
+        },
+        {
+          "call_id": "CALL-0035",
+          "source_file": "transcript_035.txt",
+          "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0045",
+          "source_file": "transcript_045.txt",
+          "summary": "Payoff Request call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "payment-confusion",
+      "issue": "payment confusion",
+      "count": 9,
+      "summary": "Payment Confusion appeared in 9 calls with escalated as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 9
+        },
+        {
+          "behavior": "used empathy",
+          "count": 8
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 5
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 2,
+        "escalated": 5,
+        "follow-up needed": 2
+      },
+      "average_shift": -0.204,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0001",
+          "source_file": "transcript_001.txt",
+          "summary": "Payment Confusion call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0011",
+          "source_file": "transcript_011.txt",
+          "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        },
+        {
+          "call_id": "CALL-0021",
+          "source_file": "transcript_021.txt",
+          "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.500 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.5,
+            "shift": -0.5
+          }
+        },
+        {
+          "call_id": "CALL-0031",
+          "source_file": "transcript_031.txt",
+          "summary": "Payment Confusion call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0041",
+          "source_file": "transcript_041.txt",
+          "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "insurance-tax-escrow-issue",
+      "issue": "insurance / tax escrow issue",
+      "count": 9,
+      "summary": "Insurance / Tax Escrow Issue appeared in 9 calls with escalated as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 9
+        },
+        {
+          "behavior": "used empathy",
+          "count": 8
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 5
+        }
+      ],
+      "outcome_breakdown": {
+        "unresolved": 3,
+        "escalated": 5,
+        "follow-up needed": 1
+      },
+      "average_shift": -0.278,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0008",
+          "source_file": "transcript_008.txt",
+          "summary": "Insurance / Tax Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.5,
+            "shift": -0.5
+          }
+        },
+        {
+          "call_id": "CALL-0018",
+          "source_file": "transcript_018.txt",
+          "summary": "Insurance / Tax Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0028",
+          "source_file": "transcript_028.txt",
+          "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0038",
+          "source_file": "transcript_038.txt",
+          "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        },
+        {
+          "call_id": "CALL-0048",
+          "source_file": "transcript_048.txt",
+          "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        }
+      ]
+    },
+    {
+      "slug": "statement-confusion",
+      "issue": "statement confusion",
+      "count": 7,
+      "summary": "Statement Confusion appeared in 7 calls with follow-up needed as the most common outcome.",
+      "top_behaviors": [
+        {
+          "behavior": "offered next steps",
+          "count": 7
+        },
+        {
+          "behavior": "used empathy",
+          "count": 5
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 3
+        }
+      ],
+      "outcome_breakdown": {
+        "follow-up needed": 3,
+        "escalated": 3,
+        "unresolved": 1
+      },
+      "average_shift": -0.143,
+      "representative_calls": [
+        {
+          "call_id": "CALL-0007",
+          "source_file": "transcript_007.txt",
+          "summary": "Statement Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0017",
+          "source_file": "transcript_017.txt",
+          "summary": "Statement Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0027",
+          "source_file": "transcript_027.txt",
+          "summary": "Statement Confusion call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        },
+        {
+          "call_id": "CALL-0037",
+          "source_file": "transcript_037.txt",
+          "summary": "Statement Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": -1.0,
+            "closing": 0.0,
+            "shift": -1.0
+          }
+        },
+        {
+          "call_id": "CALL-0047",
+          "source_file": "transcript_047.txt",
+          "summary": "Statement Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.0,
+            "closing": 1.0,
+            "shift": 0.0
+          }
+        }
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "call_id": "CALL-0001",
+      "source_file": "transcript_001.txt",
+      "issue": "payment confusion",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0002",
+      "source_file": "transcript_002.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0003",
+      "source_file": "transcript_003.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0004",
+      "source_file": "transcript_004.txt",
+      "issue": "autopay issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0005",
+      "source_file": "transcript_005.txt",
+      "issue": "payoff request",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.400 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.6,
+        "shift": -0.4
+      }
+    },
+    {
+      "call_id": "CALL-0006",
+      "source_file": "transcript_006.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "resolved",
+      "behaviors": [
+        "offered next steps",
+        "resolved calmly",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as resolved. Primary agent behaviors: offered next steps, resolved calmly, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0007",
+      "source_file": "transcript_007.txt",
+      "issue": "statement confusion",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Statement Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0008",
+      "source_file": "transcript_008.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0009",
+      "source_file": "transcript_009.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Hardship / Forbearance call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +1.000 from opening to close.",
+      "sentiments": {
+        "opening": 0.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 1.0
+      }
+    },
+    {
+      "call_id": "CALL-0010",
+      "source_file": "transcript_010.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.667 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 1.0,
+        "closing": 0.333,
+        "shift": -0.667
+      }
+    },
+    {
+      "call_id": "CALL-0011",
+      "source_file": "transcript_011.txt",
+      "issue": "payment confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0012",
+      "source_file": "transcript_012.txt",
+      "issue": "escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0013",
+      "source_file": "transcript_013.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0014",
+      "source_file": "transcript_014.txt",
+      "issue": "autopay issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0015",
+      "source_file": "transcript_015.txt",
+      "issue": "payoff request",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0016",
+      "source_file": "transcript_016.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0017",
+      "source_file": "transcript_017.txt",
+      "issue": "statement confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Statement Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0018",
+      "source_file": "transcript_018.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0019",
+      "source_file": "transcript_019.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.667 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.667
+      }
+    },
+    {
+      "call_id": "CALL-0020",
+      "source_file": "transcript_020.txt",
+      "issue": "other",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as follow-up needed. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -0.333,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0021",
+      "source_file": "transcript_021.txt",
+      "issue": "payment confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0022",
+      "source_file": "transcript_022.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0023",
+      "source_file": "transcript_023.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0024",
+      "source_file": "transcript_024.txt",
+      "issue": "autopay issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0025",
+      "source_file": "transcript_025.txt",
+      "issue": "payoff request",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.400 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.6,
+        "shift": -0.4
+      }
+    },
+    {
+      "call_id": "CALL-0026",
+      "source_file": "transcript_026.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "resolved",
+      "behaviors": [
+        "offered next steps",
+        "resolved calmly",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as resolved. Primary agent behaviors: offered next steps, resolved calmly, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0027",
+      "source_file": "transcript_027.txt",
+      "issue": "statement confusion",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Statement Confusion call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0028",
+      "source_file": "transcript_028.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0029",
+      "source_file": "transcript_029.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0030",
+      "source_file": "transcript_030.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0031",
+      "source_file": "transcript_031.txt",
+      "issue": "payment confusion",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0032",
+      "source_file": "transcript_032.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0033",
+      "source_file": "transcript_033.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0034",
+      "source_file": "transcript_034.txt",
+      "issue": "autopay issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0035",
+      "source_file": "transcript_035.txt",
+      "issue": "payoff request",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0036",
+      "source_file": "transcript_036.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "resolved",
+      "behaviors": [
+        "offered next steps",
+        "resolved calmly",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as resolved. Primary agent behaviors: offered next steps, resolved calmly, transferred / escalated. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0037",
+      "source_file": "transcript_037.txt",
+      "issue": "statement confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Statement Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0038",
+      "source_file": "transcript_038.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0039",
+      "source_file": "transcript_039.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0040",
+      "source_file": "transcript_040.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.667 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.667
+      }
+    },
+    {
+      "call_id": "CALL-0041",
+      "source_file": "transcript_041.txt",
+      "issue": "payment confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0042",
+      "source_file": "transcript_042.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0043",
+      "source_file": "transcript_043.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0044",
+      "source_file": "transcript_044.txt",
+      "issue": "autopay issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0045",
+      "source_file": "transcript_045.txt",
+      "issue": "payoff request",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0046",
+      "source_file": "transcript_046.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0047",
+      "source_file": "transcript_047.txt",
+      "issue": "statement confusion",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Statement Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0048",
+      "source_file": "transcript_048.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0049",
+      "source_file": "transcript_049.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.167 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": 0.167
+      }
+    },
+    {
+      "call_id": "CALL-0050",
+      "source_file": "transcript_050.txt",
+      "issue": "other",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0051",
+      "source_file": "transcript_051.txt",
+      "issue": "payment confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0052",
+      "source_file": "transcript_052.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0053",
+      "source_file": "transcript_053.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0054",
+      "source_file": "transcript_054.txt",
+      "issue": "autopay issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0055",
+      "source_file": "transcript_055.txt",
+      "issue": "payoff request",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0056",
+      "source_file": "transcript_056.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.167 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": 0.167
+      }
+    },
+    {
+      "call_id": "CALL-0057",
+      "source_file": "transcript_057.txt",
+      "issue": "escrow issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0058",
+      "source_file": "transcript_058.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0059",
+      "source_file": "transcript_059.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.333 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -0.333
+      }
+    },
+    {
+      "call_id": "CALL-0060",
+      "source_file": "transcript_060.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.667 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.333,
+        "shift": -0.667
+      }
+    },
+    {
+      "call_id": "CALL-0061",
+      "source_file": "transcript_061.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0062",
+      "source_file": "transcript_062.txt",
+      "issue": "escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0063",
+      "source_file": "transcript_063.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0064",
+      "source_file": "transcript_064.txt",
+      "issue": "autopay issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0065",
+      "source_file": "transcript_065.txt",
+      "issue": "payoff request",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0066",
+      "source_file": "transcript_066.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0067",
+      "source_file": "transcript_067.txt",
+      "issue": "statement confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Statement Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0068",
+      "source_file": "transcript_068.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0069",
+      "source_file": "transcript_069.txt",
+      "issue": "other",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.667 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.667
+      }
+    },
+    {
+      "call_id": "CALL-0070",
+      "source_file": "transcript_070.txt",
+      "issue": "other",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.667 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.333,
+        "shift": -0.667
+      }
+    },
+    {
+      "call_id": "CALL-0071",
+      "source_file": "transcript_071.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0072",
+      "source_file": "transcript_072.txt",
+      "issue": "escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0073",
+      "source_file": "transcript_073.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0074",
+      "source_file": "transcript_074.txt",
+      "issue": "autopay issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0075",
+      "source_file": "transcript_075.txt",
+      "issue": "payoff request",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0076",
+      "source_file": "transcript_076.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0077",
+      "source_file": "transcript_077.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0078",
+      "source_file": "transcript_078.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0079",
+      "source_file": "transcript_079.txt",
+      "issue": "payment confusion",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Payment Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.667 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.667
+      }
+    },
+    {
+      "call_id": "CALL-0080",
+      "source_file": "transcript_080.txt",
+      "issue": "other",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -0.667 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -0.333,
+        "closing": 0.333,
+        "shift": -0.667
+      }
+    },
+    {
+      "call_id": "CALL-0081",
+      "source_file": "transcript_081.txt",
+      "issue": "payment confusion",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0082",
+      "source_file": "transcript_082.txt",
+      "issue": "escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0083",
+      "source_file": "transcript_083.txt",
+      "issue": "late fee dispute",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was -0.500 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.5,
+        "shift": -0.5
+      }
+    },
+    {
+      "call_id": "CALL-0084",
+      "source_file": "transcript_084.txt",
+      "issue": "autopay issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0085",
+      "source_file": "transcript_085.txt",
+      "issue": "payoff request",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0086",
+      "source_file": "transcript_086.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0087",
+      "source_file": "transcript_087.txt",
+      "issue": "escrow issue",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0088",
+      "source_file": "transcript_088.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0089",
+      "source_file": "transcript_089.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.667 from opening to close.",
+      "sentiments": {
+        "opening": 0.333,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.667
+      }
+    },
+    {
+      "call_id": "CALL-0090",
+      "source_file": "transcript_090.txt",
+      "issue": "other",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0091",
+      "source_file": "transcript_091.txt",
+      "issue": "payment confusion",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payment Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0092",
+      "source_file": "transcript_092.txt",
+      "issue": "escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0093",
+      "source_file": "transcript_093.txt",
+      "issue": "late fee dispute",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Late Fee Dispute call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was -1.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 0.0,
+        "shift": -1.0
+      }
+    },
+    {
+      "call_id": "CALL-0094",
+      "source_file": "transcript_094.txt",
+      "issue": "autopay issue",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Autopay Issue call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0095",
+      "source_file": "transcript_095.txt",
+      "issue": "payoff request",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Payoff Request call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0096",
+      "source_file": "transcript_096.txt",
+      "issue": "hardship / forbearance",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Hardship / Forbearance call that ended as follow-up needed. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0097",
+      "source_file": "transcript_097.txt",
+      "issue": "statement confusion",
+      "outcome": "follow-up needed",
+      "behaviors": [
+        "offered next steps"
+      ],
+      "summary": "Statement Confusion call that ended as follow-up needed. Primary agent behaviors: offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0098",
+      "source_file": "transcript_098.txt",
+      "issue": "insurance / tax escrow issue",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Insurance / Tax Escrow Issue call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0099",
+      "source_file": "transcript_099.txt",
+      "issue": "other",
+      "outcome": "unresolved",
+      "behaviors": [
+        "offered next steps",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as unresolved. Primary agent behaviors: offered next steps, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": -1.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    },
+    {
+      "call_id": "CALL-0100",
+      "source_file": "transcript_100.txt",
+      "issue": "other",
+      "outcome": "escalated",
+      "behaviors": [
+        "offered next steps",
+        "transferred / escalated",
+        "used empathy"
+      ],
+      "summary": "Other call that ended as escalated. Primary agent behaviors: offered next steps, transferred / escalated, used empathy. Sentiment shift was +0.000 from opening to close.",
+      "sentiments": {
+        "opening": 1.0,
+        "mid": 0.0,
+        "closing": 1.0,
+        "shift": 0.0
+      }
+    }
+  ],
+  "top_patterns": [
+    {
+      "key": [
+        "other",
+        "used empathy",
+        "unresolved"
+      ],
+      "issue": "other",
+      "behavior": "used empathy",
+      "outcome": "unresolved",
+      "count": 8,
+      "lift": 1.442,
+      "evidence": [
+        "CALL-0010",
+        "CALL-0019",
+        "CALL-0030",
+        "CALL-0039",
+        "CALL-0040"
+      ],
+      "call_ids": [
+        "CALL-0010",
+        "CALL-0019",
+        "CALL-0030",
+        "CALL-0039",
+        "CALL-0040",
+        "CALL-0049",
+        "CALL-0060",
+        "CALL-0099"
+      ]
+    },
+    {
+      "key": [
+        "escrow issue",
+        "offered next steps",
+        "unresolved"
+      ],
+      "issue": "escrow issue",
+      "behavior": "offered next steps",
+      "outcome": "unresolved",
+      "count": 8,
+      "lift": 1.329,
+      "evidence": [
+        "CALL-0002",
+        "CALL-0022",
+        "CALL-0032",
+        "CALL-0042",
+        "CALL-0052"
+      ],
+      "call_ids": [
+        "CALL-0002",
+        "CALL-0022",
+        "CALL-0032",
+        "CALL-0042",
+        "CALL-0052",
+        "CALL-0068",
+        "CALL-0077",
+        "CALL-0082"
+      ]
+    },
+    {
+      "key": [
+        "other",
+        "offered next steps",
+        "unresolved"
+      ],
+      "issue": "other",
+      "behavior": "offered next steps",
+      "outcome": "unresolved",
+      "count": 8,
+      "lift": 1.24,
+      "evidence": [
+        "CALL-0010",
+        "CALL-0019",
+        "CALL-0030",
+        "CALL-0039",
+        "CALL-0040"
+      ],
+      "call_ids": [
+        "CALL-0010",
+        "CALL-0019",
+        "CALL-0030",
+        "CALL-0039",
+        "CALL-0040",
+        "CALL-0049",
+        "CALL-0060",
+        "CALL-0099"
+      ]
+    },
+    {
+      "key": [
+        "escrow issue",
+        "used empathy",
+        "unresolved"
+      ],
+      "issue": "escrow issue",
+      "behavior": "used empathy",
+      "outcome": "unresolved",
+      "count": 7,
+      "lift": 1.352,
+      "evidence": [
+        "CALL-0002",
+        "CALL-0022",
+        "CALL-0042",
+        "CALL-0052",
+        "CALL-0068"
+      ],
+      "call_ids": [
+        "CALL-0002",
+        "CALL-0022",
+        "CALL-0042",
+        "CALL-0052",
+        "CALL-0068",
+        "CALL-0077",
+        "CALL-0082"
+      ]
+    },
+    {
+      "key": [
+        "hardship / forbearance",
+        "offered next steps",
+        "unresolved"
+      ],
+      "issue": "hardship / forbearance",
+      "behavior": "offered next steps",
+      "outcome": "unresolved",
+      "count": 7,
+      "lift": 1.163,
+      "evidence": [
+        "CALL-0016",
+        "CALL-0029",
+        "CALL-0046",
+        "CALL-0056",
+        "CALL-0076"
+      ],
+      "call_ids": [
+        "CALL-0016",
+        "CALL-0029",
+        "CALL-0046",
+        "CALL-0056",
+        "CALL-0076",
+        "CALL-0086",
+        "CALL-0089"
+      ]
+    },
+    {
+      "key": [
+        "late fee dispute",
+        "transferred / escalated",
+        "escalated"
+      ],
+      "issue": "late fee dispute",
+      "behavior": "transferred / escalated",
+      "outcome": "escalated",
+      "count": 6,
+      "lift": 3.811,
+      "evidence": [
+        "CALL-0013",
+        "CALL-0033",
+        "CALL-0043",
+        "CALL-0063",
+        "CALL-0073"
+      ],
+      "call_ids": [
+        "CALL-0013",
+        "CALL-0033",
+        "CALL-0043",
+        "CALL-0063",
+        "CALL-0073",
+        "CALL-0093"
+      ]
+    },
+    {
+      "key": [
+        "late fee dispute",
+        "offered next steps",
+        "escalated"
+      ],
+      "issue": "late fee dispute",
+      "behavior": "offered next steps",
+      "outcome": "escalated",
+      "count": 6,
+      "lift": 1.562,
+      "evidence": [
+        "CALL-0013",
+        "CALL-0033",
+        "CALL-0043",
+        "CALL-0063",
+        "CALL-0073"
+      ],
+      "call_ids": [
+        "CALL-0013",
+        "CALL-0033",
+        "CALL-0043",
+        "CALL-0063",
+        "CALL-0073",
+        "CALL-0093"
+      ]
+    },
+    {
+      "key": [
+        "late fee dispute",
+        "offered next steps",
+        "unresolved"
+      ],
+      "issue": "late fee dispute",
+      "behavior": "offered next steps",
+      "outcome": "unresolved",
+      "count": 6,
+      "lift": 1.163,
+      "evidence": [
+        "CALL-0003",
+        "CALL-0023",
+        "CALL-0053",
+        "CALL-0061",
+        "CALL-0071"
+      ],
+      "call_ids": [
+        "CALL-0003",
+        "CALL-0023",
+        "CALL-0053",
+        "CALL-0061",
+        "CALL-0071",
+        "CALL-0083"
+      ]
+    },
+    {
+      "key": [
+        "hardship / forbearance",
+        "used empathy",
+        "unresolved"
+      ],
+      "issue": "hardship / forbearance",
+      "behavior": "used empathy",
+      "outcome": "unresolved",
+      "count": 6,
+      "lift": 1.159,
+      "evidence": [
+        "CALL-0016",
+        "CALL-0029",
+        "CALL-0056",
+        "CALL-0076",
+        "CALL-0086"
+      ],
+      "call_ids": [
+        "CALL-0016",
+        "CALL-0029",
+        "CALL-0056",
+        "CALL-0076",
+        "CALL-0086",
+        "CALL-0089"
+      ]
+    },
+    {
+      "key": [
+        "insurance / tax escrow issue",
+        "transferred / escalated",
+        "escalated"
+      ],
+      "issue": "insurance / tax escrow issue",
+      "behavior": "transferred / escalated",
+      "outcome": "escalated",
+      "count": 5,
+      "lift": 4.234,
+      "evidence": [
+        "CALL-0028",
+        "CALL-0038",
+        "CALL-0048",
+        "CALL-0058",
+        "CALL-0098"
+      ],
+      "call_ids": [
+        "CALL-0028",
+        "CALL-0038",
+        "CALL-0048",
+        "CALL-0058",
+        "CALL-0098"
+      ]
+    }
+  ]
+}
