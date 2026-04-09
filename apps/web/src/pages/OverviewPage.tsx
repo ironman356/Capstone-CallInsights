@@ -18,38 +18,8 @@ export function OverviewPage({ workspace, onOpenIssue, onOpenCall }: OverviewPag
   const { dashboard } = workspace;
 
   return (
-    <section className="layout-grid">
-      <article className="panel story-panel">
-        <div className="section-heading">
-          <h2>Now You See</h2>
-          <p>The platform frames repeatable signals instead of anecdotal hunches.</p>
-        </div>
-        <div className="benefit-grid">
-          {BLIND_SPOT_GRID.map(([before, after]) => (
-            <div className="benefit-card" key={before}>
-              <span>Before</span>
-              <h3>{before}</h3>
-              <p>{after}</p>
-            </div>
-          ))}
-        </div>
-      </article>
-
-      <article className="panel">
-        <div className="section-heading">
-          <h2>Daily pulse highlights</h2>
-          <p>The AI layer surfaces the strongest movement from the last reporting cycle.</p>
-        </div>
-        <div className="brief-stack">
-          {dashboard.overview.daily_brief.map((item) => (
-            <div className="brief-card" key={item}>
-              {item}
-            </div>
-          ))}
-        </div>
-      </article>
-
-      <article className="panel span-2">
+    <section className="layout-grid overview-grid">
+      <article className="panel overview-issues">
         <div className="section-heading">
           <h2>Recurring issue field</h2>
           <p>Issue cards stay compact here and open into deeper dedicated pages when you need detail.</p>
@@ -74,7 +44,37 @@ export function OverviewPage({ workspace, onOpenIssue, onOpenCall }: OverviewPag
         </div>
       </article>
 
-      <article className="panel span-2">
+      <article className="panel overview-pulse">
+        <div className="section-heading">
+          <h2>Daily pulse highlights</h2>
+          <p>The AI layer surfaces the strongest movement from the last reporting cycle.</p>
+        </div>
+        <div className="brief-stack">
+          {dashboard.overview.daily_brief.map((item) => (
+            <div className="brief-card" key={item}>
+              {item}
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <article className="panel overview-now">
+        <div className="section-heading">
+          <h2>Now You See</h2>
+          <p>The platform frames repeatable signals instead of anecdotal hunches.</p>
+        </div>
+        <div className="benefit-grid">
+          {BLIND_SPOT_GRID.map(([before, after]) => (
+            <div className="benefit-card" key={before}>
+              <span>Before</span>
+              <h3>{before}</h3>
+              <p>{after}</p>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      <article className="panel overview-patterns">
         <div className="section-heading">
           <h2>Pattern constellation</h2>
           <p>High-lift combinations open directly into issue exploration and transcript evidence.</p>

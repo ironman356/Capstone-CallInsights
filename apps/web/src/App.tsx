@@ -4,7 +4,7 @@ import { AppFrame } from "./components/AppFrame";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
 import { DrilldownPage } from "./pages/DrilldownPage";
 import { ExplorerPage } from "./pages/ExplorerPage";
-import { GovernancePage } from "./pages/GovernancePage";
+import AdminAiGovernancePage from "./pages/AdminAiGovernancePage";
 import { MonthlyPage } from "./pages/MonthlyPage";
 import { OverviewPage } from "./pages/OverviewPage";
 import { PulsePage } from "./pages/PulsePage";
@@ -334,7 +334,14 @@ function App() {
       />
     );
   } else if (page === "drilldown") {
-    pageNode = <DrilldownPage callDetail={callDetail} />;
+    pageNode = (
+      <DrilldownPage
+        callDetail={callDetail}
+        calls={workspace.dashboard.calls}
+        selectedCallId={selectedCallId}
+        onSelectCall={setSelectedCallId}
+      />
+    );
   } else if (page === "strategies") {
     pageNode = (
       <StrategiesPage
@@ -358,7 +365,7 @@ function App() {
       />
     );
   } else if (page === "governance") {
-    pageNode = <GovernancePage workspace={workspace} />;
+    pageNode = <AdminAiGovernancePage workspace={workspace} />;
   }
 
   return (
