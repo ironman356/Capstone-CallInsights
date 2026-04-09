@@ -164,6 +164,14 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertIn("report", payload)
         self.assertIn("issue_table", payload["report"])
 
+    def test_report_pdf_endpoint_returns_downloadable_pdf(self) -> None:
+        response = self.client.get("/api/rank1/reports/export.pdf")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers.get("content-type"), "application/pdf")
+        self.assertIn("attachment; filename=", response.headers.get("content-disposition", ""))
+        self.assertTrue(response.content.startswith(b"%PDF-1.4"))
+        self.assertGreater(len(response.content), 200)
+
 
 if __name__ == "__main__":
     unittest.main()

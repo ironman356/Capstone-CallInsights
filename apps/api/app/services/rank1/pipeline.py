@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import textwrap
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
@@ -783,6 +784,125 @@ class Rank1PipelineService:
                 for issue in bundle["issues"][:6]
             ],
         }
+
+    def _pdf_escape(self, value: str) -> str:
+        return value.replace("\\", "\\\\").replace("(", "\\(").replace(")", "\\)")
+
+    def _wrap_pdf_lines(self, value: str, width: int = 88) -> list[str]:
+        return textwrap.wrap(value, width=width, break_long_words=False, break_on_hyphens=False) or [value]
+
+    def build_report_pdf(self, bundle: dict) -> bytes:
+        report = self.build_report_summary(bundle)
+        line_specs: list[tuple[str, int]] = [
+            (report["title"], 18),
+            (f"Generated: {report['generated_at']}", 11),
+            ("", 11),
+            ("Platform Summary", 14),
+        ]
+        for summary_line in self._wrap_pdf_lines(
+            "Call Insights converts historical call transcripts into ranked issues, behavior patterns, "
+            "strategy workflows, and evidence-backed reports for operational review."
+        ):
+            line_specs.append((summary_line, 11))
+
+        line_specs.extend(
+            [
+                ("", 11),
+                ("KPI Totals", 14),
+            ]
+        )
+        for key, value in report["totals"].items():
+            line_specs.append((f"{key.replace('_', ' ').title()}: {value}", 11))
+
+        line_specs.extend(
+            [
+                ("", 11),
+                ("Highlights", 14),
+            ]
+        )
+        for highlight in report["highlights"]:
+            for wrapped in self._wrap_pdf_lines(f"- {highlight}"):
+                line_specs.append((wrapped, 11))
+
+        line_specs.extend(
+            [
+                ("", 11),
+                ("Issue Table", 14),
+            ]
+        )
+        for row in report["issue_table"]:
+            table_line = (
+                f"{row['issue'].title()} | {row['count']} calls | top outcome: {row['top_outcome']}"
+            )
+            for wrapped in self._wrap_pdf_lines(table_line):
+                line_specs.append((wrapped, 11))
+
+        max_lines_per_page = 42
+        pages: list[list[tuple[str, int]]] = [
+            line_specs[index : index + max_lines_per_page]
+            for index in range(0, len(line_specs), max_lines_per_page)
+        ]
+
+        objects: list[bytes] = []
+        page_object_ids: list[int] = []
+        font_object_id = 3 + (len(pages) * 2)
+
+        objects.append(b"<< /Type /Catalog /Pages 2 0 R >>")
+
+        kids_refs = []
+        for page_index, page_lines in enumerate(pages):
+            page_object_id = 3 + (page_index * 2)
+            content_object_id = page_object_id + 1
+            page_object_ids.append(page_object_id)
+            kids_refs.append(f"{page_object_id} 0 R")
+
+            y_position = 790
+            commands = []
+            for text, size in page_lines:
+                safe_text = self._pdf_escape(text)
+                commands.append(f"BT /F1 {size} Tf 50 {y_position} Td ({safe_text}) Tj ET")
+                y_position -= 18 if size >= 14 else 15
+            content_stream = "\n".join(commands).encode("latin-1", errors="replace")
+
+            page_object = (
+                f"<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] "
+                f"/Resources << /Font << /F1 {font_object_id} 0 R >> >> "
+                f"/Contents {content_object_id} 0 R >>"
+            ).encode("ascii")
+            content_object = (
+                f"<< /Length {len(content_stream)} >>\nstream\n".encode("ascii")
+                + content_stream
+                + b"\nendstream"
+            )
+
+            objects.append(page_object)
+            objects.append(content_object)
+
+        pages_object = f"<< /Type /Pages /Count {len(page_object_ids)} /Kids [{' '.join(kids_refs)}] >>".encode(
+            "ascii"
+        )
+        objects.insert(1, pages_object)
+        objects.append(b"<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>")
+
+        pdf = bytearray(b"%PDF-1.4\n")
+        offsets = [0]
+        for index, obj in enumerate(objects, start=1):
+            offsets.append(len(pdf))
+            pdf.extend(f"{index} 0 obj\n".encode("ascii"))
+            pdf.extend(obj)
+            pdf.extend(b"\nendobj\n")
+
+        xref_offset = len(pdf)
+        pdf.extend(f"xref\n0 {len(objects) + 1}\n".encode("ascii"))
+        pdf.extend(b"0000000000 65535 f \n")
+        for offset in offsets[1:]:
+            pdf.extend(f"{offset:010d} 00000 n \n".encode("ascii"))
+        pdf.extend(
+            (
+                f"trailer\n<< /Size {len(objects) + 1} /Root 1 0 R >>\nstartxref\n{xref_offset}\n%%EOF"
+            ).encode("ascii")
+        )
+        return bytes(pdf)
 
     def build_governance_summary(self, bundle: dict) -> dict:
         strategy_board = self.build_strategy_board(bundle)

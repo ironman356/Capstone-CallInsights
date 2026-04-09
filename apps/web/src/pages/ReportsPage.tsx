@@ -6,9 +6,10 @@ interface ReportsPageProps {
   exportPayload: WorkspacePayload["reports"] | null;
   syncing: boolean;
   onExport: () => void;
+  onRefreshReport: () => void;
 }
 
-export function ReportsPage({ workspace, exportPayload, syncing, onExport }: ReportsPageProps) {
+export function ReportsPage({ workspace, exportPayload, syncing, onExport, onRefreshReport }: ReportsPageProps) {
   const report = exportPayload ?? workspace.reports;
 
   return (
@@ -30,9 +31,14 @@ export function ReportsPage({ workspace, exportPayload, syncing, onExport }: Rep
             </div>
           ))}
         </div>
-        <button className="primary-button" type="button" onClick={onExport} disabled={syncing}>
-          Generate fresh export
-        </button>
+        <div className="hero-actions">
+          <button className="primary-button" type="button" onClick={onExport} disabled={syncing}>
+            Download PDF report
+          </button>
+          <button className="ghost-button" type="button" onClick={onRefreshReport} disabled={syncing}>
+            Refresh report data
+          </button>
+        </div>
       </article>
 
       <article className="panel">

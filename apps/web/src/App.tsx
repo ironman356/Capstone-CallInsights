@@ -259,9 +259,22 @@ function App() {
   async function handleExportReport() {
     setSyncing(true);
     try {
+      const [payload, filename] = await Promise.all([api.exportReport(), api.downloadReportPdf()]);
+      setExportPayload(payload.report);
+      setActionMessage(`PDF report downloaded as ${filename}.`);
+    } catch (exportError) {
+      setError(exportError instanceof Error ? exportError.message : "Unable to export report");
+    } finally {
+      setSyncing(false);
+    }
+  }
+
+  async function handleRefreshReportData() {
+    setSyncing(true);
+    try {
       const payload = await api.exportReport();
       setExportPayload(payload.report);
-      setActionMessage(`Export package generated at ${new Date(payload.generated_at).toLocaleString()}.`);
+      setActionMessage(`Report data refreshed at ${new Date(payload.generated_at).toLocaleString()}.`);
     } catch (exportError) {
       setError(exportError instanceof Error ? exportError.message : "Unable to export report");
     } finally {
@@ -341,6 +354,7 @@ function App() {
         exportPayload={exportPayload}
         syncing={syncing}
         onExport={() => void handleExportReport()}
+        onRefreshReport={() => void handleRefreshReportData()}
       />
     );
   } else if (page === "governance") {

@@ -55,4 +55,25 @@ export const api = {
     ),
   recalibrate: () => request<WorkspacePayload>("/recalibrate", { method: "POST" }),
   exportReport: () => request<ExportReportResponse>("/reports/export", { method: "POST" }),
+  downloadReportPdf: async () => {
+    const response = await fetch(`${API_ROOT}/reports/export.pdf`);
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(text || `Request failed with ${response.status}`);
+    }
+
+    const blob = await response.blob();
+    const header = response.headers.get("content-disposition") ?? "";
+    const match = /filename="([^"]+)"/.exec(header);
+    const filename = match?.[1] ?? "call-insights-report.pdf";
+    const url = window.URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    window.URL.revokeObjectURL(url);
+    return filename;
+  },
 };

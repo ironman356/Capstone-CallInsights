@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
+from fastapi.responses import Response
 
 from app.schemas.rank1 import (
     CallDetailResponse,
@@ -135,6 +136,17 @@ def recalibrate_workspace() -> WorkspaceResponse:
 def export_report() -> ExportReportResponse:
     report = service.build_report_summary(service.load_or_run())
     return ExportReportResponse(status="ok", generated_at=report["generated_at"], report=report)
+
+
+@router.get("/reports/export.pdf")
+def download_report_pdf() -> Response:
+    bundle = service.load_or_run()
+    report = service.build_report_summary(bundle)
+    pdf_bytes = service.build_report_pdf(bundle)
+    generated_at = report["generated_at"].replace(":", "-")
+    filename = f"call-insights-report-{generated_at}.pdf"
+    headers = {"Content-Disposition": f'attachment; filename="{filename}"'}
+    return Response(content=pdf_bytes, media_type="application/pdf", headers=headers)
 
 
 @router.get("/governance", response_model=GovernanceResponse)
