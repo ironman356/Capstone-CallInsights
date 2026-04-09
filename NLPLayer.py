@@ -2,22 +2,10 @@ import numpy as np
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sklearn.cluster import KMeans
+from sklearn.preprocessing import normalize
 from DataPreProcessing import *
 
-def prepare_chunks(files):
-    """
-    Clean way to prepare the chunks required
-    for the embedding and other NLP layer functions.
-    """
-    data = load_data(files)
-    data = clean_data(data)
-    data = normalize_text(data)
-    chunks = chunk_transcripts(data)
-
-    return chunks
-
 embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
-
 
 def generate_embeddings(chunks_df):
     """
@@ -30,8 +18,11 @@ def generate_embeddings(chunks_df):
 
     embeddings = embedding_model.encode(
         texts,
-        show_progress_bar=False
+        show_progress_bar=True,
+        batch_size=32
     )
+
+    embeddings = normalize(embeddings)
 
     chunks_df["embedding"] = list(embeddings)
 
@@ -57,6 +48,7 @@ def cluster_chunks(chunks_df, n_clusters=8):
 
     return chunks_df, model
 
+
 def label_issues_from_clusters(chunks_df):
     """
     Convert cluster IDs into human-readable issue labels.
@@ -69,26 +61,29 @@ def label_issues_from_clusters(chunks_df):
     for cluster_id in chunks_df["cluster_id"].unique():
         cluster_data = chunks_df[chunks_df["cluster_id"] == cluster_id]
 
-        # Simple heuristic: use most common words
         all_text = " ".join(cluster_data["chunk_text"].tolist())
         words = all_text.split()
 
-        # Get top frequent words
+        stopwords = {"the", "is", "and", "to", "a", "of", "i", "it", "you", "that",
+                     "in", "for", "on", "with", "this","was", "are", "but", "be",
+                     "have", "not", "my", "we"}
+
+        words = [w for w in words if w not in stopwords and len(w) > 3]
+
         word_freq = {}
         for w in words:
             word_freq[w] = word_freq.get(w, 0) + 1
 
         top_words = sorted(word_freq, key=word_freq.get, reverse=True)[:3]
 
-        # Create placeholder label
         label = " / ".join(top_words) if top_words else f"Issue_{cluster_id}"
 
         issue_labels[cluster_id] = label
 
-    # Map back to dataframe
     chunks_df["issue_label"] = chunks_df["cluster_id"].map(issue_labels)
 
     return chunks_df, issue_labels
+
 
 def run_issue_detection_pipeline(chunks_df):
     """
@@ -98,13 +93,10 @@ def run_issue_detection_pipeline(chunks_df):
     3. Label clusters as issues
     """
 
-    # Embeddings
     chunks_df = generate_embeddings(chunks_df)
 
-    # Clustering
     chunks_df, cluster_model = cluster_chunks(chunks_df)
 
-    # Issue labeling
     chunks_df, issue_map = label_issues_from_clusters(chunks_df)
 
     return chunks_df, cluster_model, issue_map
