@@ -53,6 +53,17 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), {"status": "ok", "service": "call-insights-api"})
 
+    def test_cors_preflight_allows_frontend_origin(self) -> None:
+        response = self.client.options(
+            "/api/rank1/dashboard",
+            headers={
+                "Origin": "http://127.0.0.1:4173",
+                "Access-Control-Request-Method": "GET",
+            },
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers.get("access-control-allow-origin"), "http://127.0.0.1:4173")
+
     def test_dashboard_endpoint_returns_overview_and_calls(self) -> None:
         response = self.client.get("/rank1/dashboard")
         payload = response.json()
@@ -61,6 +72,14 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertIn("issues", payload)
         self.assertIn("calls", payload)
         self.assertGreater(len(payload["calls"]), 0)
+
+    def test_dashboard_endpoint_also_available_under_api_prefix(self) -> None:
+        response = self.client.get("/api/rank1/dashboard")
+        payload = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("overview", payload)
+        self.assertIn("issues", payload)
+        self.assertIn("calls", payload)
 
     def test_issue_detail_endpoint_returns_matching_issue(self) -> None:
         dashboard = self.client.get("/rank1/dashboard").json()
