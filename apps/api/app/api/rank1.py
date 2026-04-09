@@ -5,8 +5,15 @@ from fastapi import APIRouter, HTTPException
 from app.schemas.rank1 import (
     CallDetailResponse,
     DashboardResponse,
+    ExportReportResponse,
+    GovernanceResponse,
     IssueDetailResponse,
     PipelineRunResponse,
+    StrategyBoardResponse,
+    StrategyCreateRequest,
+    StrategyRecord,
+    StrategyUpdateRequest,
+    WorkspaceResponse,
 )
 from app.services.rank1.pipeline import Rank1PipelineService
 
@@ -77,3 +84,59 @@ def run_pipeline() -> PipelineRunResponse:
             "triple_engine": "data/outputs/triple_engine_summary.json",
         },
     )
+
+
+@router.get("/workspace", response_model=WorkspaceResponse)
+def get_workspace() -> WorkspaceResponse:
+    workspace = service.build_workspace()
+    return WorkspaceResponse(**workspace)
+
+
+@router.get("/strategies", response_model=StrategyBoardResponse)
+def get_strategies() -> StrategyBoardResponse:
+    board = service.build_strategy_board(service.load_or_run())
+    return StrategyBoardResponse(**board)
+
+
+@router.post("/strategies", response_model=StrategyRecord)
+def create_strategy(payload: StrategyCreateRequest) -> StrategyRecord:
+    bundle = service.load_or_run()
+    try:
+        strategy = service.create_strategy(
+            bundle,
+            issue_slug=payload.issue_slug,
+            title=payload.title,
+            owner=payload.owner,
+            hypothesis=payload.hypothesis,
+            notes=payload.notes,
+            kpi_focus=payload.kpi_focus,
+            evidence_call_ids=payload.evidence_call_ids,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    return StrategyRecord(**strategy)
+
+
+@router.patch("/strategies/{strategy_id}", response_model=StrategyRecord)
+def update_strategy(strategy_id: str, payload: StrategyUpdateRequest) -> StrategyRecord:
+    strategy = service.update_strategy(service.load_or_run(), strategy_id, payload.model_dump(exclude_unset=True))
+    if strategy is None:
+        raise HTTPException(status_code=404, detail="Strategy not found")
+    return StrategyRecord(**strategy)
+
+
+@router.post("/recalibrate", response_model=WorkspaceResponse)
+def recalibrate_workspace() -> WorkspaceResponse:
+    workspace = service.build_workspace(force=True)
+    return WorkspaceResponse(**workspace)
+
+
+@router.post("/reports/export", response_model=ExportReportResponse)
+def export_report() -> ExportReportResponse:
+    report = service.build_report_summary(service.load_or_run())
+    return ExportReportResponse(status="ok", generated_at=report["generated_at"], report=report)
+
+
+@router.get("/governance", response_model=GovernanceResponse)
+def get_governance() -> GovernanceResponse:
+    return GovernanceResponse(**service.build_governance_summary(service.load_or_run()))

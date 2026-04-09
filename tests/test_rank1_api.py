@@ -119,6 +119,51 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertGreater(payload["segment_count"], 0)
         self.assertIn("triple_engine", payload["output_files"])
 
+    def test_workspace_endpoint_returns_extended_payload(self) -> None:
+        response = self.client.get("/api/rank1/workspace")
+        payload = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("dashboard", payload)
+        self.assertIn("pulse_insights", payload)
+        self.assertIn("strategy_board", payload)
+        self.assertIn("governance", payload)
+
+    def test_strategy_create_and_update_endpoints_work(self) -> None:
+        dashboard = self.client.get("/api/rank1/dashboard").json()
+        issue_slug = dashboard["issues"][0]["slug"]
+
+        create_response = self.client.post(
+            "/api/rank1/strategies",
+            json={
+                "issue_slug": issue_slug,
+                "title": "Reduce repeat confusion",
+                "owner": "QA",
+                "hypothesis": "Standardize agent framing earlier in the call.",
+                "notes": "Seeded from API test",
+                "kpi_focus": ["AHT", "FCR"],
+                "evidence_call_ids": [dashboard["calls"][0]["call_id"]],
+            },
+        )
+        created = create_response.json()
+        self.assertEqual(create_response.status_code, 200)
+        self.assertEqual(created["status"], "Proposed")
+
+        update_response = self.client.patch(
+            f"/api/rank1/strategies/{created['strategy_id']}",
+            json={"status": "Accepted"},
+        )
+        updated = update_response.json()
+        self.assertEqual(update_response.status_code, 200)
+        self.assertEqual(updated["status"], "Accepted")
+
+    def test_report_export_endpoint_returns_report_payload(self) -> None:
+        response = self.client.post("/api/rank1/reports/export")
+        payload = response.json()
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(payload["status"], "ok")
+        self.assertIn("report", payload)
+        self.assertIn("issue_table", payload["report"])
+
 
 if __name__ == "__main__":
     unittest.main()

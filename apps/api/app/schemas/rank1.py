@@ -51,3 +51,65 @@ class PipelineRunResponse(BaseModel):
     call_count: int
     segment_count: int
     output_files: dict[str, str]
+
+
+class StrategyRecord(BaseModel):
+    strategy_id: str
+    title: str
+    issue_slug: str
+    issue: str
+    status: str
+    owner: str
+    hypothesis: str
+    kpi_focus: list[str]
+    evidence_call_ids: list[str]
+    notes: str
+    created_at: str
+    updated_at: str
+
+
+class StrategyBoardResponse(BaseModel):
+    stages: list[dict]
+    strategies: list[StrategyRecord]
+
+
+class StrategyCreateRequest(BaseModel):
+    issue_slug: str
+    title: str
+    owner: str
+    hypothesis: str
+    notes: str = ""
+    kpi_focus: list[str] = []
+    evidence_call_ids: list[str] = []
+
+
+class StrategyUpdateRequest(BaseModel):
+    status: str | None = None
+    owner: str | None = None
+    hypothesis: str | None = None
+    notes: str | None = None
+    kpi_focus: list[str] | None = None
+    evidence_call_ids: list[str] | None = None
+
+
+class ExportReportResponse(BaseModel):
+    status: str
+    generated_at: str
+    report: dict
+
+
+class GovernanceResponse(BaseModel):
+    generated_at: str
+    evidence_policy: list[str]
+    audit_summary: dict
+    monitors: list[dict]
+
+
+class WorkspaceResponse(BaseModel):
+    dashboard: DashboardResponse
+    pulse_insights: list[dict]
+    recalibration: dict
+    strategy_board: StrategyBoardResponse
+    ask_ci: list[dict]
+    reports: dict
+    governance: GovernanceResponse

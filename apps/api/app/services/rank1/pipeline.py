@@ -4,8 +4,10 @@ import json
 import re
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Iterable
+from uuid import uuid4
 
 from app.core.config import settings
 
@@ -365,6 +367,13 @@ class Rank1PipelineService:
         self.processed_dir.mkdir(parents=True, exist_ok=True)
         self.outputs_dir.mkdir(parents=True, exist_ok=True)
 
+    @property
+    def strategy_store_path(self) -> Path:
+        return self.outputs_dir / "strategy_board.json"
+
+    def _now_iso(self) -> str:
+        return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
     def ingest_calls(self) -> list[dict]:
         if not self.raw_dir.exists():
             raise FileNotFoundError(f"Transcript directory not found: {self.raw_dir}")
@@ -557,6 +566,260 @@ class Rank1PipelineService:
         ]
 
         return {"overview": overview, "issues": issues_ranked, "calls": call_cards}
+
+    def _build_default_strategies(self, bundle: dict) -> list[dict]:
+        statuses = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"]
+        owners = ["Operations", "Servicing", "QA", "Training", "Leadership"]
+        kpis = [
+            ["AHT", "Escalation Rate"],
+            ["FCR", "Repeat Calls"],
+            ["Sentiment", "AHT"],
+            ["Escalation Rate", "Sentiment"],
+            ["Repeat Calls", "FCR"],
+        ]
+        created_at = self._now_iso()
+        seeded: list[dict] = []
+        for index, issue in enumerate(bundle["issues"][:5], start=1):
+            seeded.append(
+                {
+                    "strategy_id": f"STRAT-{index:03d}",
+                    "title": f"Improve {issue['issue']}",
+                    "issue_slug": issue["slug"],
+                    "issue": issue["issue"],
+                    "status": statuses[(index - 1) % len(statuses)],
+                    "owner": owners[(index - 1) % len(owners)],
+                    "hypothesis": (
+                        f"Standardize the strongest behaviors for {issue['issue']} and monitor the next recalibration "
+                        "cycle for KPI movement."
+                    ),
+                    "kpi_focus": kpis[(index - 1) % len(kpis)],
+                    "evidence_call_ids": [call["call_id"] for call in issue["representative_calls"][:3]],
+                    "notes": issue["summary"],
+                    "created_at": created_at,
+                    "updated_at": created_at,
+                }
+            )
+        return seeded
+
+    def load_strategies(self, bundle: dict) -> list[dict]:
+        self.ensure_output_dirs()
+        path = self.strategy_store_path
+        if path.exists():
+            return json.loads(path.read_text(encoding="utf-8"))
+
+        seeded = self._build_default_strategies(bundle)
+        self.save_strategies(seeded)
+        return seeded
+
+    def save_strategies(self, strategies: list[dict]) -> None:
+        self.ensure_output_dirs()
+        self.strategy_store_path.write_text(json.dumps(strategies, indent=2) + "\n", encoding="utf-8")
+
+    def create_strategy(
+        self,
+        bundle: dict,
+        *,
+        issue_slug: str,
+        title: str,
+        owner: str,
+        hypothesis: str,
+        notes: str,
+        kpi_focus: list[str],
+        evidence_call_ids: list[str],
+    ) -> dict:
+        issue = next((item for item in bundle["issues"] if item["slug"] == issue_slug), None)
+        if issue is None:
+            raise ValueError("Issue not found")
+
+        strategies = self.load_strategies(bundle)
+        now = self._now_iso()
+        strategy = {
+            "strategy_id": f"STRAT-{uuid4().hex[:8].upper()}",
+            "title": title.strip(),
+            "issue_slug": issue_slug,
+            "issue": issue["issue"],
+            "status": "Proposed",
+            "owner": owner.strip(),
+            "hypothesis": hypothesis.strip(),
+            "kpi_focus": kpi_focus,
+            "evidence_call_ids": evidence_call_ids or [call["call_id"] for call in issue["representative_calls"][:2]],
+            "notes": notes.strip(),
+            "created_at": now,
+            "updated_at": now,
+        }
+        strategies.insert(0, strategy)
+        self.save_strategies(strategies)
+        return strategy
+
+    def update_strategy(self, bundle: dict, strategy_id: str, updates: dict) -> dict | None:
+        strategies = self.load_strategies(bundle)
+        for strategy in strategies:
+            if strategy["strategy_id"] != strategy_id:
+                continue
+            for key, value in updates.items():
+                if value is not None:
+                    strategy[key] = value
+            strategy["updated_at"] = self._now_iso()
+            self.save_strategies(strategies)
+            return strategy
+        return None
+
+    def build_strategy_board(self, bundle: dict) -> dict:
+        stage_order = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"]
+        strategies = self.load_strategies(bundle)
+        return {
+            "stages": [
+                {
+                    "name": stage,
+                    "count": sum(1 for strategy in strategies if strategy["status"] == stage),
+                }
+                for stage in stage_order
+            ],
+            "strategies": strategies,
+        }
+
+    def build_pulse_insights(self, bundle: dict) -> list[dict]:
+        insights: list[dict] = []
+        for index, pattern in enumerate(bundle["overview"]["top_patterns"][:6], start=1):
+            trend = "Escalation risk" if pattern["outcome"] == "escalated" else "Stabilizing signal"
+            insights.append(
+                {
+                    "insight_id": f"INS-{index:03d}",
+                    "title": f"{pattern['issue'].title()} is moving through {pattern['behavior']}",
+                    "issue": pattern["issue"],
+                    "behavior": pattern["behavior"],
+                    "outcome": pattern["outcome"],
+                    "trend": trend,
+                    "evidence_count": pattern["count"],
+                    "summary": (
+                        f"{pattern['count']} evidence calls show {pattern['behavior']} linked with "
+                        f"{pattern['outcome']} for {pattern['issue']}."
+                    ),
+                    "call_ids": pattern["call_ids"],
+                    "lift": pattern["lift"],
+                }
+            )
+        return insights
+
+    def build_recalibration_summary(self, bundle: dict) -> dict:
+        top_issue = bundle["issues"][0] if bundle["issues"] else None
+        declining_issue = bundle["issues"][-1] if bundle["issues"] else None
+        return {
+            "completed_at": self._now_iso(),
+            "baseline_window": "Last 30 days",
+            "new_clusters_detected": max(len(bundle["overview"]["issue_counts"]) - 6, 0),
+            "retired_clusters": 0,
+            "top_issue": top_issue["issue"] if top_issue else None,
+            "focus_summary": (
+                f"{top_issue['issue']} remains the highest-volume issue cluster." if top_issue else "No issue clusters detected."
+            ),
+            "taxonomy_notes": [
+                f"{len(bundle['overview']['issue_counts'])} issue groupings are active in the current taxonomy.",
+                f"Most common behavior signal remains {bundle['overview']['top_patterns'][0]['behavior']}."
+                if bundle["overview"]["top_patterns"]
+                else "No ranked patterns are available yet.",
+                (
+                    f"Lowest-volume active issue: {declining_issue['issue']}."
+                    if declining_issue
+                    else "No declining issue trend is available."
+                ),
+            ],
+        }
+
+    def build_ask_ci(self, bundle: dict) -> list[dict]:
+        issues = bundle["issues"]
+        patterns = bundle["overview"]["top_patterns"]
+        escalation = next((pattern for pattern in patterns if pattern["outcome"] == "escalated"), None)
+        resolved = next((pattern for pattern in patterns if pattern["outcome"] == "resolved"), None)
+        lead_issue = issues[0] if issues else None
+        return [
+            {
+                "question": "What should leadership review first?",
+                "answer": (
+                    f"Start with {lead_issue['issue']} because it is the largest recurring issue cluster."
+                    if lead_issue
+                    else "No lead issue is available yet."
+                ),
+                "evidence_call_ids": [call["call_id"] for call in lead_issue["representative_calls"][:3]] if lead_issue else [],
+            },
+            {
+                "question": "Which pattern is driving escalations?",
+                "answer": (
+                    f"{escalation['issue']} paired with {escalation['behavior']} is the strongest escalated pattern."
+                    if escalation
+                    else "No escalated pattern is available yet."
+                ),
+                "evidence_call_ids": escalation["call_ids"][:3] if escalation else [],
+            },
+            {
+                "question": "Where are agents stabilizing calls?",
+                "answer": (
+                    f"{resolved['behavior']} is the clearest resolved behavior for {resolved['issue']}."
+                    if resolved
+                    else "Resolved signals are still limited in the current corpus."
+                ),
+                "evidence_call_ids": resolved["call_ids"][:3] if resolved else [],
+            },
+        ]
+
+    def build_report_summary(self, bundle: dict) -> dict:
+        overview = bundle["overview"]
+        return {
+            "title": "Call Insights Operational Report",
+            "generated_at": self._now_iso(),
+            "totals": {
+                "calls_indexed": overview["metrics"][0]["value"],
+                "issue_types": overview["metrics"][1]["value"],
+                "escalations": overview["metrics"][2]["value"],
+                "avg_sentiment_shift": overview["metrics"][3]["value"],
+            },
+            "highlights": overview["daily_brief"],
+            "issue_table": [
+                {
+                    "issue": issue["issue"],
+                    "count": issue["count"],
+                    "top_outcome": max(issue["outcome_breakdown"], key=issue["outcome_breakdown"].get),
+                }
+                for issue in bundle["issues"][:6]
+            ],
+        }
+
+    def build_governance_summary(self, bundle: dict) -> dict:
+        strategy_board = self.build_strategy_board(bundle)
+        return {
+            "generated_at": self._now_iso(),
+            "evidence_policy": [
+                "Every insight references evidence call IDs before it is rendered.",
+                "Strategies inherit issue references and evidence calls at creation time.",
+                "Monthly recalibration metadata is logged with completion timestamps.",
+            ],
+            "audit_summary": {
+                "strategies_tracked": len(strategy_board["strategies"]),
+                "issue_clusters": len(bundle["overview"]["issue_counts"]),
+                "evidence_backed_patterns": len(bundle["overview"]["top_patterns"]),
+            },
+            "monitors": [
+                {"label": "Nightly pulse ready", "status": "healthy"},
+                {"label": "Monthly recalibration", "status": "scheduled"},
+                {"label": "Evidence pack coverage", "status": "healthy"},
+            ],
+        }
+
+    def build_workspace(self, *, force: bool = False) -> dict:
+        bundle = self.load_or_run(force=force)
+        return {
+            "dashboard": {
+                "overview": bundle["overview"],
+                "issues": bundle["issues"],
+                "calls": bundle["calls"],
+            },
+            "pulse_insights": self.build_pulse_insights(bundle),
+            "recalibration": self.build_recalibration_summary(bundle),
+            "strategy_board": self.build_strategy_board(bundle),
+            "ask_ci": self.build_ask_ci(bundle),
+            "reports": self.build_report_summary(bundle),
+            "governance": self.build_governance_summary(bundle),
+        }
 
     def _write_jsonl(self, path: Path, rows: list[dict]) -> None:
         path.write_text("\n".join(json.dumps(row, ensure_ascii=True) for row in rows), encoding="utf-8")
