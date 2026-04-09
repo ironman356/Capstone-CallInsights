@@ -538,12 +538,18 @@ button {
 }
 
 .kanban-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(5, 280px);
+  gap: 14px;
   overflow-x: auto;
+  padding-bottom: 10px;
 }
 
 .kanban-column {
-  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 280px;
 }
 
 .benefit-card span,
@@ -803,7 +809,7 @@ button {
   }
 
   .kanban-grid {
-    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    grid-template-columns: repeat(2, 260px);
   }
 }
 
