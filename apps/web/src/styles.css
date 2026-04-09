@@ -59,20 +59,18 @@ button {
 
 #root {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .app-shell {
   position: relative;
-  width: min(1440px, calc(100vw - 32px));
-  margin: 0 auto;
-  padding: 28px 0 72px;
+  width: 100%;
+  margin: 0;
+  padding: 24px;
 }
 
 .app-shell-pages {
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: 20px;
-  align-items: start;
+  display: block;
 }
 
 .ambient {
@@ -110,10 +108,17 @@ button {
 }
 
 .side-nav {
-  position: sticky;
-  top: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   display: grid;
   gap: 20px;
+  z-index: 20;
+  border-radius: 0;
 }
 
 .side-nav-top,
@@ -124,10 +129,14 @@ button {
   gap: 14px;
 }
 
+.side-nav-top .eyebrow {
+  text-align: center;
+}
+
 .side-nav-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: 1.5rem;
   line-height: 1.05;
 }
 
@@ -159,6 +168,7 @@ button {
 }
 
 .page-shell {
+  margin-left: 320px;
   min-width: 0;
 }
 
@@ -211,7 +221,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--accent);
-  font-size: 0.76rem;
+  font-size: 0.8rem;
 }
 
 .hero h1,
@@ -672,11 +682,19 @@ button {
   }
 
   .app-shell-pages {
-    grid-template-columns: 1fr;
+    display: grid;
+    gap: 20px;
   }
 
   .side-nav {
     position: static;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    border-radius: 28px  }
+
+  .page-shell {
+    margin-left: 0;
   }
 
   .span-2 {
@@ -690,7 +708,6 @@ button {
 
 @media (max-width: 720px) {
   .app-shell {
-    width: min(100vw - 20px, 100%);
     padding-top: 16px;
   }
 
