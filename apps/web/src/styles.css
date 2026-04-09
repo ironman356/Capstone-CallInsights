@@ -264,7 +264,6 @@ button {
 .pulse-head,
 .pulse-meta,
 .kanban-header,
-.table-row,
 .mode-switch {
   display: flex;
   gap: 10px;
@@ -646,6 +645,11 @@ button {
   gap: 10px;
 }
 
+.table-shell {
+  display: grid;
+  gap: 0;
+}
+
 .input {
   width: 100%;
   padding: 10px 12px;
@@ -671,8 +675,7 @@ button {
 .evidence-head,
 .issue-card-top,
 .kanban-header,
-.line-item,
-.table-row {
+.line-item {
   justify-content: space-between;
   align-items: center;
 }
@@ -717,8 +720,24 @@ button {
 }
 
 .table-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
   padding: 12px 0;
   border-bottom: 1px solid var(--line);
+  align-items: center;
+}
+
+.table-row span {
+  text-align: left;
+}
+
+.table-row strong {
+  text-align: center;
+}
+
+.table-row em {
+  text-align: right;
 }
 
 .table-row:last-child {
