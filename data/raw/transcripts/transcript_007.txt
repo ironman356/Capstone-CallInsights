@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I am looking at this statement and the amounts do not add up to me.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me go line by line through what is listed on that statement.
+Customer: I need it explained in plain language because the statement wording is not clear to me.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that the amount that feels off is often tied to unpaid charges or the escrow portion of the bill.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I was on hold earlier today, so I really do not want to get bounced around again.
+Agent: I understand. I will keep the notes detailed so you do not have to repeat yourself if another team is needed.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I can break each section down so you know which amount is the regular payment and which is separate.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Agent: I do not want to guess at the answer while the review is still pending.
+Customer: That makes sense. I just wanted to know what happens from here.
+Agent: The next step is the follow-up review, and I am documenting that now.
+Agent: Thank you for calling today.
+Customer: Thank you.

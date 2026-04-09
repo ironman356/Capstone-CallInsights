@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I fell behind and I need to know whether there is any kind of payment plan.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me go over what usually determines whether a payment plan can be offered.
+Customer: I just need something that feels manageable.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that partial payments alone do not always create a formal plan unless the account is approved for one.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will make sure the account reflects that you are asking for a way to catch up, not ignoring the balance.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: I hear what you are saying, but I am still not comfortable with where this stands.
+Agent: That is fair, and I will note that the issue is still open from your perspective.
+Customer: All right. I will wait for the next update.
+Agent: Thank you for calling today.
+Customer: Thank you.

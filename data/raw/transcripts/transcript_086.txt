@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I am trying to avoid another missed payment and I need to know what hardship options are available.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am pulling up the assistance information so I can give you accurate next steps.
+Customer: I am stressed and I just need to know what to do next.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that the hardship process usually requires supporting information before an option can be offered.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will document that you called proactively about assistance so the next team sees that context.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: I hear what you are saying, but I am still not comfortable with where this stands.
+Agent: That is fair, and I will note that the issue is still open from your perspective.
+Customer: All right. I will wait for the next update.
+Agent: Thank you for calling today.
+Customer: Thank you.

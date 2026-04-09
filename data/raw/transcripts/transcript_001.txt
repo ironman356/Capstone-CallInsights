@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my payment still shows pending even though I made it online three days ago.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am reviewing the payment history on the loan right now.
+Customer: I just do not want that to turn into a late fee.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that the draft may already be in progress even if the website has not refreshed to posted yet.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I do see the payment in process, and I do not see a late fee tied to it right now.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: Okay, that makes more sense now.
+Customer: I appreciate you taking the time to explain it.
+Agent: Of course. I am glad we could clear that up today.
+Agent: Thank you for calling today.
+Customer: Thank you.

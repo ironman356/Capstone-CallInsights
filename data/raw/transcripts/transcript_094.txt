@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my automatic payment did not pull this month and now I am worried I will be marked late.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am checking the autopay enrollment date and the draft schedule now.
+Customer: That was not how it was explained to me when I signed up.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that autopay usually starts on the next eligible cycle after enrollment is fully active.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will document the account so there is a record that the autopay start date was reviewed with you.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: Can somebody call me back once the research is done?
+Agent: Yes. I will document the callback request with the account notes today.
+Customer: All right. I appreciate that.
+Agent: Thank you for calling today.
+Customer: Thank you.

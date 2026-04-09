@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, nobody seems to know where this issue belongs and I am getting frustrated.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can review the last contact notes and explain what the next best team would be if needed.
+Customer: I appreciate that, because I have already explained this more than once today.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that some issues do require a specialized team, but I can set expectations clearly before that happens.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I already called once about this, so I am trying not to go in circles again.
+Agent: I understand, and I will be as specific as I can so you know exactly what this means.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I am documenting the prior hold and transfer issue so the account history is clear.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: I still do not feel like this is fully resolved.
+Agent: I understand. What I can do today is document everything we reviewed and note the remaining concern.
+Customer: Okay. I just do not want this to be dropped.
+Agent: Thank you for calling today.
+Customer: Thank you.

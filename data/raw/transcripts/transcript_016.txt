@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my income dropped and I am calling to ask about forbearance or any temporary help.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can go over the general assistance process and what the review usually requires.
+Customer: I am stressed and I just need to know what to do next.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that forbearance or repayment help is not quoted directly on this line, but I can explain how the review starts.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I can outline the next steps and tell you what to expect from the assistance review.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: I still do not feel like this is fully resolved.
+Agent: I understand. What I can do today is document everything we reviewed and note the remaining concern.
+Customer: Okay. I just do not want this to be dropped.
+Agent: Thank you for calling today.
+Customer: Thank you.

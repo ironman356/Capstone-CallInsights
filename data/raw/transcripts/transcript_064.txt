@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I was told autopay would come out automatically and it never drafted.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can see the autopay profile, so I am looking at when it became effective.
+Customer: That was not how it was explained to me when I signed up.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that the bank information can be saved successfully even when the first draft has not started yet.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If you want, I can go over the manual payment options for this month while autopay finishes setting up.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Agent: This one still needs additional review on our side.
+Customer: Okay, so I should wait for the update before calling back again?
+Agent: Yes. I am noting the account for follow-up so the review is already in motion.
+Agent: Thank you for calling today.
+Customer: Thank you.

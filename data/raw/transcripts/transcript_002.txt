@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, my monthly payment went up and the letter says it has to do with escrow.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: I have the escrow analysis in front of me now.
+Customer: I was not expecting my payment to go up this much all at once.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that the escrow review shows a higher projected disbursement for taxes or insurance than last year.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I can break down the shortage amount line by line and explain when the new payment takes effect.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: Once someone has the full answer, I would rather get a callback than keep checking.
+Agent: That is completely fine. I will note that a callback was requested after the review is completed.
+Customer: Thank you. That would help a lot.
+Agent: Thank you for calling today.
+Customer: Thank you.

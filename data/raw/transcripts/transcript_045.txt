@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I am trying to get the payoff quote and I want to make sure I do it the right way.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am checking the process we use for payoff statements now.
+Customer: I want to make sure the title company gets exactly what it needs.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that the amount changes by day because of interest, so the payoff has to match the closing timeline.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I already called once about this, so I am trying not to go in circles again.
+Agent: I understand, and I will be as specific as I can so you know exactly what this means.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will note the account that you called about the payoff today in case the request team needs context.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: At this point I really think I need a supervisor or the other team involved.
+Agent: I understand. I will document what we covered and get you to the correct escalation path.
+Customer: Okay. Please make sure they can see the notes.
+Agent: Thank you for calling today.
+Customer: Thank you.

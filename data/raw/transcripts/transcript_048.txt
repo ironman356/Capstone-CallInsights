@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I got another notice about insurance even though I thought I already provided proof.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am reviewing the insurance tracking notes on the account now.
+Customer: That is why I am calling, because I do not want a force-placed policy issue on top of this.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that there can be a delay between document receipt and the escrow record showing cleared.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will explain the next step so you know whether to resend anything or wait for the update.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: I do not want to start over again with another person.
+Agent: I understand, and I am adding detailed notes before I transfer or escalate this further.
+Customer: All right. That is what I was worried about.
+Agent: Thank you for calling today.
+Customer: Thank you.

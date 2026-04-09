@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I was told autopay would come out automatically and it never drafted.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me review whether the bank account was active in time for this month's draft.
+Customer: I need to know what I have to do today so this does not get worse.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that if the enrollment completed after the monthly cutoff, the current payment may still need to be made manually.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I will document the account so there is a record that the autopay start date was reviewed with you.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: Can somebody call me back once the research is done?
+Agent: Yes. I will document the callback request with the account notes today.
+Customer: All right. I appreciate that.
+Agent: Thank you for calling today.
+Customer: Thank you.

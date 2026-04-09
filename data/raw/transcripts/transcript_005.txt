@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I am trying to get the payoff quote and I want to make sure I do it the right way.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: That is fine, I can do that.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me review what information is needed for the payoff quote.
+Customer: I just do not want this to delay closing.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that the statement will usually include the unpaid principal, interest, and any applicable fees through the requested date.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I already called once about this, so I am trying not to go in circles again.
+Agent: I understand, and I will be as specific as I can so you know exactly what this means.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If you already have a closing date, I can explain why the good-through date matters.
+Agent: Let me make sure I explain what happens next and what timeframe to expect.
+Customer: All right, I understand what happened now.
+Agent: I know it can be confusing, but I am glad we were able to go through it together.
+Customer: Thank you. That answers my question.
+Agent: Thank you for calling today.
+Customer: Thank you.

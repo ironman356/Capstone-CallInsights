@@ -1,0 +1,20 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I need a payoff amount because we are getting ready to close.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can explain the payoff request steps and turnaround from here.
+Customer: I want to make sure the title company gets exactly what it needs.
+Agent: I understand why that would be frustrating.
+Agent: What I am seeing is that payoff quotes are issued through a request process and are valid through a specific good-through date.
+Customer: Okay, but that was not clear from what I saw online.
+Customer: I already called once about this, so I am trying not to go in circles again.
+Agent: I understand, and I will be as specific as I can so you know exactly what this means.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If you already have a closing date, I can explain why the good-through date matters.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: All right, I understand what happened now.
+Agent: I know it can be confusing, but I am glad we were able to go through it together.
+Customer: Thank you. That answers my question.
+Agent: Thank you for calling today.
+Customer: Thank you.

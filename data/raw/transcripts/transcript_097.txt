@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I already called about this statement once and I am still confused by the breakdown.
+Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
+Customer: Okay, that is fine.
+Agent: Thank you. I have the account in front of me now.
+Agent: Let me go line by line through what is listed on that statement.
+Customer: I was worried I was reading the wrong amount and about to pay the wrong thing.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that the total due may reflect principal, interest, escrow, and fees shown in separate sections.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If it still does not look right after we review it, I can note it for additional research.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Agent: I do not want to guess at the answer while the review is still pending.
+Customer: That makes sense. I just wanted to know what happens from here.
+Agent: The next step is the follow-up review, and I am documenting that now.
+Agent: Thank you for calling today.
+Customer: Thank you.

@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I need somebody to explain this escrow analysis because the amount looks way higher than I expected.
+Agent: Before I discuss the loan, I do need to complete a quick verification.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I can see the projected escrow activity and the new payment amount on my side.
+Customer: That is the part I am struggling with because nothing else changed on my end.
+Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
+Agent: What I am seeing is that part of the increase is catching up the shortage and part is setting the new monthly escrow amount.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: If you want, I can tell you what portion is principal and interest versus escrow.
+Agent: I will summarize the next steps before we end the call so nothing is unclear.
+Customer: I do not want to start over again with another person.
+Agent: I understand, and I am adding detailed notes before I transfer or escalate this further.
+Customer: All right. That is what I was worried about.
+Agent: Thank you for calling today.
+Customer: Thank you.

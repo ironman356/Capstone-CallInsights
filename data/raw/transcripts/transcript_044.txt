@@ -1,0 +1,18 @@
+Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
+Customer: Hi, I was told autopay would come out automatically and it never drafted.
+Agent: I can help with that. First I need to complete a brief verification on the account.
+Customer: Sure, go ahead.
+Agent: Thank you. I have the account in front of me now.
+Agent: I am checking the autopay enrollment date and the draft schedule now.
+Customer: I need to know what I have to do today so this does not get worse.
+Agent: I can hear the concern, and I will walk through it carefully with you.
+Agent: What I am seeing is that autopay usually starts on the next eligible cycle after enrollment is fully active.
+Customer: Okay, but that was not clear from what I saw online.
+Agent: Let me walk through what that means for the payment, due date, and next step.
+Agent: I can confirm whether autopay is set for the next cycle and explain what to do for the current due date.
+Agent: I am also adding detailed notes so the account reflects what we reviewed today.
+Customer: I do not want to start over again with another person.
+Agent: I understand, and I am adding detailed notes before I transfer or escalate this further.
+Customer: All right. That is what I was worried about.
+Agent: Thank you for calling today.
+Customer: Thank you.
