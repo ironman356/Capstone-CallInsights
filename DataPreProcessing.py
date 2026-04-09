@@ -32,8 +32,7 @@ def load_data(files):
 
 def clean_data(data):
     """
-    This method is for cleaning the data if required, fill this method
-    once we do get the data
+    This method is for cleaning the data if required
     """
     def clean_transcript(text):
         if not isinstance(text, str):
