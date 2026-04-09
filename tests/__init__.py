@@ -1,1 +1,1 @@
-"""Test suite package for CallInsights."""
+"""Test suite package for CallInsights Project"""
