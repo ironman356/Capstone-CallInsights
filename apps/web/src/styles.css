@@ -118,6 +118,8 @@ button {
   display: grid;
   gap: 20px;
   z-index: 20;
+}
+.side-nav.panel {
   border-radius: 0;
 }
 
@@ -691,7 +693,7 @@ button {
     width: auto;
     max-height: none;
     overflow: visible;
-    border-radius: 28px  }
+    }
 
   .page-shell {
     margin-left: 0;
