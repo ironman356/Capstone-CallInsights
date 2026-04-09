@@ -432,6 +432,29 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.overview-grid {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  grid-template-areas:
+    "issues pulse"
+    "patterns now";
+}
+
+.overview-issues {
+  grid-area: issues;
+}
+
+.overview-pulse {
+  grid-area: pulse;
+}
+
+.overview-patterns {
+  grid-area: patterns;
+}
+
+.overview-now {
+  grid-area: now;
+}
+
 .explorer-grid {
   grid-template-columns: 0.92fr 1.3fr 0.9fr;
 }
@@ -510,6 +533,29 @@ button {
   background: color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--accent);
   font-size: 0.72rem;
+}
+
+.overview-now .benefit-card {
+  padding: 10px 12px;
+  border-radius: 14px;
+}
+
+.overview-now .benefit-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.overview-now .benefit-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
+.overview-now .benefit-card span {
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  font-size: 0.68rem;
 }
 
 .issue-card,
@@ -703,6 +749,14 @@ button {
   .explorer-grid,
   .drilldown-grid {
     grid-template-columns: 1fr;
+  }
+
+  .overview-grid {
+    grid-template-areas:
+      "issues"
+      "pulse"
+      "patterns"
+      "now";
   }
 
   .app-shell-pages {
