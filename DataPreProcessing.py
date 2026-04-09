@@ -1,22 +1,59 @@
 import numpy as np
 import pandas as pd
 import re
+import os
 
 def load_data(files):
     """
-    Method for loading the data files, since we currently do not have data,
-    fill this method once we do get the data
+    Method for loading the data files
     """
-    data = None
+    records = []
+
+    for file_path in files:
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                text = f.read()
+
+            filename = os.path.basename(file_path)
+            call_id_match = re.findall(r"\d+", filename)
+            call_id = call_id_match[0] if call_id_match else filename
+
+            records.append({
+                "call_id": call_id,
+                "transcript": text
+            })
+
+        except Exception as e:
+            print(f"Error loading {file_path}: {e}")
+
+    data = pd.DataFrame(records)
     return data
+
 
 def clean_data(data):
     """
     This method is for cleaning the data if required, fill this method
     once we do get the data
     """
-    cleaned_data = None
+    def clean_transcript(text):
+        if not isinstance(text, str):
+            return ""
+
+        text = text.replace("\r", "\n")
+        text = re.sub(r"\n+", "\n", text)
+
+        text = re.sub(r"Agent:", "agent:", text)
+        text = re.sub(r"Customer:", "customer:", text)
+
+        lines = [line.strip() for line in text.split("\n") if line.strip()]
+
+        return " ".join(lines)
+
+    data["transcript"] = data["transcript"].apply(clean_transcript)
+
+    cleaned_data = data
     return cleaned_data
+
 
 def normalize_text(cleaned_data):
     """
@@ -82,4 +119,3 @@ def chunk_transcripts(data):
             })
 
     return pd.DataFrame(records)
-
