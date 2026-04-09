@@ -674,6 +674,28 @@ button {
   box-shadow: var(--shadow);
 }
 
+/* React Flow & Governance Page Specific Styles */
+.admin-page { min-height: calc(100vh - 84px); }
+.admin-layout { min-height: calc(100vh - 134px); display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 20px; }
+.flow-panel { min-width: 0; overflow: hidden; border-radius: 12px; background: color-mix(in srgb, var(--panel-strong) 88%, transparent); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.flow-canvas { width: 100%; height: 100%; min-height: 700px; }
+.side-panel { width: 350px; background: color-mix(in srgb, var(--panel-strong) 88%, transparent); border: 1px solid var(--line); border-radius: 12px; padding: 24px; overflow-y: auto; box-shadow: var(--shadow); }
+.side-panel h2 { margin-top: 0; font-size: 18px; color: var(--text); border-bottom: 2px solid var(--line); padding-bottom: 8px; }
+.side-panel p { color: var(--muted); line-height: 1.5; }
+.side-panel-description { margin-top: 0.5rem; }
+.context-note { padding: 15px; background-color: color-mix(in srgb, var(--panel) 88%, transparent); border-radius: 4px; font-style: italic; color: var(--muted); border: 1px solid var(--line); }
+.side-panel-form { display: flex; flex-direction: column; gap: 18px; }
+.side-panel-subheading { margin: 0; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.field-label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: var(--text); }
+.side-panel select, .side-panel input[type='number'], .side-panel input[type='text'] { width: 100%; padding: 8px; border-radius: 4px; border: 1px solid var(--line); background: transparent; color: var(--text); }
+.save-button { margin-top: 15px; padding: 12px; background-color: var(--accent); color: #04131d; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+.pipeline-node { padding: 14px 16px; border-radius: 8px; background: color-mix(in srgb, var(--panel-strong) 99%, transparent); border: 1px solid var(--line); border-left: 5px solid var(--accent); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); width: 180px; font-family: var(--font-body); }
+.pipeline-node-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.pipeline-node-layer { font-size: 10px; text-transform: uppercase; color: var(--muted); font-weight: 600; letter-spacing: 0.5px; }
+.pipeline-node-status { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent); }
+.pipeline-node-label { font-weight: 600; color: var(--text); font-size: 14px; line-height: 1.2; }
+.pipeline-node-handle { width: 8px !important; height: 8px !important; background: var(--accent) !important; }
+
 @media (max-width: 1180px) {
   .hero,
   .page-hero,

@@ -4,7 +4,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from dataclasses import asdict, dataclass
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 from uuid import uuid4
@@ -372,7 +372,7 @@ class Rank1PipelineService:
         return self.outputs_dir / "strategy_board.json"
 
     def _now_iso(self) -> str:
-        return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+        return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
     def ingest_calls(self) -> list[dict]:
         if not self.raw_dir.exists():
