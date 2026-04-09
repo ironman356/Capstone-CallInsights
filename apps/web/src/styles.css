@@ -463,6 +463,29 @@ button {
   grid-template-columns: 1.3fr 0.9fr;
 }
 
+.drilldown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.drilldown-header .section-heading {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.call-selector {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.call-selector-input {
+  appearance: none;
+}
+
 .single-column {
   margin-top: 16px;
 }

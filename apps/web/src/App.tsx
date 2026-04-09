@@ -321,7 +321,14 @@ function App() {
       />
     );
   } else if (page === "drilldown") {
-    pageNode = <DrilldownPage callDetail={callDetail} />;
+    pageNode = (
+      <DrilldownPage
+        callDetail={callDetail}
+        calls={workspace.dashboard.calls}
+        selectedCallId={selectedCallId}
+        onSelectCall={setSelectedCallId}
+      />
+    );
   } else if (page === "strategies") {
     pageNode = (
       <StrategiesPage

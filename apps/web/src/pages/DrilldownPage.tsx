@@ -1,17 +1,35 @@
-import type { CallDetail } from "../types";
+import type { CallCard, CallDetail } from "../types";
 import { titleCase } from "../utils";
 
 interface DrilldownPageProps {
   callDetail: CallDetail | null;
+  calls: CallCard[];
+  selectedCallId: string | null;
+  onSelectCall: (callId: string) => void;
 }
 
-export function DrilldownPage({ callDetail }: DrilldownPageProps) {
+export function DrilldownPage({ callDetail, calls, selectedCallId, onSelectCall }: DrilldownPageProps) {
   return (
     <section className="drilldown-grid">
       <article className="panel transcript-panel">
-        <div className="section-heading">
-          <h2>Call Drilldown</h2>
-          <p>{callDetail ? `${callDetail.call_id} from ${callDetail.source_file}` : "Select a call to inspect."}</p>
+        <div className="drilldown-header">
+          <div className="section-heading">
+            <h2>Call Drilldown</h2>
+            <p>{callDetail ? `${callDetail.call_id} from ${callDetail.source_file}` : "Select a call to inspect."}</p>
+          </div>
+          <label className="call-selector">
+            <select
+              className="input call-selector-input"
+              value={selectedCallId ?? ""}
+              onChange={(event) => onSelectCall(event.target.value)}
+            >
+              {calls.map((call) => (
+                <option key={call.call_id} value={call.call_id}>
+                  {call.call_id} - {titleCase(call.issue)}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
         <div className="transcript-stream">
           {callDetail?.turns.map((turn, index) => (
