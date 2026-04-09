@@ -1,6 +1,5 @@
 [
   {
-<<<<<<< HEAD
     "strategy_id": "STRAT-ED0858E4",
     "title": "Improve Payment Confusion",
     "issue_slug": "payment-confusion",
@@ -21,17 +20,11 @@
     "updated_at": "2026-04-09T12:55:53Z"
   },
   {
-=======
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
     "strategy_id": "STRAT-001",
     "title": "Improve other",
     "issue_slug": "other",
     "issue": "other",
-<<<<<<< HEAD
     "status": "Accepted",
-=======
-    "status": "Proposed",
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
     "owner": "Operations",
     "hypothesis": "Standardize the strongest behaviors for other and monitor the next recalibration cycle for KPI movement.",
     "kpi_focus": [
@@ -44,24 +37,15 @@
       "CALL-0020"
     ],
     "notes": "Other appeared in 15 calls with unresolved as the most common outcome.",
-<<<<<<< HEAD
     "created_at": "2026-04-09T12:51:06Z",
     "updated_at": "2026-04-09T14:05:14Z"
-=======
-    "created_at": "2026-04-09T17:10:57Z",
-    "updated_at": "2026-04-09T17:10:57Z"
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
   },
   {
     "strategy_id": "STRAT-002",
     "title": "Improve escrow issue",
     "issue_slug": "escrow-issue",
     "issue": "escrow issue",
-<<<<<<< HEAD
     "status": "Proposed",
-=======
-    "status": "Accepted",
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
     "owner": "Servicing",
     "hypothesis": "Standardize the strongest behaviors for escrow issue and monitor the next recalibration cycle for KPI movement.",
     "kpi_focus": [
@@ -74,13 +58,8 @@
       "CALL-0022"
     ],
     "notes": "Escrow Issue appeared in 14 calls with unresolved as the most common outcome.",
-<<<<<<< HEAD
     "created_at": "2026-04-09T12:51:06Z",
     "updated_at": "2026-04-09T12:56:11Z"
-=======
-    "created_at": "2026-04-09T17:10:57Z",
-    "updated_at": "2026-04-09T17:10:57Z"
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
   },
   {
     "strategy_id": "STRAT-003",
@@ -100,13 +79,8 @@
       "CALL-0016"
     ],
     "notes": "Hardship / Forbearance appeared in 14 calls with unresolved as the most common outcome.",
-<<<<<<< HEAD
     "created_at": "2026-04-09T12:51:06Z",
     "updated_at": "2026-04-09T12:51:06Z"
-=======
-    "created_at": "2026-04-09T17:10:57Z",
-    "updated_at": "2026-04-09T17:10:57Z"
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
   },
   {
     "strategy_id": "STRAT-004",
@@ -126,13 +100,8 @@
       "CALL-0023"
     ],
     "notes": "Late Fee Dispute appeared in 12 calls with unresolved as the most common outcome.",
-<<<<<<< HEAD
     "created_at": "2026-04-09T12:51:06Z",
     "updated_at": "2026-04-09T12:51:06Z"
-=======
-    "created_at": "2026-04-09T17:10:57Z",
-    "updated_at": "2026-04-09T17:10:57Z"
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
   },
   {
     "strategy_id": "STRAT-005",
@@ -152,12 +121,7 @@
       "CALL-0024"
     ],
     "notes": "Autopay Issue appeared in 10 calls with follow-up needed as the most common outcome.",
-<<<<<<< HEAD
     "created_at": "2026-04-09T12:51:06Z",
     "updated_at": "2026-04-09T12:51:06Z"
-=======
-    "created_at": "2026-04-09T17:10:57Z",
-    "updated_at": "2026-04-09T17:10:57Z"
->>>>>>> c52b8e7eee06593c09b4fea8f4acb021b8fe2417
   }
 ]

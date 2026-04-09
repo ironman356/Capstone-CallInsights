@@ -606,7 +606,12 @@ class Rank1PipelineService:
         self.ensure_output_dirs()
         path = self.strategy_store_path
         if path.exists():
-            return json.loads(path.read_text(encoding="utf-8"))
+            try:
+                return json.loads(path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                seeded = self._build_default_strategies(bundle)
+                self.save_strategies(seeded)
+                return seeded
 
         seeded = self._build_default_strategies(bundle)
         self.save_strategies(seeded)
