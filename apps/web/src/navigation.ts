@@ -1,5 +1,6 @@
 export type PageKey =
   | "overview"
+  | "design-lab"
   | "pulse"
   | "monthly"
   | "explorer"
@@ -21,6 +22,12 @@ export const PAGES: PageDefinition[] = [
     label: "Executive Overview",
     path: "/",
     description: "High-level operating picture and issue landscape.",
+  },
+  {
+    key: "design-lab",
+    label: "UI Design Lab",
+    path: "/ui-design-lab",
+    description: "Three richer dashboard concepts with heavier visual storytelling.",
   },
   {
     key: "pulse",

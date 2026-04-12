@@ -1,4 +1,5 @@
 import { startTransition, useDeferredValue, useEffect, useEffectEvent, useMemo, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "./api";
 import { AppFrame } from "./components/AppFrame";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
@@ -10,6 +11,7 @@ import { OverviewPage } from "./pages/OverviewPage";
 import { PulsePage } from "./pages/PulsePage";
 import { ReportsPage } from "./pages/ReportsPage";
 import { StrategiesPage } from "./pages/StrategiesPage";
+import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type {
   CallDetail,
   DashboardIssue,
@@ -22,19 +24,18 @@ import type {
 type ThemeMode = "light" | "dark";
 
 function App() {
+  const queryClient = useQueryClient();
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const stored = window.localStorage.getItem("ci-theme");
     return stored === "light" || stored === "dark" ? stored : "dark";
   });
   const [page, setPage] = useState<PageKey>(() => pageFromPath(window.location.pathname));
-  const [workspace, setWorkspace] = useState<WorkspacePayload | null>(null);
   const [issueDetail, setIssueDetail] = useState<IssueDetail | null>(null);
   const [callDetail, setCallDetail] = useState<CallDetail | null>(null);
   const [selectedIssueSlug, setSelectedIssueSlug] = useState<string | null>(null);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
   const [issueQuery, setIssueQuery] = useState("");
   const [outcomeFilter, setOutcomeFilter] = useState("all");
-  const [loading, setLoading] = useState(true);
   const [syncing, setSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [actionMessage, setActionMessage] = useState<string | null>(null);
@@ -50,6 +51,11 @@ function App() {
   });
 
   const deferredQuery = useDeferredValue(issueQuery);
+  const workspaceQuery = useQuery({
+    queryKey: ["workspace"],
+    queryFn: api.getWorkspace,
+  });
+  const workspace = workspaceQuery.data ?? null;
   const dashboard = workspace?.dashboard;
 
   const applyTheme = useEffectEvent((nextTheme: ThemeMode) => {
@@ -68,41 +74,18 @@ function App() {
   }, []);
 
   useEffect(() => {
-    let cancelled = false;
-
-    async function load() {
-      setLoading(true);
-      setError(null);
-      try {
-        const payload = await api.getWorkspace();
-        if (cancelled) {
-          return;
-        }
-        setWorkspace(payload);
-        const firstIssue = payload.dashboard.issues[0]?.slug ?? null;
-        const firstCall = payload.dashboard.calls[0]?.call_id ?? null;
-        setSelectedIssueSlug((current) => current ?? firstIssue);
-        setSelectedCallId((current) => current ?? firstCall);
-        setFormState((current) => ({
-          ...current,
-          issue_slug: current.issue_slug || firstIssue || "",
-        }));
-      } catch (loadError) {
-        if (!cancelled) {
-          setError(loadError instanceof Error ? loadError.message : "Unable to load workspace");
-        }
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
+    if (!workspace) {
+      return;
     }
-
-    load();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    const firstIssue = workspace.dashboard.issues[0]?.slug ?? null;
+    const firstCall = workspace.dashboard.calls[0]?.call_id ?? null;
+    setSelectedIssueSlug((current) => current ?? firstIssue);
+    setSelectedCallId((current) => current ?? firstCall);
+    setFormState((current) => ({
+      ...current,
+      issue_slug: current.issue_slug || firstIssue || "",
+    }));
+  }, [workspace]);
 
   useEffect(() => {
     if (!selectedIssueSlug) {
@@ -152,19 +135,26 @@ function App() {
   async function refreshWorkspace(mode: "refresh" | "recalibrate" | "rerun" = "refresh") {
     setSyncing(true);
     setActionMessage(null);
+    setError(null);
     try {
       if (mode === "recalibrate") {
         const payload = await api.recalibrate();
-        setWorkspace(payload);
+        queryClient.setQueryData(["workspace"], payload);
         setActionMessage("Monthly recalibration completed and the workspace has been refreshed.");
       } else if (mode === "rerun") {
         await api.rerunPipeline();
-        const payload = await api.getWorkspace();
-        setWorkspace(payload);
+        const payload = await queryClient.fetchQuery({
+          queryKey: ["workspace"],
+          queryFn: api.getWorkspace,
+        });
+        queryClient.setQueryData(["workspace"], payload);
         setActionMessage("The batch pipeline re-ran successfully and the UI is now showing fresh data.");
       } else {
-        const payload = await api.getWorkspace();
-        setWorkspace(payload);
+        const payload = await queryClient.fetchQuery({
+          queryKey: ["workspace"],
+          queryFn: api.getWorkspace,
+        });
+        queryClient.setQueryData(["workspace"], payload);
       }
     } catch (refreshError) {
       setError(refreshError instanceof Error ? refreshError.message : "Unable to refresh workspace");
@@ -198,10 +188,13 @@ function App() {
 
     setSyncing(true);
     setActionMessage(null);
+    setError(null);
     try {
       await api.createStrategy(formState);
       const board = await api.getStrategies();
-      setWorkspace((current) => (current ? { ...current, strategy_board: board } : current));
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) =>
+        current ? { ...current, strategy_board: board } : current,
+      );
       setActionMessage("Strategy created and added to the workflow board.");
       setFormState({
         issue_slug: formState.issue_slug,
@@ -228,9 +221,10 @@ function App() {
     }
 
     setSyncing(true);
+    setError(null);
     try {
       const updated = await api.updateStrategy(strategy.strategy_id, { status: nextStatus });
-      setWorkspace((current) => {
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => {
         if (!current) {
           return current;
         }
@@ -258,6 +252,7 @@ function App() {
 
   async function handleExportReport() {
     setSyncing(true);
+    setError(null);
     try {
       const [payload, filename] = await Promise.all([api.exportReport(), api.downloadReportPdf()]);
       setExportPayload(payload.report);
@@ -271,6 +266,7 @@ function App() {
 
   async function handleRefreshReportData() {
     setSyncing(true);
+    setError(null);
     try {
       const payload = await api.exportReport();
       setExportPayload(payload.report);
@@ -282,17 +278,17 @@ function App() {
     }
   }
 
-  if (loading) {
+  if (workspaceQuery.isLoading) {
     return <div className="status-screen">Loading the Call Insights workspace...</div>;
   }
 
-  if (error && !workspace) {
+  if ((workspaceQuery.error || error) && !workspace) {
     return (
       <div className="status-screen">
         <div className="status-card">
           <h1>Call Insights</h1>
           <p>The workspace could not be loaded.</p>
-          <p>{error}</p>
+          <p>{workspaceQuery.error instanceof Error ? workspaceQuery.error.message : error}</p>
           <p>Start the API from `apps/api` with `uvicorn app.main:app --reload`.</p>
         </div>
       </div>
@@ -307,7 +303,11 @@ function App() {
     <OverviewPage workspace={workspace} onOpenIssue={openIssue} onOpenCall={openCall} />
   );
 
-  if (page === "pulse") {
+  if (page === "design-lab") {
+    pageNode = (
+      <UiDesignLabPage workspace={workspace} onOpenIssue={openIssue} onOpenCall={openCall} />
+    );
+  } else if (page === "pulse") {
     pageNode = (
       <PulsePage
         workspace={workspace}
