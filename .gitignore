@@ -1,9 +1,6 @@
 # Node modules
 node_modules/
 dist/
-dist-ssr/
-*.local
-
 
 # Python environments
 __pycache__/
@@ -17,4 +14,3 @@ venv/
 # IDEs
 .idea/
 .vscode/
-
