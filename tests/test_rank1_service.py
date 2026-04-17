@@ -145,6 +145,22 @@ class Rank1ServiceTests(unittest.TestCase):
         self.assertTrue(self.processed_dir.exists())
         self.assertTrue(self.outputs_dir.exists())
 
+    def test_run_incremental_only_adds_new_calls(self) -> None:
+        first_bundle = self.service.run()
+        original_count = len(first_bundle["calls"])
+
+        extra_transcript = "\n".join(
+            [
+                "Customer: My insurance premium changed and I need to know whether escrow was updated.",
+                "Agent: I can review the escrow disbursement activity and coverage update with you.",
+                "Customer: Thank you.",
+            ]
+        )
+        (self.raw_dir / "transcript_999.txt").write_text(extra_transcript, encoding="utf-8")
+
+        second_bundle = self.service.run_incremental()
+        self.assertEqual(len(second_bundle["calls"]), original_count + 1)
+
 
 if __name__ == "__main__":
     unittest.main()

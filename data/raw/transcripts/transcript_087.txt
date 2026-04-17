@@ -1,18 +1,12 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, I am looking at this statement and the amounts do not add up to me.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: Okay, that is fine.
+Customer: The shortage amount on this escrow statement does not make sense to me.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am reviewing the billed amount, unpaid charges, and escrow line now.
-Customer: I need it explained in plain language because the statement wording is not clear to me.
-Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
-Agent: What I am seeing is that the total due may reflect principal, interest, escrow, and fees shown in separate sections.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I can also explain what amount would bring the loan current based on what I am seeing.
-Agent: Let me make sure I explain what happens next and what timeframe to expect.
-Agent: This one still needs additional review on our side.
-Customer: Okay, so I should wait for the update before calling back again?
-Agent: Yes. I am noting the account for follow-up so the review is already in motion.
+Agent: I have the escrow analysis in front of me and I can review the projected disbursements line by line.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I will add notes about the shortage breakdown so you do not have to start over if you call back.
+Agent: I am transferring this to the specialist queue and documenting the notes before I do.
 Agent: Thank you for calling today.
 Customer: Thank you.

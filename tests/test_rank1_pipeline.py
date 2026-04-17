@@ -49,10 +49,10 @@ class Rank1PipelineTests(unittest.TestCase):
             Turn(speaker="Agent", text="I understand. Let me explain the processing."),
             Turn(speaker="Customer", text="Also, my escrow analysis increased the monthly payment."),
         ]
-        segments = segment_call("CALL-9999", turns, "payment confusion")
+        segments = segment_call("CALL-9999", turns, "payment posting")
         self.assertEqual(len(segments), 2)
-        self.assertEqual(segments[0]["issue"], "payment confusion")
-        self.assertEqual(segments[1]["issue"], "escrow issue")
+        self.assertEqual(segments[0]["issue"], "payment posting")
+        self.assertIn("escrow", segments[1]["issue"])
 
     def test_score_sentiment_returns_expected_shape(self) -> None:
         turns = [

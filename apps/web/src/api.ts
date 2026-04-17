@@ -1,4 +1,5 @@
 import type {
+  AskCiChatResponse,
   CallDetail,
   IssueDetail,
   StrategyBoard,
@@ -35,6 +36,11 @@ export interface ExportReportResponse {
 
 export const api = {
   getWorkspace: () => request<WorkspacePayload>("/workspace"),
+  askCiChat: (payload: { question: string; current_page?: string; history?: Array<{ role: string; text: string }> }) =>
+    request<AskCiChatResponse>("/ask-ci/chat", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
   getIssue: (issueSlug: string) => request<IssueDetail>(`/issues/${issueSlug}`),
   getCall: (callId: string) => request<CallDetail>(`/calls/${callId}`),
   getStrategies: () => request<StrategyBoard>("/strategies"),

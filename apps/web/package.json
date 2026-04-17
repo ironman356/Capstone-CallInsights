@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --config vite.config.mjs --configLoader runner",
+    "build": "vite build --config vite.config.mjs --configLoader runner",
+    "preview": "vite preview --config vite.config.mjs --configLoader runner"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.98.0",

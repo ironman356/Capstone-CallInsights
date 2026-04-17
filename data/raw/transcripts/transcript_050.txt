@@ -1,20 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, nobody seems to know where this issue belongs and I am getting frustrated.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: That is fine, I can do that.
+Customer: The county says the tax bill is due, and I need to know whether escrow already paid it.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: Let me see how far I can take this from my side before moving you anywhere else.
-Customer: I am already frustrated, so I need a clear answer on what happens next.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that if I do need to route the call, I will document the issue so you are not starting from zero again.
-Customer: Okay, but that was not clear from what I saw online.
-Customer: I already called once about this, so I am trying not to go in circles again.
-Agent: I understand, and I will be as specific as I can so you know exactly what this means.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I will stay on the line as long as I can and make sure the notes are complete first.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Agent: This one still needs additional review on our side.
-Customer: Okay, so I should wait for the update before calling back again?
-Agent: Yes. I am noting the account for follow-up so the review is already in motion.
+Agent: I am looking at the tax disbursement record and the most recent escrow activity now.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I can explain whether the tax bill has already been paid from escrow or is still pending.
+Customer: Please have someone call me back once the research is complete.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I documented the callback request and the current status before we end the call.
 Agent: Thank you for calling today.
 Customer: Thank you.

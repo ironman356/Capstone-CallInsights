@@ -4,6 +4,8 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
 from app.schemas.rank1 import (
+    AskCiChatRequest,
+    AskCiChatResponse,
     CallDetailResponse,
     DashboardResponse,
     ExportReportResponse,
@@ -91,6 +93,16 @@ def run_pipeline() -> PipelineRunResponse:
 def get_workspace() -> WorkspaceResponse:
     workspace = service.build_workspace()
     return WorkspaceResponse(**workspace)
+
+
+@router.post("/ask-ci/chat", response_model=AskCiChatResponse)
+def ask_ci_chat(payload: AskCiChatRequest) -> AskCiChatResponse:
+    response = service.answer_ask_ci(
+        question=payload.question,
+        current_page=payload.current_page,
+        history=payload.history,
+    )
+    return AskCiChatResponse(**response)
 
 
 @router.get("/strategies", response_model=StrategyBoardResponse)

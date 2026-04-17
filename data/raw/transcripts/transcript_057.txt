@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, I already called about this statement once and I am still confused by the breakdown.
-Agent: I can help with that. First I need to complete a brief verification on the account.
-Customer: Okay, that is fine.
+Customer: I need someone to explain why the escrow analysis raised my monthly payment so much.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am reviewing the billed amount, unpaid charges, and escrow line now.
-Customer: I need it explained in plain language because the statement wording is not clear to me.
-Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
-Agent: What I am seeing is that the amount that feels off is often tied to unpaid charges or the escrow portion of the bill.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I can also explain what amount would bring the loan current based on what I am seeing.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Agent: I do not want to guess at the answer while the review is still pending.
-Customer: That makes sense. I just wanted to know what happens from here.
-Agent: The next step is the follow-up review, and I am documenting that now.
+Agent: I can explain how the shortage was spread into the new payment amount.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: The increase is tied to higher county taxes and insurance, and I can explain when the new amount takes effect.
+Customer: Okay, I will wait for the follow-up since the review is still in motion.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I noted the follow-up expectation and the review timeline on the account.
 Agent: Thank you for calling today.
 Customer: Thank you.

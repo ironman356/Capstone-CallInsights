@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, I made a payment this week and the website is still not showing it as posted.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: Sure, go ahead.
+Customer: The website shows my payment as pending and I need to know if I am going to be marked late.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I can see the transaction you are referring to, so let me walk through the timing with you.
-Customer: I am trying to avoid another call about the same payment.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that there can be a short delay between the bank withdrawal and the loan servicing update.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I do see the payment in process, and I do not see a late fee tied to it right now.
-Agent: I am also adding detailed notes so the account reflects what we reviewed today.
-Customer: I hear what you are saying, but I am still not comfortable with where this stands.
-Agent: That is fair, and I will note that the issue is still open from your perspective.
-Customer: All right. I will wait for the next update.
+Agent: I am reviewing the payment history and the suspense activity now.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: What I can confirm is that the payment is in process and the delinquency status has not advanced today.
+Customer: Okay, I will wait for the follow-up since the review is still in motion.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I noted the follow-up expectation and the review timeline on the account.
 Agent: Thank you for calling today.
 Customer: Thank you.

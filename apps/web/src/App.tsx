@@ -1,27 +1,85 @@
-import { startTransition, useDeferredValue, useEffect, useEffectEvent, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, RefreshCw, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api } from "./api";
-import { AppFrame } from "./components/AppFrame";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
-import { DrilldownPage } from "./pages/DrilldownPage";
-import { ExplorerPage } from "./pages/ExplorerPage";
 import AdminAiGovernancePage from "./pages/AdminAiGovernancePage";
-import { MonthlyPage } from "./pages/MonthlyPage";
-import { OverviewPage } from "./pages/OverviewPage";
-import { PulsePage } from "./pages/PulsePage";
-import { ReportsPage } from "./pages/ReportsPage";
-import { StrategiesPage } from "./pages/StrategiesPage";
+import AskCiPage from "./pages/AskCiPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
-import type {
-  CallDetail,
-  DashboardIssue,
-  IssueDetail,
-  StrategyCreateInput,
-  StrategyRecord,
-  WorkspacePayload,
-} from "./types";
+import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
 type ThemeMode = "light" | "dark";
+
+const STAGE_ORDER = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
+const KPI_OPTIONS = ["AHT", "FCR", "Repeat Calls", "Escalation Rate", "Sentiment"];
+const OUTCOME_COLORS = ["#69d2ff", "#8ce99a", "#ffc96c", "#ff8d72", "#b7a1ff"];
+const TONE_COLORS: Record<string, string> = {
+  neutral: "#7cc6ff",
+  info: "#6ad5c2",
+  risk: "#ff8a66",
+  stable: "#84d66e",
+  warning: "#ffc857",
+};
+
+const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
+  overview: {
+    title: "Overview",
+    description: "Executive view of call drivers, outcomes, sentiment movement, and active action plans.",
+    kicker: "Executive Summary",
+  },
+  issues: {
+    title: "Issues",
+    description: "Track recurring customer problems, supporting evidence, and patterns across calls.",
+    kicker: "Issue Analysis",
+  },
+  calls: {
+    title: "Calls",
+    description: "Review representative calls, transcript details, and signal extraction for specific interactions.",
+    kicker: "Call Review",
+  },
+  strategies: {
+    title: "Action Plans",
+    description: "Manage improvement plans, ownership, and progress against the issues driving performance.",
+    kicker: "Action Management",
+  },
+  learning: {
+    title: "Monitoring",
+    description: "See refresh status, control checks, and the operating health of the analytics workflow.",
+    kicker: "Controls & Monitoring",
+  },
+  "ask-ci": {
+    title: "Ask CI",
+    description: "Use the assistant to find the right page, explain a metric, or navigate directly to supporting detail.",
+    kicker: "Assistant",
+  },
+  governance: {
+    title: "Governance",
+    description: "Review architecture, evidence policy, and control surfaces in one governed workspace.",
+    kicker: "Governance",
+  },
+  "visual-lab": {
+    title: "Visual Lab",
+    description: "Design exploration workspace.",
+    kicker: "Design Lab",
+  },
+  reports: {
+    title: "Reports",
+    description: "Leadership-ready export package with totals, highlights, and issue-level reporting.",
+    kicker: "Reporting",
+  },
+};
+
+const NAV_ITEMS: Array<[PageKey, string, string]> = [
+  ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
+  ["issues", "Issues", "Recurring customer problems and supporting evidence"],
+  ["calls", "Calls", "Representative calls, transcripts, and call detail"],
+  ["strategies", "Action Plans", "Improvement plans and ownership tracking"],
+  ["learning", "Monitoring", "Trend movement, model monitoring, and controls"],
+  ["ask-ci", "Ask CI", "Assistant for pages, metrics, and workflow questions"],
+  ["governance", "Governance", "Architecture, controls, and audit review"],
+  ["reports", "Reports", "Leadership-ready summary and export package"],
+];
 
 function App() {
   const queryClient = useQueryClient();
@@ -30,42 +88,42 @@ function App() {
     return stored === "light" || stored === "dark" ? stored : "dark";
   });
   const [page, setPage] = useState<PageKey>(() => pageFromPath(window.location.pathname));
-  const [issueDetail, setIssueDetail] = useState<IssueDetail | null>(null);
-  const [callDetail, setCallDetail] = useState<CallDetail | null>(null);
+  const [issueFilter, setIssueFilter] = useState("");
   const [selectedIssueSlug, setSelectedIssueSlug] = useState<string | null>(null);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
-  const [issueQuery, setIssueQuery] = useState("");
-  const [outcomeFilter, setOutcomeFilter] = useState("all");
   const [syncing, setSyncing] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [actionMessage, setActionMessage] = useState<string | null>(null);
-  const [exportPayload, setExportPayload] = useState<WorkspacePayload["reports"] | null>(null);
+  const [reportSnapshot, setReportSnapshot] = useState<WorkspacePayload["reports"] | null>(null);
   const [formState, setFormState] = useState<StrategyCreateInput>({
     issue_slug: "",
     title: "",
     owner: "Operations",
     hypothesis: "",
     notes: "",
-    kpi_focus: ["AHT", "Escalation Rate"],
+    kpi_focus: ["AHT", "FCR"],
     evidence_call_ids: [],
   });
 
-  const deferredQuery = useDeferredValue(issueQuery);
-  const workspaceQuery = useQuery({
-    queryKey: ["workspace"],
-    queryFn: api.getWorkspace,
-  });
+  const workspaceQuery = useQuery({ queryKey: ["workspace"], queryFn: api.getWorkspace });
   const workspace = workspaceQuery.data ?? null;
-  const dashboard = workspace?.dashboard;
+  const dashboard = workspace?.dashboard ?? null;
 
-  const applyTheme = useEffectEvent((nextTheme: ThemeMode) => {
-    document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem("ci-theme", nextTheme);
+  const issueDetailQuery = useQuery({
+    queryKey: ["issue", selectedIssueSlug],
+    queryFn: () => api.getIssue(selectedIssueSlug!),
+    enabled: Boolean(selectedIssueSlug),
+  });
+  const callDetailQuery = useQuery({
+    queryKey: ["call", selectedCallId],
+    queryFn: () => api.getCall(selectedCallId!),
+    enabled: Boolean(selectedCallId),
   });
 
   useEffect(() => {
-    applyTheme(theme);
-  }, [applyTheme, theme]);
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("ci-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     const onPopState = () => setPage(pageFromPath(window.location.pathname));
@@ -74,57 +132,47 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!workspace) {
+    if (!dashboard) {
       return;
     }
-    const firstIssue = workspace.dashboard.issues[0]?.slug ?? null;
-    const firstCall = workspace.dashboard.calls[0]?.call_id ?? null;
+    const firstIssue = dashboard.issues[0]?.slug ?? null;
+    const firstCall = dashboard.calls[0]?.call_id ?? null;
     setSelectedIssueSlug((current) => current ?? firstIssue);
     setSelectedCallId((current) => current ?? firstCall);
     setFormState((current) => ({
       ...current,
       issue_slug: current.issue_slug || firstIssue || "",
+      evidence_call_ids: current.evidence_call_ids.length ? current.evidence_call_ids : firstCall ? [firstCall] : [],
     }));
-  }, [workspace]);
+  }, [dashboard]);
 
-  useEffect(() => {
-    if (!selectedIssueSlug) {
-      return;
-    }
-    void api.getIssue(selectedIssueSlug).then(setIssueDetail).catch(() => undefined);
-  }, [selectedIssueSlug]);
-
-  useEffect(() => {
-    if (!selectedCallId) {
-      return;
-    }
-    void api.getCall(selectedCallId).then(setCallDetail).catch(() => undefined);
-  }, [selectedCallId]);
-
-  const filteredIssues = useMemo(() => {
+  const issueCards = useMemo(() => {
     if (!dashboard) {
       return [];
     }
-    const query = deferredQuery.toLowerCase().trim();
-    return dashboard.issues.filter((issue) => {
-      const matchesQuery =
-        query.length === 0 ||
-        issue.issue.toLowerCase().includes(query) ||
-        issue.summary.toLowerCase().includes(query);
-      const matchesOutcome =
-        outcomeFilter === "all" || Object.keys(issue.outcome_breakdown).includes(outcomeFilter);
-      return matchesQuery && matchesOutcome;
-    });
-  }, [dashboard, deferredQuery, outcomeFilter]);
+    const query = issueFilter.trim().toLowerCase();
+    return dashboard.issues.filter((issue) => !query || issue.issue.toLowerCase().includes(query) || issue.summary.toLowerCase().includes(query));
+  }, [dashboard, issueFilter]);
 
-  const selectedIssueCard = useMemo(() => {
-    return dashboard?.issues.find((issue) => issue.slug === selectedIssueSlug) ?? null;
-  }, [dashboard, selectedIssueSlug]);
-
-  const selectedStrategyIssue = useMemo(() => {
-    return dashboard?.issues.find((issue) => issue.slug === formState.issue_slug) ?? null;
-  }, [dashboard, formState.issue_slug]);
-
+  const issueVolumeData = useMemo(
+    () => issueCards.slice(0, 8).map((issue) => ({ issue: compactLabel(issue.issue), count: issue.count })),
+    [issueCards],
+  );
+  const outcomeData = useMemo(
+    () => Object.entries(dashboard?.overview.outcome_counts ?? {}).map(([name, value]) => ({ name, value })),
+    [dashboard],
+  );
+  const sentimentData = useMemo(() => {
+    const sentiment = dashboard?.overview.sentiment_summary;
+    if (!sentiment) {
+      return [];
+    }
+    return [
+      { stage: "Opening", value: sentiment.opening },
+      { stage: "Closing", value: sentiment.closing },
+      { stage: "Shift", value: sentiment.average_shift },
+    ];
+  }, [dashboard]);
   function navigate(nextPage: PageKey) {
     startTransition(() => {
       setPage(nextPage);
@@ -132,30 +180,20 @@ function App() {
     });
   }
 
-  async function refreshWorkspace(mode: "refresh" | "recalibrate" | "rerun" = "refresh") {
+  async function refreshWorkspace(mode: "refresh" | "rerun" | "recalibrate" = "refresh") {
     setSyncing(true);
-    setActionMessage(null);
+    setMessage(null);
     setError(null);
     try {
-      if (mode === "recalibrate") {
-        const payload = await api.recalibrate();
-        queryClient.setQueryData(["workspace"], payload);
-        setActionMessage("Monthly recalibration completed and the workspace has been refreshed.");
-      } else if (mode === "rerun") {
+      if (mode === "rerun") {
         await api.rerunPipeline();
-        const payload = await queryClient.fetchQuery({
-          queryKey: ["workspace"],
-          queryFn: api.getWorkspace,
-        });
-        queryClient.setQueryData(["workspace"], payload);
-        setActionMessage("The batch pipeline re-ran successfully and the UI is now showing fresh data.");
-      } else {
-        const payload = await queryClient.fetchQuery({
-          queryKey: ["workspace"],
-          queryFn: api.getWorkspace,
-        });
-        queryClient.setQueryData(["workspace"], payload);
+        setMessage("Batch analysis reran successfully.");
+      } else if (mode === "recalibrate") {
+        await api.recalibrate();
+        setMessage("Monthly recalibration completed.");
       }
+      const payload = await queryClient.fetchQuery({ queryKey: ["workspace"], queryFn: api.getWorkspace });
+      queryClient.setQueryData(["workspace"], payload);
     } catch (refreshError) {
       setError(refreshError instanceof Error ? refreshError.message : "Unable to refresh workspace");
     } finally {
@@ -163,48 +201,20 @@ function App() {
     }
   }
 
-  function openIssue(issue: DashboardIssue) {
-    startTransition(() => {
-      setSelectedIssueSlug(issue.slug);
-      setSelectedCallId(issue.representative_calls[0]?.call_id ?? selectedCallId);
-      setFormState((current) => ({ ...current, issue_slug: issue.slug }));
-      navigate("explorer");
-    });
-  }
-
-  function openCall(callId: string) {
-    startTransition(() => {
-      setSelectedCallId(callId);
-      navigate("drilldown");
-    });
-  }
-
   async function handleCreateStrategy(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!formState.issue_slug || !formState.title.trim() || !formState.hypothesis.trim()) {
-      setActionMessage("A strategy needs an issue, title, and hypothesis before it can be created.");
+      setMessage("Issue, title, and hypothesis are required.");
       return;
     }
-
     setSyncing(true);
-    setActionMessage(null);
     setError(null);
     try {
       await api.createStrategy(formState);
       const board = await api.getStrategies();
-      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) =>
-        current ? { ...current, strategy_board: board } : current,
-      );
-      setActionMessage("Strategy created and added to the workflow board.");
-      setFormState({
-        issue_slug: formState.issue_slug,
-        title: "",
-        owner: formState.owner,
-        hypothesis: "",
-        notes: "",
-        kpi_focus: formState.kpi_focus,
-        evidence_call_ids: selectedStrategyIssue?.representative_calls.map((call) => call.call_id).slice(0, 2) ?? [],
-      });
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? { ...current, strategy_board: board } : current);
+      setMessage("Strategy created.");
+      setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "" }));
     } catch (createError) {
       setError(createError instanceof Error ? createError.message : "Unable to create strategy");
     } finally {
@@ -213,64 +223,43 @@ function App() {
   }
 
   async function moveStrategy(strategy: StrategyRecord, direction: -1 | 1) {
-    const stages = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
-    const currentIndex = stages.indexOf(strategy.status);
-    const nextStatus = stages[currentIndex + direction];
+    const currentIndex = STAGE_ORDER.indexOf(strategy.status);
+    const nextStatus = STAGE_ORDER[currentIndex + direction];
     if (!nextStatus) {
       return;
     }
-
     setSyncing(true);
-    setError(null);
     try {
       const updated = await api.updateStrategy(strategy.strategy_id, { status: nextStatus });
       queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => {
         if (!current) {
           return current;
         }
-        const strategies = current.strategy_board.strategies.map((item) =>
-          item.strategy_id === updated.strategy_id ? updated : item,
-        );
+        const strategies = current.strategy_board.strategies.map((item) => item.strategy_id === updated.strategy_id ? updated : item);
         return {
           ...current,
           strategy_board: {
-            stages: stages.map((name) => ({
-              name,
-              count: strategies.filter((item) => item.status === name).length,
-            })),
+            stages: STAGE_ORDER.map((name) => ({ name, count: strategies.filter((item) => item.status === name).length })),
             strategies,
           },
         };
       });
-      setActionMessage(`${strategy.title} moved to ${nextStatus}.`);
-    } catch (updateError) {
-      setError(updateError instanceof Error ? updateError.message : "Unable to update strategy");
+      setMessage(`${strategy.title} moved to ${nextStatus}.`);
+    } catch (moveError) {
+      setError(moveError instanceof Error ? moveError.message : "Unable to move strategy");
     } finally {
       setSyncing(false);
     }
   }
 
-  async function handleExportReport() {
-    setSyncing(true);
-    setError(null);
-    try {
-      const [payload, filename] = await Promise.all([api.exportReport(), api.downloadReportPdf()]);
-      setExportPayload(payload.report);
-      setActionMessage(`PDF report downloaded as ${filename}.`);
-    } catch (exportError) {
-      setError(exportError instanceof Error ? exportError.message : "Unable to export report");
-    } finally {
-      setSyncing(false);
-    }
-  }
-
-  async function handleRefreshReportData() {
+  async function handleExport() {
     setSyncing(true);
     setError(null);
     try {
       const payload = await api.exportReport();
-      setExportPayload(payload.report);
-      setActionMessage(`Report data refreshed at ${new Date(payload.generated_at).toLocaleString()}.`);
+      await api.downloadReportPdf();
+      setReportSnapshot(payload.report);
+      setMessage("PDF report exported.");
     } catch (exportError) {
       setError(exportError instanceof Error ? exportError.message : "Unable to export report");
     } finally {
@@ -279,17 +268,16 @@ function App() {
   }
 
   if (workspaceQuery.isLoading) {
-    return <div className="status-screen">Loading the Call Insights workspace...</div>;
+    return <div className="loading-screen">Loading Call Insights workspace...</div>;
   }
 
   if ((workspaceQuery.error || error) && !workspace) {
     return (
-      <div className="status-screen">
-        <div className="status-card">
+      <div className="loading-screen">
+        <div className="loading-card">
           <h1>Call Insights</h1>
-          <p>The workspace could not be loaded.</p>
           <p>{workspaceQuery.error instanceof Error ? workspaceQuery.error.message : error}</p>
-          <p>Start the API from `apps/api` with `uvicorn app.main:app --reload`.</p>
+          <p>Start the API with `uvicorn app.main:app --reload` from `apps/api`.</p>
         </div>
       </div>
     );
@@ -299,93 +287,584 @@ function App() {
     return null;
   }
 
-  let pageNode = (
-    <OverviewPage workspace={workspace} onOpenIssue={openIssue} onOpenCall={openCall} />
-  );
-
-  if (page === "design-lab") {
-    pageNode = (
-      <UiDesignLabPage workspace={workspace} onOpenIssue={openIssue} onOpenCall={openCall} />
-    );
-  } else if (page === "pulse") {
-    pageNode = (
-      <PulsePage
-        workspace={workspace}
-        onOpenCall={openCall}
-        onSeedStrategy={(updater) => setFormState((current) => updater(current))}
-        onGoToStrategies={() => navigate("strategies")}
-      />
-    );
-  } else if (page === "monthly") {
-    pageNode = <MonthlyPage workspace={workspace} onOpenCall={openCall} />;
-  } else if (page === "explorer") {
-    pageNode = (
-      <ExplorerPage
-        issues={filteredIssues}
-        selectedIssueSlug={selectedIssueSlug}
-        selectedIssueCard={selectedIssueCard}
-        issueDetail={issueDetail}
-        issueQuery={issueQuery}
-        outcomeFilter={outcomeFilter}
-        onIssueQueryChange={setIssueQuery}
-        onOutcomeFilterChange={setOutcomeFilter}
-        onOpenIssue={openIssue}
-        onOpenCall={openCall}
-      />
-    );
-  } else if (page === "drilldown") {
-    pageNode = (
-      <DrilldownPage
-        callDetail={callDetail}
-        calls={workspace.dashboard.calls}
-        selectedCallId={selectedCallId}
-        onSelectCall={setSelectedCallId}
-      />
-    );
-  } else if (page === "strategies") {
-    pageNode = (
-      <StrategiesPage
-        workspace={workspace}
-        formState={formState}
-        syncing={syncing}
-        onFormStateChange={(updater) => setFormState((current) => updater(current))}
-        onSubmit={handleCreateStrategy}
-        onMoveStrategy={(strategy, direction) => void moveStrategy(strategy, direction)}
-        onOpenCall={openCall}
-      />
-    );
-  } else if (page === "reports") {
-    pageNode = (
-      <ReportsPage
-        workspace={workspace}
-        exportPayload={exportPayload}
-        syncing={syncing}
-        onExport={() => void handleExportReport()}
-        onRefreshReport={() => void handleRefreshReportData()}
-      />
-    );
-  } else if (page === "governance") {
-    pageNode = <AdminAiGovernancePage workspace={workspace} />;
-  }
+  const pageMeta = PAGE_META[page];
+  const openActionPlans = workspace.strategy_board.strategies.filter((item) => item.status !== "Closed").length;
+  const topIssue = dashboard.issues[0] ?? null;
+  const dailyBrief = dashboard.overview.daily_brief.slice(0, 3);
+  const generatedAt = workspace.governance.generated_at || workspace.reports.generated_at;
 
   return (
-    <AppFrame
-      page={page}
-      theme={theme}
-      syncing={syncing}
-      message={actionMessage}
-      error={error}
-      workspace={workspace}
-      onNavigate={navigate}
-      onToggleTheme={() => setTheme(theme === "dark" ? "light" : "dark")}
-      onRefresh={() => void refreshWorkspace("refresh")}
-      onRerun={() => void refreshWorkspace("rerun")}
-      onRecalibrate={() => void refreshWorkspace("recalibrate")}
-      onExport={() => void handleExportReport()}
-    >
-      {pageNode}
-    </AppFrame>
+    <div className="dashboard-shell">
+      <div className="dashboard-glow dashboard-glow-one" />
+      <div className="dashboard-glow dashboard-glow-two" />
+      <aside className="dashboard-sidebar">
+        <div className="brand-block">
+          <p className="brand-kicker">Call Insights</p>
+          <h1>Servicing performance, clearly organized.</h1>
+          <p>Track call drivers, resolution quality, customer friction, and action plans in one management dashboard.</p>
+        </div>
+        <nav className="dashboard-nav">
+          {NAV_ITEMS.map(([key, label, description]) => (
+            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key as PageKey)}>
+              <strong>{label}</strong>
+              <span>{description}</span>
+            </button>
+          ))}
+        </nav>
+        <div className="sidebar-summary">
+          <div className="sidebar-summary-row">
+            <span>Top issue</span>
+            <strong>{topIssue?.issue ?? "n/a"}</strong>
+          </div>
+          <div className="sidebar-summary-row">
+            <span>Open action plans</span>
+            <strong>{openActionPlans}</strong>
+          </div>
+          <div className="sidebar-summary-row">
+            <span>Last refresh</span>
+            <strong>{generatedAt}</strong>
+          </div>
+        </div>
+        <div className="sidebar-controls">
+          <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
+        </div>
+      </aside>
+      <main className="dashboard-main">
+        <section className="workspace-header">
+          <div className="workspace-heading">
+            <p className="section-kicker">{pageMeta.kicker}</p>
+            <h2>{pageMeta.title}</h2>
+            <p>{pageMeta.description}</p>
+          </div>
+          <div className="workspace-actions">
+            <button type="button" className="ghost-button" disabled={syncing} onClick={() => void refreshWorkspace("refresh")}><RefreshCw size={16} /> Refresh view</button>
+            <button type="button" className="ghost-button" disabled={syncing} onClick={() => void refreshWorkspace("rerun")}><Sparkles size={16} /> Update analysis</button>
+            <button type="button" className="ghost-button" disabled={syncing} onClick={() => void refreshWorkspace("recalibrate")}><GitBranchPlus size={16} /> Refresh trends</button>
+            <button type="button" className="primary-button" disabled={syncing} onClick={() => void handleExport()}><FileDown size={16} /> Export summary</button>
+          </div>
+        </section>
+        {page === "overview" ? (
+          <section className="hero-panel overview-hero">
+            <div className="hero-copy">
+              <p className="section-kicker">Executive Overview</p>
+              <h2>See what customers are calling about, which responses are working, and where teams need support.</h2>
+              <p>This dashboard brings together call drivers, resolution results, sentiment movement, and active action plans for servicing leadership.</p>
+              <div className="hero-briefs">
+                {dailyBrief.map((item) => (
+                  <div className="brief-pill" key={item}><ArrowRight size={14} /><span>{item}</span></div>
+                ))}
+              </div>
+            </div>
+            <div className="hero-side">
+              <div className="hero-metrics">
+                {dashboard.overview.metrics.map((metric) => (
+                  <article className="metric-card" key={metric.label}>
+                    <span>{metric.label}</span>
+                    <strong style={{ color: TONE_COLORS[metric.tone] ?? undefined }}>{formatMetricValue(metric.value)}</strong>
+                  </article>
+                ))}
+              </div>
+              <div className="hero-focus-card">
+                <p className="section-kicker">Management Focus</p>
+                <h3>{topIssue?.issue ?? "No dominant issue loaded"}</h3>
+                <p>{topIssue?.summary ?? "Refresh the workspace to load issue detail."}</p>
+                <div className="focus-meta">
+                  <span>{topIssue?.count ?? 0} calls</span>
+                  <span>{openActionPlans} open action plans</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        ) : null}
+        {message ? <div className="flash-banner success">{message}</div> : null}
+        {error ? <div className="flash-banner error">{error}</div> : null}
+        {page === "overview" ? (
+          <section className="grid-page overview-page">
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Issue Volume</p>
+                  <h3>Top call drivers</h3>
+                </div>
+                <Target size={18} />
+              </div>
+              <div className="chart-box">
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart data={issueVolumeData}>
+                    <CartesianGrid vertical={false} stroke="rgba(122,148,190,0.14)" />
+                    <XAxis dataKey="issue" tickLine={false} axisLine={false} interval={0} angle={-12} textAnchor="end" height={64} />
+                    <YAxis tickLine={false} axisLine={false} />
+                    <Tooltip contentStyle={tooltipStyle} />
+                    <Bar dataKey="count" radius={[10, 10, 0, 0]}>
+                      {issueVolumeData.map((entry, index) => (
+                        <Cell key={`${entry.issue}-${index}`} fill={index % 2 === 0 ? "#62d3ff" : "#8ff0a7"} />
+                      ))}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Outcome Mix</p>
+                  <h3>Resolution distribution</h3>
+                </div>
+                <Activity size={18} />
+              </div>
+              <div className="chart-box compact">
+                <ResponsiveContainer width="100%" height={280}>
+                  <PieChart>
+                    <Pie data={outcomeData} dataKey="value" nameKey="name" innerRadius={60} outerRadius={96} paddingAngle={3}>
+                      {outcomeData.map((entry, index) => (
+                        <Cell key={entry.name} fill={OUTCOME_COLORS[index % OUTCOME_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip contentStyle={tooltipStyle} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="legend-stack">
+                {outcomeData.map((entry, index) => (
+                  <div className="legend-row" key={entry.name}>
+                    <span className="legend-dot" style={{ background: OUTCOME_COLORS[index % OUTCOME_COLORS.length] }} />
+                    <strong>{entry.name}</strong>
+                    <span>{entry.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Sentiment Lens</p>
+                  <h3>Opening to close</h3>
+                </div>
+                <Sparkles size={18} />
+              </div>
+              <div className="chart-box compact">
+                <ResponsiveContainer width="100%" height={240}>
+                  <AreaChart data={sentimentData}>
+                    <CartesianGrid vertical={false} stroke="rgba(122,148,190,0.14)" />
+                    <XAxis dataKey="stage" tickLine={false} axisLine={false} />
+                    <YAxis tickLine={false} axisLine={false} />
+                    <Tooltip contentStyle={tooltipStyle} />
+                    <Area type="monotone" dataKey="value" stroke="#86efac" fill="url(#sentimentFill)" strokeWidth={3} />
+                    <defs>
+                      <linearGradient id="sentimentFill" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stopColor="#86efac" stopOpacity={0.55} />
+                        <stop offset="100%" stopColor="#86efac" stopOpacity={0.02} />
+                      </linearGradient>
+                    </defs>
+                  </AreaChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Response Patterns</p>
+                  <h3>Responses linked to stronger outcomes</h3>
+                </div>
+                <BrainCircuit size={18} />
+              </div>
+              <div className="pattern-grid">
+                {dashboard.overview.top_patterns.slice(0, 6).map((pattern) => (
+                  <button
+                    type="button"
+                    className="pattern-card"
+                    key={`${pattern.issue}-${pattern.behavior}-${pattern.outcome}`}
+                    onClick={() => {
+                      const nextSlug = dashboard.issues.find((issue) => issue.issue === pattern.issue)?.slug ?? selectedIssueSlug;
+                      setSelectedIssueSlug(nextSlug);
+                      navigate("issues");
+                    }}
+                  >
+                    <span className="pattern-chip">{pattern.outcome}</span>
+                    <strong>{pattern.issue}</strong>
+                    <p>{pattern.behavior}</p>
+                    <div className="pattern-meta">
+                      <span>{pattern.count} calls</span>
+                      <span>Lift {pattern.lift.toFixed(2)}</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {page === "issues" ? (
+          <section className="grid-page intelligence-page">
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Issue Explorer</p>
+                  <h3>Recurring customer issues</h3>
+                </div>
+                <BrainCircuit size={18} />
+              </div>
+              <input className="dashboard-input" placeholder="Filter issues" value={issueFilter} onChange={(event) => setIssueFilter(event.target.value)} />
+              <div className="issue-list">
+                {issueCards.map((issue) => (
+                  <button key={issue.slug} type="button" className={`issue-list-card ${issue.slug === selectedIssueSlug ? "active" : ""}`} onClick={() => setSelectedIssueSlug(issue.slug)}>
+                    <div>
+                      <strong>{issue.issue}</strong>
+                      <p>{issue.summary}</p>
+                    </div>
+                    <span>{issue.count}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Evidence Pack</p>
+                  <h3>{issueDetailQuery.data?.issue ?? "Select an issue"}</h3>
+                </div>
+                <ShieldCheck size={18} />
+              </div>
+              {issueDetailQuery.data ? (
+                <div className="issue-detail-layout">
+                  <div className="detail-callout">
+                    <p>{issueDetailQuery.data.summary}</p>
+                    <div className="detail-tags">
+                      {Object.entries(issueDetailQuery.data.outcome_breakdown).map(([name, value]) => (
+                        <span className="data-tag" key={name}>{name}: {value}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="detail-stack-grid">
+                    <div className="subpanel">
+                      <h4>Top behaviors</h4>
+                      {issueDetailQuery.data.top_behaviors.map((item, index) => (
+                        <div className="line-row" key={`${item.behavior ?? item.label ?? index}`}>
+                          <span>{item.behavior ?? item.label ?? "Signal"}</span>
+                          <strong>{item.count}</strong>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="subpanel">
+                      <h4>Representative calls</h4>
+                      {issueDetailQuery.data.evidence_calls.map((call) => (
+                        <button type="button" className="evidence-row" key={call.call_id} onClick={() => { setSelectedCallId(call.call_id); navigate("calls"); }}>
+                          <strong>{call.call_id}</strong>
+                          <span>{call.summary}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p className="empty-state">Select an issue to load supporting detail.</p>
+              )}
+            </div>
+          </section>
+        ) : null}
+        {page === "calls" ? (
+          <section className="grid-page calls-page">
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Call Index</p>
+                  <h3>Transcript set</h3>
+                </div>
+                <Activity size={18} />
+              </div>
+              <div className="call-list">
+                {dashboard.calls.slice(0, 14).map((call: CallCard) => (
+                  <button type="button" key={call.call_id} className={`call-list-card ${call.call_id === selectedCallId ? "active" : ""}`} onClick={() => setSelectedCallId(call.call_id)}>
+                    <strong>{call.call_id}</strong>
+                    <span>{call.issue}</span>
+                    <p>{call.summary}</p>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Call Review</p>
+                  <h3>{callDetailQuery.data?.call_id ?? "Select a call"}</h3>
+                </div>
+                <Target size={18} />
+              </div>
+              {callDetailQuery.data ? (
+                <div className="call-review-layout">
+                  <div className="call-review-meta">
+                    <div className="detail-tags">
+                      <span className="data-tag">{callDetailQuery.data.issue}</span>
+                      <span className="data-tag">{callDetailQuery.data.outcome}</span>
+                      {callDetailQuery.data.behaviors.map((behavior) => (
+                        <span className="data-tag muted" key={behavior}>{behavior}</span>
+                      ))}
+                    </div>
+                    <p>{callDetailQuery.data.summary}</p>
+                    <div className="segment-strip">
+                      {callDetailQuery.data.segments.map((segment) => (
+                        <div className="segment-pill" key={segment.segment_id}>
+                          <strong>{segment.issue}</strong>
+                          <span>{segment.turn_count} turns</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="transcript-stream">
+                    {callDetailQuery.data.turns.map((turn, index) => (
+                      <article className={`transcript-turn ${turn.speaker.toLowerCase()}`} key={`${turn.speaker}-${index}`}>
+                        <span>{turn.speaker}</span>
+                        <p>{turn.text}</p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <p className="empty-state">Select a call to review transcript evidence.</p>
+              )}
+            </div>
+          </section>
+        ) : null}
+
+        {page === "strategies" ? (
+          <section className="grid-page strategy-page">
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Strategy Workflow</p>
+                  <h3>Action plan board</h3>
+                </div>
+                <Target size={18} />
+              </div>
+              <div className="kanban-board">
+                {workspace.strategy_board.stages.map((stage) => (
+                  <div className="kanban-column" key={stage.name}>
+                    <div className="kanban-column-head">
+                      <strong>{stage.name}</strong>
+                      <span>{stage.count}</span>
+                    </div>
+                    {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => (
+                      <article className="strategy-card" key={strategy.strategy_id}>
+                        <p className="strategy-issue">{strategy.issue}</p>
+                        <h4>{strategy.title}</h4>
+                        <p>{strategy.hypothesis}</p>
+                        <div className="detail-tags">
+                          {strategy.kpi_focus.map((kpi) => (
+                            <span className="data-tag muted" key={kpi}>{kpi}</span>
+                          ))}
+                        </div>
+                        <div className="strategy-actions">
+                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, -1)}>Back</button>
+                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Create Action Plan</p>
+                  <h3>Assign a new improvement plan</h3>
+                </div>
+                <GitBranchPlus size={18} />
+              </div>
+              <form className="strategy-form" onSubmit={(event) => void handleCreateStrategy(event)}>
+                <select className="dashboard-input" value={formState.issue_slug} onChange={(event) => setFormState((current) => ({ ...current, issue_slug: event.target.value }))}>
+                  {dashboard.issues.map((issue) => (
+                    <option value={issue.slug} key={issue.slug}>{issue.issue}</option>
+                  ))}
+                </select>
+                <input className="dashboard-input" placeholder="Strategy title" value={formState.title} onChange={(event) => setFormState((current) => ({ ...current, title: event.target.value }))} />
+                <input className="dashboard-input" placeholder="Owner" value={formState.owner} onChange={(event) => setFormState((current) => ({ ...current, owner: event.target.value }))} />
+                <textarea className="dashboard-input dashboard-textarea" placeholder="Hypothesis" value={formState.hypothesis} onChange={(event) => setFormState((current) => ({ ...current, hypothesis: event.target.value }))} />
+                <textarea className="dashboard-input dashboard-textarea" placeholder="Notes" value={formState.notes} onChange={(event) => setFormState((current) => ({ ...current, notes: event.target.value }))} />
+                <div className="kpi-grid">
+                  {KPI_OPTIONS.map((kpi) => {
+                    const active = formState.kpi_focus.includes(kpi);
+                    return (
+                      <button
+                        type="button"
+                        className={`kpi-toggle ${active ? "active" : ""}`}
+                        key={kpi}
+                        onClick={() => setFormState((current) => ({ ...current, kpi_focus: active ? current.kpi_focus.filter((item) => item !== kpi) : [...current.kpi_focus, kpi] }))}
+                      >
+                        {kpi}
+                      </button>
+                    );
+                  })}
+                </div>
+                <button type="submit" className="primary-button">Create strategy</button>
+              </form>
+            </div>
+          </section>
+        ) : null}
+        {page === "learning" ? (
+          <section className="grid-page learning-page">
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Monitoring</p>
+                  <h3>Trend refresh, controls, and system monitoring</h3>
+                </div>
+                <BrainCircuit size={18} />
+              </div>
+              <div className="learning-grid">
+                <div className="subpanel">
+                  <h4>Trend refresh status</h4>
+                  <div className="line-row"><span>Completed</span><strong>{workspace.recalibration.completed_at}</strong></div>
+                  <div className="line-row"><span>Top issue</span><strong>{workspace.recalibration.top_issue ?? "n/a"}</strong></div>
+                  <div className="line-row"><span>New clusters</span><strong>{workspace.recalibration.new_clusters_detected}</strong></div>
+                  <div className="line-row"><span>Retired clusters</span><strong>{workspace.recalibration.retired_clusters}</strong></div>
+                </div>
+                <div className="subpanel">
+                  <h4>Control checks</h4>
+                  {workspace.governance.monitors.map((monitor) => (
+                    <div className="monitor-row" key={monitor.label}>
+                      <span>{monitor.label}</span>
+                      <strong>{monitor.status}</strong>
+                    </div>
+                  ))}
+                </div>
+                <div className="subpanel">
+                  <h4>Ask CI</h4>
+                  {workspace.ask_ci.map((item) => (
+                    <div className="qa-card" key={item.question}>
+                      <strong>{item.question}</strong>
+                      <p>{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Controls</p>
+                  <h3>Review rules and safeguards</h3>
+                </div>
+                <ShieldCheck size={18} />
+              </div>
+              <div className="policy-list">
+                {workspace.governance.evidence_policy.map((policy) => (
+                  <div className="policy-item" key={policy}>
+                    <ArrowRight size={14} />
+                    <span>{policy}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        {page === "ask-ci" ? (
+          <AskCiPage
+            workspace={workspace}
+            currentPage={page}
+            onNavigate={navigate}
+            onOpenIssue={(issueSlug) => {
+              setSelectedIssueSlug(issueSlug);
+              navigate("issues");
+            }}
+            onOpenCall={(callId) => {
+              setSelectedCallId(callId);
+              navigate("calls");
+            }}
+          />
+        ) : null}
+
+        {page === "governance" ? <AdminAiGovernancePage workspace={workspace} /> : null}
+
+        {page === "visual-lab" ? (
+          <UiDesignLabPage
+            workspace={workspace}
+            onOpenIssue={(issue) => {
+              setSelectedIssueSlug(issue.slug);
+              navigate("issues");
+            }}
+            onOpenCall={(callId) => {
+              setSelectedCallId(callId);
+              navigate("calls");
+            }}
+          />
+        ) : null}
+
+        {page === "reports" ? (
+          <section className="grid-page reports-page">
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Leadership Report</p>
+                  <h3>{(reportSnapshot ?? workspace.reports).title}</h3>
+                </div>
+                <FileDown size={18} />
+              </div>
+              <div className="report-grid">
+                {Object.entries((reportSnapshot ?? workspace.reports).totals).map(([label, value]) => (
+                  <div className="metric-card report" key={label}>
+                    <span>{label.replaceAll("_", " ")}</span>
+                    <strong>{String(value)}</strong>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Highlights</p>
+                  <h3>Export narrative</h3>
+                </div>
+                <Sparkles size={18} />
+              </div>
+              <div className="policy-list">
+                {(reportSnapshot ?? workspace.reports).highlights.map((highlight) => (
+                  <div className="policy-item" key={highlight}>
+                    <ArrowRight size={14} />
+                    <span>{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="panel-card span-two">
+              <div className="panel-heading">
+                <div>
+                  <p className="section-kicker">Issue Table</p>
+                  <h3>Export package detail</h3>
+                </div>
+                <Target size={18} />
+              </div>
+              <div className="table-list">
+                {(reportSnapshot ?? workspace.reports).issue_table.map((row) => (
+                  <div className="table-row-dashboard" key={row.issue}>
+                    <strong>{row.issue}</strong>
+                    <span>{row.count} calls</span>
+                    <span>{row.top_outcome}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+      </main>
+    </div>
   );
 }
+
+function compactLabel(value: string) {
+  return value.length > 18 ? `${value.slice(0, 18)}…` : value;
+}
+
+function formatMetricValue(value: string | number) {
+  return typeof value === "number" ? (Number.isInteger(value) ? value.toLocaleString() : value.toFixed(3)) : value;
+}
+
+const tooltipStyle = {
+  background: "var(--tooltip-bg)",
+  border: "1px solid var(--tooltip-border)",
+  borderRadius: "16px",
+  color: "var(--tooltip-text)",
+};
 
 export default App;

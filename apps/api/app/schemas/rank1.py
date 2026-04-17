@@ -105,6 +105,26 @@ class GovernanceResponse(BaseModel):
     monitors: list[dict]
 
 
+class AskCiChatRequest(BaseModel):
+    question: str
+    current_page: str | None = None
+    history: list[dict] = []
+
+
+class AskCiChatAction(BaseModel):
+    type: str
+    label: str
+    target: str
+
+
+class AskCiChatResponse(BaseModel):
+    answer: str
+    sources: list[str]
+    actions: list[AskCiChatAction]
+    generated_at: str
+    mode: str
+
+
 class WorkspaceResponse(BaseModel):
     dashboard: DashboardResponse
     pulse_insights: list[dict]

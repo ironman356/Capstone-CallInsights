@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, I do not think that late fee should be there because I made the payment as soon as I could.
-Agent: I can help with that. First I need to complete a brief verification on the account.
-Customer: Sure, go ahead.
+Customer: I need to understand what the loss mitigation review process looks like before I fall further behind.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am checking the timeline on the last payment and the fee assessment now.
-Customer: I am asking if there is any way to review this instead of just telling me it stays.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that late fees are typically based on when the payment posts after the grace period.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: If needed, I can transfer you to a supervisor after I finish documenting what we reviewed.
-Agent: I am also adding detailed notes so the account reflects what we reviewed today.
-Customer: I still do not feel like this is fully resolved.
-Agent: I understand. What I can do today is document everything we reviewed and note the remaining concern.
-Customer: Okay. I just do not want this to be dropped.
+Agent: I can explain the assistance application steps and what documents the review team needs.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I will document the assistance discussion and the follow-up expectations on the loan.
+Customer: Okay, I will wait for the follow-up since the review is still in motion.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I noted the follow-up expectation and the review timeline on the account.
 Agent: Thank you for calling today.
 Customer: Thank you.

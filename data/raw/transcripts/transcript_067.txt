@@ -1,18 +1,12 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my monthly statement does not make sense and I cannot tell what I am actually supposed to pay.
-Agent: Before I discuss the loan, I do need to complete a quick verification.
-Customer: Okay, that is fine.
+Customer: The shortage amount on this escrow statement does not make sense to me.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am reviewing the billed amount, unpaid charges, and escrow line now.
-Customer: I was worried I was reading the wrong amount and about to pay the wrong thing.
-Agent: I understand why that would be frustrating.
-Agent: What I am seeing is that the statement can include the regular monthly payment plus any outstanding charges from a prior cycle.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I can break each section down so you know which amount is the regular payment and which is separate.
-Agent: I am also adding detailed notes so the account reflects what we reviewed today.
-Customer: At this point I really think I need a supervisor or the other team involved.
-Agent: I understand. I will document what we covered and get you to the correct escalation path.
-Customer: Okay. Please make sure they can see the notes.
+Agent: Let me compare last year's tax and insurance disbursements against the new escrow calculation.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: The increase is tied to higher county taxes and insurance, and I can explain when the new amount takes effect.
+Agent: I am transferring this to the specialist queue and documenting the notes before I do.
 Agent: Thank you for calling today.
 Customer: Thank you.

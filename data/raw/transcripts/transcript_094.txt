@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my automatic payment did not pull this month and now I am worried I will be marked late.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: That is fine, I can do that.
+Customer: My title company needs a payoff statement for closing and I want to make sure the amount is correct.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am checking the autopay enrollment date and the draft schedule now.
-Customer: That was not how it was explained to me when I signed up.
-Agent: I understand why that would be frustrating.
-Agent: What I am seeing is that autopay usually starts on the next eligible cycle after enrollment is fully active.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I will document the account so there is a record that the autopay start date was reviewed with you.
-Agent: Let me make sure I explain what happens next and what timeframe to expect.
-Customer: Can somebody call me back once the research is done?
-Agent: Yes. I will document the callback request with the account notes today.
-Customer: All right. I appreciate that.
+Agent: I am looking at the closing timeline and the payoff request status now.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: If the title company needs another statement, I can note that request and document the closing timeline.
+Customer: Please have someone call me back once the research is complete.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I documented the callback request and the current status before we end the call.
 Agent: Thank you for calling today.
 Customer: Thank you.

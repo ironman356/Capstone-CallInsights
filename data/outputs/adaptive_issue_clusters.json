@@ -1,0 +1,178 @@
+[
+  {
+    "cluster_id": "ISSUE-0001",
+    "label": "payment online",
+    "count": 28,
+    "call_ids": [
+      "CALL-0001",
+      "CALL-0006",
+      "CALL-0026",
+      "CALL-0031",
+      "CALL-0036",
+      "CALL-0046",
+      "CALL-0051",
+      "CALL-0061",
+      "CALL-0066",
+      "CALL-0071"
+    ],
+    "last_seen_at": "2026-04-17T12:53:10Z"
+  },
+  {
+    "cluster_id": "ISSUE-0002",
+    "label": "escrow statement",
+    "count": 12,
+    "call_ids": [
+      "CALL-0002",
+      "CALL-0022",
+      "CALL-0062",
+      "CALL-0067",
+      "CALL-0087",
+      "CALL-0092",
+      "CALL-0002",
+      "CALL-0022",
+      "CALL-0062",
+      "CALL-0067"
+    ],
+    "last_seen_at": "2026-04-17T12:53:08Z"
+  },
+  {
+    "cluster_id": "ISSUE-0003",
+    "label": "fall further behind",
+    "count": 14,
+    "call_ids": [
+      "CALL-0003",
+      "CALL-0013",
+      "CALL-0018",
+      "CALL-0033",
+      "CALL-0043",
+      "CALL-0063",
+      "CALL-0098",
+      "CALL-0003",
+      "CALL-0013",
+      "CALL-0018"
+    ],
+    "last_seen_at": "2026-04-17T12:53:11Z"
+  },
+  {
+    "cluster_id": "ISSUE-0004",
+    "label": "funds were wired",
+    "count": 6,
+    "call_ids": [
+      "CALL-0004",
+      "CALL-0034",
+      "CALL-0099",
+      "CALL-0004",
+      "CALL-0034",
+      "CALL-0099"
+    ],
+    "last_seen_at": "2026-04-17T12:53:12Z"
+  },
+  {
+    "cluster_id": "ISSUE-0005",
+    "label": "insurance even though",
+    "count": 18,
+    "call_ids": [
+      "CALL-0005",
+      "CALL-0015",
+      "CALL-0020",
+      "CALL-0025",
+      "CALL-0030",
+      "CALL-0055",
+      "CALL-0080",
+      "CALL-0085",
+      "CALL-0100",
+      "CALL-0005"
+    ],
+    "last_seen_at": "2026-04-17T12:53:12Z"
+  },
+  {
+    "cluster_id": "ISSUE-0006",
+    "label": "escrow",
+    "count": 50,
+    "call_ids": [
+      "CALL-0007",
+      "CALL-0010",
+      "CALL-0012",
+      "CALL-0017",
+      "CALL-0027",
+      "CALL-0032",
+      "CALL-0035",
+      "CALL-0037",
+      "CALL-0040",
+      "CALL-0042"
+    ],
+    "last_seen_at": "2026-04-17T12:53:11Z"
+  },
+  {
+    "cluster_id": "ISSUE-0007",
+    "label": "monthly payment right",
+    "count": 26,
+    "call_ids": [
+      "CALL-0008",
+      "CALL-0023",
+      "CALL-0028",
+      "CALL-0038",
+      "CALL-0048",
+      "CALL-0053",
+      "CALL-0058",
+      "CALL-0068",
+      "CALL-0073",
+      "CALL-0078"
+    ],
+    "last_seen_at": "2026-04-17T12:53:08Z"
+  },
+  {
+    "cluster_id": "ISSUE-0008",
+    "label": "title company needs",
+    "count": 20,
+    "call_ids": [
+      "CALL-0009",
+      "CALL-0019",
+      "CALL-0039",
+      "CALL-0049",
+      "CALL-0054",
+      "CALL-0059",
+      "CALL-0074",
+      "CALL-0084",
+      "CALL-0089",
+      "CALL-0094"
+    ],
+    "last_seen_at": "2026-04-17T12:53:09Z"
+  },
+  {
+    "cluster_id": "ISSUE-0009",
+    "label": "bank shows",
+    "count": 12,
+    "call_ids": [
+      "CALL-0011",
+      "CALL-0016",
+      "CALL-0021",
+      "CALL-0041",
+      "CALL-0056",
+      "CALL-0081",
+      "CALL-0011",
+      "CALL-0016",
+      "CALL-0021",
+      "CALL-0041"
+    ],
+    "last_seen_at": "2026-04-17T12:53:01Z"
+  },
+  {
+    "cluster_id": "ISSUE-0010",
+    "label": "good through date",
+    "count": 14,
+    "call_ids": [
+      "CALL-0014",
+      "CALL-0024",
+      "CALL-0029",
+      "CALL-0044",
+      "CALL-0064",
+      "CALL-0069",
+      "CALL-0079",
+      "CALL-0014",
+      "CALL-0024",
+      "CALL-0029"
+    ],
+    "last_seen_at": "2026-04-17T12:53:00Z"
+  }
+]
