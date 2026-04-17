@@ -1,6 +1,7 @@
 # Call Insights CTO Demo Script
 
 ## Purpose
+
 This script is written for a CTO-level demo of the Call Insights (CI) platform. It explains:
 
 - what each page does
@@ -512,4 +513,4 @@ They can understand which agent behaviors are helping or hurting.
 They can turn those findings into action plans.  
 And they can continuously recalibrate as the call population changes.
 
-That is the core value of the platform.” 
+That is the core value of the platform.”
