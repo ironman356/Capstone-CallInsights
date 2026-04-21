@@ -54,6 +54,10 @@ export const api = {
       method: "PATCH",
       body: JSON.stringify(payload),
     }),
+  deleteStrategy: (strategyId: string) =>
+    request<StrategyRecord>(`/strategies/${strategyId}`, {
+      method: "DELETE",
+    }),
   rerunPipeline: () =>
     request<{ status: string; call_count: number; segment_count: number; output_files: Record<string, string> }>(
       "/run",

@@ -549,6 +549,13 @@ button { cursor: pointer; }
 }
 .strategy-card h4 { margin: 0 0 8px; }
 
+.strategy-delete-button {
+  border-color: color-mix(in srgb, var(--risk) 52%, var(--line));
+  background: color-mix(in srgb, var(--risk) 14%, transparent);
+  color: var(--risk);
+  white-space: nowrap;
+}
+
 .kpi-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
