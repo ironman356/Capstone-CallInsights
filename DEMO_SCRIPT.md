@@ -357,6 +357,23 @@ Why it matters:
 
 - unresolved friction
 - repeat-call prediction
+  Leat common denominatir conversations look at whats working or not
+
+# Call into call center, you have a morgage : sps sent aletter house is closed because you are calling for that I got a foreclosure notice , hey also the statement u send can u resend so customer talkes about multiple topics like send my statement. They have still not addresed foreclosure: W
+
+What different behaviors do agents have when you explain things
+
+Call !
+
+I dont care about why called
+
+What are various questions asked have they been asked before and all the different agents answered this which agent reaches faster
+
+Want a summary saying using ai
+
+each question thing : how well did you answer oeach question
+
+At the end the AI can say heres what to say instead of this based on the patterns we had
 
 ### Component 5: Sentiment over time
 

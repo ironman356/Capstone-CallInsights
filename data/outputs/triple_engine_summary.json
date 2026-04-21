@@ -8,7 +8,7 @@
       },
       {
         "label": "Issue Types",
-        "value": 12,
+        "value": 10,
         "tone": "info"
       },
       {
@@ -28,18 +28,16 @@
       }
     ],
     "issue_counts": {
-      "marked late": 11,
+      "payment online": 14,
       "escrow statement": 6,
       "fall further behind": 7,
       "funds were wired": 3,
       "insurance even though": 9,
       "escrow": 25,
-      "assistance options": 12,
+      "monthly payment right": 13,
       "title company needs": 10,
       "bank shows": 6,
-      "good through date": 7,
-      "payment online": 3,
-      "monthly payment right": 1
+      "good through date": 7
     },
     "outcome_counts": {
       "follow-up needed": 25,
@@ -511,166 +509,50 @@
       ]
     },
     {
-      "slug": "assistance-options",
-      "issue": "assistance options",
-      "count": 12,
-      "summary": "Assistance Options appeared in 12 calls; the most common outcome was resolved.",
+      "slug": "payment-online",
+      "issue": "payment online",
+      "count": 14,
+      "summary": "Payment Online appeared in 14 calls; the most common outcome was callback requested.",
       "top_behaviors": [
         {
           "behavior": "completed verification",
-          "count": 12
+          "count": 14
         },
         {
           "behavior": "showed empathy",
-          "count": 12
+          "count": 14
         },
         {
           "behavior": "used empathy",
-          "count": 12
-        },
-        {
-          "behavior": "explained policy clearly",
-          "count": 10
-        },
-        {
-          "behavior": "offered next steps",
-          "count": 10
-        }
-      ],
-      "outcome_breakdown": {
-        "resolved": 5,
-        "escalated": 2,
-        "callback requested": 3,
-        "follow-up needed": 2
-      },
-      "average_shift": 0.408,
-      "evidence_pack": {
-        "issue": "assistance options",
-        "time_window": "demo corpus",
-        "sample_size": 12,
-        "outcomes": {
-          "resolved": 5,
-          "escalated": 2,
-          "callback requested": 3,
-          "follow-up needed": 2
-        },
-        "avg_sentiment_shift": 0.408,
-        "representative_call_ids": [
-          "CALL-0008",
-          "CALL-0023",
-          "CALL-0028",
-          "CALL-0038",
-          "CALL-0048"
-        ]
-      },
-      "representative_calls": [
-        {
-          "call_id": "CALL-0008",
-          "source_file": "transcript_008.txt",
-          "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.744,
-            "shift": 0.744
-          },
-          "outcome": "resolved"
-        },
-        {
-          "call_id": "CALL-0023",
-          "source_file": "transcript_023.txt",
-          "summary": "Assistance Options call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.609,
-            "shift": 0.609
-          },
-          "outcome": "escalated"
-        },
-        {
-          "call_id": "CALL-0028",
-          "source_file": "transcript_028.txt",
-          "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.73,
-            "shift": 0.73
-          },
-          "outcome": "resolved"
-        },
-        {
-          "call_id": "CALL-0038",
-          "source_file": "transcript_038.txt",
-          "summary": "Assistance Options call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.0
-          },
-          "outcome": "callback requested"
-        },
-        {
-          "call_id": "CALL-0048",
-          "source_file": "transcript_048.txt",
-          "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.73,
-            "shift": 0.73
-          },
-          "outcome": "resolved"
-        }
-      ]
-    },
-    {
-      "slug": "marked-late",
-      "issue": "marked late",
-      "count": 11,
-      "summary": "Marked Late appeared in 11 calls; the most common outcome was callback requested.",
-      "top_behaviors": [
-        {
-          "behavior": "completed verification",
-          "count": 11
-        },
-        {
-          "behavior": "showed empathy",
-          "count": 11
-        },
-        {
-          "behavior": "used empathy",
-          "count": 11
+          "count": 14
         },
         {
           "behavior": "transferred or escalated",
-          "count": 10
+          "count": 13
         },
         {
           "behavior": "explained policy clearly",
-          "count": 8
+          "count": 10
         }
       ],
       "outcome_breakdown": {
         "follow-up needed": 2,
-        "callback requested": 4,
-        "escalated": 3,
-        "resolved": 2
+        "callback requested": 5,
+        "escalated": 4,
+        "resolved": 3
       },
-      "average_shift": 0.18,
+      "average_shift": 0.235,
       "evidence_pack": {
-        "issue": "marked late",
+        "issue": "payment online",
         "time_window": "demo corpus",
-        "sample_size": 11,
+        "sample_size": 14,
         "outcomes": {
           "follow-up needed": 2,
-          "callback requested": 4,
-          "escalated": 3,
-          "resolved": 2
+          "callback requested": 5,
+          "escalated": 4,
+          "resolved": 3
         },
-        "avg_sentiment_shift": 0.18,
+        "avg_sentiment_shift": 0.235,
         "representative_call_ids": [
           "CALL-0001",
           "CALL-0006",
@@ -683,7 +565,7 @@
         {
           "call_id": "CALL-0001",
           "source_file": "transcript_001.txt",
-          "summary": "Marked Late call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+          "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
             "opening": 0.0,
             "mid": 0.0,
@@ -695,7 +577,7 @@
         {
           "call_id": "CALL-0006",
           "source_file": "transcript_006.txt",
-          "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+          "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
             "opening": 0.0,
             "mid": 0.0,
@@ -707,7 +589,7 @@
         {
           "call_id": "CALL-0026",
           "source_file": "transcript_026.txt",
-          "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+          "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
             "opening": 0.0,
             "mid": 0.0,
@@ -719,7 +601,7 @@
         {
           "call_id": "CALL-0031",
           "source_file": "transcript_031.txt",
-          "summary": "Marked Late call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
+          "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
           "sentiments": {
             "opening": 0.0,
             "mid": 0.0,
@@ -731,12 +613,128 @@
         {
           "call_id": "CALL-0036",
           "source_file": "transcript_036.txt",
-          "summary": "Marked Late call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
+          "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
           "sentiments": {
             "opening": 0.0,
             "mid": 0.0,
             "closing": 0.705,
             "shift": 0.705
+          },
+          "outcome": "resolved"
+        }
+      ]
+    },
+    {
+      "slug": "monthly-payment-right",
+      "issue": "monthly payment right",
+      "count": 13,
+      "summary": "Monthly Payment Right appeared in 13 calls; the most common outcome was resolved.",
+      "top_behaviors": [
+        {
+          "behavior": "completed verification",
+          "count": 13
+        },
+        {
+          "behavior": "showed empathy",
+          "count": 13
+        },
+        {
+          "behavior": "used empathy",
+          "count": 13
+        },
+        {
+          "behavior": "explained policy clearly",
+          "count": 11
+        },
+        {
+          "behavior": "offered next steps",
+          "count": 11
+        }
+      ],
+      "outcome_breakdown": {
+        "resolved": 5,
+        "escalated": 2,
+        "callback requested": 3,
+        "follow-up needed": 3
+      },
+      "average_shift": 0.377,
+      "evidence_pack": {
+        "issue": "monthly payment right",
+        "time_window": "demo corpus",
+        "sample_size": 13,
+        "outcomes": {
+          "resolved": 5,
+          "escalated": 2,
+          "callback requested": 3,
+          "follow-up needed": 3
+        },
+        "avg_sentiment_shift": 0.377,
+        "representative_call_ids": [
+          "CALL-0008",
+          "CALL-0023",
+          "CALL-0028",
+          "CALL-0038",
+          "CALL-0048"
+        ]
+      },
+      "representative_calls": [
+        {
+          "call_id": "CALL-0008",
+          "source_file": "transcript_008.txt",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 0.744,
+            "shift": 0.744
+          },
+          "outcome": "resolved"
+        },
+        {
+          "call_id": "CALL-0023",
+          "source_file": "transcript_023.txt",
+          "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 0.609,
+            "shift": 0.609
+          },
+          "outcome": "escalated"
+        },
+        {
+          "call_id": "CALL-0028",
+          "source_file": "transcript_028.txt",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 0.73,
+            "shift": 0.73
+          },
+          "outcome": "resolved"
+        },
+        {
+          "call_id": "CALL-0038",
+          "source_file": "transcript_038.txt",
+          "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 0.0,
+            "shift": 0.0
+          },
+          "outcome": "callback requested"
+        },
+        {
+          "call_id": "CALL-0048",
+          "source_file": "transcript_048.txt",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+          "sentiments": {
+            "opening": 0.0,
+            "mid": 0.0,
+            "closing": 0.73,
+            "shift": 0.73
           },
           "outcome": "resolved"
         }
@@ -1519,159 +1517,13 @@
           "outcome": "escalated"
         }
       ]
-    },
-    {
-      "slug": "payment-online",
-      "issue": "payment online",
-      "count": 3,
-      "summary": "Payment Online appeared in 3 calls; the most common outcome was callback requested.",
-      "top_behaviors": [
-        {
-          "behavior": "completed verification",
-          "count": 3
-        },
-        {
-          "behavior": "showed empathy",
-          "count": 3
-        },
-        {
-          "behavior": "transferred or escalated",
-          "count": 3
-        },
-        {
-          "behavior": "used empathy",
-          "count": 3
-        },
-        {
-          "behavior": "explained policy clearly",
-          "count": 2
-        }
-      ],
-      "outcome_breakdown": {
-        "callback requested": 1,
-        "escalated": 1,
-        "resolved": 1
-      },
-      "average_shift": 0.435,
-      "evidence_pack": {
-        "issue": "payment online",
-        "time_window": "demo corpus",
-        "sample_size": 3,
-        "outcomes": {
-          "callback requested": 1,
-          "escalated": 1,
-          "resolved": 1
-        },
-        "avg_sentiment_shift": 0.435,
-        "representative_call_ids": [
-          "CALL-0086",
-          "CALL-0091",
-          "CALL-0096"
-        ]
-      },
-      "representative_calls": [
-        {
-          "call_id": "CALL-0086",
-          "source_file": "transcript_086.txt",
-          "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.0
-          },
-          "outcome": "callback requested"
-        },
-        {
-          "call_id": "CALL-0091",
-          "source_file": "transcript_091.txt",
-          "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.601 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.601,
-            "shift": 0.601
-          },
-          "outcome": "escalated"
-        },
-        {
-          "call_id": "CALL-0096",
-          "source_file": "transcript_096.txt",
-          "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.705 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.705,
-            "shift": 0.705
-          },
-          "outcome": "resolved"
-        }
-      ]
-    },
-    {
-      "slug": "monthly-payment-right",
-      "issue": "monthly payment right",
-      "count": 1,
-      "summary": "Monthly Payment Right appeared in 1 calls; the most common outcome was follow-up needed.",
-      "top_behaviors": [
-        {
-          "behavior": "completed verification",
-          "count": 1
-        },
-        {
-          "behavior": "explained policy clearly",
-          "count": 1
-        },
-        {
-          "behavior": "failed to address concern",
-          "count": 1
-        },
-        {
-          "behavior": "left issue open",
-          "count": 1
-        },
-        {
-          "behavior": "offered next steps",
-          "count": 1
-        }
-      ],
-      "outcome_breakdown": {
-        "follow-up needed": 1
-      },
-      "average_shift": 0.0,
-      "evidence_pack": {
-        "issue": "monthly payment right",
-        "time_window": "demo corpus",
-        "sample_size": 1,
-        "outcomes": {
-          "follow-up needed": 1
-        },
-        "avg_sentiment_shift": 0.0,
-        "representative_call_ids": [
-          "CALL-0093"
-        ]
-      },
-      "representative_calls": [
-        {
-          "call_id": "CALL-0093",
-          "source_file": "transcript_093.txt",
-          "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.0
-          },
-          "outcome": "follow-up needed"
-        }
-      ]
     }
   ],
   "calls": [
     {
       "call_id": "CALL-0001",
       "source_file": "transcript_001.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -1685,7 +1537,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -1788,7 +1640,7 @@
     {
       "call_id": "CALL-0006",
       "source_file": "transcript_006.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -1798,7 +1650,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -1831,7 +1683,7 @@
     {
       "call_id": "CALL-0008",
       "source_file": "transcript_008.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -1844,7 +1696,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2175,7 +2027,7 @@
     {
       "call_id": "CALL-0023",
       "source_file": "transcript_023.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2186,7 +2038,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2244,7 +2096,7 @@
     {
       "call_id": "CALL-0026",
       "source_file": "transcript_026.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2254,7 +2106,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2287,7 +2139,7 @@
     {
       "call_id": "CALL-0028",
       "source_file": "transcript_028.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2300,7 +2152,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2357,7 +2209,7 @@
     {
       "call_id": "CALL-0031",
       "source_file": "transcript_031.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2368,7 +2220,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
+      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2469,7 +2321,7 @@
     {
       "call_id": "CALL-0036",
       "source_file": "transcript_036.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2482,7 +2334,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
+      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2517,7 +2369,7 @@
     {
       "call_id": "CALL-0038",
       "source_file": "transcript_038.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2529,7 +2381,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2703,7 +2555,7 @@
     {
       "call_id": "CALL-0046",
       "source_file": "transcript_046.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2713,7 +2565,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2747,7 +2599,7 @@
     {
       "call_id": "CALL-0048",
       "source_file": "transcript_048.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2760,7 +2612,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2817,7 +2669,7 @@
     {
       "call_id": "CALL-0051",
       "source_file": "transcript_051.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2828,7 +2680,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2861,7 +2713,7 @@
     {
       "call_id": "CALL-0053",
       "source_file": "transcript_053.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2874,7 +2726,7 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -2976,7 +2828,7 @@
     {
       "call_id": "CALL-0058",
       "source_file": "transcript_058.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2986,7 +2838,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3043,7 +2895,7 @@
     {
       "call_id": "CALL-0061",
       "source_file": "transcript_061.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3057,7 +2909,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3157,7 +3009,7 @@
     {
       "call_id": "CALL-0066",
       "source_file": "transcript_066.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3167,7 +3019,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3201,7 +3053,7 @@
     {
       "call_id": "CALL-0068",
       "source_file": "transcript_068.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3212,7 +3064,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.729 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.729 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3269,7 +3121,7 @@
     {
       "call_id": "CALL-0071",
       "source_file": "transcript_071.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3280,7 +3132,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3314,7 +3166,7 @@
     {
       "call_id": "CALL-0073",
       "source_file": "transcript_073.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3327,7 +3179,7 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3382,7 +3234,7 @@
     {
       "call_id": "CALL-0076",
       "source_file": "transcript_076.txt",
-      "issue": "marked late",
+      "issue": "payment online",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3393,7 +3245,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Marked Late call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.677 from opening to close.",
+      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.677 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3429,7 +3281,7 @@
     {
       "call_id": "CALL-0078",
       "source_file": "transcript_078.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3441,7 +3293,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3542,7 +3394,7 @@
     {
       "call_id": "CALL-0083",
       "source_file": "transcript_083.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3553,7 +3405,7 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
@@ -3655,7 +3507,7 @@
     {
       "call_id": "CALL-0088",
       "source_file": "transcript_088.txt",
-      "issue": "assistance options",
+      "issue": "monthly payment right",
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3668,7 +3520,7 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Assistance Options call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
       "sentiments": {
         "opening": 0.0,
         "mid": 0.0,
