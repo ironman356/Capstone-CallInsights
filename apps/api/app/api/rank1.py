@@ -138,6 +138,14 @@ def update_strategy(strategy_id: str, payload: StrategyUpdateRequest) -> Strateg
     return StrategyRecord(**strategy)
 
 
+@router.delete("/strategies/{strategy_id}", response_model=StrategyRecord)
+def delete_strategy(strategy_id: str) -> StrategyRecord:
+    strategy = service.delete_strategy(service.load_or_run(), strategy_id)
+    if strategy is None:
+        raise HTTPException(status_code=404, detail="Strategy not found")
+    return StrategyRecord(**strategy)
+
+
 @router.post("/recalibrate", response_model=WorkspaceResponse)
 def recalibrate_workspace() -> WorkspaceResponse:
     workspace = service.build_workspace(force=True)

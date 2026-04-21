@@ -1114,6 +1114,16 @@ class Rank1PipelineService:
             return strategy
         return None
 
+    def delete_strategy(self, bundle: dict, strategy_id: str) -> dict | None:
+        strategies = self.load_strategies(bundle)
+        for index, strategy in enumerate(strategies):
+            if strategy["strategy_id"] != strategy_id:
+                continue
+            removed = strategies.pop(index)
+            self.save_strategies(strategies)
+            return removed
+        return None
+
     def build_strategy_board(self, bundle: dict) -> dict:
         stages = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"]
         strategies = self.load_strategies(bundle)

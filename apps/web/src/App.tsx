@@ -252,6 +252,35 @@ function App() {
     }
   }
 
+  async function deleteStrategy(strategy: StrategyRecord) {
+    if (!window.confirm(`Delete strategy "${strategy.title}"? This cannot be undone.`)) {
+      return;
+    }
+    setSyncing(true);
+    setError(null);
+    try {
+      await api.deleteStrategy(strategy.strategy_id);
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => {
+        if (!current) {
+          return current;
+        }
+        const strategies = current.strategy_board.strategies.filter((item) => item.strategy_id !== strategy.strategy_id);
+        return {
+          ...current,
+          strategy_board: {
+            stages: STAGE_ORDER.map((name) => ({ name, count: strategies.filter((item) => item.status === name).length })),
+            strategies,
+          },
+        };
+      });
+      setMessage(`${strategy.title} deleted.`);
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Unable to delete strategy");
+    } finally {
+      setSyncing(false);
+    }
+  }
+
   async function handleExport() {
     setSyncing(true);
     setError(null);
@@ -656,6 +685,15 @@ function App() {
                         <div className="strategy-actions">
                           <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, -1)}>Back</button>
                           <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
+                          <button
+                            type="button"
+                            className="ghost-button small strategy-delete-button"
+                            onClick={() => void deleteStrategy(strategy)}
+                            disabled={syncing}
+                            aria-label={`Delete ${strategy.title}`}
+                          >
+                            Delete
+                          </button>
                         </div>
                       </article>
                     ))}
