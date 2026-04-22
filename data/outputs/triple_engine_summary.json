@@ -23,7 +23,7 @@
       },
       {
         "label": "Avg Sentiment Shift",
-        "value": 0.054,
+        "value": 0.0,
         "tone": "stable"
       }
     ],
@@ -46,9 +46,9 @@
       "resolved": 25
     },
     "sentiment_summary": {
-      "opening": 0.177,
-      "closing": 0.231,
-      "average_shift": 0.054
+      "opening": 1.0,
+      "closing": 1.0,
+      "average_shift": 0.0
     },
     "top_patterns": [
       {
@@ -425,7 +425,7 @@
         "resolved": 6,
         "follow-up needed": 7
       },
-      "average_shift": -0.028,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "escrow",
         "time_window": "demo corpus",
@@ -436,7 +436,7 @@
           "resolved": 6,
           "follow-up needed": 7
         },
-        "avg_sentiment_shift": -0.028,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0007",
           "CALL-0010",
@@ -451,9 +451,9 @@
           "source_file": "transcript_007.txt",
           "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "escalated"
@@ -461,24 +461,24 @@
         {
           "call_id": "CALL-0010",
           "source_file": "transcript_010.txt",
-          "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.632 from opening to close.",
+          "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.632,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.632
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         },
         {
           "call_id": "CALL-0012",
           "source_file": "transcript_012.txt",
-          "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.538 from opening to close.",
+          "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.538,
-            "shift": 0.538
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
@@ -487,9 +487,9 @@
           "source_file": "transcript_017.txt",
           "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -497,12 +497,12 @@
         {
           "call_id": "CALL-0027",
           "source_file": "transcript_027.txt",
-          "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.535 from opening to close.",
+          "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.535,
-            "shift": 0.535
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         }
@@ -541,7 +541,7 @@
         "escalated": 4,
         "resolved": 3
       },
-      "average_shift": 0.235,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "payment online",
         "time_window": "demo corpus",
@@ -552,7 +552,7 @@
           "escalated": 4,
           "resolved": 3
         },
-        "avg_sentiment_shift": 0.235,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0001",
           "CALL-0006",
@@ -567,9 +567,9 @@
           "source_file": "transcript_001.txt",
           "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -579,9 +579,9 @@
           "source_file": "transcript_006.txt",
           "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "callback requested"
@@ -591,9 +591,9 @@
           "source_file": "transcript_026.txt",
           "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "callback requested"
@@ -601,24 +601,24 @@
         {
           "call_id": "CALL-0031",
           "source_file": "transcript_031.txt",
-          "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
+          "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.601,
-            "shift": 0.601
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0036",
           "source_file": "transcript_036.txt",
-          "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
+          "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.705,
-            "shift": 0.705
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         }
@@ -657,7 +657,7 @@
         "callback requested": 3,
         "follow-up needed": 3
       },
-      "average_shift": 0.377,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "monthly payment right",
         "time_window": "demo corpus",
@@ -668,7 +668,7 @@
           "callback requested": 3,
           "follow-up needed": 3
         },
-        "avg_sentiment_shift": 0.377,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0008",
           "CALL-0023",
@@ -681,36 +681,36 @@
         {
           "call_id": "CALL-0008",
           "source_file": "transcript_008.txt",
-          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.744,
-            "shift": 0.744
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
         {
           "call_id": "CALL-0023",
           "source_file": "transcript_023.txt",
-          "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
+          "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.609,
-            "shift": 0.609
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0028",
           "source_file": "transcript_028.txt",
-          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.73,
-            "shift": 0.73
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
@@ -719,9 +719,9 @@
           "source_file": "transcript_038.txt",
           "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "callback requested"
@@ -729,12 +729,12 @@
         {
           "call_id": "CALL-0048",
           "source_file": "transcript_048.txt",
-          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+          "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.73,
-            "shift": 0.73
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         }
@@ -773,7 +773,7 @@
         "callback requested": 3,
         "resolved": 1
       },
-      "average_shift": -0.506,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "title company needs",
         "time_window": "demo corpus",
@@ -784,7 +784,7 @@
           "callback requested": 3,
           "resolved": 1
         },
-        "avg_sentiment_shift": -0.506,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0009",
           "CALL-0019",
@@ -797,60 +797,60 @@
         {
           "call_id": "CALL-0009",
           "source_file": "transcript_009.txt",
-          "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+          "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.566,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.566
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "follow-up needed"
         },
         {
           "call_id": "CALL-0019",
           "source_file": "transcript_019.txt",
-          "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.566 from opening to close.",
+          "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.566,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.566
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0039",
           "source_file": "transcript_039.txt",
-          "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was -0.566 from opening to close.",
+          "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.566,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.566
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0049",
           "source_file": "transcript_049.txt",
-          "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+          "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.566,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.566
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "follow-up needed"
         },
         {
           "call_id": "CALL-0054",
           "source_file": "transcript_054.txt",
-          "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+          "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.566,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.566
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         }
@@ -889,7 +889,7 @@
         "resolved": 3,
         "callback requested": 1
       },
-      "average_shift": -0.349,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "insurance even though",
         "time_window": "demo corpus",
@@ -900,7 +900,7 @@
           "resolved": 3,
           "callback requested": 1
         },
-        "avg_sentiment_shift": -0.349,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0005",
           "CALL-0015",
@@ -913,60 +913,60 @@
         {
           "call_id": "CALL-0005",
           "source_file": "transcript_005.txt",
-          "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.560 from opening to close.",
+          "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.56,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.56
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "follow-up needed"
         },
         {
           "call_id": "CALL-0015",
           "source_file": "transcript_015.txt",
-          "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.560 from opening to close.",
+          "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.56,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.56
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0020",
           "source_file": "transcript_020.txt",
-          "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.073 from opening to close.",
+          "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.56,
-            "mid": 0.0,
-            "closing": 0.633,
-            "shift": 0.073
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
         {
           "call_id": "CALL-0025",
           "source_file": "transcript_025.txt",
-          "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.560 from opening to close.",
+          "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.56,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.56
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "follow-up needed"
         },
         {
           "call_id": "CALL-0030",
           "source_file": "transcript_030.txt",
-          "summary": "Insurance Even Though call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.560 from opening to close.",
+          "summary": "Insurance Even Though call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.56,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.56
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         }
@@ -1004,7 +1004,7 @@
         "follow-up needed": 2,
         "callback requested": 2
       },
-      "average_shift": 0.259,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "fall further behind",
         "time_window": "demo corpus",
@@ -1014,7 +1014,7 @@
           "follow-up needed": 2,
           "callback requested": 2
         },
-        "avg_sentiment_shift": 0.259,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0003",
           "CALL-0013",
@@ -1027,12 +1027,12 @@
         {
           "call_id": "CALL-0003",
           "source_file": "transcript_003.txt",
-          "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.558 from opening to close.",
+          "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.558,
-            "shift": 0.558
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
@@ -1041,9 +1041,9 @@
           "source_file": "transcript_013.txt",
           "summary": "Fall Further Behind call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -1053,9 +1053,9 @@
           "source_file": "transcript_018.txt",
           "summary": "Fall Further Behind call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "callback requested"
@@ -1065,9 +1065,9 @@
           "source_file": "transcript_033.txt",
           "summary": "Fall Further Behind call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -1075,12 +1075,12 @@
         {
           "call_id": "CALL-0043",
           "source_file": "transcript_043.txt",
-          "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
+          "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.627,
-            "shift": 0.627
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         }
@@ -1119,7 +1119,7 @@
         "follow-up needed": 2,
         "escalated": 1
       },
-      "average_shift": -0.249,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "good through date",
         "time_window": "demo corpus",
@@ -1130,7 +1130,7 @@
           "follow-up needed": 2,
           "escalated": 1
         },
-        "avg_sentiment_shift": -0.249,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0014",
           "CALL-0024",
@@ -1143,60 +1143,60 @@
         {
           "call_id": "CALL-0014",
           "source_file": "transcript_014.txt",
-          "summary": "Good Through Date call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.524 from opening to close.",
+          "summary": "Good Through Date call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.524,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.524
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         },
         {
           "call_id": "CALL-0024",
           "source_file": "transcript_024.txt",
-          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.072 from opening to close.",
+          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.524,
-            "mid": 0.0,
-            "closing": 0.596,
-            "shift": 0.072
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
         {
           "call_id": "CALL-0029",
           "source_file": "transcript_029.txt",
-          "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.524 from opening to close.",
+          "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.524,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": -0.524
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "follow-up needed"
         },
         {
           "call_id": "CALL-0044",
           "source_file": "transcript_044.txt",
-          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.123 from opening to close.",
+          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.524,
-            "mid": 0.0,
-            "closing": 0.647,
-            "shift": 0.123
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
         {
           "call_id": "CALL-0064",
           "source_file": "transcript_064.txt",
-          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.160 from opening to close.",
+          "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.524,
-            "mid": 0.0,
-            "closing": 0.684,
-            "shift": 0.16
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         }
@@ -1234,7 +1234,7 @@
         "escalated": 2,
         "resolved": 1
       },
-      "average_shift": 0.568,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "escrow statement",
         "time_window": "demo corpus",
@@ -1244,7 +1244,7 @@
           "escalated": 2,
           "resolved": 1
         },
-        "avg_sentiment_shift": 0.568,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0002",
           "CALL-0022",
@@ -1257,60 +1257,60 @@
         {
           "call_id": "CALL-0002",
           "source_file": "transcript_002.txt",
-          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.478 from opening to close.",
+          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": -0.478,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.478
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         },
         {
           "call_id": "CALL-0022",
           "source_file": "transcript_022.txt",
-          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.478 from opening to close.",
+          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": -0.478,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.478
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         },
         {
           "call_id": "CALL-0062",
           "source_file": "transcript_062.txt",
-          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.478 from opening to close.",
+          "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": -0.478,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.478
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "callback requested"
         },
         {
           "call_id": "CALL-0067",
           "source_file": "transcript_067.txt",
-          "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.478 from opening to close.",
+          "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": -0.478,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.478
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0087",
           "source_file": "transcript_087.txt",
-          "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.478 from opening to close.",
+          "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": -0.478,
-            "mid": 0.0,
-            "closing": 0.0,
-            "shift": 0.478
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         }
@@ -1348,7 +1348,7 @@
         "resolved": 2,
         "follow-up needed": 3
       },
-      "average_shift": 0.318,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "bank shows",
         "time_window": "demo corpus",
@@ -1358,7 +1358,7 @@
           "resolved": 2,
           "follow-up needed": 3
         },
-        "avg_sentiment_shift": 0.318,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0011",
           "CALL-0016",
@@ -1371,24 +1371,24 @@
         {
           "call_id": "CALL-0011",
           "source_file": "transcript_011.txt",
-          "summary": "Bank Shows call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.526 from opening to close.",
+          "summary": "Bank Shows call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.526,
-            "shift": 0.526
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "escalated"
         },
         {
           "call_id": "CALL-0016",
           "source_file": "transcript_016.txt",
-          "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.690 from opening to close.",
+          "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.69,
-            "shift": 0.69
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
@@ -1397,9 +1397,9 @@
           "source_file": "transcript_021.txt",
           "summary": "Bank Shows call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -1409,9 +1409,9 @@
           "source_file": "transcript_041.txt",
           "summary": "Bank Shows call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "follow-up needed"
@@ -1419,12 +1419,12 @@
         {
           "call_id": "CALL-0056",
           "source_file": "transcript_056.txt",
-          "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.690 from opening to close.",
+          "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.69,
-            "shift": 0.69
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         }
@@ -1462,7 +1462,7 @@
         "callback requested": 1,
         "escalated": 1
       },
-      "average_shift": 0.228,
+      "average_shift": 0.0,
       "evidence_pack": {
         "issue": "funds were wired",
         "time_window": "demo corpus",
@@ -1472,7 +1472,7 @@
           "callback requested": 1,
           "escalated": 1
         },
-        "avg_sentiment_shift": 0.228,
+        "avg_sentiment_shift": 0.0,
         "representative_call_ids": [
           "CALL-0004",
           "CALL-0034",
@@ -1483,12 +1483,12 @@
         {
           "call_id": "CALL-0004",
           "source_file": "transcript_004.txt",
-          "summary": "Funds Were Wired call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.684 from opening to close.",
+          "summary": "Funds Were Wired call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.684,
-            "shift": 0.684
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
           },
           "outcome": "resolved"
         },
@@ -1497,9 +1497,9 @@
           "source_file": "transcript_034.txt",
           "summary": "Funds Were Wired call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "callback requested"
@@ -1509,9 +1509,9 @@
           "source_file": "transcript_099.txt",
           "summary": "Funds Were Wired call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
           "sentiments": {
-            "opening": 0.0,
-            "mid": 0.0,
-            "closing": 0.0,
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
             "shift": 0.0
           },
           "outcome": "escalated"
@@ -1539,9 +1539,9 @@
       ],
       "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1559,12 +1559,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.478 from opening to close.",
+      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": 0.478
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1581,12 +1581,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.558 from opening to close.",
+      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.558,
-        "shift": 0.558
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1604,12 +1604,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Funds Were Wired call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.684 from opening to close.",
+      "summary": "Funds Were Wired call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.684,
-        "shift": 0.684
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1629,12 +1629,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1652,9 +1652,9 @@
       ],
       "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1674,9 +1674,9 @@
       ],
       "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1696,12 +1696,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.744 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.744,
-        "shift": 0.744
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1721,12 +1721,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1742,12 +1742,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.632 from opening to close.",
+      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.632,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.632
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1765,12 +1765,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Bank Shows call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.526 from opening to close.",
+      "summary": "Bank Shows call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.526,
-        "shift": 0.526
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1788,12 +1788,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.538 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.538,
-        "shift": 0.538
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1814,9 +1814,9 @@
       ],
       "summary": "Fall Further Behind call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1834,12 +1834,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.524 from opening to close.",
+      "summary": "Good Through Date call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.524
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1856,12 +1856,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1879,12 +1879,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.690 from opening to close.",
+      "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.69,
-        "shift": 0.69
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1905,9 +1905,9 @@
       ],
       "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1928,9 +1928,9 @@
       ],
       "summary": "Fall Further Behind call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -1948,12 +1948,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1970,12 +1970,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.073 from opening to close.",
+      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.633,
-        "shift": 0.073
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -1997,9 +1997,9 @@
       ],
       "summary": "Bank Shows call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2016,12 +2016,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.478 from opening to close.",
+      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": 0.478
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2038,12 +2038,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.609 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.609,
-        "shift": 0.609
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2060,12 +2060,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.072 from opening to close.",
+      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.596,
-        "shift": 0.072
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2085,12 +2085,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2108,9 +2108,9 @@
       ],
       "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2128,12 +2128,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.535 from opening to close.",
+      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.535,
-        "shift": 0.535
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2152,12 +2152,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.73,
-        "shift": 0.73
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2177,12 +2177,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.524 from opening to close.",
+      "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.524
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2198,12 +2198,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2220,12 +2220,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.601 from opening to close.",
+      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.601,
-        "shift": 0.601
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2243,12 +2243,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.538 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.538,
-        "shift": 0.538
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2269,9 +2269,9 @@
       ],
       "summary": "Fall Further Behind call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2290,9 +2290,9 @@
       ],
       "summary": "Funds Were Wired call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2310,12 +2310,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.038 from opening to close.",
+      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.632,
-        "mid": 0.0,
-        "closing": 0.594,
-        "shift": -0.038
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2334,12 +2334,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.705 from opening to close.",
+      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.705,
-        "shift": 0.705
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2360,9 +2360,9 @@
       ],
       "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2383,9 +2383,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2404,12 +2404,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2428,12 +2428,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.116 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.632,
-        "mid": 0.0,
-        "closing": 0.748,
-        "shift": 0.116
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2456,9 +2456,9 @@
       ],
       "summary": "Bank Shows call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2477,9 +2477,9 @@
       ],
       "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2497,12 +2497,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
+      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.627,
-        "shift": 0.627
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2519,12 +2519,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.123 from opening to close.",
+      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.647,
-        "shift": 0.123
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2544,12 +2544,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.632 from opening to close.",
+      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.632,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.632
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2567,9 +2567,9 @@
       ],
       "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2590,9 +2590,9 @@
       ],
       "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2612,12 +2612,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.73,
-        "shift": 0.73
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2637,12 +2637,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2658,12 +2658,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.510 from opening to close.",
+      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.51
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2682,9 +2682,9 @@
       ],
       "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2702,12 +2702,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.697 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.697,
-        "shift": 0.697
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2728,9 +2728,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2748,12 +2748,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2770,12 +2770,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2792,12 +2792,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.690 from opening to close.",
+      "summary": "Bank Shows call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.69,
-        "shift": 0.69
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2819,9 +2819,9 @@
       ],
       "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2840,9 +2840,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2860,12 +2860,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2884,12 +2884,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.238 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.748,
-        "shift": 0.238
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2911,9 +2911,9 @@
       ],
       "summary": "Payment Online call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -2930,12 +2930,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.478 from opening to close.",
+      "summary": "Escrow Statement call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": 0.478
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2952,12 +2952,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
+      "summary": "Fall Further Behind call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.627,
-        "shift": 0.627
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2974,12 +2974,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.160 from opening to close.",
+      "summary": "Good Through Date call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.684,
-        "shift": 0.16
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -2998,12 +2998,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.510 from opening to close.",
+      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.51
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3021,9 +3021,9 @@
       ],
       "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3042,12 +3042,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.478 from opening to close.",
+      "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": 0.478
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3064,12 +3064,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.729 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.729,
-        "shift": 0.729
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3089,12 +3089,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.524 from opening to close.",
+      "summary": "Good Through Date call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.524
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3110,12 +3110,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.510 from opening to close.",
+      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.51
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3134,9 +3134,9 @@
       ],
       "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3155,12 +3155,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.538 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.538,
-        "shift": 0.538
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3181,9 +3181,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3201,12 +3201,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3223,12 +3223,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.084 from opening to close.",
+      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.594,
-        "shift": 0.084
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3245,12 +3245,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.677 from opening to close.",
+      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.677,
-        "shift": 0.677
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3272,9 +3272,9 @@
       ],
       "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3295,9 +3295,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3315,12 +3315,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Good Through Date call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.524 from opening to close.",
+      "summary": "Good Through Date call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.524,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.524
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3338,12 +3338,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.073 from opening to close.",
+      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.633,
-        "shift": 0.073
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3364,9 +3364,9 @@
       ],
       "summary": "Bank Shows call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3385,9 +3385,9 @@
       ],
       "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3405,12 +3405,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.627 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.627,
-        "shift": 0.627
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3428,12 +3428,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.030 from opening to close.",
+      "summary": "Title Company Needs call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.596,
-        "shift": 0.03
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3452,12 +3452,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.560 from opening to close.",
+      "summary": "Insurance Even Though call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.56
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3476,9 +3476,9 @@
       ],
       "summary": "Payment Online call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3496,12 +3496,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.478 from opening to close.",
+      "summary": "Escrow Statement call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": 0.478
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3520,12 +3520,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.730 from opening to close.",
+      "summary": "Monthly Payment Right call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.73,
-        "shift": 0.73
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3544,12 +3544,12 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3567,12 +3567,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was -0.632 from opening to close.",
+      "summary": "Escrow call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.632,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.632
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3590,12 +3590,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.601 from opening to close.",
+      "summary": "Payment Online call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.601,
-        "shift": 0.601
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3613,12 +3613,12 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Escrow Statement call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +1.016 from opening to close.",
+      "summary": "Escrow Statement call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": -0.478,
-        "mid": 0.0,
-        "closing": 0.538,
-        "shift": 1.016
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3639,9 +3639,9 @@
       ],
       "summary": "Monthly Payment Right call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3658,12 +3658,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was -0.566 from opening to close.",
+      "summary": "Title Company Needs call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.566,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.566
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3680,12 +3680,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was -0.510 from opening to close.",
+      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.51,
-        "mid": 0.0,
-        "closing": 0.0,
-        "shift": -0.51
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3703,12 +3703,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.705 from opening to close.",
+      "summary": "Payment Online call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.705,
-        "shift": 0.705
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     },
     {
@@ -3729,9 +3729,9 @@
       ],
       "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3752,9 +3752,9 @@
       ],
       "summary": "Fall Further Behind call that ended as callback requested. Observed agent behaviors: completed verification, explained policy clearly, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3774,9 +3774,9 @@
       ],
       "summary": "Funds Were Wired call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.0,
-        "mid": 0.0,
-        "closing": 0.0,
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
         "shift": 0.0
       }
     },
@@ -3795,12 +3795,12 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.073 from opening to close.",
+      "summary": "Insurance Even Though call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, prevented repeat explanation. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
-        "opening": 0.56,
-        "mid": 0.0,
-        "closing": 0.633,
-        "shift": 0.073
+        "opening": 1.0,
+        "mid": 0.333,
+        "closing": 1.0,
+        "shift": 0.0
       }
     }
   ],

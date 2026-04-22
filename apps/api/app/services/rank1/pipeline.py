@@ -4,6 +4,8 @@ import json
 import os
 import re
 import textwrap
+import urllib.error
+import urllib.request
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -1345,6 +1347,121 @@ class Rank1PipelineService:
             "Ask about issues, calls, action plans, governance, reports, or current service trends."
         )
 
+    def _format_ask_ci_answer(self, answer: str) -> str:
+        cleaned = re.sub(r"\s+", " ", answer).strip()
+        if not cleaned:
+            return cleaned
+
+        cleaned = re.sub(r"(?i)\bask ci\b\s*", "", cleaned).strip(" :|-")
+        cleaned = cleaned.replace("IM=mproving", "Improving")
+
+        if "|" in cleaned:
+            parts = [part.strip(" .") for part in cleaned.split("|") if part.strip(" .")]
+            intro_parts: list[str] = []
+            detail_groups: list[str] = []
+            seen_groups: set[str] = set()
+            current_group: dict[str, str] = {}
+
+            def flush_group() -> None:
+                if not current_group:
+                    return
+                detail = []
+                issue = current_group.get("issue")
+                status = current_group.get("status")
+                owner = current_group.get("owner")
+                kpi = current_group.get("kpi")
+                if issue:
+                    detail.append(f"issue: {issue}")
+                if status:
+                    detail.append(f"status: {status}")
+                if owner:
+                    detail.append(f"owner: {owner}")
+                if kpi:
+                    detail.append(f"KPI: {kpi}")
+                if detail:
+                    line = ", ".join(detail)
+                    if line not in seen_groups:
+                        seen_groups.add(line)
+                        detail_groups.append(line)
+                current_group.clear()
+
+            for part in parts:
+                if ":" not in part:
+                    intro_parts.append(part)
+                    continue
+                key, value = part.split(":", 1)
+                normalized_key = key.strip().lower()
+                normalized_value = value.strip()
+                if normalized_key in {"summary", "title"}:
+                    flush_group()
+                    intro_parts.append(normalized_value)
+                    continue
+                if normalized_key in {"issue", "status", "owner", "kpi"}:
+                    if normalized_key == "issue" and current_group:
+                        flush_group()
+                    current_group[normalized_key] = normalized_value
+                    continue
+                intro_parts.append(part)
+            flush_group()
+
+            sentences: list[str] = []
+            if intro_parts:
+                sentences.append(". ".join(dict.fromkeys(intro_parts)).strip())
+            if detail_groups:
+                if len(detail_groups) == 1:
+                    sentences.append(f"Related action plan details: {detail_groups[0]}.")
+                else:
+                    sentences.append("Related action plan details: " + "; ".join(detail_groups) + ".")
+            cleaned = " ".join(sentence.rstrip(".") + "." for sentence in sentences if sentence.strip())
+
+        cleaned = re.sub(r"\s*:\s*", ": ", cleaned)
+        cleaned = re.sub(r"\s+,", ",", cleaned)
+        cleaned = re.sub(r"\.{2,}", ".", cleaned)
+        return cleaned.strip()
+
+    def _generate_ask_ci_with_gemini(self, prompt: str) -> str | None:
+        if os.getenv("ASK_CI_PROVIDER", "").lower() != "gemini":
+            return None
+
+        api_key = os.getenv("GEMINI_API_KEY")
+        if not api_key:
+            return None
+
+        model = os.getenv("ASK_CI_GEMINI_MODEL", "gemini-2.0-flash")
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 0.2,
+                "maxOutputTokens": 220,
+            },
+        }
+        request = urllib.request.Request(
+            url=f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}",
+            data=json.dumps(payload).encode("utf-8"),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        try:
+            with urllib.request.urlopen(request, timeout=20) as response:
+                body = json.loads(response.read().decode("utf-8"))
+        except (urllib.error.URLError, TimeoutError, ValueError, json.JSONDecodeError):
+            return None
+
+        candidates = body.get("candidates")
+        if not isinstance(candidates, list):
+            return None
+
+        parts: list[str] = []
+        for candidate in candidates:
+            content = candidate.get("content", {})
+            for part in content.get("parts", []):
+                text = part.get("text")
+                if isinstance(text, str) and text.strip():
+                    parts.append(text.strip())
+        if not parts:
+            return None
+        return "\n".join(parts).strip()
+
     def answer_ask_ci(self, *, question: str, current_page: str | None = None, history: list[dict] | None = None) -> dict:
         bundle = self.load_or_run()
         context = self._build_ask_ci_context(bundle, question, current_page, history)
@@ -1352,11 +1469,21 @@ class Rank1PipelineService:
             "You are Ask CI, a copilot inside a mortgage servicing analytics dashboard. "
             "Answer the user's question in plain business language for managers. "
             "Use only the provided workspace context. Do not mention model names, implementation details, or anything outside the context. "
-            "If the question asks where to go, name the page directly. Keep the answer concise and useful.\n\n"
+            "If the question asks where to go, name the page directly. "
+            "Return 1 to 3 short sentences in normal prose. "
+            "Do not return labels like 'summary:' or pipe-delimited fields. "
+            "Do not repeat the same status, owner, KPI, or issue details multiple times. "
+            "Keep the answer concise and useful.\n\n"
             f"{context}"
         )
-        generated = self.hf_engine.generate_text(prompt, max_new_tokens=160)
+        generated = self._generate_ask_ci_with_gemini(prompt)
+        mode = "gemini" if generated else "fallback"
+        if not generated:
+            generated = self.hf_engine.generate_text(prompt, max_new_tokens=160)
+            if generated:
+                mode = "llm"
         answer = generated.strip() if generated else self._fallback_ask_ci_answer(bundle, question, current_page)
+        answer = self._format_ask_ci_answer(answer)
         if len(answer.split()) > 110:
             answer = " ".join(answer.split()[:110]).rstrip(" .,") + "."
         return {
@@ -1364,7 +1491,7 @@ class Rank1PipelineService:
             "sources": self._build_ask_ci_sources(question),
             "actions": self._build_ask_ci_actions(bundle, question),
             "generated_at": self._now_iso(),
-            "mode": "llm" if generated else "fallback",
+            "mode": mode if generated else "fallback",
         }
 
     def build_report_summary(self, bundle: dict) -> dict:

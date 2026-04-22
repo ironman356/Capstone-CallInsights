@@ -6,6 +6,8 @@ import { api } from "./api";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
 import AdminAiGovernancePage from "./pages/AdminAiGovernancePage";
 import AskCiPage from "./pages/AskCiPage";
+import FieldModePage from "./pages/FieldModePage";
+import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
@@ -53,6 +55,16 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     description: "Use the assistant to find the right page, explain a metric, or navigate directly to supporting detail.",
     kicker: "Assistant",
   },
+  "live-command": {
+    title: "Live Incident Command",
+    description: "Leadership-ready incident room with executive brief, change detection, evidence routing, guided answers, and AR field mode.",
+    kicker: "Incident Room",
+  },
+  field: {
+    title: "Field Mode",
+    description: "Phone-first issue field with camera-gated AR controls.",
+    kicker: "Field",
+  },
   governance: {
     title: "Governance",
     description: "Review architecture, evidence policy, and control surfaces in one governed workspace.",
@@ -77,6 +89,7 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["strategies", "Action Plans", "Improvement plans and ownership tracking"],
   ["learning", "Monitoring", "Trend movement, model monitoring, and controls"],
   ["ask-ci", "Ask CI", "Assistant for pages, metrics, and workflow questions"],
+  ["live-command", "Live Command", "War-room brief, evidence routing, and tablet AR scene"],
   ["governance", "Governance", "Architecture, controls, and audit review"],
   ["reports", "Reports", "Leadership-ready summary and export package"],
 ];
@@ -314,6 +327,23 @@ function App() {
 
   if (!workspace || !dashboard) {
     return null;
+  }
+
+  if (page === "field") {
+    return (
+      <FieldModePage
+        workspace={workspace}
+        onNavigate={navigate}
+        onOpenIssue={(issueSlug) => {
+          setSelectedIssueSlug(issueSlug);
+          navigate("issues");
+        }}
+        onOpenCall={(callId) => {
+          setSelectedCallId(callId);
+          navigate("calls");
+        }}
+      />
+    );
   }
 
   const pageMeta = PAGE_META[page];
@@ -801,6 +831,21 @@ function App() {
           <AskCiPage
             workspace={workspace}
             currentPage={page}
+            onNavigate={navigate}
+            onOpenIssue={(issueSlug) => {
+              setSelectedIssueSlug(issueSlug);
+              navigate("issues");
+            }}
+            onOpenCall={(callId) => {
+              setSelectedCallId(callId);
+              navigate("calls");
+            }}
+          />
+        ) : null}
+
+        {page === "live-command" ? (
+          <LiveIncidentCommandPage
+            workspace={workspace}
             onNavigate={navigate}
             onOpenIssue={(issueSlug) => {
               setSelectedIssueSlug(issueSlug);

@@ -60,6 +60,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     summary: "Answers questions about the dashboard, the workflow, and the current workspace.",
     highlights: ["Guided prompts", "Evidence-backed answers", "Drilldown actions"],
   },
+  "live-command": {
+    title: "Live Incident Command",
+    summary: "Combines executive briefing, change detection, evidence routing, guided Ask CI cards, and tablet AR field mode.",
+    highlights: ["Meeting brief", "What changed", "Evidence-to-action", "AR issue constellation"],
+  },
   governance: {
     title: "Governance",
     summary: "Maps the architecture and governed controls with the React Flow diagram.",

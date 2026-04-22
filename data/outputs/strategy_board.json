@@ -4,7 +4,7 @@
     "title": "IM=mproving Escrow issues",
     "issue_slug": "hardship-forbearance",
     "issue": "hardship / forbearance",
-    "status": "Accepted",
+    "status": "Proposed",
     "owner": "Operations",
     "hypothesis": "Reduce other by standardizing used empathy",
     "kpi_focus": [
@@ -17,14 +17,14 @@
     ],
     "notes": "",
     "created_at": "2026-04-10T01:39:19Z",
-    "updated_at": "2026-04-10T01:39:29Z"
+    "updated_at": "2026-04-22T03:26:19Z"
   },
   {
     "strategy_id": "STRAT-BAC0411E",
     "title": "Address other trend",
     "issue_slug": "other",
     "issue": "other",
-    "status": "Proposed",
+    "status": "Accepted",
     "owner": "Operations",
     "hypothesis": "Reduce other by standardizing used empathy.",
     "kpi_focus": [
@@ -38,7 +38,7 @@
     ],
     "notes": "",
     "created_at": "2026-04-10T00:17:15Z",
-    "updated_at": "2026-04-10T00:17:15Z"
+    "updated_at": "2026-04-22T03:26:18Z"
   },
   {
     "strategy_id": "STRAT-ED0858E4",
