@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my income dropped and I am calling to ask about forbearance or any temporary help.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: Sure, go ahead.
+Customer: The website shows my payment as pending and I need to know if I am going to be marked late.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: Let me explain the hardship review path we have for situations like this.
-Customer: I want to handle this before I miss another payment.
-Agent: I understand this is stressful, and I will explain what I am seeing as clearly as I can.
-Agent: What I am seeing is that the hardship process usually requires supporting information before an option can be offered.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I will document that you called proactively about assistance so the next team sees that context.
-Agent: I am also adding detailed notes so the account reflects what we reviewed today.
-Customer: I still do not feel like this is fully resolved.
-Agent: I understand. What I can do today is document everything we reviewed and note the remaining concern.
-Customer: Okay. I just do not want this to be dropped.
+Agent: Let me check the posting timeline and whether the funds are still in suspense.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: What I can confirm is that the payment is in process and the delinquency status has not advanced today.
+Customer: That helps and now I understand what happened on the account.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I am glad we were able to clear that up today.
 Agent: Thank you for calling today.
 Customer: Thank you.

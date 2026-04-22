@@ -1,18 +1,12 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my payment came out of my bank, but on your side it still looks like nothing happened.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: Okay, that is fine.
+Customer: I made my payment online on Friday and it still has not posted to the account.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I can see the transaction you are referring to, so let me walk through the timing with you.
-Customer: I am trying to avoid another call about the same payment.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that there can be a short delay between the bank withdrawal and the loan servicing update.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I do see the payment in process, and I do not see a late fee tied to it right now.
-Agent: Let me make sure I explain what happens next and what timeframe to expect.
-Customer: All right, I understand what happened now.
-Agent: I know it can be confusing, but I am glad we were able to go through it together.
-Customer: Thank you. That answers my question.
+Agent: I am reviewing the payment history and the suspense activity now.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: What I can confirm is that the payment is in process and the delinquency status has not advanced today.
+Agent: I am transferring this to the specialist queue and documenting the notes before I do.
 Agent: Thank you for calling today.
 Customer: Thank you.

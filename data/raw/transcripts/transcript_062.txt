@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my monthly payment went up and the letter says it has to do with escrow.
-Agent: Absolutely. Let me verify the account with you first and then we will go through it together.
-Customer: That is fine, I can do that.
+Customer: The shortage amount on this escrow statement does not make sense to me.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am reviewing the breakdown from the most recent escrow review.
-Customer: I need to know whether this is temporary or my regular payment now.
-Agent: I understand why that would be frustrating.
-Agent: What I am seeing is that part of the increase is catching up the shortage and part is setting the new monthly escrow amount.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I will also note the account so you have a record that we reviewed the escrow analysis today.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Customer: At this point I really think I need a supervisor or the other team involved.
-Agent: I understand. I will document what we covered and get you to the correct escalation path.
-Customer: Okay. Please make sure they can see the notes.
+Agent: I can explain how the shortage was spread into the new payment amount.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I will add notes about the shortage breakdown so you do not have to start over if you call back.
+Customer: Please have someone call me back once the research is complete.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I documented the callback request and the current status before we end the call.
 Agent: Thank you for calling today.
 Customer: Thank you.

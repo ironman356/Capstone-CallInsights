@@ -129,6 +129,20 @@ export interface GovernanceSummary {
   monitors: Array<{ label: string; status: string }>;
 }
 
+export interface AskCiChatAction {
+  type: "page" | "issue" | "call";
+  label: string;
+  target: string;
+}
+
+export interface AskCiChatResponse {
+  answer: string;
+  sources: string[];
+  actions: AskCiChatAction[];
+  generated_at: string;
+  mode: string;
+}
+
 export interface WorkspacePayload {
   dashboard: DashboardPayload;
   pulse_insights: PulseInsight[];

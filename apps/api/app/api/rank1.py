@@ -4,6 +4,8 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
 
 from app.schemas.rank1 import (
+    AskCiChatRequest,
+    AskCiChatResponse,
     CallDetailResponse,
     DashboardResponse,
     ExportReportResponse,
@@ -93,6 +95,16 @@ def get_workspace() -> WorkspaceResponse:
     return WorkspaceResponse(**workspace)
 
 
+@router.post("/ask-ci/chat", response_model=AskCiChatResponse)
+def ask_ci_chat(payload: AskCiChatRequest) -> AskCiChatResponse:
+    response = service.answer_ask_ci(
+        question=payload.question,
+        current_page=payload.current_page,
+        history=payload.history,
+    )
+    return AskCiChatResponse(**response)
+
+
 @router.get("/strategies", response_model=StrategyBoardResponse)
 def get_strategies() -> StrategyBoardResponse:
     board = service.build_strategy_board(service.load_or_run())
@@ -121,6 +133,14 @@ def create_strategy(payload: StrategyCreateRequest) -> StrategyRecord:
 @router.patch("/strategies/{strategy_id}", response_model=StrategyRecord)
 def update_strategy(strategy_id: str, payload: StrategyUpdateRequest) -> StrategyRecord:
     strategy = service.update_strategy(service.load_or_run(), strategy_id, payload.model_dump(exclude_unset=True))
+    if strategy is None:
+        raise HTTPException(status_code=404, detail="Strategy not found")
+    return StrategyRecord(**strategy)
+
+
+@router.delete("/strategies/{strategy_id}", response_model=StrategyRecord)
+def delete_strategy(strategy_id: str) -> StrategyRecord:
+    strategy = service.delete_strategy(service.load_or_run(), strategy_id)
     if strategy is None:
         raise HTTPException(status_code=404, detail="Strategy not found")
     return StrategyRecord(**strategy)

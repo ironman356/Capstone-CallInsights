@@ -1,76 +1,24 @@
-export type PageKey =
-  | "overview"
-  | "pulse"
-  | "monthly"
-  | "explorer"
-  | "drilldown"
-  | "strategies"
-  | "reports"
-  | "governance";
+export type PageKey = "overview" | "issues" | "calls" | "strategies" | "learning" | "ask-ci" | "live-command" | "field" | "governance" | "visual-lab" | "reports";
 
-export interface PageDefinition {
-  key: PageKey;
-  label: string;
-  path: string;
-  description: string;
-}
-
-export const PAGES: PageDefinition[] = [
-  {
-    key: "overview",
-    label: "Executive Overview",
-    path: "/",
-    description: "High-level operating picture and issue landscape.",
-  },
-  {
-    key: "pulse",
-    label: "Daily Pulse",
-    path: "/daily-pulse",
-    description: "Fresh insights, spikes, and evidence-backed movement.",
-  },
-  {
-    key: "monthly",
-    label: "Monthly Recalibration",
-    path: "/monthly-recalibration",
-    description: "What changed, what works, and what should be reviewed next.",
-  },
-  {
-    key: "explorer",
-    label: "Issue Explorer",
-    path: "/issue-explorer",
-    description: "Recurring issue clusters, filters, and evidence packs.",
-  },
-  {
-    key: "drilldown",
-    label: "Call Drilldown",
-    path: "/call-drilldown",
-    description: "Transcript review with structured extraction and sentiment flow.",
-  },
-  {
-    key: "strategies",
-    label: "Strategy Workflow",
-    path: "/strategy-workflow",
-    description: "Decision tracking from proposed intervention to closure.",
-  },
-  {
-    key: "reports",
-    label: "Reports & Export",
-    path: "/reports",
-    description: "Leadership summaries and reproducible export packages.",
-  },
-  {
-    key: "governance",
-    label: "AI Governance",
-    path: "/governance",
-    description: "Evidence policy, audits, and system monitoring.",
-  },
-];
+const PAGE_PATHS: Record<PageKey, string> = {
+  overview: "/",
+  issues: "/issues",
+  calls: "/calls",
+  strategies: "/strategies",
+  learning: "/learning",
+  "ask-ci": "/ask-ci",
+  "live-command": "/live-command",
+  field: "/field",
+  governance: "/governance",
+  "visual-lab": "/visual-lab",
+  reports: "/reports",
+};
 
 export function pageFromPath(pathname: string): PageKey {
-  const match = PAGES.find((page) => page.path === pathname);
-  return match?.key ?? "overview";
+  const match = Object.entries(PAGE_PATHS).find(([, path]) => path === pathname);
+  return (match?.[0] as PageKey | undefined) ?? "overview";
 }
 
 export function pathFromPage(page: PageKey): string {
-  return PAGES.find((item) => item.key === page)?.path ?? "/";
+  return PAGE_PATHS[page] ?? "/";
 }

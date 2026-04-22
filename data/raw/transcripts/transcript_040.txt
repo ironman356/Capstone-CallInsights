@@ -1,20 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, this is the second time I have called and I keep getting transferred around.
-Agent: I can help with that. First I need to complete a brief verification on the account.
-Customer: Okay, that is fine.
+Customer: My homeowners insurance changed and I am trying to keep the escrow side accurate.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: Let me see how far I can take this from my side before moving you anywhere else.
-Customer: I am already frustrated, so I need a clear answer on what happens next.
-Agent: I understand why that would be frustrating.
-Agent: What I am seeing is that if I do need to route the call, I will document the issue so you are not starting from zero again.
-Customer: Okay, but that was not clear from what I saw online.
-Customer: I already called once about this, so I am trying not to go in circles again.
-Agent: I understand, and I will be as specific as I can so you know exactly what this means.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I will stay on the line as long as I can and make sure the notes are complete first.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Customer: Can somebody call me back once the research is done?
-Agent: Yes. I will document the callback request with the account notes today.
-Customer: All right. I appreciate that.
+Agent: I can check whether proof of coverage has been matched to the loan yet.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I will note the coverage update and the next step so the record is clear.
+Customer: That helps and now I understand what happened on the account.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I am glad we were able to clear that up today.
 Agent: Thank you for calling today.
 Customer: Thank you.

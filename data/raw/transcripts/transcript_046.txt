@@ -1,18 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my income dropped and I am calling to ask about forbearance or any temporary help.
-Agent: I can help with that. First I need to complete a brief verification on the account.
-Customer: That is fine, I can do that.
+Customer: I made my payment online on Friday and it still has not posted to the account.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I can go over the general assistance process and what the review usually requires.
-Customer: I am stressed and I just need to know what to do next.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that available options depend on the account status and a formal review by the assistance team.
-Customer: Okay, but that was not clear from what I saw online.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: If needed, I can transfer you to the team that handles hardship intake after I note the account.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Customer: Once someone has the full answer, I would rather get a callback than keep checking.
-Agent: That is completely fine. I will note that a callback was requested after the review is completed.
-Customer: Thank you. That would help a lot.
+Agent: I am reviewing the payment history and the suspense activity now.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I can submit a payment research request and add notes so the next agent can see what was reviewed.
+Customer: Please have someone call me back once the research is complete.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I documented the callback request and the current status before we end the call.
 Agent: Thank you for calling today.
 Customer: Thank you.

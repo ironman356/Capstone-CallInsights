@@ -1,20 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, I need a payoff amount because we are getting ready to close.
-Agent: I can help with that. First I need to complete a brief verification on the account.
-Customer: Sure, go ahead.
+Customer: The county says the tax bill is due, and I need to know whether escrow already paid it.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: Let me review what information is needed for the payoff quote.
-Customer: I just do not want this to delay closing.
-Agent: I understand why that would be frustrating.
-Agent: What I am seeing is that payoff quotes are issued through a request process and are valid through a specific good-through date.
-Customer: Okay, but that was not clear from what I saw online.
-Customer: I already called once about this, so I am trying not to go in circles again.
-Agent: I understand, and I will be as specific as I can so you know exactly what this means.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: If you already have a closing date, I can explain why the good-through date matters.
-Agent: I will summarize the next steps before we end the call so nothing is unclear.
-Agent: I do not want to guess at the answer while the review is still pending.
-Customer: That makes sense. I just wanted to know what happens from here.
-Agent: The next step is the follow-up review, and I am documenting that now.
+Agent: I can check whether proof of coverage has been matched to the loan yet.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: I can explain whether the tax bill has already been paid from escrow or is still pending.
+Customer: Okay, I will wait for the follow-up since the review is still in motion.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I noted the follow-up expectation and the review timeline on the account.
 Agent: Thank you for calling today.
 Customer: Thank you.

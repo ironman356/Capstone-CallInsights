@@ -1,20 +1,14 @@
 Agent: Thank you for calling SPS mortgage servicing. My name is Taylor. How can I help you today?
-Customer: Hi, my monthly statement does not make sense and I cannot tell what I am actually supposed to pay.
-Agent: Before I discuss the loan, I do need to complete a quick verification.
-Customer: That is fine, I can do that.
+Customer: I need someone to explain why the escrow analysis raised my monthly payment so much.
+Agent: Before we discuss the loan, I need to complete account verification.
+Customer: That is fine.
 Agent: Thank you. I have the account in front of me now.
-Agent: I am reviewing the billed amount, unpaid charges, and escrow line now.
-Customer: I need it explained in plain language because the statement wording is not clear to me.
-Agent: I can hear the concern, and I will walk through it carefully with you.
-Agent: What I am seeing is that the total due may reflect principal, interest, escrow, and fees shown in separate sections.
-Customer: Okay, but that was not clear from what I saw online.
-Customer: I was on hold earlier today, so I really do not want to get bounced around again.
-Agent: I understand. I will keep the notes detailed so you do not have to repeat yourself if another team is needed.
-Agent: Let me walk through what that means for the payment, due date, and next step.
-Agent: I can also explain what amount would bring the loan current based on what I am seeing.
-Agent: Let me make sure I explain what happens next and what timeframe to expect.
-Customer: All right, I understand what happened now.
-Agent: I know it can be confusing, but I am glad we were able to go through it together.
-Customer: Thank you. That answers my question.
+Agent: Let me compare last year's tax and insurance disbursements against the new escrow calculation.
+Customer: I have already called once, so I really need a clear answer on what happens next.
+Agent: I understand why that is frustrating, and I will walk through it carefully.
+Agent: The increase is tied to higher county taxes and insurance, and I can explain when the new amount takes effect.
+Customer: Okay, I will wait for the follow-up since the review is still in motion.
+Agent: I am adding notes so the account reflects everything we reviewed today.
+Agent: I noted the follow-up expectation and the review timeline on the account.
 Agent: Thank you for calling today.
 Customer: Thank you.
