@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import { ArrowRight, Bot, BrainCircuit, Compass, MessageSquareText, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { api } from "../api";
 import type { PageKey } from "../navigation";
-import type { AskCiChatAction, DashboardIssue, WorkspacePayload } from "../types";
+import type { AskCiChatAction, WorkspacePayload } from "../types";
 
 interface AskCiPageProps {
   workspace: WorkspacePayload;
@@ -64,6 +64,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     title: "Live Incident Command",
     summary: "Combines executive briefing, change detection, evidence routing, guided Ask CI cards, and tablet AR field mode.",
     highlights: ["Meeting brief", "What changed", "Evidence-to-action", "AR issue constellation"],
+  },
+  field: {
+    title: "Field Mode",
+    summary: "Provides a phone-first issue field with camera-gated AR controls.",
+    highlights: ["Issue field", "Priority zones", "Call timeline", "Snapshot comparison"],
   },
   governance: {
     title: "Governance",
@@ -437,13 +442,4 @@ function buildInitialMessages(workspace: WorkspacePayload, currentPage: PageKey)
           sources: ["Workspace state"],
         },
   ];
-}
-
-function findIssueMention(issues: DashboardIssue[], query: string): DashboardIssue | null {
-  return (
-    issues.find((issue) => {
-      const normalized = issue.issue.toLowerCase();
-      return query.includes(normalized) || normalized.split(" ").some((part) => part.length > 4 && query.includes(part));
-    }) ?? null
-  );
 }
