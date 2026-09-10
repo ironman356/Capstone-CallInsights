@@ -14,6 +14,7 @@ import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } 
 type ThemeMode = "light" | "dark";
 
 const STAGE_ORDER = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
+const CALLS_PER_PAGE = 14;
 const KPI_OPTIONS = ["AHT", "FCR", "Repeat Calls", "Escalation Rate", "Sentiment"];
 const OUTCOME_COLORS = ["#69d2ff", "#8ce99a", "#ffc96c", "#ff8d72", "#b7a1ff"];
 const TONE_COLORS: Record<string, string> = {
@@ -94,6 +95,23 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["reports", "Reports", "Leadership-ready summary and export package"],
 ];
 
+function compareCallRecency(left: CallCard, right: CallCard) {
+  const leftDate = Date.parse(left.timestamp_start ?? left.timestamp_end ?? "");
+  const rightDate = Date.parse(right.timestamp_start ?? right.timestamp_end ?? "");
+  if (!Number.isNaN(leftDate) && !Number.isNaN(rightDate)) {
+    return leftDate - rightDate;
+  }
+  if (!Number.isNaN(leftDate)) {
+    return -1;
+  }
+  if (!Number.isNaN(rightDate)) {
+    return 1;
+  }
+  const leftSequence = Number(left.call_id.match(/\d+$/)?.[0] ?? 0);
+  const rightSequence = Number(right.call_id.match(/\d+$/)?.[0] ?? 0);
+  return leftSequence - rightSequence || left.call_id.localeCompare(right.call_id);
+}
+
 function App() {
   const queryClient = useQueryClient();
   const [theme, setTheme] = useState<ThemeMode>(() => {
@@ -102,6 +120,9 @@ function App() {
   });
   const [page, setPage] = useState<PageKey>(() => pageFromPath(window.location.pathname));
   const [issueFilter, setIssueFilter] = useState("");
+  const [callIssueFilter, setCallIssueFilter] = useState("");
+  const [callIssueSort, setCallIssueSort] = useState<"issue-asc" | "issue-desc" | "recent" | "oldest">("issue-asc");
+  const [callPage, setCallPage] = useState(1);
   const [selectedIssueSlug, setSelectedIssueSlug] = useState<string | null>(null);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
@@ -171,6 +192,32 @@ function App() {
     () => issueCards.slice(0, 8).map((issue) => ({ issue: compactLabel(issue.issue), count: issue.count })),
     [issueCards],
   );
+  const filteredCalls = useMemo(() => {
+    const query = callIssueFilter.trim().toLowerCase();
+    return [...(dashboard?.calls ?? [])]
+      .filter((call) => !query || (call.issues ?? [call.issue]).some((issue) => issue.toLowerCase().includes(query)))
+      .sort((left, right) => {
+        if (callIssueSort === "recent" || callIssueSort === "oldest") {
+          const order = compareCallRecency(left, right);
+          return callIssueSort === "recent" ? -order : order;
+        }
+        const order = left.issue.localeCompare(right.issue) || left.call_id.localeCompare(right.call_id);
+        return callIssueSort === "issue-asc" ? order : -order;
+      });
+  }, [callIssueFilter, callIssueSort, dashboard]);
+  const callPageCount = Math.max(1, Math.ceil(filteredCalls.length / CALLS_PER_PAGE));
+  const visibleCalls = useMemo(
+    () => filteredCalls.slice((callPage - 1) * CALLS_PER_PAGE, callPage * CALLS_PER_PAGE),
+    [callPage, filteredCalls],
+  );
+
+  useEffect(() => {
+    setCallPage((current) => Math.min(current, callPageCount));
+  }, [callPageCount]);
+
+  useEffect(() => {
+    setSelectedCallId((current) => current && visibleCalls.some((call) => call.call_id === current) ? current : visibleCalls[0]?.call_id ?? null);
+  }, [visibleCalls]);
   const outcomeData = useMemo(
     () => Object.entries(dashboard?.overview.outcome_counts ?? {}).map(([name, value]) => ({ name, value })),
     [dashboard],
@@ -631,14 +678,58 @@ function App() {
                 </div>
                 <Activity size={18} />
               </div>
+              <div className="call-list-controls">
+                  <input
+                    className="dashboard-input"
+                    placeholder="Search calls by issue"
+                    aria-label="Search calls by issue"
+                    value={callIssueFilter}
+                    onChange={(event) => {
+                      setCallIssueFilter(event.target.value);
+                      setCallPage(1);
+                    }}
+                  />
+                  <select
+                    className="dashboard-input"
+                    aria-label="Sort calls by issue"
+                    value={callIssueSort}
+                    onChange={(event) => {
+                      setCallIssueSort(event.target.value as "issue-asc" | "issue-desc" | "recent" | "oldest");
+                      setCallPage(1);
+                    }}
+                  >
+                    <option value="issue-asc">Issue A-Z</option>
+                    <option value="issue-desc">Issue Z-A</option>
+                    <option value="recent">Most recent</option>
+                    <option value="oldest">Least recent</option>
+                  </select>
+                  <select
+                    className="dashboard-input"
+                    aria-label="Select calls page"
+                    title={callPageCount === 1 ? "Only one page available" : undefined}
+                    value={callPage}
+                    onChange={(event) => setCallPage(Number(event.target.value))}
+                    disabled={callPageCount === 1}
+                  >
+                    {Array.from({ length: callPageCount }, (_, index) => (
+                      <option value={index + 1} key={index + 1}>Page {index + 1} of {callPageCount}{callPageCount === 1 ? " (only page)" : ""}</option>
+                    ))}
+                  </select>
+                  <button type="button" className="ghost-button small" aria-label="Previous page" title={callPageCount === 1 ? "Only one page available" : undefined} onClick={() => setCallPage((current) => current - 1)} disabled={callPage <= 1}>
+                    Previous page
+                  </button>
+                  <button type="button" className="ghost-button small" aria-label="Next page" title={callPageCount === 1 ? "Only one page available" : undefined} onClick={() => setCallPage((current) => current + 1)} disabled={callPage >= callPageCount}>
+                    Next page
+                  </button>
+              </div>
               <div className="call-list">
-                {dashboard.calls.slice(0, 14).map((call: CallCard) => (
+                {visibleCalls.length ? visibleCalls.map((call: CallCard) => (
                   <button type="button" key={call.call_id} className={`call-list-card ${call.call_id === selectedCallId ? "active" : ""}`} onClick={() => setSelectedCallId(call.call_id)}>
                     <strong>{call.call_id}</strong>
-                    <span>{call.issue}</span>
+                    <span>{(call.issues ?? [call.issue]).join(" · ")}</span>
                     <p>{call.summary}</p>
                   </button>
-                ))}
+                )) : <p className="empty-state">No calls match this issue search.</p>}
               </div>
             </div>
             <div className="panel-card span-two">
