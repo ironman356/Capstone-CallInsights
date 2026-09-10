@@ -130,7 +130,7 @@ export default function AskCiPage({ workspace, currentPage, onNavigate, onOpenIs
 
   const topIssue = useMemo(() => workspace.dashboard.issues[0] ?? null, [workspace.dashboard.issues]);
   const topCall = useMemo(() => workspace.dashboard.calls[0] ?? null, [workspace.dashboard.calls]);
-  const resolvedCount = workspace.dashboard.overview.outcome_counts.Resolved ?? 0;
+  const resolvedCount = workspace.dashboard.overview.outcome_counts.resolved ?? 0;
   const openStrategies = workspace.strategy_board.strategies.filter((item) => item.status !== "Closed").length;
   const activeAnswer = useMemo(
     () => [...messages].reverse().find((message) => message.role === "assistant") ?? null,
