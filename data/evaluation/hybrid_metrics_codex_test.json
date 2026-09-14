@@ -1,0 +1,13 @@
+{
+  "gold_calls": 28,
+  "evaluated_calls": 28,
+  "failed_or_missing_calls": 0,
+  "call_coverage": 1.0,
+  "issue_count_accuracy": 1.0,
+  "exact_issue_sequence_accuracy": 1.0,
+  "aligned_segment_accuracy": 1.0,
+  "aligned_segment_macro_f1": 1.0,
+  "unknown_rate": 0.0,
+  "valid_evidence_rate": 1.0,
+  "aligned_segments": 46
+}

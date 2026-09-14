@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="700" viewBox="0 0 1100 700">
+<rect width="100%" height="100%" fill="#F7F4ED" />
+<text x="70" y="64" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" fill="#14213D">Approximate Manual SLoC by Team Member</text>
+<text x="70" y="96" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#4F5D75">Approximate handwritten code only. Total: 11,000 lines across 54 files.</text>
+<line x1="190" y1="560.0" x2="1020" y2="560.0" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="566.0" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">0</text>
+<line x1="190" y1="495.7" x2="1020" y2="495.7" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="501.7" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">500</text>
+<line x1="190" y1="431.4" x2="1020" y2="431.4" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="437.4" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">1,000</text>
+<line x1="190" y1="367.1" x2="1020" y2="367.1" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="373.1" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">1,500</text>
+<line x1="190" y1="302.9" x2="1020" y2="302.9" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="308.9" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">2,000</text>
+<line x1="190" y1="238.6" x2="1020" y2="238.6" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="244.6" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">2,500</text>
+<line x1="190" y1="174.3" x2="1020" y2="174.3" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="180.3" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">3,000</text>
+<line x1="190" y1="110.0" x2="1020" y2="110.0" stroke="#D7D1C4" stroke-width="1" />
+<text x="172" y="116.0" text-anchor="end" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#6B7280">3,500</text>
+<line x1="190" y1="110" x2="190" y2="560" stroke="#334155" stroke-width="2" />
+<line x1="190" y1="560" x2="1020" y2="560" stroke="#334155" stroke-width="2" />
+<rect x="190.0" y="174.3" width="176.0" height="385.7" rx="12" fill="#1746A2" />
+<text x="278.0" y="162.3" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#14213D">3,000</text>
+<text x="278.0" y="592.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Prachi</text>
+<text x="278.0" y="612.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Aswani</text>
+<rect x="408.0" y="200.0" width="176.0" height="360.0" rx="12" fill="#F9A825" />
+<text x="496.0" y="188.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#14213D">2,800</text>
+<text x="496.0" y="592.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Alexander</text>
+<text x="496.0" y="612.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Held</text>
+<rect x="626.0" y="212.9" width="176.0" height="347.1" rx="12" fill="#2E7D32" />
+<text x="714.0" y="200.9" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#14213D">2,700</text>
+<text x="714.0" y="592.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Anshul</text>
+<text x="714.0" y="612.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Kasera</text>
+<rect x="844.0" y="238.6" width="176.0" height="321.4" rx="12" fill="#C62828" />
+<text x="932.0" y="226.6" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="17" font-weight="700" fill="#14213D">2,500</text>
+<text x="932.0" y="592.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Abdul</text>
+<text x="932.0" y="612.0" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="15" fill="#334155">Hattali</text>
+</svg>
