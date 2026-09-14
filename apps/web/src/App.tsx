@@ -230,7 +230,6 @@ function App() {
     return [
       { stage: "Opening", value: sentiment.opening },
       { stage: "Closing", value: sentiment.closing },
-      { stage: "Shift", value: sentiment.average_shift },
     ];
   }, [dashboard]);
   function navigate(nextPage: PageKey) {
@@ -551,7 +550,16 @@ function App() {
                   <p className="section-kicker">Sentiment Lens</p>
                   <h3>Opening to close</h3>
                 </div>
-                <Sparkles size={18} />
+                <div
+                  className={`sentiment-shift ${dashboard.overview.sentiment_summary.average_shift > 0 ? "positive" : dashboard.overview.sentiment_summary.average_shift < 0 ? "negative" : "neutral"}`}
+                  title="Average closing sentiment minus average opening sentiment"
+                >
+                  <span>Avg shift</span>
+                  <strong>
+                    {dashboard.overview.sentiment_summary.average_shift > 0 ? "+" : ""}
+                    {dashboard.overview.sentiment_summary.average_shift.toFixed(2)}
+                  </strong>
+                </div>
               </div>
               <div className="chart-box compact">
                 <ResponsiveContainer width="100%" height={240}>

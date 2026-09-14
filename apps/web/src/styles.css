@@ -370,6 +370,21 @@ button { cursor: pointer; }
   margin-bottom: 14px;
 }
 
+.sentiment-shift {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.sentiment-shift span { color: var(--muted); font-size: 0.72rem; }
+.sentiment-shift strong { font-size: 0.95rem; }
+.sentiment-shift.positive strong { color: var(--success); }
+.sentiment-shift.negative strong { color: var(--risk); }
+.sentiment-shift.neutral strong { color: var(--muted); }
+
 .chart-box { min-height: 300px; }
 .chart-box.compact { min-height: 240px; }
 
