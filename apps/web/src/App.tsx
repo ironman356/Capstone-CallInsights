@@ -254,6 +254,11 @@ function App() {
       }
       const payload = await queryClient.fetchQuery({ queryKey: ["workspace"], queryFn: api.getWorkspace });
       queryClient.setQueryData(["workspace"], payload);
+      setReportSnapshot(null);
+      await Promise.all([
+        queryClient.invalidateQueries({ queryKey: ["issue"] }),
+        queryClient.invalidateQueries({ queryKey: ["call"] }),
+      ]);
     } catch (refreshError) {
       setError(refreshError instanceof Error ? refreshError.message : "Unable to refresh workspace");
     } finally {
