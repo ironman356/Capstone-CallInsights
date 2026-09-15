@@ -8,6 +8,7 @@ import AdminAiGovernancePage from "./pages/AdminAiGovernancePage";
 import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
+import ModelApproachesPage from "./pages/ModelApproachesPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
@@ -49,6 +50,11 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     title: "Monitoring",
     description: "See refresh status, control checks, and the operating health of the analytics workflow.",
     kicker: "Controls & Monitoring",
+  },
+  "model-approaches": {
+    title: "Model Approaches",
+    description: "Compare topic-mapping and agent-approach extraction methods on the same frozen benchmark.",
+    kicker: "Model Evaluation",
   },
   "ask-ci": {
     title: "Ask CI",
