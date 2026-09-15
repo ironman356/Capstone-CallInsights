@@ -322,12 +322,20 @@ def run_benchmark(path: Path) -> dict:
         KeywordModel("taxonomy_keyword_rules", ISSUE_KEYWORDS),
         CentroidModel(),
         _char_word_model("char_word_tfidf_linear"),
+        _linear_svm_model("char_tfidf_linear_svm"),
+        _complement_nb_model("word_tfidf_complement_nb"),
+        _sgd_text_model("char_tfidf_sgd_huber"),
+        _ridge_text_model("word_tfidf_ridge"),
         _lsa_model("lsa_semantic_linear"),
     ]
     approach_models = [
         KeywordModel("taxonomy_keyword_rules", APPROACH_KEYWORDS),
         CentroidModel(),
         _char_word_model("char_word_tfidf_linear"),
+        _linear_svm_model("char_tfidf_linear_svm"),
+        _complement_nb_model("word_tfidf_complement_nb"),
+        _sgd_text_model("char_tfidf_sgd_huber"),
+        _ridge_text_model("word_tfidf_ridge"),
         _lsa_model("lsa_semantic_linear", components=32),
     ]
     issue_results = []
