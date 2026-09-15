@@ -16,6 +16,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.preprocessing import Normalizer
+from sklearn.svm import LinearSVC
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -149,6 +150,17 @@ def _char_word_model(name: str) -> Pipeline:
                 ),
             ),
             ("classifier", LogisticRegression(max_iter=1500, class_weight="balanced", random_state=4000)),
+        ]
+    )
+    model.name = name  # type: ignore[attr-defined]
+    return model
+
+
+def _linear_svm_model(name: str) -> Pipeline:
+    model = Pipeline(
+        [
+            ("tfidf", TfidfVectorizer(analyzer="char_wb", ngram_range=(3, 5), min_df=2, sublinear_tf=True)),
+            ("classifier", LinearSVC(class_weight="balanced", random_state=4000)),
         ]
     )
     model.name = name  # type: ignore[attr-defined]
