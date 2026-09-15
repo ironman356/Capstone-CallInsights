@@ -94,6 +94,7 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
   ["strategies", "Action Plans", "Improvement plans and ownership tracking"],
   ["learning", "Monitoring", "Trend movement, model monitoring, and controls"],
+  ["model-approaches", "Model Approaches", "Side-by-side benchmark methods and measured results"],
   ["ask-ci", "Ask CI", "Assistant for pages, metrics, and workflow questions"],
   ["live-command", "Live Command", "War-room brief, evidence routing, and tablet AR scene"],
   ["governance", "Governance", "Architecture, controls, and audit review"],
@@ -865,6 +866,8 @@ function App() {
         ) : null}
 
         {page === "governance" ? <AdminAiGovernancePage workspace={workspace} /> : null}
+
+        {page === "model-approaches" ? <ModelApproachesPage /> : null}
 
         {page === "visual-lab" ? (
           <UiDesignLabPage
