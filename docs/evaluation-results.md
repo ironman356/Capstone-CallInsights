@@ -6,20 +6,28 @@ Corpus: 144 calls, 240 issue segments, 28 held-out test calls.
 
 | Method | Macro F1 | Accuracy | Paraphrase same | Shared-vocabulary different | Multi-issue exact | Long single exact | Seconds |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| taxonomy_keyword_rules | 0.830 | 0.848 | 0.774 | 0.977 | 0.714 | 1.000 | 0.006 |
-| char_word_tfidf_linear | 0.640 | 0.609 | 0.439 | 0.927 | 0.429 | 1.000 | 0.186 |
-| lsa_semantic_linear | 0.575 | 0.543 | 0.348 | 0.915 | 0.429 | 1.000 | 0.073 |
-| word_tfidf_centroid | 0.553 | 0.543 | 0.387 | 0.898 | 0.357 | 1.000 | 0.027 |
-| current_keyphrase_pipeline | 0.000 | 0.000 | 0.116 | 1.000 | 0.000 | 0.000 | 0.012 |
+| taxonomy_keyword_rules | 0.830 | 0.848 | 0.774 | 0.977 | 0.714 | 1.000 | 0.004 |
+| char_word_tfidf_linear | 0.640 | 0.609 | 0.439 | 0.927 | 0.429 | 1.000 | 0.102 |
+| char_tfidf_linear_svm | 0.621 | 0.609 | 0.497 | 0.961 | 0.357 | 1.000 | 0.055 |
+| word_tfidf_ridge | 0.601 | 0.565 | 0.368 | 0.915 | 0.429 | 1.000 | 0.095 |
+| lsa_semantic_linear | 0.575 | 0.543 | 0.348 | 0.915 | 0.429 | 1.000 | 0.069 |
+| word_tfidf_centroid | 0.553 | 0.543 | 0.387 | 0.898 | 0.357 | 1.000 | 0.020 |
+| word_tfidf_complement_nb | 0.503 | 0.478 | 0.342 | 0.904 | 0.357 | 1.000 | 0.014 |
+| char_tfidf_sgd_huber | 0.429 | 0.500 | 0.561 | 0.842 | 0.286 | 1.000 | 0.040 |
+| current_keyphrase_pipeline | 0.000 | 0.000 | 0.116 | 1.000 | 0.000 | 0.000 | 0.006 |
 
 ## Agent Approach Extraction
 
 | Method | Macro F1 | Accuracy | Seconds |
 |---|---:|---:|---:|
-| char_word_tfidf_linear | 0.697 | 0.739 | 0.161 |
-| lsa_semantic_linear | 0.532 | 0.609 | 0.063 |
-| word_tfidf_centroid | 0.507 | 0.522 | 0.024 |
-| taxonomy_keyword_rules | 0.029 | 0.130 | 0.005 |
+| char_tfidf_linear_svm | 0.759 | 0.804 | 0.060 |
+| char_word_tfidf_linear | 0.697 | 0.739 | 0.075 |
+| char_tfidf_sgd_huber | 0.582 | 0.674 | 0.042 |
+| word_tfidf_ridge | 0.547 | 0.609 | 0.029 |
+| lsa_semantic_linear | 0.532 | 0.609 | 0.028 |
+| word_tfidf_centroid | 0.507 | 0.522 | 0.010 |
+| word_tfidf_complement_nb | 0.464 | 0.543 | 0.011 |
+| taxonomy_keyword_rules | 0.029 | 0.130 | 0.002 |
 
 ## Resolution Attribution
 
