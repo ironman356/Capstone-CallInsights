@@ -12,7 +12,7 @@ from typing import Iterable
 import numpy as np
 from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.linear_model import LogisticRegression, RidgeClassifier, SGDClassifier
 from sklearn.metrics import accuracy_score, f1_score
 from sklearn.naive_bayes import ComplementNB
 from sklearn.pipeline import FeatureUnion, Pipeline
@@ -184,6 +184,17 @@ def _sgd_text_model(name: str) -> Pipeline:
         [
             ("tfidf", TfidfVectorizer(analyzer="char_wb", ngram_range=(3, 5), min_df=2, sublinear_tf=True)),
             ("classifier", SGDClassifier(loss="modified_huber", class_weight="balanced", random_state=4000)),
+        ]
+    )
+    model.name = name  # type: ignore[attr-defined]
+    return model
+
+
+def _ridge_text_model(name: str) -> Pipeline:
+    model = Pipeline(
+        [
+            ("tfidf", TfidfVectorizer(ngram_range=(1, 3), min_df=2, sublinear_tf=True)),
+            ("classifier", RidgeClassifier(alpha=0.8, class_weight="balanced")),
         ]
     )
     model.name = name  # type: ignore[attr-defined]
