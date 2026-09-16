@@ -8,6 +8,7 @@ import AdminAiGovernancePage from "./pages/AdminAiGovernancePage";
 import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
+import ModelApproachesPage from "./pages/ModelApproachesPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
@@ -51,6 +52,11 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     description: "See refresh status, control checks, and the operating health of the analytics workflow.",
     kicker: "Controls & Monitoring",
   },
+  "model-approaches": {
+    title: "Model Approaches",
+    description: "Compare topic-mapping and agent-approach extraction methods on the same frozen benchmark.",
+    kicker: "Model Evaluation",
+  },
   "ask-ci": {
     title: "Ask CI",
     description: "Use the assistant to find the right page, explain a metric, or navigate directly to supporting detail.",
@@ -89,6 +95,7 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
   ["strategies", "Action Plans", "Improvement plans and ownership tracking"],
   ["learning", "Monitoring", "Trend movement, model monitoring, and controls"],
+  ["model-approaches", "Model Approaches", "Side-by-side benchmark methods and measured results"],
   ["ask-ci", "Ask CI", "Assistant for pages, metrics, and workflow questions"],
   ["live-command", "Live Command", "War-room brief, evidence routing, and tablet AR scene"],
   ["governance", "Governance", "Architecture, controls, and audit review"],
@@ -963,6 +970,8 @@ function App() {
         ) : null}
 
         {page === "governance" ? <AdminAiGovernancePage workspace={workspace} /> : null}
+
+        {page === "model-approaches" ? <ModelApproachesPage /> : null}
 
         {page === "visual-lab" ? (
           <UiDesignLabPage

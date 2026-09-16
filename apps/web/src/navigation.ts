@@ -1,4 +1,4 @@
-export type PageKey = "overview" | "issues" | "calls" | "strategies" | "learning" | "ask-ci" | "live-command" | "field" | "governance" | "visual-lab" | "reports";
+export type PageKey = "overview" | "issues" | "calls" | "strategies" | "learning" | "model-approaches" | "ask-ci" | "live-command" | "field" | "governance" | "visual-lab" | "reports";
 
 const PAGE_PATHS: Record<PageKey, string> = {
   overview: "/",
@@ -6,6 +6,7 @@ const PAGE_PATHS: Record<PageKey, string> = {
   calls: "/calls",
   strategies: "/strategies",
   learning: "/learning",
+  "model-approaches": "/model-approaches",
   "ask-ci": "/ask-ci",
   "live-command": "/live-command",
   field: "/field",
