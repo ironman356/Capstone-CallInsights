@@ -1054,6 +1054,7 @@ class Rank1PipelineService:
                     "kpi_focus": ["AHT", "FCR", "Repeat Calls"],
                     "evidence_call_ids": [call["call_id"] for call in issue["representative_calls"][:3]],
                     "notes": issue["summary"],
+                    "due_date": None,
                     "created_at": created_at,
                     "updated_at": created_at,
                 }
@@ -1087,6 +1088,7 @@ class Rank1PipelineService:
         notes: str,
         kpi_focus: list[str],
         evidence_call_ids: list[str],
+        due_date: str | None,
     ) -> dict:
         issue = next((item for item in bundle["issues"] if item["slug"] == issue_slug), None)
         if issue is None:
@@ -1105,6 +1107,7 @@ class Rank1PipelineService:
             "kpi_focus": kpi_focus,
             "evidence_call_ids": evidence_call_ids or [call["call_id"] for call in issue["representative_calls"][:2]],
             "notes": notes.strip(),
+            "due_date": due_date,
             "created_at": now,
             "updated_at": now,
         }
@@ -1118,7 +1121,7 @@ class Rank1PipelineService:
             if strategy["strategy_id"] != strategy_id:
                 continue
             for key, value in updates.items():
-                if value is not None:
+                if key == "due_date" or value is not None:
                     strategy[key] = value
             strategy["updated_at"] = self._now_iso()
             self.save_strategies(strategies)

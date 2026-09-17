@@ -1,6 +1,6 @@
-import { startTransition, useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, RefreshCw, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api } from "./api";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
@@ -14,6 +14,15 @@ import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } 
 
 type ThemeMode = "light" | "dark";
 
+interface StrategyEditForm {
+  title: string;
+  owner: string;
+  hypothesis: string;
+  notes: string;
+  kpi_focus: string[];
+  evidence_call_ids: string[];
+}
+
 const STAGE_ORDER = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
 const CALLS_PER_PAGE = 14;
 const KPI_OPTIONS = ["AHT", "FCR", "Repeat Calls", "Escalation Rate", "Sentiment"];
@@ -25,6 +34,93 @@ const TONE_COLORS: Record<string, string> = {
   stable: "#84d66e",
   warning: "#ffc857",
 };
+
+function formatStrategyDate(value: string) {
+  const date = new Date(value.includes("T") ? value : `${value}T00:00:00`);
+  return Number.isNaN(date.getTime())
+    ? value
+    : new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
+
+function localDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function deadlineState(strategy: StrategyRecord) {
+  if (!strategy.due_date) return { label: "No deadline", tone: "none" };
+  if (strategy.status === "Closed") return { label: `Deadline ${formatStrategyDate(strategy.due_date)}`, tone: "closed" };
+
+  const today = localDateKey();
+  const daysRemaining = Math.ceil((new Date(`${strategy.due_date}T00:00:00`).getTime() - new Date(`${today}T00:00:00`).getTime()) / 86_400_000);
+  if (daysRemaining < 0) return { label: `Overdue · ${formatStrategyDate(strategy.due_date)}`, tone: "overdue" };
+  if (daysRemaining === 0) return { label: "Due today", tone: "soon" };
+  if (daysRemaining <= 7) return { label: `Due in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}`, tone: "soon" };
+  return { label: `Due ${formatStrategyDate(strategy.due_date)}`, tone: "scheduled" };
+}
+
+function isValidDeadline(value: string) {
+  if (!value) return true;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match || Number(match[1]) < 1900) return false;
+  const date = new Date(`${value}T00:00:00`);
+  return !Number.isNaN(date.getTime()) && localDateKey(date) === value;
+}
+
+function StrategyDeadlineEditor({
+  strategy,
+  disabled,
+  onSave,
+}: {
+  strategy: StrategyRecord;
+  disabled: boolean;
+  onSave: (strategy: StrategyRecord, dueDate: string) => Promise<void>;
+}) {
+  const savedDate = strategy.due_date ?? "";
+  const [draftDate, setDraftDate] = useState(savedDate);
+  const valid = isValidDeadline(draftDate);
+  const changed = draftDate !== savedDate;
+  const inputId = `strategy-deadline-${strategy.strategy_id}`;
+
+  useEffect(() => {
+    setDraftDate(savedDate);
+  }, [savedDate]);
+
+  function saveDraft() {
+    if (!disabled && changed && valid) void onSave(strategy, draftDate);
+  }
+
+  return (
+    <div className="strategy-deadline-field">
+      <label htmlFor={inputId}>{strategy.due_date ? "Change deadline" : "Add deadline"}</label>
+      <span className="strategy-deadline-control">
+        <input
+          id={inputId}
+          type="date"
+          className="dashboard-input"
+          value={draftDate}
+          min="1900-01-01"
+          disabled={disabled}
+          aria-invalid={!valid}
+          onChange={(event) => setDraftDate(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              saveDraft();
+            }
+            if (event.key === "Escape") setDraftDate(savedDate);
+          }}
+        />
+        <button type="button" className="ghost-button small" disabled={disabled || !changed || !valid} onClick={saveDraft}>
+          Save
+        </button>
+      </span>
+      {!valid ? <small className="deadline-error">Enter a complete four-digit year (1900 or later).</small> : null}
+    </div>
+  );
+}
 
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
   overview: {
@@ -133,9 +229,14 @@ function App() {
   const [selectedIssueSlug, setSelectedIssueSlug] = useState<string | null>(null);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
+  const draggedStrategyRef = useRef<string | null>(null);
+  const [draggedStrategyId, setDraggedStrategyId] = useState<string | null>(null);
+  const [dropStage, setDropStage] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reportSnapshot, setReportSnapshot] = useState<WorkspacePayload["reports"] | null>(null);
+  const [editingStrategy, setEditingStrategy] = useState<StrategyRecord | null>(null);
+  const [strategyEditForm, setStrategyEditForm] = useState<StrategyEditForm | null>(null);
   const [formState, setFormState] = useState<StrategyCreateInput>({
     issue_slug: "",
     title: "",
@@ -144,6 +245,7 @@ function App() {
     notes: "",
     kpi_focus: ["AHT", "FCR"],
     evidence_call_ids: [],
+    due_date: "",
   });
 
   const workspaceQuery = useQuery({ queryKey: ["workspace"], queryFn: api.getWorkspace });
@@ -171,6 +273,23 @@ function App() {
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
+
+  useEffect(() => {
+    if (!editingStrategy) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !syncing) {
+        setEditingStrategy(null);
+        setStrategyEditForm(null);
+      }
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [editingStrategy, syncing]);
 
   useEffect(() => {
     if (!dashboard) {
@@ -285,9 +404,70 @@ function App() {
       const board = await api.getStrategies();
       queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? { ...current, strategy_board: board } : current);
       setMessage("Strategy created.");
-      setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "" }));
+      setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "", due_date: "" }));
     } catch (createError) {
       setError(createError instanceof Error ? createError.message : "Unable to create strategy");
+    } finally {
+      setSyncing(false);
+    }
+  }
+
+  function openStrategyEditor(strategy: StrategyRecord) {
+    setEditingStrategy(strategy);
+    setStrategyEditForm({
+      title: strategy.title,
+      owner: strategy.owner,
+      hypothesis: strategy.hypothesis,
+      notes: strategy.notes,
+      kpi_focus: [...strategy.kpi_focus],
+      evidence_call_ids: [...strategy.evidence_call_ids],
+    });
+    setError(null);
+    setMessage(null);
+  }
+
+  function closeStrategyEditor() {
+    if (syncing) return;
+    setEditingStrategy(null);
+    setStrategyEditForm(null);
+  }
+
+  async function saveStrategyEdits(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!editingStrategy || !strategyEditForm || syncing) return;
+
+    const title = strategyEditForm.title.trim();
+    const owner = strategyEditForm.owner.trim();
+    const hypothesis = strategyEditForm.hypothesis.trim();
+    if (!title || !owner || !hypothesis) {
+      setError("Title, owner, and hypothesis are required.");
+      return;
+    }
+
+    setSyncing(true);
+    setError(null);
+    setMessage(null);
+    try {
+      const updated = await api.updateStrategy(editingStrategy.strategy_id, {
+        title,
+        owner,
+        hypothesis,
+        notes: strategyEditForm.notes.trim(),
+        kpi_focus: strategyEditForm.kpi_focus,
+        evidence_call_ids: strategyEditForm.evidence_call_ids,
+      });
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? {
+        ...current,
+        strategy_board: {
+          ...current.strategy_board,
+          strategies: current.strategy_board.strategies.map((item) => item.strategy_id === updated.strategy_id ? updated : item),
+        },
+      } : current);
+      setEditingStrategy(null);
+      setStrategyEditForm(null);
+      setMessage(`${updated.title} updated.`);
+    } catch (updateError) {
+      setError(updateError instanceof Error ? updateError.message : "Unable to update strategy");
     } finally {
       setSyncing(false);
     }
@@ -296,9 +476,35 @@ function App() {
   async function moveStrategy(strategy: StrategyRecord, direction: -1 | 1) {
     const currentIndex = STAGE_ORDER.indexOf(strategy.status);
     const nextStatus = STAGE_ORDER[currentIndex + direction];
-    if (!nextStatus) {
-      return;
+    if (nextStatus) await moveStrategyToStage(strategy, nextStatus);
+  }
+
+  async function updateStrategyDeadline(strategy: StrategyRecord, dueDate: string) {
+    if (syncing) return;
+    setError(null);
+    setMessage(null);
+    setSyncing(true);
+    try {
+      const updated = await api.updateStrategy(strategy.strategy_id, { due_date: dueDate || null });
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? {
+        ...current,
+        strategy_board: {
+          ...current.strategy_board,
+          strategies: current.strategy_board.strategies.map((item) => item.strategy_id === updated.strategy_id ? updated : item),
+        },
+      } : current);
+      setMessage(dueDate ? `${strategy.title} deadline updated.` : `${strategy.title} deadline removed.`);
+    } catch (deadlineError) {
+      setError(deadlineError instanceof Error ? deadlineError.message : "Unable to update deadline");
+    } finally {
+      setSyncing(false);
     }
+  }
+
+  async function moveStrategyToStage(strategy: StrategyRecord, nextStatus: string) {
+    if (syncing || strategy.status === nextStatus || !STAGE_ORDER.includes(nextStatus)) return;
+    setError(null);
+    setMessage(null);
     setSyncing(true);
     try {
       const updated = await api.updateStrategy(strategy.strategy_id, { status: nextStatus });
@@ -806,26 +1012,92 @@ function App() {
                 </div>
                 <Target size={18} />
               </div>
-              <div className="kanban-board">
+              <p className="kanban-help">Drag a card to another column, or use Back and Forward.</p>
+              <div className="kanban-board" aria-busy={syncing}>
                 {workspace.strategy_board.stages.map((stage) => (
-                  <div className="kanban-column" key={stage.name}>
+                  <div
+                    className={`kanban-column${dropStage === stage.name ? " is-drop-target" : ""}`}
+                    key={stage.name}
+                    onDragOver={(event) => {
+                      const strategy = workspace.strategy_board.strategies.find((item) => item.strategy_id === draggedStrategyRef.current);
+                      if (syncing || !strategy || strategy.status === stage.name) return;
+                      event.preventDefault();
+                      event.dataTransfer.dropEffect = "move";
+                      setDropStage(stage.name);
+                    }}
+                    onDragLeave={(event) => {
+                      if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                        setDropStage((current) => current === stage.name ? null : current);
+                      }
+                    }}
+                    onDrop={(event) => {
+                      event.preventDefault();
+                      const strategy = workspace.strategy_board.strategies.find((item) => item.strategy_id === draggedStrategyRef.current);
+                      draggedStrategyRef.current = null;
+                      setDraggedStrategyId(null);
+                      setDropStage(null);
+                      if (strategy) void moveStrategyToStage(strategy, stage.name);
+                    }}
+                  >
                     <div className="kanban-column-head">
                       <strong>{stage.name}</strong>
                       <span>{stage.count}</span>
                     </div>
-                    {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => (
-                      <article className="strategy-card" key={strategy.strategy_id}>
+                    {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => {
+                      const deadline = deadlineState(strategy);
+                      return (
+                      <article
+                        className={`strategy-card${draggedStrategyId === strategy.strategy_id ? " is-dragging" : ""}`}
+                        key={strategy.strategy_id}
+                        draggable={!syncing}
+                        onDragStart={(event) => {
+                          if (syncing || (event.target instanceof Element && event.target.closest("button, input"))) {
+                            event.preventDefault();
+                            return;
+                          }
+                          event.dataTransfer.effectAllowed = "move";
+                          event.dataTransfer.setData("text/plain", strategy.strategy_id);
+                          draggedStrategyRef.current = strategy.strategy_id;
+                          setDraggedStrategyId(strategy.strategy_id);
+                        }}
+                        onDragEnd={() => {
+                          draggedStrategyRef.current = null;
+                          setDraggedStrategyId(null);
+                          setDropStage(null);
+                        }}
+                      >
                         <p className="strategy-issue">{strategy.issue}</p>
                         <h4>{strategy.title}</h4>
                         <p>{strategy.hypothesis}</p>
+                        <dl className="strategy-dates">
+                          <div>
+                            <dt>Initiated</dt>
+                            <dd>{formatStrategyDate(strategy.created_at)}</dd>
+                          </div>
+                          <div>
+                            <dt>Deadline</dt>
+                            <dd><span className={`deadline-badge ${deadline.tone}`}>{deadline.label}</span></dd>
+                          </div>
+                        </dl>
+                        <StrategyDeadlineEditor strategy={strategy} disabled={syncing} onSave={updateStrategyDeadline} />
                         <div className="detail-tags">
                           {strategy.kpi_focus.map((kpi) => (
                             <span className="data-tag muted" key={kpi}>{kpi}</span>
                           ))}
                         </div>
                         <div className="strategy-actions">
-                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, -1)}>Back</button>
-                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
+                          <button
+                            type="button"
+                            className="ghost-button small strategy-edit-button"
+                            disabled={syncing}
+                            onClick={() => openStrategyEditor(strategy)}
+                            aria-label={`Edit ${strategy.title}`}
+                          >
+                            <Pencil size={13} />
+                            Edit
+                          </button>
+                          <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[0]} onClick={() => void moveStrategy(strategy, -1)}>Back</button>
+                          <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[STAGE_ORDER.length - 1]} onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
                           <button
                             type="button"
                             className="ghost-button small strategy-delete-button"
@@ -837,7 +1109,8 @@ function App() {
                           </button>
                         </div>
                       </article>
-                    ))}
+                      );
+                    })}
                   </div>
                 ))}
               </div>
@@ -860,6 +1133,10 @@ function App() {
                 <input className="dashboard-input" placeholder="Owner" value={formState.owner} onChange={(event) => setFormState((current) => ({ ...current, owner: event.target.value }))} />
                 <textarea className="dashboard-input dashboard-textarea" placeholder="Hypothesis" value={formState.hypothesis} onChange={(event) => setFormState((current) => ({ ...current, hypothesis: event.target.value }))} />
                 <textarea className="dashboard-input dashboard-textarea" placeholder="Notes" value={formState.notes} onChange={(event) => setFormState((current) => ({ ...current, notes: event.target.value }))} />
+                <label className="strategy-form-field">
+                  <span>Deadline <small>Optional</small></span>
+                  <input type="date" className="dashboard-input" min="1900-01-01" value={formState.due_date} onChange={(event) => setFormState((current) => ({ ...current, due_date: event.target.value }))} />
+                </label>
                 <div className="kpi-grid">
                   {KPI_OPTIONS.map((kpi) => {
                     const active = formState.kpi_focus.includes(kpi);
@@ -1044,6 +1321,130 @@ function App() {
           </section>
         ) : null}
       </main>
+      {editingStrategy && strategyEditForm ? (
+        <div
+          className="strategy-edit-overlay"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeStrategyEditor();
+          }}
+        >
+          <section className="strategy-edit-dialog" role="dialog" aria-modal="true" aria-labelledby="strategy-edit-title">
+            <div className="strategy-edit-header">
+              <div>
+                <p className="section-kicker">Edit Action Plan</p>
+                <h3 id="strategy-edit-title">Update strategy details</h3>
+              </div>
+              <button type="button" className="icon-button" onClick={closeStrategyEditor} disabled={syncing} aria-label="Close strategy editor">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="strategy-edit-context">
+              <div><span>Issue</span><strong>{editingStrategy.issue}</strong></div>
+              <div><span>Status</span><strong>{editingStrategy.status}</strong></div>
+              <div><span>Initiated</span><strong>{formatStrategyDate(editingStrategy.created_at)}</strong></div>
+            </div>
+
+            <form className="strategy-edit-form" onSubmit={(event) => void saveStrategyEdits(event)}>
+              <label>
+                <span>Strategy title</span>
+                <input
+                  className="dashboard-input"
+                  value={strategyEditForm.title}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, title: event.target.value } : current)}
+                  autoFocus
+                  required
+                />
+              </label>
+              <label>
+                <span>Owner</span>
+                <input
+                  className="dashboard-input"
+                  value={strategyEditForm.owner}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, owner: event.target.value } : current)}
+                  required
+                />
+              </label>
+              <label className="strategy-edit-wide">
+                <span>Hypothesis</span>
+                <textarea
+                  className="dashboard-input dashboard-textarea"
+                  value={strategyEditForm.hypothesis}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, hypothesis: event.target.value } : current)}
+                  required
+                />
+              </label>
+              <label className="strategy-edit-wide">
+                <span>Notes <small>Optional</small></span>
+                <textarea
+                  className="dashboard-input dashboard-textarea"
+                  value={strategyEditForm.notes}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, notes: event.target.value } : current)}
+                />
+              </label>
+              <fieldset className="strategy-edit-wide strategy-edit-kpis">
+                <legend>KPI focus</legend>
+                <div className="kpi-grid">
+                  {KPI_OPTIONS.map((kpi) => {
+                    const active = strategyEditForm.kpi_focus.includes(kpi);
+                    return (
+                      <button
+                        type="button"
+                        className={`kpi-toggle ${active ? "active" : ""}`}
+                        key={kpi}
+                        aria-pressed={active}
+                        onClick={() => setStrategyEditForm((current) => current ? {
+                          ...current,
+                          kpi_focus: active ? current.kpi_focus.filter((item) => item !== kpi) : [...current.kpi_focus, kpi],
+                        } : current)}
+                      >
+                        {kpi}
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+              <details className="strategy-edit-wide strategy-edit-evidence">
+                <summary>
+                  Evidence calls
+                  <span>{strategyEditForm.evidence_call_ids.length} selected</span>
+                </summary>
+                <div className="strategy-evidence-options">
+                  {dashboard.calls.map((call) => {
+                    const selected = strategyEditForm.evidence_call_ids.includes(call.call_id);
+                    return (
+                      <label key={call.call_id}>
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() => setStrategyEditForm((current) => current ? {
+                            ...current,
+                            evidence_call_ids: selected
+                              ? current.evidence_call_ids.filter((callId) => callId !== call.call_id)
+                              : [...current.evidence_call_ids, call.call_id],
+                          } : current)}
+                        />
+                        <span>
+                          <strong>{call.call_id}</strong>
+                          <small>{call.issue} · {call.outcome}</small>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </details>
+              {error ? <p className="strategy-edit-error strategy-edit-wide" role="alert">{error}</p> : null}
+              <div className="strategy-edit-footer strategy-edit-wide">
+                <p>Issue, status, initiated date, and deadline are managed outside this editor.</p>
+                <div>
+                  <button type="button" className="ghost-button" onClick={closeStrategyEditor} disabled={syncing}>Cancel</button>
+                  <button type="submit" className="primary-button" disabled={syncing}>{syncing ? "Saving…" : "Save changes"}</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }

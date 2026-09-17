@@ -47,7 +47,7 @@ export const api = {
   createStrategy: (payload: StrategyCreateInput) =>
     request<StrategyRecord>("/strategies", {
       method: "POST",
-      body: JSON.stringify(payload),
+      body: JSON.stringify({ ...payload, due_date: payload.due_date || null }),
     }),
   updateStrategy: (strategyId: string, payload: StrategyUpdateInput) =>
     request<StrategyRecord>(`/strategies/${strategyId}`, {

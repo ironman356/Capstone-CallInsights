@@ -95,6 +95,7 @@ export interface StrategyRecord {
   kpi_focus: string[];
   evidence_call_ids: string[];
   notes: string;
+  due_date: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -172,13 +173,16 @@ export interface StrategyCreateInput {
   notes: string;
   kpi_focus: string[];
   evidence_call_ids: string[];
+  due_date: string;
 }
 
 export interface StrategyUpdateInput {
+  title?: string;
   status?: string;
   owner?: string;
   hypothesis?: string;
   notes?: string;
   kpi_focus?: string[];
   evidence_call_ids?: string[];
+  due_date?: string | null;
 }
