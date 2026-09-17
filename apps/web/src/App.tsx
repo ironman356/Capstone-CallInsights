@@ -20,6 +20,7 @@ interface StrategyEditForm {
   hypothesis: string;
   notes: string;
   kpi_focus: string[];
+  evidence_call_ids: string[];
 }
 
 const STAGE_ORDER = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
@@ -368,6 +369,7 @@ function App() {
       hypothesis: strategy.hypothesis,
       notes: strategy.notes,
       kpi_focus: [...strategy.kpi_focus],
+      evidence_call_ids: [...strategy.evidence_call_ids],
     });
     setError(null);
     setMessage(null);
@@ -401,6 +403,7 @@ function App() {
         hypothesis,
         notes: strategyEditForm.notes.trim(),
         kpi_focus: strategyEditForm.kpi_focus,
+        evidence_call_ids: strategyEditForm.evidence_call_ids,
       });
       queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? {
         ...current,
@@ -1297,6 +1300,35 @@ function App() {
                   })}
                 </div>
               </fieldset>
+              <details className="strategy-edit-wide strategy-edit-evidence">
+                <summary>
+                  Evidence calls
+                  <span>{strategyEditForm.evidence_call_ids.length} selected</span>
+                </summary>
+                <div className="strategy-evidence-options">
+                  {dashboard.calls.map((call) => {
+                    const selected = strategyEditForm.evidence_call_ids.includes(call.call_id);
+                    return (
+                      <label key={call.call_id}>
+                        <input
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() => setStrategyEditForm((current) => current ? {
+                            ...current,
+                            evidence_call_ids: selected
+                              ? current.evidence_call_ids.filter((callId) => callId !== call.call_id)
+                              : [...current.evidence_call_ids, call.call_id],
+                          } : current)}
+                        />
+                        <span>
+                          <strong>{call.call_id}</strong>
+                          <small>{call.issue} · {call.outcome}</small>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </details>
               {error ? <p className="strategy-edit-error strategy-edit-wide" role="alert">{error}</p> : null}
               <div className="strategy-edit-footer strategy-edit-wide">
                 <p>Issue, status, initiated date, and deadline are managed outside this editor.</p>
