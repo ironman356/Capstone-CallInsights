@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, RefreshCw, ShieldCheck, Sparkles, Target } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -112,6 +112,9 @@ function App() {
   const [selectedIssueSlug, setSelectedIssueSlug] = useState<string | null>(null);
   const [selectedCallId, setSelectedCallId] = useState<string | null>(null);
   const [syncing, setSyncing] = useState(false);
+  const draggedStrategyRef = useRef<string | null>(null);
+  const [draggedStrategyId, setDraggedStrategyId] = useState<string | null>(null);
+  const [dropStage, setDropStage] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reportSnapshot, setReportSnapshot] = useState<WorkspacePayload["reports"] | null>(null);
@@ -245,9 +248,13 @@ function App() {
   async function moveStrategy(strategy: StrategyRecord, direction: -1 | 1) {
     const currentIndex = STAGE_ORDER.indexOf(strategy.status);
     const nextStatus = STAGE_ORDER[currentIndex + direction];
-    if (!nextStatus) {
-      return;
-    }
+    if (nextStatus) await moveStrategyToStage(strategy, nextStatus);
+  }
+
+  async function moveStrategyToStage(strategy: StrategyRecord, nextStatus: string) {
+    if (syncing || strategy.status === nextStatus || !STAGE_ORDER.includes(nextStatus)) return;
+    setError(null);
+    setMessage(null);
     setSyncing(true);
     try {
       const updated = await api.updateStrategy(strategy.strategy_id, { status: nextStatus });
@@ -702,15 +709,57 @@ function App() {
                 </div>
                 <Target size={18} />
               </div>
-              <div className="kanban-board">
+              <div className="kanban-board" aria-busy={syncing}>
                 {workspace.strategy_board.stages.map((stage) => (
-                  <div className="kanban-column" key={stage.name}>
+                  <div
+                    className={`kanban-column${dropStage === stage.name ? " is-drop-target" : ""}`}
+                    key={stage.name}
+                    onDragOver={(event) => {
+                      const strategy = workspace.strategy_board.strategies.find((item) => item.strategy_id === draggedStrategyRef.current);
+                      if (syncing || !strategy || strategy.status === stage.name) return;
+                      event.preventDefault();
+                      event.dataTransfer.dropEffect = "move";
+                      setDropStage(stage.name);
+                    }}
+                    onDragLeave={(event) => {
+                      if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) {
+                        setDropStage((current) => current === stage.name ? null : current);
+                      }
+                    }}
+                    onDrop={(event) => {
+                      event.preventDefault();
+                      const strategy = workspace.strategy_board.strategies.find((item) => item.strategy_id === draggedStrategyRef.current);
+                      draggedStrategyRef.current = null;
+                      setDraggedStrategyId(null);
+                      setDropStage(null);
+                      if (strategy) void moveStrategyToStage(strategy, stage.name);
+                    }}
+                  >
                     <div className="kanban-column-head">
                       <strong>{stage.name}</strong>
                       <span>{stage.count}</span>
                     </div>
                     {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => (
-                      <article className="strategy-card" key={strategy.strategy_id}>
+                      <article
+                        className={`strategy-card${draggedStrategyId === strategy.strategy_id ? " is-dragging" : ""}`}
+                        key={strategy.strategy_id}
+                        draggable={!syncing}
+                        onDragStart={(event) => {
+                          if (syncing || (event.target instanceof Element && event.target.closest("button"))) {
+                            event.preventDefault();
+                            return;
+                          }
+                          event.dataTransfer.effectAllowed = "move";
+                          event.dataTransfer.setData("text/plain", strategy.strategy_id);
+                          draggedStrategyRef.current = strategy.strategy_id;
+                          setDraggedStrategyId(strategy.strategy_id);
+                        }}
+                        onDragEnd={() => {
+                          draggedStrategyRef.current = null;
+                          setDraggedStrategyId(null);
+                          setDropStage(null);
+                        }}
+                      >
                         <p className="strategy-issue">{strategy.issue}</p>
                         <h4>{strategy.title}</h4>
                         <p>{strategy.hypothesis}</p>
@@ -720,8 +769,8 @@ function App() {
                           ))}
                         </div>
                         <div className="strategy-actions">
-                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, -1)}>Back</button>
-                          <button type="button" className="ghost-button small" onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
+                          <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[0]} onClick={() => void moveStrategy(strategy, -1)}>Back</button>
+                          <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[STAGE_ORDER.length - 1]} onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
                           <button
                             type="button"
                             className="ghost-button small strategy-delete-button"
