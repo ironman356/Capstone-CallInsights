@@ -709,6 +709,7 @@ function App() {
                 </div>
                 <Target size={18} />
               </div>
+              <p className="kanban-help">Drag a card to another column, or use Back and Forward.</p>
               <div className="kanban-board" aria-busy={syncing}>
                 {workspace.strategy_board.stages.map((stage) => (
                   <div
