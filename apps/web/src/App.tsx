@@ -1,6 +1,6 @@
 import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, RefreshCw, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api } from "./api";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
@@ -13,6 +13,14 @@ import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
 type ThemeMode = "light" | "dark";
+
+interface StrategyEditForm {
+  title: string;
+  owner: string;
+  hypothesis: string;
+  notes: string;
+  kpi_focus: string[];
+}
 
 const STAGE_ORDER = ["Proposed", "Accepted", "In Progress", "Evaluating", "Closed"];
 const KPI_OPTIONS = ["AHT", "FCR", "Repeat Calls", "Escalation Rate", "Sentiment"];
@@ -205,6 +213,8 @@ function App() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reportSnapshot, setReportSnapshot] = useState<WorkspacePayload["reports"] | null>(null);
+  const [editingStrategy, setEditingStrategy] = useState<StrategyRecord | null>(null);
+  const [strategyEditForm, setStrategyEditForm] = useState<StrategyEditForm | null>(null);
   const [formState, setFormState] = useState<StrategyCreateInput>({
     issue_slug: "",
     title: "",
@@ -241,6 +251,23 @@ function App() {
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
+
+  useEffect(() => {
+    if (!editingStrategy) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && !syncing) {
+        setEditingStrategy(null);
+        setStrategyEditForm(null);
+      }
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [editingStrategy, syncing]);
 
   useEffect(() => {
     if (!dashboard) {
@@ -328,6 +355,65 @@ function App() {
       setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "", due_date: "" }));
     } catch (createError) {
       setError(createError instanceof Error ? createError.message : "Unable to create strategy");
+    } finally {
+      setSyncing(false);
+    }
+  }
+
+  function openStrategyEditor(strategy: StrategyRecord) {
+    setEditingStrategy(strategy);
+    setStrategyEditForm({
+      title: strategy.title,
+      owner: strategy.owner,
+      hypothesis: strategy.hypothesis,
+      notes: strategy.notes,
+      kpi_focus: [...strategy.kpi_focus],
+    });
+    setError(null);
+    setMessage(null);
+  }
+
+  function closeStrategyEditor() {
+    if (syncing) return;
+    setEditingStrategy(null);
+    setStrategyEditForm(null);
+  }
+
+  async function saveStrategyEdits(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!editingStrategy || !strategyEditForm || syncing) return;
+
+    const title = strategyEditForm.title.trim();
+    const owner = strategyEditForm.owner.trim();
+    const hypothesis = strategyEditForm.hypothesis.trim();
+    if (!title || !owner || !hypothesis) {
+      setError("Title, owner, and hypothesis are required.");
+      return;
+    }
+
+    setSyncing(true);
+    setError(null);
+    setMessage(null);
+    try {
+      const updated = await api.updateStrategy(editingStrategy.strategy_id, {
+        title,
+        owner,
+        hypothesis,
+        notes: strategyEditForm.notes.trim(),
+        kpi_focus: strategyEditForm.kpi_focus,
+      });
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? {
+        ...current,
+        strategy_board: {
+          ...current.strategy_board,
+          strategies: current.strategy_board.strategies.map((item) => item.strategy_id === updated.strategy_id ? updated : item),
+        },
+      } : current);
+      setEditingStrategy(null);
+      setStrategyEditForm(null);
+      setMessage(`${updated.title} updated.`);
+    } catch (updateError) {
+      setError(updateError instanceof Error ? updateError.message : "Unable to update strategy");
     } finally {
       setSyncing(false);
     }
@@ -893,6 +979,16 @@ function App() {
                           ))}
                         </div>
                         <div className="strategy-actions">
+                          <button
+                            type="button"
+                            className="ghost-button small strategy-edit-button"
+                            disabled={syncing}
+                            onClick={() => openStrategyEditor(strategy)}
+                            aria-label={`Edit ${strategy.title}`}
+                          >
+                            <Pencil size={13} />
+                            Edit
+                          </button>
                           <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[0]} onClick={() => void moveStrategy(strategy, -1)}>Back</button>
                           <button type="button" className="ghost-button small" disabled={syncing || strategy.status === STAGE_ORDER[STAGE_ORDER.length - 1]} onClick={() => void moveStrategy(strategy, 1)}>Forward</button>
                           <button
@@ -1118,6 +1214,101 @@ function App() {
           </section>
         ) : null}
       </main>
+      {editingStrategy && strategyEditForm ? (
+        <div
+          className="strategy-edit-overlay"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeStrategyEditor();
+          }}
+        >
+          <section className="strategy-edit-dialog" role="dialog" aria-modal="true" aria-labelledby="strategy-edit-title">
+            <div className="strategy-edit-header">
+              <div>
+                <p className="section-kicker">Edit Action Plan</p>
+                <h3 id="strategy-edit-title">Update strategy details</h3>
+              </div>
+              <button type="button" className="icon-button" onClick={closeStrategyEditor} disabled={syncing} aria-label="Close strategy editor">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="strategy-edit-context">
+              <div><span>Issue</span><strong>{editingStrategy.issue}</strong></div>
+              <div><span>Status</span><strong>{editingStrategy.status}</strong></div>
+              <div><span>Initiated</span><strong>{formatStrategyDate(editingStrategy.created_at)}</strong></div>
+            </div>
+
+            <form className="strategy-edit-form" onSubmit={(event) => void saveStrategyEdits(event)}>
+              <label>
+                <span>Strategy title</span>
+                <input
+                  className="dashboard-input"
+                  value={strategyEditForm.title}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, title: event.target.value } : current)}
+                  autoFocus
+                  required
+                />
+              </label>
+              <label>
+                <span>Owner</span>
+                <input
+                  className="dashboard-input"
+                  value={strategyEditForm.owner}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, owner: event.target.value } : current)}
+                  required
+                />
+              </label>
+              <label className="strategy-edit-wide">
+                <span>Hypothesis</span>
+                <textarea
+                  className="dashboard-input dashboard-textarea"
+                  value={strategyEditForm.hypothesis}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, hypothesis: event.target.value } : current)}
+                  required
+                />
+              </label>
+              <label className="strategy-edit-wide">
+                <span>Notes <small>Optional</small></span>
+                <textarea
+                  className="dashboard-input dashboard-textarea"
+                  value={strategyEditForm.notes}
+                  onChange={(event) => setStrategyEditForm((current) => current ? { ...current, notes: event.target.value } : current)}
+                />
+              </label>
+              <fieldset className="strategy-edit-wide strategy-edit-kpis">
+                <legend>KPI focus</legend>
+                <div className="kpi-grid">
+                  {KPI_OPTIONS.map((kpi) => {
+                    const active = strategyEditForm.kpi_focus.includes(kpi);
+                    return (
+                      <button
+                        type="button"
+                        className={`kpi-toggle ${active ? "active" : ""}`}
+                        key={kpi}
+                        aria-pressed={active}
+                        onClick={() => setStrategyEditForm((current) => current ? {
+                          ...current,
+                          kpi_focus: active ? current.kpi_focus.filter((item) => item !== kpi) : [...current.kpi_focus, kpi],
+                        } : current)}
+                      >
+                        {kpi}
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+              {error ? <p className="strategy-edit-error strategy-edit-wide" role="alert">{error}</p> : null}
+              <div className="strategy-edit-footer strategy-edit-wide">
+                <p>Issue, status, initiated date, and deadline are managed outside this editor.</p>
+                <div>
+                  <button type="button" className="ghost-button" onClick={closeStrategyEditor} disabled={syncing}>Cancel</button>
+                  <button type="submit" className="primary-button" disabled={syncing}>{syncing ? "Saving…" : "Save changes"}</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }
