@@ -142,19 +142,32 @@ class Rank1ApiTests(unittest.TestCase):
                 "notes": "Seeded from API test",
                 "kpi_focus": ["AHT", "FCR"],
                 "evidence_call_ids": [dashboard["calls"][0]["call_id"]],
+                "due_date": "2026-10-15",
             },
         )
         created = create_response.json()
         self.assertEqual(create_response.status_code, 200)
         self.assertEqual(created["status"], "Proposed")
+        self.assertEqual(created["due_date"], "2026-10-15")
+        initiated_at = created["created_at"]
 
         update_response = self.client.patch(
             f"/api/rank1/strategies/{created['strategy_id']}",
-            json={"status": "Accepted"},
+            json={"status": "Accepted", "due_date": "2026-10-22", "created_at": "2000-01-01T00:00:00Z"},
         )
         updated = update_response.json()
         self.assertEqual(update_response.status_code, 200)
         self.assertEqual(updated["status"], "Accepted")
+        self.assertEqual(updated["due_date"], "2026-10-22")
+        self.assertEqual(updated["created_at"], initiated_at)
+
+        clear_response = self.client.patch(
+            f"/api/rank1/strategies/{created['strategy_id']}",
+            json={"due_date": None},
+        )
+        self.assertEqual(clear_response.status_code, 200)
+        self.assertIsNone(clear_response.json()["due_date"])
+        self.assertEqual(clear_response.json()["created_at"], initiated_at)
 
     def test_report_export_endpoint_returns_report_payload(self) -> None:
         response = self.client.post("/api/rank1/reports/export")

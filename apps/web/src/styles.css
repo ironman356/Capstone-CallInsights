@@ -580,6 +580,53 @@ button { cursor: pointer; }
 }
 .strategy-card h4 { margin: 0 0 8px; }
 
+.strategy-dates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 14px 0;
+}
+.strategy-dates div {
+  min-width: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+}
+.strategy-dates dt,
+.strategy-deadline-field > label,
+.strategy-form-field > span {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+.strategy-dates dd { margin: 4px 0 0; font-size: 0.84rem; }
+.deadline-badge { color: var(--muted); }
+.deadline-badge.scheduled { color: var(--accent-alt); }
+.deadline-badge.soon { color: var(--warn); }
+.deadline-badge.overdue { color: var(--risk); font-weight: 700; }
+.deadline-badge.closed { color: var(--success); }
+.strategy-deadline-field,
+.strategy-form-field { display: grid; gap: 7px; }
+.strategy-deadline-field { margin: 0 0 14px; }
+.strategy-deadline-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+.strategy-deadline-field .dashboard-input,
+.strategy-form-field .dashboard-input {
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 12px;
+  color-scheme: dark;
+}
+[data-theme="light"] .strategy-deadline-field .dashboard-input,
+[data-theme="light"] .strategy-form-field .dashboard-input { color-scheme: light; }
+.deadline-error { color: var(--risk); line-height: 1.35; }
+.strategy-form-field small { color: var(--accent-alt); font-weight: 500; }
+
 .strategy-delete-button {
   border-color: color-mix(in srgb, var(--risk) 52%, var(--line));
   background: color-mix(in srgb, var(--risk) 14%, transparent);

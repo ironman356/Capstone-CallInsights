@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from datetime import date
+
 from pydantic import BaseModel
 
 
@@ -64,6 +66,7 @@ class StrategyRecord(BaseModel):
     kpi_focus: list[str]
     evidence_call_ids: list[str]
     notes: str
+    due_date: date | None = None
     created_at: str
     updated_at: str
 
@@ -81,6 +84,7 @@ class StrategyCreateRequest(BaseModel):
     notes: str = ""
     kpi_focus: list[str] = []
     evidence_call_ids: list[str] = []
+    due_date: date | None = None
 
 
 class StrategyUpdateRequest(BaseModel):
@@ -90,6 +94,7 @@ class StrategyUpdateRequest(BaseModel):
     notes: str | None = None
     kpi_focus: list[str] | None = None
     evidence_call_ids: list[str] | None = None
+    due_date: date | None = None
 
 
 class ExportReportResponse(BaseModel):
