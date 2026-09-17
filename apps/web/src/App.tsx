@@ -318,19 +318,21 @@ function App() {
     () => issueCards.slice(0, 8).map((issue) => ({ issue: compactLabel(issue.issue), count: issue.count })),
     [issueCards],
   );
+  const sortedCalls = useMemo(
+    () => [...(dashboard?.calls ?? [])].sort((left, right) => {
+      if (callIssueSort === "recent" || callIssueSort === "oldest") {
+        const order = compareCallRecency(left, right);
+        return callIssueSort === "recent" ? -order : order;
+      }
+      const order = left.issue.localeCompare(right.issue) || left.call_id.localeCompare(right.call_id);
+      return callIssueSort === "issue-asc" ? order : -order;
+    }),
+    [callIssueSort, dashboard],
+  );
   const filteredCalls = useMemo(() => {
     const query = callIssueFilter.trim().toLowerCase();
-    return [...(dashboard?.calls ?? [])]
-      .filter((call) => !query || (call.issues ?? [call.issue]).some((issue) => issue.toLowerCase().includes(query)))
-      .sort((left, right) => {
-        if (callIssueSort === "recent" || callIssueSort === "oldest") {
-          const order = compareCallRecency(left, right);
-          return callIssueSort === "recent" ? -order : order;
-        }
-        const order = left.issue.localeCompare(right.issue) || left.call_id.localeCompare(right.call_id);
-        return callIssueSort === "issue-asc" ? order : -order;
-      });
-  }, [callIssueFilter, callIssueSort, dashboard]);
+    return sortedCalls.filter((call) => !query || (call.issues ?? [call.issue]).some((issue) => issue.toLowerCase().includes(query)));
+  }, [callIssueFilter, sortedCalls]);
   const callPageCount = Math.max(1, Math.ceil(filteredCalls.length / CALLS_PER_PAGE));
   const visibleCalls = useMemo(
     () => filteredCalls.slice((callPage - 1) * CALLS_PER_PAGE, callPage * CALLS_PER_PAGE),
@@ -363,6 +365,14 @@ function App() {
       setPage(nextPage);
       window.history.pushState({}, "", pathFromPage(nextPage));
     });
+  }
+
+  function openCall(callId: string) {
+    const callIndex = sortedCalls.findIndex((call) => call.call_id === callId);
+    setCallIssueFilter("");
+    setCallPage(callIndex < 0 ? 1 : Math.floor(callIndex / CALLS_PER_PAGE) + 1);
+    setSelectedCallId(callId);
+    navigate("calls");
   }
 
   async function refreshWorkspace(mode: "refresh" | "rerun" | "recalibrate" = "refresh") {
@@ -602,10 +612,7 @@ function App() {
           setSelectedIssueSlug(issueSlug);
           navigate("issues");
         }}
-        onOpenCall={(callId) => {
-          setSelectedCallId(callId);
-          navigate("calls");
-        }}
+        onOpenCall={openCall}
       />
     );
   }
@@ -880,7 +887,7 @@ function App() {
                     <div className="subpanel">
                       <h4>Representative calls</h4>
                       {issueDetailQuery.data.evidence_calls.map((call) => (
-                        <button type="button" className="evidence-row" key={call.call_id} onClick={() => { setSelectedCallId(call.call_id); navigate("calls"); }}>
+                        <button type="button" className="evidence-row" key={call.call_id} onClick={() => openCall(call.call_id)}>
                           <strong>{call.call_id}</strong>
                           <span>{call.summary}</span>
                         </button>
@@ -1224,10 +1231,7 @@ function App() {
               setSelectedIssueSlug(issueSlug);
               navigate("issues");
             }}
-            onOpenCall={(callId) => {
-              setSelectedCallId(callId);
-              navigate("calls");
-            }}
+            onOpenCall={openCall}
           />
         ) : null}
 
@@ -1239,10 +1243,7 @@ function App() {
               setSelectedIssueSlug(issueSlug);
               navigate("issues");
             }}
-            onOpenCall={(callId) => {
-              setSelectedCallId(callId);
-              navigate("calls");
-            }}
+            onOpenCall={openCall}
           />
         ) : null}
 
@@ -1257,10 +1258,7 @@ function App() {
               setSelectedIssueSlug(issue.slug);
               navigate("issues");
             }}
-            onOpenCall={(callId) => {
-              setSelectedCallId(callId);
-              navigate("calls");
-            }}
+            onOpenCall={openCall}
           />
         ) : null}
 
