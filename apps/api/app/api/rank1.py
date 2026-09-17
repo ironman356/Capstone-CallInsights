@@ -124,6 +124,7 @@ def create_strategy(payload: StrategyCreateRequest) -> StrategyRecord:
             notes=payload.notes,
             kpi_focus=payload.kpi_focus,
             evidence_call_ids=payload.evidence_call_ids,
+            due_date=payload.due_date.isoformat() if payload.due_date else None,
         )
     except ValueError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
@@ -132,7 +133,7 @@ def create_strategy(payload: StrategyCreateRequest) -> StrategyRecord:
 
 @router.patch("/strategies/{strategy_id}", response_model=StrategyRecord)
 def update_strategy(strategy_id: str, payload: StrategyUpdateRequest) -> StrategyRecord:
-    strategy = service.update_strategy(service.load_or_run(), strategy_id, payload.model_dump(exclude_unset=True))
+    strategy = service.update_strategy(service.load_or_run(), strategy_id, payload.model_dump(mode="json", exclude_unset=True))
     if strategy is None:
         raise HTTPException(status_code=404, detail="Strategy not found")
     return StrategyRecord(**strategy)
