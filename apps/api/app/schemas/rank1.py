@@ -88,6 +88,7 @@ class StrategyCreateRequest(BaseModel):
 
 
 class StrategyUpdateRequest(BaseModel):
+    title: str | None = None
     status: str | None = None
     owner: str | None = None
     hypothesis: str | None = None

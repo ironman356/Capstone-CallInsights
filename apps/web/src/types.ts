@@ -174,6 +174,7 @@ export interface StrategyCreateInput {
 }
 
 export interface StrategyUpdateInput {
+  title?: string;
   status?: string;
   owner?: string;
   hypothesis?: string;
