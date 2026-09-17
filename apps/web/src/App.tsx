@@ -25,6 +25,32 @@ const TONE_COLORS: Record<string, string> = {
   warning: "#ffc857",
 };
 
+function formatStrategyDate(value: string) {
+  const date = new Date(value.includes("T") ? value : `${value}T00:00:00`);
+  return Number.isNaN(date.getTime())
+    ? value
+    : new Intl.DateTimeFormat(undefined, { month: "short", day: "numeric", year: "numeric" }).format(date);
+}
+
+function localDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function deadlineState(strategy: StrategyRecord) {
+  if (!strategy.due_date) return { label: "No deadline", tone: "none" };
+  if (strategy.status === "Closed") return { label: `Deadline ${formatStrategyDate(strategy.due_date)}`, tone: "closed" };
+
+  const today = localDateKey();
+  const daysRemaining = Math.ceil((new Date(`${strategy.due_date}T00:00:00`).getTime() - new Date(`${today}T00:00:00`).getTime()) / 86_400_000);
+  if (daysRemaining < 0) return { label: `Overdue · ${formatStrategyDate(strategy.due_date)}`, tone: "overdue" };
+  if (daysRemaining === 0) return { label: "Due today", tone: "soon" };
+  if (daysRemaining <= 7) return { label: `Due in ${daysRemaining} day${daysRemaining === 1 ? "" : "s"}`, tone: "soon" };
+  return { label: `Due ${formatStrategyDate(strategy.due_date)}`, tone: "scheduled" };
+}
+
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
   overview: {
     title: "Overview",
@@ -126,6 +152,7 @@ function App() {
     notes: "",
     kpi_focus: ["AHT", "FCR"],
     evidence_call_ids: [],
+    due_date: "",
   });
 
   const workspaceQuery = useQuery({ queryKey: ["workspace"], queryFn: api.getWorkspace });
@@ -237,7 +264,7 @@ function App() {
       const board = await api.getStrategies();
       queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? { ...current, strategy_board: board } : current);
       setMessage("Strategy created.");
-      setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "" }));
+      setFormState((current) => ({ ...current, title: "", hypothesis: "", notes: "", due_date: "" }));
     } catch (createError) {
       setError(createError instanceof Error ? createError.message : "Unable to create strategy");
     } finally {
@@ -249,6 +276,28 @@ function App() {
     const currentIndex = STAGE_ORDER.indexOf(strategy.status);
     const nextStatus = STAGE_ORDER[currentIndex + direction];
     if (nextStatus) await moveStrategyToStage(strategy, nextStatus);
+  }
+
+  async function updateStrategyDeadline(strategy: StrategyRecord, dueDate: string) {
+    if (syncing) return;
+    setError(null);
+    setMessage(null);
+    setSyncing(true);
+    try {
+      const updated = await api.updateStrategy(strategy.strategy_id, { due_date: dueDate || null });
+      queryClient.setQueryData<WorkspacePayload | undefined>(["workspace"], (current) => current ? {
+        ...current,
+        strategy_board: {
+          ...current.strategy_board,
+          strategies: current.strategy_board.strategies.map((item) => item.strategy_id === updated.strategy_id ? updated : item),
+        },
+      } : current);
+      setMessage(dueDate ? `${strategy.title} deadline updated.` : `${strategy.title} deadline removed.`);
+    } catch (deadlineError) {
+      setError(deadlineError instanceof Error ? deadlineError.message : "Unable to update deadline");
+    } finally {
+      setSyncing(false);
+    }
   }
 
   async function moveStrategyToStage(strategy: StrategyRecord, nextStatus: string) {
@@ -740,13 +789,15 @@ function App() {
                       <strong>{stage.name}</strong>
                       <span>{stage.count}</span>
                     </div>
-                    {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => (
+                    {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => {
+                      const deadline = deadlineState(strategy);
+                      return (
                       <article
                         className={`strategy-card${draggedStrategyId === strategy.strategy_id ? " is-dragging" : ""}`}
                         key={strategy.strategy_id}
                         draggable={!syncing}
                         onDragStart={(event) => {
-                          if (syncing || (event.target instanceof Element && event.target.closest("button"))) {
+                          if (syncing || (event.target instanceof Element && event.target.closest("button, input"))) {
                             event.preventDefault();
                             return;
                           }
@@ -764,6 +815,26 @@ function App() {
                         <p className="strategy-issue">{strategy.issue}</p>
                         <h4>{strategy.title}</h4>
                         <p>{strategy.hypothesis}</p>
+                        <dl className="strategy-dates">
+                          <div>
+                            <dt>Initiated</dt>
+                            <dd>{formatStrategyDate(strategy.created_at)}</dd>
+                          </div>
+                          <div>
+                            <dt>Deadline</dt>
+                            <dd><span className={`deadline-badge ${deadline.tone}`}>{deadline.label}</span></dd>
+                          </div>
+                        </dl>
+                        <label className="strategy-deadline-field">
+                          <span>{strategy.due_date ? "Change deadline" : "Add deadline"}</span>
+                          <input
+                            type="date"
+                            className="dashboard-input"
+                            value={strategy.due_date ?? ""}
+                            disabled={syncing}
+                            onChange={(event) => void updateStrategyDeadline(strategy, event.target.value)}
+                          />
+                        </label>
                         <div className="detail-tags">
                           {strategy.kpi_focus.map((kpi) => (
                             <span className="data-tag muted" key={kpi}>{kpi}</span>
@@ -783,7 +854,8 @@ function App() {
                           </button>
                         </div>
                       </article>
-                    ))}
+                      );
+                    })}
                   </div>
                 ))}
               </div>
@@ -806,6 +878,10 @@ function App() {
                 <input className="dashboard-input" placeholder="Owner" value={formState.owner} onChange={(event) => setFormState((current) => ({ ...current, owner: event.target.value }))} />
                 <textarea className="dashboard-input dashboard-textarea" placeholder="Hypothesis" value={formState.hypothesis} onChange={(event) => setFormState((current) => ({ ...current, hypothesis: event.target.value }))} />
                 <textarea className="dashboard-input dashboard-textarea" placeholder="Notes" value={formState.notes} onChange={(event) => setFormState((current) => ({ ...current, notes: event.target.value }))} />
+                <label className="strategy-form-field">
+                  <span>Deadline <small>Optional</small></span>
+                  <input type="date" className="dashboard-input" value={formState.due_date} onChange={(event) => setFormState((current) => ({ ...current, due_date: event.target.value }))} />
+                </label>
                 <div className="kpi-grid">
                   {KPI_OPTIONS.map((kpi) => {
                     const active = formState.kpi_focus.includes(kpi);
