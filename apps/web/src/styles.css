@@ -594,7 +594,7 @@ button { cursor: pointer; }
   background: color-mix(in srgb, var(--surface) 80%, transparent);
 }
 .strategy-dates dt,
-.strategy-deadline-field > span,
+.strategy-deadline-field > label,
 .strategy-form-field > span {
   color: var(--muted);
   font-size: 0.75rem;
@@ -609,7 +609,22 @@ button { cursor: pointer; }
 .strategy-deadline-field,
 .strategy-form-field { display: grid; gap: 7px; }
 .strategy-deadline-field { margin: 0 0 14px; }
-.strategy-deadline-field .dashboard-input { padding: 9px 10px; border-radius: 12px; }
+.strategy-deadline-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+.strategy-deadline-field .dashboard-input,
+.strategy-form-field .dashboard-input {
+  min-width: 0;
+  padding: 9px 10px;
+  border-radius: 12px;
+  color-scheme: dark;
+}
+[data-theme="light"] .strategy-deadline-field .dashboard-input,
+[data-theme="light"] .strategy-form-field .dashboard-input { color-scheme: light; }
+.deadline-error { color: var(--risk); line-height: 1.35; }
 .strategy-form-field small { color: var(--accent-alt); font-weight: 500; }
 
 .strategy-delete-button {

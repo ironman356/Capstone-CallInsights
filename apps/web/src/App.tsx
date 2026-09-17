@@ -51,6 +51,67 @@ function deadlineState(strategy: StrategyRecord) {
   return { label: `Due ${formatStrategyDate(strategy.due_date)}`, tone: "scheduled" };
 }
 
+function isValidDeadline(value: string) {
+  if (!value) return true;
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+  if (!match || Number(match[1]) < 1900) return false;
+  const date = new Date(`${value}T00:00:00`);
+  return !Number.isNaN(date.getTime()) && localDateKey(date) === value;
+}
+
+function StrategyDeadlineEditor({
+  strategy,
+  disabled,
+  onSave,
+}: {
+  strategy: StrategyRecord;
+  disabled: boolean;
+  onSave: (strategy: StrategyRecord, dueDate: string) => Promise<void>;
+}) {
+  const savedDate = strategy.due_date ?? "";
+  const [draftDate, setDraftDate] = useState(savedDate);
+  const valid = isValidDeadline(draftDate);
+  const changed = draftDate !== savedDate;
+  const inputId = `strategy-deadline-${strategy.strategy_id}`;
+
+  useEffect(() => {
+    setDraftDate(savedDate);
+  }, [savedDate]);
+
+  function saveDraft() {
+    if (!disabled && changed && valid) void onSave(strategy, draftDate);
+  }
+
+  return (
+    <div className="strategy-deadline-field">
+      <label htmlFor={inputId}>{strategy.due_date ? "Change deadline" : "Add deadline"}</label>
+      <span className="strategy-deadline-control">
+        <input
+          id={inputId}
+          type="date"
+          className="dashboard-input"
+          value={draftDate}
+          min="1900-01-01"
+          disabled={disabled}
+          aria-invalid={!valid}
+          onChange={(event) => setDraftDate(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              saveDraft();
+            }
+            if (event.key === "Escape") setDraftDate(savedDate);
+          }}
+        />
+        <button type="button" className="ghost-button small" disabled={disabled || !changed || !valid} onClick={saveDraft}>
+          Save
+        </button>
+      </span>
+      {!valid ? <small className="deadline-error">Enter a complete four-digit year (1900 or later).</small> : null}
+    </div>
+  );
+}
+
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
   overview: {
     title: "Overview",
@@ -825,16 +886,7 @@ function App() {
                             <dd><span className={`deadline-badge ${deadline.tone}`}>{deadline.label}</span></dd>
                           </div>
                         </dl>
-                        <label className="strategy-deadline-field">
-                          <span>{strategy.due_date ? "Change deadline" : "Add deadline"}</span>
-                          <input
-                            type="date"
-                            className="dashboard-input"
-                            value={strategy.due_date ?? ""}
-                            disabled={syncing}
-                            onChange={(event) => void updateStrategyDeadline(strategy, event.target.value)}
-                          />
-                        </label>
+                        <StrategyDeadlineEditor strategy={strategy} disabled={syncing} onSave={updateStrategyDeadline} />
                         <div className="detail-tags">
                           {strategy.kpi_focus.map((kpi) => (
                             <span className="data-tag muted" key={kpi}>{kpi}</span>
@@ -880,7 +932,7 @@ function App() {
                 <textarea className="dashboard-input dashboard-textarea" placeholder="Notes" value={formState.notes} onChange={(event) => setFormState((current) => ({ ...current, notes: event.target.value }))} />
                 <label className="strategy-form-field">
                   <span>Deadline <small>Optional</small></span>
-                  <input type="date" className="dashboard-input" value={formState.due_date} onChange={(event) => setFormState((current) => ({ ...current, due_date: event.target.value }))} />
+                  <input type="date" className="dashboard-input" min="1900-01-01" value={formState.due_date} onChange={(event) => setFormState((current) => ({ ...current, due_date: event.target.value }))} />
                 </label>
                 <div className="kpi-grid">
                   {KPI_OPTIONS.map((kpi) => {
