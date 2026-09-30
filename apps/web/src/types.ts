@@ -40,10 +40,13 @@ export interface CallCard {
   call_id: string;
   source_file: string;
   issue: string;
+  issues?: string[];
   outcome: string;
   behaviors: string[];
   summary: string;
   sentiments: Record<string, number>;
+  timestamp_start?: string | null;
+  timestamp_end?: string | null;
 }
 
 export interface DashboardPayload {

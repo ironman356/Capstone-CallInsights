@@ -370,6 +370,21 @@ button { cursor: pointer; }
   margin-bottom: 14px;
 }
 
+.sentiment-shift {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  padding: 7px 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.sentiment-shift span { color: var(--muted); font-size: 0.72rem; }
+.sentiment-shift strong { font-size: 0.95rem; }
+.sentiment-shift.positive strong { color: var(--success); }
+.sentiment-shift.negative strong { color: var(--risk); }
+.sentiment-shift.neutral strong { color: var(--muted); }
+
 .chart-box { min-height: 300px; }
 .chart-box.compact { min-height: 240px; }
 
@@ -526,6 +541,27 @@ button { cursor: pointer; }
 
 .call-review-layout {
   grid-template-columns: 0.9fr 1.1fr;
+}
+
+.call-list-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.call-list-controls .dashboard-input {
+  min-width: 0;
+}
+
+.call-list-controls .dashboard-input:first-child {
+  grid-column: 1 / -1;
+}
+
+.call-list-controls :disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .transcript-stream {

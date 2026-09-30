@@ -649,10 +649,16 @@ function GuidedActionButton({
   );
 }
 
+function findWorseningIssue(issues: DashboardIssue[]) {
+  return issues
+    .filter((issue) => issue.average_shift < 0)
+    .sort((left, right) => left.average_shift - right.average_shift)[0];
+}
+
 function buildExecutiveBrief(workspace: WorkspacePayload) {
   const issues = workspace.dashboard.issues;
   const topIssue = issues[0];
-  const worseningIssue = [...issues].sort((left, right) => left.average_shift - right.average_shift)[0];
+  const worseningIssue = findWorseningIssue(issues);
   const openStrategies = workspace.strategy_board.strategies.filter((item) => item.status !== "Closed");
   const stuckStrategies = openStrategies.filter((item) => item.status === "In Progress");
   const topPattern = workspace.dashboard.overview.top_patterns[0];
@@ -667,11 +673,11 @@ function buildExecutiveBrief(workspace: WorkspacePayload) {
         tone: "risk",
       },
       {
-        title: `${titleCase(worseningIssue?.issue ?? "Sentiment")} is moving the wrong way`,
+        title: worseningIssue ? `${titleCase(worseningIssue.issue)} is moving the wrong way` : "No worsening sentiment detected",
         detail: worseningIssue
           ? `Average sentiment shift is ${worseningIssue.average_shift.toFixed(2)}, which signals worsening customer experience inside this cluster.`
           : "No worsening issue detected.",
-        tone: "warning",
+        tone: worseningIssue ? "warning" : "stable",
       },
       {
         title: `${stuckStrategies.length} strategies are still in progress`,
@@ -711,7 +717,7 @@ function buildExecutiveBrief(workspace: WorkspacePayload) {
 }
 
 function buildChangeFeed(workspace: WorkspacePayload) {
-  const worseningIssue = [...workspace.dashboard.issues].sort((left, right) => left.average_shift - right.average_shift)[0];
+  const worseningIssue = findWorseningIssue(workspace.dashboard.issues);
   const stuckStrategies = workspace.strategy_board.strategies.filter((item) => item.status === "In Progress");
   const escalations = workspace.dashboard.overview.outcome_counts.escalated ?? workspace.dashboard.overview.outcome_counts.Escalated ?? 0;
 
@@ -723,12 +729,12 @@ function buildChangeFeed(workspace: WorkspacePayload) {
       tone: workspace.recalibration.new_clusters_detected > 0 ? "warning" : "stable",
     },
     {
-      title: "Worsening sentiment cluster",
+      title: worseningIssue ? "Worsening sentiment cluster" : "No worsening sentiment detected",
       detail: worseningIssue
         ? `${titleCase(worseningIssue.issue)} is showing the lowest average sentiment shift at ${worseningIssue.average_shift.toFixed(2)}.`
         : "No worsening cluster identified.",
       value: worseningIssue ? titleCase(worseningIssue.issue) : "none",
-      tone: "risk",
+      tone: worseningIssue ? "risk" : "stable",
     },
     {
       title: "Strategies stuck in progress",

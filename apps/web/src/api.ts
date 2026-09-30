@@ -68,14 +68,26 @@ export const api = {
   downloadReportPdf: async () => {
     const url = `${API_ROOT}/reports/export.pdf`;
     const filename = "call-insights-report.pdf";
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      const text = await response.text();
+      throw new Error(text || `Request failed with ${response.status}`);
+    }
+
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
-    anchor.href = url;
-    anchor.download = filename;
-    anchor.target = "_blank";
-    anchor.rel = "noopener";
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
-    return filename;
+
+    try {
+      anchor.href = objectUrl;
+      anchor.download = filename;
+      document.body.appendChild(anchor);
+      anchor.click();
+      return filename;
+    } finally {
+      anchor.remove();
+      URL.revokeObjectURL(objectUrl);
+    }
   },
 };

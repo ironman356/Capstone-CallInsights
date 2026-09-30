@@ -563,6 +563,12 @@ def summarize_call(issue: str, outcome: str, behaviors: list[str], sentiments: d
     )
 
 
+def call_issue_labels(call: dict) -> list[str]:
+    labels = [call.get("issue", "")]
+    labels.extend(segment.get("issue", "") for segment in call.get("segments", []))
+    return list(dict.fromkeys(label for label in labels if label))
+
+
 def _customer_text(turns: list[Turn]) -> str:
     return " ".join(turn.text for turn in turns if turn.speaker == "Customer")
 
@@ -1014,10 +1020,13 @@ class Rank1PipelineService:
                 "call_id": call["call_id"],
                 "source_file": call["source_file"],
                 "issue": call["issue"],
+                "issues": call_issue_labels(call),
                 "outcome": call["outcome"],
                 "behaviors": call["behaviors"],
                 "summary": call["summary"],
                 "sentiments": call["sentiments"],
+                "timestamp_start": call.get("timestamp_start"),
+                "timestamp_end": call.get("timestamp_end"),
             }
             for call in calls
         ]
@@ -1802,9 +1811,21 @@ class Rank1PipelineService:
 
         calls = [json.loads(line) for line in calls_path.read_text(encoding="utf-8").splitlines() if line.strip()]
         summary = json.loads(summary_path.read_text(encoding="utf-8"))
+        calls_by_id = {call["call_id"]: call for call in calls}
+        call_cards = []
+        for call_card in summary["calls"]:
+            source_call = calls_by_id.get(call_card["call_id"], call_card)
+            call_cards.append(
+                {
+                    **call_card,
+                    "issues": call_issue_labels(source_call),
+                    "timestamp_start": source_call.get("timestamp_start"),
+                    "timestamp_end": source_call.get("timestamp_end"),
+                }
+            )
         return {
             "overview": summary["overview"],
             "issues": summary["issues"],
-            "calls": summary["calls"],
+            "calls": call_cards,
             "call_details": {call["call_id"]: call for call in calls},
         }
