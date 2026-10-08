@@ -1026,6 +1026,7 @@ class Rank1PipelineService:
                 "summary": call["summary"],
                 "sentiments": call["sentiments"],
                 "turn_count": call.get("turn_count", len(call.get("turns", []))),
+                "first_contact_resolved": call["outcome"] == "resolved" and not call.get("unaddressed_issues", []),
                 "timestamp_start": call.get("timestamp_start"),
                 "timestamp_end": call.get("timestamp_end"),
             }
@@ -1821,6 +1822,10 @@ class Rank1PipelineService:
                     **call_card,
                     "issues": call_issue_labels(source_call),
                     "turn_count": source_call.get("turn_count", len(source_call.get("turns", []))),
+                    "first_contact_resolved": source_call.get(
+                        "first_contact_resolved",
+                        source_call.get("outcome") == "resolved" and not source_call.get("unaddressed_issues", []),
+                    ),
                     "timestamp_start": source_call.get("timestamp_start"),
                     "timestamp_end": source_call.get("timestamp_end"),
                 }

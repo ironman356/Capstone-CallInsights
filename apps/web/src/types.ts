@@ -46,6 +46,7 @@ export interface CallCard {
   summary: string;
   sentiments: Record<string, number>;
   turn_count?: number;
+  first_contact_resolved?: boolean;
   timestamp_start?: string | null;
   timestamp_end?: string | null;
 }

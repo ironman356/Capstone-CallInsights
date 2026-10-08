@@ -2582,11 +2582,6 @@ button { cursor: pointer; }
 /* Story Dashboard 1. */
 .results-main { align-content: start; padding-top: 12px; gap: 12px; }
 .results-main .workspace-heading p { margin-top: 4px; }
-.nav-card-featured {
-  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 15%, var(--panel-strong)), var(--surface));
-}
-.nav-card-featured.active { border-color: var(--accent); }
 .results-layout {
   display: grid;
   grid-template-columns: minmax(180px, 240px) minmax(220px, 300px) minmax(280px, 1fr);
@@ -2608,7 +2603,20 @@ button { cursor: pointer; }
 .results-list button.active { border-color: var(--accent); background: var(--surface-accent); }
 .results-list button:hover { border-color: color-mix(in srgb, var(--accent) 65%, var(--line)); }
 .results-selected-approach { margin: 0 0 16px; color: var(--muted); }
-.results-stat-row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); }
+.results-stats-scroll { overflow-x: auto; }
+.results-stats-table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; }
+.results-stats-table th, .results-stats-table td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+.results-stats-table thead th { border-top: 0; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.results-stats-table tbody th { min-width: 150px; }
+.results-stats-table td strong, .results-stats-table td small { display: block; }
+.results-stats-table td small { max-width: 150px; margin-top: 3px; color: var(--muted); }
+.results-stats-table td > span { display: block; min-width: max-content; margin-top: 3px; }
+.results-delta { min-width: max-content; font-weight: 750; }
+.results-delta.positive { color: var(--success); }
+.results-delta.negative { color: var(--risk); }
+.results-delta.neutral { color: var(--muted); }
+:root[data-theme="light"] .results-delta.positive { color: #087f5b; }
+:root[data-theme="light"] .results-delta.negative { color: #c92a2a; }
 
 @media (min-width: 901px) {
   .results-main .workspace-header { flex-direction: row; }

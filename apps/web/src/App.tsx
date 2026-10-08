@@ -642,7 +642,7 @@ function App() {
         </div>
         <nav className="dashboard-nav">
           {NAV_ITEMS.map(([key, label, description]) => (
-            <button key={key} type="button" className={`nav-card ${key === "results" ? "nav-card-featured" : ""} ${page === key ? "active" : ""}`} onClick={() => navigate(key)} aria-current={page === key ? "page" : undefined}>
+            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key)} aria-current={page === key ? "page" : undefined}>
               <strong>{label}</strong>
               {description ? <span>{description}</span> : null}
             </button>
