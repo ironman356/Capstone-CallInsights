@@ -40,6 +40,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     summary: "Compares each observed agent approach across customer issues.",
     highlights: ["Approach × issue matrix", "FCR impact", "Call evidence"],
   },
+  "approach-portfolio": {
+    title: "Story Dashboard 3",
+    summary: "Positions approaches by adoption, reliability, and modeled outcome impact.",
+    highlights: ["Portfolio map", "Quadrant decisions", "Approach evidence"],
+  },
   overview: {
     title: "Overview",
     summary: "Tracks KPIs, call drivers, outcomes, and service trends.",
