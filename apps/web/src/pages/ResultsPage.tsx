@@ -181,7 +181,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
       {selectedMetrics ? (
         <div className="panel-card results-column">
           <h3>Statistics</h3>
-          <p className="results-selected-approach">{titleCase(selectedApproach)}</p>
+          <p className="results-selected-approach">{titleCase(selectedApproach!)}</p>
           <div className="results-stats-scroll">
             <table className="results-stats-table">
               <thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Vs avg</th><th scope="col">Vs best</th><th scope="col">Vs worst</th></tr></thead>
@@ -215,7 +215,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
             </div>
             <div className="results-transcript-list">
               {recentApproachCalls.map((call) => {
-                const visibleApproaches = [selectedApproach, ...call.behaviors.filter((behavior) => behavior !== selectedApproach)].slice(0, 4);
+                const visibleApproaches = [selectedApproach!, ...call.behaviors.filter((behavior) => behavior !== selectedApproach)].slice(0, 4);
                 const remainingApproaches = call.behaviors.length - visibleApproaches.length;
                 return (
                   <button type="button" className="evidence-row" key={call.call_id} onClick={() => onOpenCall(call.call_id)}>

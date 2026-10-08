@@ -35,6 +35,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     summary: "Shows issues, their observed agent approaches, and statistics.",
     highlights: ["Issue list", "Approaches", "Statistics"],
   },
+  "approach-matrix": {
+    title: "Story Dashboard 2",
+    summary: "Compares each observed agent approach across customer issues.",
+    highlights: ["Approach × issue matrix", "FCR impact", "Call evidence"],
+  },
   overview: {
     title: "Overview",
     summary: "Tracks KPIs, call drivers, outcomes, and service trends.",

@@ -9,6 +9,7 @@ import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import ModelApproachesPage from "./pages/ModelApproachesPage";
+import ApproachMatrixPage from "./pages/ApproachMatrixPage";
 import ResultsPage from "./pages/ResultsPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
@@ -130,6 +131,11 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     description: "Issue list → Approaches → Statistics",
     kicker: "",
   },
+  "approach-matrix": {
+    title: "Story Dashboard 2",
+    description: "Approaches × Issues → Outcome impact",
+    kicker: "",
+  },
   overview: {
     title: "Overview",
     description: "Executive view of call drivers, outcomes, sentiment movement, and active action plans.",
@@ -194,6 +200,7 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["results", "Story Dashboard 1", ""],
+  ["approach-matrix", "Story Dashboard 2", ""],
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
@@ -650,7 +657,7 @@ function App() {
           <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
         </div>
       </aside>
-      <main className={`dashboard-main ${page === "results" ? "results-main" : ""}`}>
+      <main className={`dashboard-main ${page === "results" || page === "approach-matrix" ? "results-main" : ""}`}>
         <section className="workspace-header">
           <div className="workspace-heading">
             {pageMeta.kicker ? <p className="section-kicker">{pageMeta.kicker}</p> : null}
@@ -700,6 +707,7 @@ function App() {
         {message ? <div className="flash-banner success">{message}</div> : null}
         {error ? <div className="flash-banner error">{error}</div> : null}
         {page === "results" ? <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
+        {page === "approach-matrix" ? <ApproachMatrixPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
         {page === "overview" ? (
           <section className="grid-page overview-page">
             <div className="panel-card span-two">
