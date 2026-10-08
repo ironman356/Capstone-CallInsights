@@ -1,10 +1,11 @@
 import { useState } from "react";
 import type { CallCard, DashboardIssue } from "../types";
-import { titleCase } from "../utils";
+import { compareCallRecency, titleCase } from "../utils";
 
 interface ResultsPageProps {
   issues: DashboardIssue[];
   calls: CallCard[];
+  onOpenCall: (callId: string) => void;
 }
 
 interface StatRow {
@@ -40,7 +41,7 @@ function isFirstContactResolved(call: CallCard) {
   return call.first_contact_resolved ?? call.outcome === "resolved";
 }
 
-export default function ResultsPage({ issues, calls }: ResultsPageProps) {
+export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPageProps) {
   const [selectedIssue, setSelectedIssue] = useState<string | null>(null);
   const [selectedApproach, setSelectedApproach] = useState<string | null>(null);
   const issue = issues.find((item) => item.slug === selectedIssue);
@@ -66,6 +67,9 @@ export default function ResultsPage({ issues, calls }: ResultsPageProps) {
     };
   });
   const selectedMetrics = approachMetrics.find((metrics) => metrics.approach === selectedApproach);
+  const recentApproachCalls = selectedApproach
+    ? issueCalls.filter((call) => call.behaviors.includes(selectedApproach)).sort((left, right) => -compareCallRecency(left, right)).slice(0, 5)
+    : [];
   const issueTurnCounts = issueCalls.map((call) => call.turn_count).filter((count): count is number => typeof count === "number");
   const issueSentimentShifts = issueCalls.map((call) => call.sentiments.shift).filter((shift): shift is number => typeof shift === "number");
   const issueAverageTurns = issueTurnCounts.length
@@ -203,6 +207,27 @@ export default function ResultsPage({ issues, calls }: ResultsPageProps) {
                 })}
               </tbody>
             </table>
+          </div>
+          <div className="results-transcripts">
+            <div className="results-transcripts-heading">
+              <h4>Recent transcripts</h4>
+              <span>Showing {recentApproachCalls.length} of {selectedMetrics.calls}</span>
+            </div>
+            <div className="results-transcript-list">
+              {recentApproachCalls.map((call) => {
+                const visibleApproaches = [selectedApproach, ...call.behaviors.filter((behavior) => behavior !== selectedApproach)].slice(0, 4);
+                const remainingApproaches = call.behaviors.length - visibleApproaches.length;
+                return (
+                  <button type="button" className="evidence-row" key={call.call_id} onClick={() => onOpenCall(call.call_id)}>
+                    <strong>{call.call_id}</strong>
+                    <span className="results-transcript-approaches">
+                      {visibleApproaches.map(titleCase).join(" · ")}{remainingApproaches > 0 ? ` · +${remainingApproaches} more` : ""}
+                    </span>
+                    <span className="results-transcript-meta">{titleCase(call.outcome)} · {call.turn_count ?? "Unknown"} turns</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       ) : null}

@@ -2613,6 +2613,14 @@ button { cursor: pointer; }
 .results-approach-link { display: block; max-width: 150px; margin-top: 3px; padding: 0; border: 0; background: none; color: var(--text); text-align: left; text-decoration: underline; text-underline-offset: 2px; }
 .results-approach-link:hover { color: var(--accent); }
 .results-approach-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.results-transcripts { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.results-transcripts-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.results-transcripts-heading h4 { margin: 0; }
+.results-transcripts-heading span { color: var(--muted); font-size: 0.82rem; }
+.results-transcript-list { display: grid; gap: 8px; }
+.results-transcript-list .evidence-row strong { margin-bottom: 10px; }
+.evidence-row .results-transcript-approaches { display: block; color: var(--text); line-height: 1.45; }
+.results-transcript-meta { display: block; margin-top: 6px; }
 .results-delta { min-width: max-content; font-weight: 750; }
 .results-delta.positive { color: var(--success); }
 .results-delta.negative { color: var(--risk); }
