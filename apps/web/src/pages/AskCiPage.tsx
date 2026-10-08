@@ -30,6 +30,11 @@ interface IntentRoute {
 }
 
 const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights: string[] }> = {
+  results: {
+    title: "Story Dashboard 1",
+    summary: "Shows issues, their observed agent approaches, and statistics.",
+    highlights: ["Issue list", "Approaches", "Statistics"],
+  },
   overview: {
     title: "Overview",
     summary: "Tracks KPIs, call drivers, outcomes, and service trends.",
@@ -54,6 +59,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     title: "Monitoring",
     summary: "Shows refresh status, controls, and operating checks.",
     highlights: ["Trend refresh", "Control checks", "Policy rules"],
+  },
+  "model-approaches": {
+    title: "Model Approaches",
+    summary: "Compares the methods used to identify issue topics and agent approaches.",
+    highlights: ["Benchmark results", "Method comparison", "Evaluation notes"],
   },
   "ask-ci": {
     title: "Ask CI",

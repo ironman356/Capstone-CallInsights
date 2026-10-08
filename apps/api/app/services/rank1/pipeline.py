@@ -1025,6 +1025,7 @@ class Rank1PipelineService:
                 "behaviors": call["behaviors"],
                 "summary": call["summary"],
                 "sentiments": call["sentiments"],
+                "turn_count": call.get("turn_count", len(call.get("turns", []))),
                 "timestamp_start": call.get("timestamp_start"),
                 "timestamp_end": call.get("timestamp_end"),
             }
@@ -1819,6 +1820,7 @@ class Rank1PipelineService:
                 {
                     **call_card,
                     "issues": call_issue_labels(source_call),
+                    "turn_count": source_call.get("turn_count", len(source_call.get("turns", []))),
                     "timestamp_start": source_call.get("timestamp_start"),
                     "timestamp_end": source_call.get("timestamp_end"),
                 }

@@ -9,6 +9,7 @@ import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import ModelApproachesPage from "./pages/ModelApproachesPage";
+import ResultsPage from "./pages/ResultsPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 
@@ -123,6 +124,11 @@ function StrategyDeadlineEditor({
 }
 
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
+  results: {
+    title: "Story Dashboard 1",
+    description: "Issue list → Approaches → Statistics",
+    kicker: "",
+  },
   overview: {
     title: "Overview",
     description: "Executive view of call drivers, outcomes, sentiment movement, and active action plans.",
@@ -186,6 +192,7 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 };
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
+  ["results", "Story Dashboard 1", ""],
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
@@ -635,9 +642,9 @@ function App() {
         </div>
         <nav className="dashboard-nav">
           {NAV_ITEMS.map(([key, label, description]) => (
-            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key as PageKey)}>
+            <button key={key} type="button" className={`nav-card ${key === "results" ? "nav-card-featured" : ""} ${page === key ? "active" : ""}`} onClick={() => navigate(key)} aria-current={page === key ? "page" : undefined}>
               <strong>{label}</strong>
-              <span>{description}</span>
+              {description ? <span>{description}</span> : null}
             </button>
           ))}
         </nav>
@@ -659,10 +666,10 @@ function App() {
           <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
         </div>
       </aside>
-      <main className="dashboard-main">
+      <main className={`dashboard-main ${page === "results" ? "results-main" : ""}`}>
         <section className="workspace-header">
           <div className="workspace-heading">
-            <p className="section-kicker">{pageMeta.kicker}</p>
+            {pageMeta.kicker ? <p className="section-kicker">{pageMeta.kicker}</p> : null}
             <h2>{pageMeta.title}</h2>
             <p>{pageMeta.description}</p>
           </div>
@@ -708,6 +715,7 @@ function App() {
         ) : null}
         {message ? <div className="flash-banner success">{message}</div> : null}
         {error ? <div className="flash-banner error">{error}</div> : null}
+        {page === "results" ? <ResultsPage issues={dashboard.issues} calls={dashboard.calls} /> : null}
         {page === "overview" ? (
           <section className="grid-page overview-page">
             <div className="panel-card span-two">
