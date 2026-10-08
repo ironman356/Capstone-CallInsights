@@ -196,8 +196,8 @@ export default function ResultsPage({ issues, calls }: ResultsPageProps) {
                       <th scope="row">{row.label}</th>
                       <td><strong>{formatStat(row.value, row.suffix)}</strong></td>
                       <td><strong className={`results-delta ${tone(difference)}`}>{formatDelta(difference, row.suffix)}</strong><span>{direction} Avg</span></td>
-                      <td><strong className={`results-delta ${tone(bestDifference)}`}>{formatDelta(bestDifference, row.suffix)}</strong><small>{titleCase(best.approach)}</small></td>
-                      <td><strong className={`results-delta ${tone(worstDifference)}`}>{formatDelta(worstDifference, row.suffix)}</strong><small>{titleCase(worst.approach)}</small></td>
+                      <td><strong className={`results-delta ${tone(bestDifference)}`}>{formatDelta(bestDifference, row.suffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(best.approach)}>{titleCase(best.approach)}</button></td>
+                      <td><strong className={`results-delta ${tone(worstDifference)}`}>{formatDelta(worstDifference, row.suffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(worst.approach)}>{titleCase(worst.approach)}</button></td>
                     </tr>
                   );
                 })}

@@ -2608,9 +2608,11 @@ button { cursor: pointer; }
 .results-stats-table th, .results-stats-table td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }
 .results-stats-table thead th { border-top: 0; color: var(--muted); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .results-stats-table tbody th { min-width: 150px; }
-.results-stats-table td strong, .results-stats-table td small { display: block; }
-.results-stats-table td small { max-width: 150px; margin-top: 3px; color: var(--muted); }
+.results-stats-table td strong { display: block; }
 .results-stats-table td > span { display: block; min-width: max-content; margin-top: 3px; }
+.results-approach-link { display: block; max-width: 150px; margin-top: 3px; padding: 0; border: 0; background: none; color: var(--text); text-align: left; text-decoration: underline; text-underline-offset: 2px; }
+.results-approach-link:hover { color: var(--accent); }
+.results-approach-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .results-delta { min-width: max-content; font-weight: 750; }
 .results-delta.positive { color: var(--success); }
 .results-delta.negative { color: var(--risk); }
