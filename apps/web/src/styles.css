@@ -2602,7 +2602,29 @@ button { cursor: pointer; }
 }
 .results-list button.active { border-color: var(--accent); background: var(--surface-accent); }
 .results-list button:hover { border-color: color-mix(in srgb, var(--accent) 65%, var(--line)); }
-.results-selected-approach { margin: 0 0 16px; color: var(--muted); }
+.results-approaches button { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.results-approaches button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.results-approach-name { min-width: 0; overflow-wrap: anywhere; }
+.results-approach-name strong { font-weight: 600; }
+.results-approach-name > span,
+.results-approach-usage > span { display: block; margin-top: 5px; color: var(--muted); font-size: 0.72rem; }
+.results-approach-usage { flex-shrink: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.results-approach-usage > span { margin-top: 2px; }
+.results-approach-usage strong { font-size: 0.8rem; font-weight: 600; }
+.results-statistics-heading { display: flex; align-items: baseline; gap: 4px 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.results-statistics-heading h3 { margin: 0; }
+.results-selected-approach { margin: 0; color: var(--text); }
+.results-common-phrases { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.results-common-phrases h4 { margin: 0; }
+.results-common-phrases > p { color: var(--muted); font-size: 0.8rem; line-height: 1.5; }
+.results-phrase { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.results-phrase:last-child { border-bottom: 0; }
+.results-phrase > div:first-child { display: flex; align-items: baseline; gap: 8px; }
+.results-phrase > div:first-child > span { color: var(--muted); font-size: 0.72rem; flex-shrink: 0; }
+.results-phrase q { line-height: 1.5; overflow-wrap: anywhere; }
+.results-phrase > span { display: block; margin: 4px 0; color: var(--muted); font-size: 0.75rem; }
+.results-phrase-evidence { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; font-size: 0.75rem; }
+.results-phrase-evidence > span { color: var(--muted); }
 .results-stats-scroll { overflow-x: auto; }
 .results-stats-table { width: 100%; min-width: 720px; border-collapse: collapse; text-align: left; }
 .results-stats-table th, .results-stats-table td { padding: 10px 12px; border-top: 1px solid var(--line); vertical-align: top; }

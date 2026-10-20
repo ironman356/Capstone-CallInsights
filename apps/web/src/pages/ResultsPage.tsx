@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../api";
 import type { CallCard, DashboardIssue } from "../types";
 import { compareCallRecency, titleCase } from "../utils";
 
@@ -45,6 +47,11 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
   const [selectedIssue, setSelectedIssue] = useState<string | null>(null);
   const [selectedApproach, setSelectedApproach] = useState<string | null>(null);
   const issue = issues.find((item) => item.slug === selectedIssue);
+  const phrasesQuery = useQuery({
+    queryKey: ["common-phrases", issue?.issue, selectedApproach],
+    queryFn: () => api.getCommonPhrases(issue!.issue, selectedApproach!),
+    enabled: Boolean(issue && selectedApproach),
+  });
   const issueCalls = issue ? calls.filter((call) => call.issue === issue.issue) : [];
   const approaches = [...new Set(issueCalls.flatMap((call) => call.behaviors))].sort();
   const outcomeLabels = [...new Set(issueCalls.map((call) => call.outcome))].sort();
@@ -65,7 +72,11 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
         matchingCalls.filter((call) => call.outcome === outcome).length / matchingCalls.length * 100,
       ])),
     };
-  });
+  }).sort((left, right) =>
+    right.firstContactResolutionRate - left.firstContactResolutionRate
+    || right.calls - left.calls
+    || left.approach.localeCompare(right.approach),
+  );
   const selectedMetrics = approachMetrics.find((metrics) => metrics.approach === selectedApproach);
   const recentApproachCalls = selectedApproach
     ? issueCalls.filter((call) => call.behaviors.includes(selectedApproach)).sort((left, right) => -compareCallRecency(left, right)).slice(0, 5)
@@ -162,16 +173,23 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
       {issue ? (
         <div className="panel-card results-column">
           <h3>Approaches</h3>
-          <div className="results-list">
-            {approaches.map((approach) => (
+          <div className="results-list results-approaches">
+            {approachMetrics.map((metrics) => (
               <button
-                key={approach}
+                key={metrics.approach}
                 type="button"
-                className={approach === selectedApproach ? "active" : ""}
-                aria-pressed={approach === selectedApproach}
-                onClick={() => setSelectedApproach(approach)}
+                className={metrics.approach === selectedApproach ? "active" : ""}
+                aria-pressed={metrics.approach === selectedApproach}
+                onClick={() => setSelectedApproach(metrics.approach)}
               >
-                {titleCase(approach)}
+                <span className="results-approach-name">
+                  <strong>{titleCase(metrics.approach)}</strong>
+                </span>
+                <span className="results-approach-usage">
+                  <strong>{metrics.calls} {metrics.calls === 1 ? "call" : "calls"}</strong>
+                  <span>{formatStat(metrics.calls / issueCalls.length * 100, "%")} usage</span>
+                  <span>{formatStat(metrics.firstContactResolutionRate, "%")} resolution</span>
+                </span>
               </button>
             ))}
           </div>
@@ -180,8 +198,10 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
 
       {selectedMetrics ? (
         <div className="panel-card results-column">
-          <h3>Statistics</h3>
-          <p className="results-selected-approach">{titleCase(selectedApproach!)}</p>
+          <div className="results-statistics-heading">
+            <h3>Statistics</h3>
+            <p className="results-selected-approach">{titleCase(selectedApproach!)}</p>
+          </div>
           <div className="results-stats-scroll">
             <table className="results-stats-table">
               <thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Vs avg</th><th scope="col">Vs best</th><th scope="col">Vs worst</th></tr></thead>
@@ -208,6 +228,28 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
               </tbody>
             </table>
           </div>
+          <section className="results-common-phrases" aria-label="Common transcript phrases" aria-busy={phrasesQuery.isFetching}>
+            <h4>Common phrases</h4>
+            <p>Repeated wording across calls using this approach for {issue?.issue}.</p>
+            {phrasesQuery.isPending ? <p role="status">Finding shared wording…</p>
+              : phrasesQuery.isError ? <p role="alert">Couldn’t load phrases. <button type="button" className="results-approach-link" onClick={() => phrasesQuery.refetch()}>Try again</button></p>
+              : phrasesQuery.data.phrases.length ? (
+                <div className="results-phrase-list">
+                  {phrasesQuery.data.phrases.map((phrase) => (
+                    <article className="results-phrase" key={`${phrase.speaker}:${phrase.text}`}>
+                      <div><span>{phrase.speaker}</span><q>{phrase.text}</q></div>
+                      <span>{phrase.call_ids.length} of {phrasesQuery.data.call_count} calls</span>
+                      <div className="results-phrase-evidence">
+                        {phrase.call_ids.slice(0, 3).map((callId) => (
+                          <button type="button" className="results-approach-link" key={callId} onClick={() => onOpenCall(callId)}>{callId}</button>
+                        ))}
+                        {phrase.call_ids.length > 3 ? <span>+{phrase.call_ids.length - 3} more</span> : null}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : <p>No shared phrases found in at least two matching calls.</p>}
+          </section>
           <div className="results-transcripts">
             <div className="results-transcripts-heading">
               <h4>Recent transcripts</h4>

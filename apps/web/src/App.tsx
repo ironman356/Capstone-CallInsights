@@ -398,6 +398,7 @@ function App() {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["issue"] }),
         queryClient.invalidateQueries({ queryKey: ["call"] }),
+        queryClient.invalidateQueries({ queryKey: ["common-phrases"] }),
       ]);
     } catch (refreshError) {
       setError(refreshError instanceof Error ? refreshError.message : "Unable to refresh workspace");
