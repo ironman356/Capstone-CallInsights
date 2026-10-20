@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 import type { CallCard, DashboardIssue } from "../types";
@@ -46,6 +46,11 @@ function isFirstContactResolved(call: CallCard) {
 export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPageProps) {
   const [selectedIssue, setSelectedIssue] = useState<string | null>(null);
   const [selectedApproach, setSelectedApproach] = useState<string | null>(null);
+  const scrollPosition = useRef(0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: scrollPosition.current, behavior: "instant" });
+    return () => { scrollPosition.current = window.scrollY; };
+  }, []);
   const issue = issues.find((item) => item.slug === selectedIssue);
   const now = Date.now();
   const weekStart = now - 7 * 24 * 60 * 60 * 1000;
@@ -166,7 +171,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
 
   return (
     <section className="results-layout" aria-label="Story Dashboard 1">
-      <div className="panel-card results-column">
+      <div className={`panel-card results-column ${!issue ? "results-awaiting-selection" : ""}`}>
         <h3>Issues</h3>
         <div className="results-list results-issues">
           {issues.map((item) => (
@@ -190,7 +195,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
       </div>
 
       {issue ? (
-        <div className="panel-card results-column">
+        <div className={`panel-card results-column ${!selectedMetrics ? "results-awaiting-selection" : ""}`}>
           <h3>Approaches</h3>
           <div className="results-list results-approaches">
             {approachMetrics.map((metrics) => (
@@ -258,7 +263,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                 <div className="results-phrase-list">
                   {phrasesQuery.data.phrases.map((phrase) => (
                     <article className="results-phrase" key={`${phrase.speaker}:${phrase.text}`}>
-                      <div><span>{phrase.speaker}</span><q>{phrase.text}</q></div>
+                      <div><q>{phrase.text}</q></div>
                       <span>{phrase.call_ids.length} of {phrasesQuery.data.call_count} calls</span>
                       <div className="results-phrase-evidence">
                         {phrase.call_ids.slice(0, 3).map((callId) => (

@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useMemo, useRef, useState } from "react";
+import { Activity as ReactActivity, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -714,7 +714,9 @@ function App() {
         ) : null}
         {message ? <div className="flash-banner success">{message}</div> : null}
         {error ? <div className="flash-banner error">{error}</div> : null}
-        {page === "results" ? <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
+        <ReactActivity mode={page === "results" ? "visible" : "hidden"}>
+          <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
+        </ReactActivity>
         {page === "approach-matrix" ? <ApproachMatrixPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
         {page === "approach-portfolio" ? <ApproachPortfolioPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
         {page === "overview" ? (
