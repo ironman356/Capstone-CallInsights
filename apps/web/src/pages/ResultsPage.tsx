@@ -47,6 +47,19 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
   const [selectedIssue, setSelectedIssue] = useState<string | null>(null);
   const [selectedApproach, setSelectedApproach] = useState<string | null>(null);
   const issue = issues.find((item) => item.slug === selectedIssue);
+  const now = Date.now();
+  const weekStart = now - 7 * 24 * 60 * 60 * 1000;
+  const issueActivity = new Map<string, { dated: number; recent: number }>();
+  for (const call of calls) {
+    const activity = issueActivity.get(call.issue) ?? { dated: 0, recent: 0 };
+    const start = Date.parse(call.timestamp_start ?? "");
+    const timestamp = Number.isNaN(start) ? Date.parse(call.timestamp_end ?? "") : start;
+    if (!Number.isNaN(timestamp)) {
+      activity.dated++;
+      if (timestamp >= weekStart && timestamp <= now) activity.recent++;
+    }
+    issueActivity.set(call.issue, activity);
+  }
   const phrasesQuery = useQuery({
     queryKey: ["common-phrases", issue?.issue, selectedApproach],
     queryFn: () => api.getCommonPhrases(issue!.issue, selectedApproach!),
@@ -155,7 +168,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
     <section className="results-layout" aria-label="Story Dashboard 1">
       <div className="panel-card results-column">
         <h3>Issues</h3>
-        <div className="results-list">
+        <div className="results-list results-issues">
           {issues.map((item) => (
             <button
               key={item.slug}
@@ -164,7 +177,13 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
               aria-pressed={item.slug === selectedIssue}
               onClick={() => { setSelectedIssue(item.slug); setSelectedApproach(null); }}
             >
-              {titleCase(item.issue)}
+              <span className="results-issue-name">{titleCase(item.issue)}</span>
+              <span className="results-approach-usage">
+                <strong>{item.count} total</strong>
+                <span title={`${issueActivity.get(item.issue)?.dated ?? 0} of ${item.count} calls have dates. Past week means the last seven days.`}>
+                  {issueActivity.get(item.issue)?.dated ? issueActivity.get(item.issue)!.recent : "—"} past week
+                </span>
+              </span>
             </button>
           ))}
         </div>
@@ -197,6 +216,8 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
       ) : null}
 
       {selectedMetrics ? (
+        <>
+        <div className="results-detail-stack">
         <div className="panel-card results-column">
           <div className="results-statistics-heading">
             <h3>Statistics</h3>
@@ -228,9 +249,9 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
               </tbody>
             </table>
           </div>
-          <section className="results-common-phrases" aria-label="Common transcript phrases" aria-busy={phrasesQuery.isFetching}>
+        </div>
+          <section className="panel-card results-common-phrases" aria-label="Common transcript phrases" aria-busy={phrasesQuery.isFetching}>
             <h4>Common phrases</h4>
-            <p>Repeated wording across calls using this approach for {issue?.issue}.</p>
             {phrasesQuery.isPending ? <p role="status">Finding shared wording…</p>
               : phrasesQuery.isError ? <p role="alert">Couldn’t load phrases. <button type="button" className="results-approach-link" onClick={() => phrasesQuery.refetch()}>Try again</button></p>
               : phrasesQuery.data.phrases.length ? (
@@ -243,14 +264,27 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                         {phrase.call_ids.slice(0, 3).map((callId) => (
                           <button type="button" className="results-approach-link" key={callId} onClick={() => onOpenCall(callId)}>{callId}</button>
                         ))}
-                        {phrase.call_ids.length > 3 ? <span>+{phrase.call_ids.length - 3} more</span> : null}
+                        {phrase.call_ids.length > 3 ? (
+                          <details key={`${selectedIssue}:${selectedApproach}`}>
+                            <summary className="results-approach-link">
+                              <span className="results-phrase-expand">+{phrase.call_ids.length - 3} more</span>
+                              <span className="results-phrase-collapse">Show fewer</span>
+                            </summary>
+                            <div>
+                              {phrase.call_ids.slice(3).map((callId) => (
+                                <button type="button" className="results-approach-link" key={callId} onClick={() => onOpenCall(callId)}>{callId}</button>
+                              ))}
+                            </div>
+                          </details>
+                        ) : null}
                       </div>
                     </article>
                   ))}
                 </div>
               ) : <p>No shared phrases found in at least two matching calls.</p>}
           </section>
-          <div className="results-transcripts">
+        </div>
+          <section className="panel-card results-transcripts" aria-label="Recent transcripts">
             <div className="results-transcripts-heading">
               <h4>Recent transcripts</h4>
               <span>Showing {recentApproachCalls.length} of {selectedMetrics.calls}</span>
@@ -270,8 +304,8 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                 );
               })}
             </div>
-          </div>
-        </div>
+          </section>
+        </>
       ) : null}
     </section>
   );
