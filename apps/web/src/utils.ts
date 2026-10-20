@@ -1,4 +1,27 @@
-import type { CallCard } from "./types";
+import type { CallCard, CallDetail } from "./types";
+
+export function phraseContext(call: CallDetail, phrase: string, speaker: string) {
+  const tokens = phrase.match(/[a-z]+(?:['’][a-z]+)?/gi) ?? [];
+  if (!tokens.length) return null;
+  const pattern = new RegExp(`\\b${tokens.map((token) => token.replace(/['’]/g, "['’]")).join("[^a-z]+")}\\b`, "i");
+  const lines = call.turns.map((turn) => `${turn.speaker}: ${turn.text}`);
+  let offset = 0;
+  for (const [index, turn] of call.turns.entries()) {
+    const match = turn.speaker.toLowerCase() === speaker.toLowerCase() ? pattern.exec(turn.text) : null;
+    if (match) {
+      const transcript = lines.join("\n");
+      const start = offset + turn.speaker.length + 2 + match.index;
+      const end = start + match[0].length;
+      return {
+        before: `${start > 160 ? "…" : ""}${transcript.slice(Math.max(0, start - 160), start)}`,
+        match: transcript.slice(start, end),
+        after: `${transcript.slice(end, end + 160)}${end + 160 < transcript.length ? "…" : ""}`,
+      };
+    }
+    offset += lines[index].length + 1;
+  }
+  return null;
+}
 
 export function formatValue(value: number | string): string {
   if (typeof value !== "number") {

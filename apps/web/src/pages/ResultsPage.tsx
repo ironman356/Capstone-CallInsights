@@ -1,8 +1,9 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 import type { CallCard, DashboardIssue } from "../types";
-import { compareCallRecency, titleCase } from "../utils";
+import { compareCallRecency, phraseContext, titleCase } from "../utils";
 
 interface ResultsPageProps {
   issues: DashboardIssue[];
@@ -17,6 +18,55 @@ interface StatRow {
   higherIsBetter: boolean;
   suffix: string;
   values: Array<{ approach: string; value: number }>;
+}
+
+function PhraseCallLink({ callId, phrase, speaker, onOpenCall }: {
+  callId: string; phrase: string; speaker: string; onOpenCall: (callId: string) => void;
+}) {
+  const tooltipId = useId();
+  const [position, setPosition] = useState<CSSProperties | null>(null);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
+  function hidePreview() {
+    clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => setPosition(null), 150);
+  }
+  const callQuery = useQuery({
+    queryKey: ["call", callId],
+    queryFn: () => api.getCall(callId),
+    enabled: position !== null,
+    staleTime: 60_000,
+  });
+  const context = callQuery.data ? phraseContext(callQuery.data, phrase, speaker) : null;
+  function showPreview(button: HTMLButtonElement) {
+    clearTimeout(hideTimer.current);
+    const rect = button.getBoundingClientRect();
+    setPosition({
+      left: Math.max(12, Math.min(rect.left, window.innerWidth - 372)),
+      ...(rect.top > 240 ? { bottom: window.innerHeight - rect.top + 8 } : { top: rect.bottom + 8 }),
+    });
+  }
+  return (
+    <span className="results-phrase-call" onMouseLeave={hidePreview}>
+      <button type="button" className="results-approach-link"
+        aria-describedby={position ? tooltipId : undefined}
+        onMouseEnter={(event) => showPreview(event.currentTarget)}
+        onFocus={(event) => showPreview(event.currentTarget)}
+        onBlur={() => setPosition(null)}
+        onKeyDown={(event) => { if (event.key === "Escape") setPosition(null); }}
+        onClick={() => { setPosition(null); onOpenCall(callId); }}
+      >{callId}</button>
+      {position ? createPortal(
+        <span id={tooltipId} role="tooltip" className="results-phrase-preview" style={position}
+          onMouseEnter={() => clearTimeout(hideTimer.current)} onMouseLeave={hidePreview}>
+          <strong>{callId}</strong>
+          {callQuery.isPending ? "Loading transcript…" : callQuery.isError ? "Couldn’t load preview. Open the call to view its transcript."
+            : context ? <span>{context.before}<mark>{context.match}</mark>{context.after}</span>
+              : "No matching excerpt found. Open the call to view its transcript."}
+        </span>, document.body,
+      ) : null}
+    </span>
+  );
 }
 
 function formatStat(value: number, suffix: string) {
@@ -267,7 +317,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                       <span>{phrase.call_ids.length} of {phrasesQuery.data.call_count} calls</span>
                       <div className="results-phrase-evidence">
                         {phrase.call_ids.slice(0, 3).map((callId) => (
-                          <button type="button" className="results-approach-link" key={callId} onClick={() => onOpenCall(callId)}>{callId}</button>
+                          <PhraseCallLink key={callId} callId={callId} phrase={phrase.text} speaker={phrase.speaker} onOpenCall={onOpenCall} />
                         ))}
                         {phrase.call_ids.length > 3 ? (
                           <details key={`${selectedIssue}:${selectedApproach}`}>
@@ -277,7 +327,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                             </summary>
                             <div>
                               {phrase.call_ids.slice(3).map((callId) => (
-                                <button type="button" className="results-approach-link" key={callId} onClick={() => onOpenCall(callId)}>{callId}</button>
+                                <PhraseCallLink key={callId} callId={callId} phrase={phrase.text} speaker={phrase.speaker} onOpenCall={onOpenCall} />
                               ))}
                             </div>
                           </details>
