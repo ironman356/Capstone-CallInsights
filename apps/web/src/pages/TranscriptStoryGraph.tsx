@@ -16,9 +16,85 @@ function LineEvidence({ turn, onOpenCall }: { turn: DialogueTurn; onOpenCall: (i
   </div>;
 }
 
-export default function TranscriptStoryGraph({ cluster, guide, onOpenCall }: {
-  cluster: ConversationCluster; guide: boolean; onOpenCall: (id: string) => void;
+type RouteReference = { callId: string; turn: number; depth: number };
+
+function RouteExplorer({ cluster, onOpenCall }: { cluster: ConversationCluster; onOpenCall: (id: string) => void }) {
+  const [rootCallId, setRootCallId] = useState(cluster.calls[0]?.call_id ?? "");
+  const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
+  const rootCall = cluster.calls.find(call => call.call_id === rootCallId) ?? cluster.calls[0];
+  const routeKey = (callId: string, turn: number) => `${callId}:${turn}`;
+  const findTurn = (callId: string, turn: number) => cluster.calls.find(call => call.call_id === callId)?.turns.find(item => item.turn === turn);
+  const nextRoutes = (callId: string, turn: number): Array<{ callId: string; turn: number }> => {
+    const call = cluster.calls.find(item => item.call_id === callId);
+    const currentIndex = call?.turns.findIndex(item => item.turn === turn) ?? -1;
+    const current = currentIndex >= 0 ? call?.turns[currentIndex] : undefined;
+    const direct = currentIndex >= 0 ? call?.turns[currentIndex + 1] : undefined;
+    const alternatives = (current?.alternatives ?? [])
+      .map(option => ({ callId: option.call_id, turn: option.turn }))
+      .filter(option => Boolean(findTurn(option.callId, option.turn)));
+    const unique = new Map<string, { callId: string; turn: number }>();
+    if (direct) unique.set(routeKey(callId, direct.turn), { callId, turn: direct.turn });
+    alternatives.forEach(option => unique.set(routeKey(option.callId, option.turn), option));
+    return [...unique.values()].slice(0, 4);
+  };
+
+  const rootTurn = rootCall?.turns[0];
+  const queue: RouteReference[] = rootTurn ? [{ callId: rootCall.call_id, turn: rootTurn.turn, depth: 0 }] : [];
+  const seen = new Set(queue.map(route => routeKey(route.callId, route.turn)));
+  const routes: RouteReference[] = [];
+  const links: Array<{ from: string; to: string }> = [];
+  while (queue.length) {
+    const route = queue.shift();
+    if (!route) continue;
+    routes.push(route);
+    if (route.depth >= 6 || !expanded.has(routeKey(route.callId, route.turn))) continue;
+    nextRoutes(route.callId, route.turn).forEach(child => {
+      const childKey = routeKey(child.callId, child.turn);
+      links.push({ from: routeKey(route.callId, route.turn), to: childKey });
+      if (!seen.has(childKey)) {
+        seen.add(childKey);
+        queue.push({ ...child, depth: route.depth + 1 });
+      }
+    });
+  }
+
+  const columns = new Map<number, RouteReference[]>();
+  routes.forEach(route => columns.set(route.depth, [...(columns.get(route.depth) ?? []), route]));
+  const nodes: Node[] = routes.map(route => {
+    const current = findTurn(route.callId, route.turn);
+    const column = columns.get(route.depth) ?? [];
+    const row = column.findIndex(item => routeKey(item.callId, item.turn) === routeKey(route.callId, route.turn));
+    const hasChildren = nextRoutes(route.callId, route.turn).length > 0;
+    const isOpen = expanded.has(routeKey(route.callId, route.turn));
+    const color = current?.speaker.toLowerCase() === "agent" ? "#7ac8ff" : "#b7a1ff";
+    return { id: routeKey(route.callId, route.turn), position: { x: route.depth * 420, y: row * 225 }, sourcePosition: Position.Right, targetPosition: Position.Left, style: { width: 350, background: "var(--panel-strong)", color: "var(--text)", border: `2px solid ${color}`, borderRadius: 16, padding: 18, textAlign: "left" as const }, data: { label: <><small>{current?.speaker.toUpperCase()} / {route.callId} / TURN {route.turn}</small><p className="script-node-quote">{current?.text}</p><em>{hasChildren ? (isOpen ? "Click to collapse these routes" : `Click to reveal up to ${nextRoutes(route.callId, route.turn).length} next routes`) : "End of this observed route"}</em></> } };
+  });
+  const edges: Edge[] = links.map(link => ({ id: `${link.from}-${link.to}`, source: link.from, target: link.to, label: "next route", animated: true, style: { stroke: "#7ac8ff", strokeWidth: 1.8 }, labelStyle: { fill: "var(--text)", fontSize: 11 }, labelBgStyle: { fill: "var(--bg-soft)" }, markerEnd: { type: MarkerType.ArrowClosed, color: "#7ac8ff" } }));
+  const toggleRoute = (id: string) => setExpanded(previous => {
+    const next = new Set(previous);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    return next;
+  });
+
+  return <section className="transcript-story">
+    <div className="script-navigation">
+      <label>Start from observed call<select value={rootCall?.call_id ?? ""} onChange={event => { setRootCallId(event.target.value); setExpanded(new Set()); }}>{cluster.calls.map(call => <option key={call.call_id} value={call.call_id}>{call.call_id} / {call.outcome}</option>)}</select></label>
+      {rootCall && <button className="ghost-button" onClick={() => onOpenCall(rootCall.call_id)}>Open full starting transcript</button>}
+      <button className="ghost-button" onClick={() => setExpanded(new Set())}>Reset routes</button>
+    </div>
+    <p className="discovery-note">This is a progressive script tree built from observed calls. Click any card once to reveal its next observed reply and up to three comparable reply routes. Click an expanded card again to collapse that branch.</p>
+    <div className="discovery-canvas script-canvas route-canvas" aria-label="Progressive branching script route explorer">
+      <ReactFlow key={`${rootCall?.call_id}-${[...expanded].join("-")}`} nodes={nodes} edges={edges} fitView fitViewOptions={{ padding: .12 }} nodesDraggable nodesConnectable={false} minZoom={.18} maxZoom={2} onNodeClick={(_, node) => toggleRoute(node.id)}>
+        <Background gap={24} color="var(--line-strong)" /><Controls showInteractive={false} />
+      </ReactFlow>
+    </div>
+  </section>;
+}
+
+export default function TranscriptStoryGraph({ cluster, guide, onOpenCall, mode = "linear" }: {
+  cluster: ConversationCluster; guide: boolean; onOpenCall: (id: string) => void; mode?: "linear" | "routes";
 }) {
+  if (mode === "routes") return <RouteExplorer cluster={cluster} onOpenCall={onOpenCall} />;
   const [callId, setCallId] = useState(cluster.guide.source_call_id ?? cluster.calls[0]?.call_id ?? "");
   const [stage, setStage] = useState<string | null>(null);
   const [turnId, setTurnId] = useState<number | null>(null);
