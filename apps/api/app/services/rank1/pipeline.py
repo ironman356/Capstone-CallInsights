@@ -15,6 +15,7 @@ from uuid import uuid4
 
 from app.core.config import settings
 from app.services.rank1.adaptive import AdaptiveIssueMemory, HuggingFaceAdaptiveEngine
+from app.services.rank1.redaction import redact_transcript_text
 
 
 @dataclass(frozen=True)
@@ -701,6 +702,12 @@ class Rank1PipelineService:
         if not transcript_text and normalized_turns:
             transcript_text = "\n".join(f"{turn['speaker']}: {turn['text']}" for turn in normalized_turns)
 
+        transcript_text = redact_transcript_text(transcript_text)
+        normalized_turns = [
+            {**turn, "text": redact_transcript_text(str(turn["text"]))}
+            for turn in normalized_turns
+        ]
+
         call_id = str(record.get("call_id") or f"CALL-{index:04d}")
         return {
             "call_id": call_id,
@@ -714,6 +721,7 @@ class Rank1PipelineService:
             "transcript_text": transcript_text,
             "turns": normalized_turns,
             "turn_count": len(normalized_turns),
+            "redaction_applied": True,
         }
 
     def ingest_calls(self) -> list[dict]:

@@ -29,6 +29,14 @@ class Rank1PipelineTests(unittest.TestCase):
         self.assertIn("call_details", bundle)
         self.assertGreater(len(bundle["calls"]), 0)
 
+    def test_normalized_record_redacts_direct_identifiers(self) -> None:
+        service = Rank1PipelineService()
+        record = {"transcript_text": "Customer: Reach me at 801-555-0199 about my payment."}
+        normalized = service._normalize_record(record, "fixture.jsonl", 1)
+        self.assertNotIn("801-555-0199", normalized["transcript_text"])
+        self.assertEqual(normalized["turns"][0]["text"], "Reach me at [REDACTED_PHONE] about my payment.")
+        self.assertTrue(normalized["redaction_applied"])
+
     def test_classify_outcome_detects_escalation(self) -> None:
         text = "Agent: Please hold while I connect you to a supervisor for escalation."
         self.assertEqual(classify_outcome(text), "escalated")
