@@ -96,6 +96,22 @@ def get_workspace() -> WorkspaceResponse:
     return WorkspaceResponse(**workspace)
 
 
+@router.get("/alerts")
+def get_alerts() -> dict:
+    from app.services.rank1.alerts import load_alerts
+    alerts = load_alerts(service.outputs_dir / "alerts.json", service.load_or_run())
+    return {"alerts": alerts}
+
+
+@router.post("/alerts/{alert_id}/dismiss")
+def dismiss_alert(alert_id: str) -> dict:
+    from app.services.rank1.alerts import dismiss_alert as dismiss
+    try:
+        return dismiss(service.outputs_dir / "alerts.json", alert_id, service.load_or_run())
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
 @router.get("/solutions")
 def get_solutions() -> dict:
     from app.services.rank1.solutions import build_solution_report

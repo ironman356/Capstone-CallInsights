@@ -139,6 +139,11 @@ class Rank1ApiTests(unittest.TestCase):
                 self.assertEqual(signal["resolved"] + signal["other"], signal["support"])
                 self.assertTrue(all(e["quotes"] for e in signal["examples"]))
 
+    def test_alerts_endpoint_returns_persisted_alerts(self) -> None:
+        response = self.client.get("/api/rank1/alerts")
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("alerts", response.json())
+
     def test_strategy_create_and_update_endpoints_work(self) -> None:
         dashboard = self.client.get("/api/rank1/dashboard").json()
         issue_slug = dashboard["issues"][0]["slug"]
