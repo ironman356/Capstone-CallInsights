@@ -35,6 +35,11 @@ export interface ExportReportResponse {
 }
 
 export const api = {
+  getSolutions: () => request<import("./solutionTypes").DiscoveryReport>("/solutions"),
+  getScriptExperiments: () => request<{ experiments: import("./solutionTypes").ScriptExperiment[] }>("/script-experiments"),
+  createScriptExperiment: (issue_slug: string) => request<import("./solutionTypes").ScriptExperiment>("/script-experiments", { method: "POST", body: JSON.stringify({ issue_slug }) }),
+  assignScript: (id: string, unit_id: string) => request<import("./solutionTypes").ScriptAssignment>(`/script-experiments/${id}/assignments`, { method: "POST", body: JSON.stringify({ unit_id }) }),
+  recordScriptOutcome: (id: string, assignment: string, payload: { resolved: boolean; repeat_contact_7d: boolean; delivered: boolean; source_reference: string }) => request<import("./solutionTypes").ScriptExperiment>(`/script-experiments/${id}/assignments/${assignment}/outcome`, { method: "POST", body: JSON.stringify(payload) }),
   getWorkspace: () => request<WorkspacePayload>("/workspace"),
   askCiChat: (payload: { question: string; current_page?: string; history?: Array<{ role: string; text: string }> }) =>
     request<AskCiChatResponse>("/ask-ci/chat", {

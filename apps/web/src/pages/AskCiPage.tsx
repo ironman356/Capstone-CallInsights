@@ -30,6 +30,21 @@ interface IntentRoute {
 }
 
 const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights: string[] }> = {
+  solutions: {
+    title: "Story → Solution",
+    summary: "Connects issues, agent responses and call outcomes through evidence.",
+    highlights: ["Interactive graph", "Quoted turns", "Method comparison"],
+  },
+  "model-approaches": {
+    title: "Model Approaches",
+    summary: "Compares topic mapping approaches on the frozen benchmark.",
+    highlights: ["Topic metrics", "Approach extraction"],
+  },
+  field: {
+    title: "Field Mode",
+    summary: "Shows the phone-first issue field.",
+    highlights: ["Issue field", "Camera controls"],
+  },
   overview: {
     title: "Overview",
     summary: "Tracks KPIs, call drivers, outcomes, and service trends.",
