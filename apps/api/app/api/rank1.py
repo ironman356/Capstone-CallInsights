@@ -143,6 +143,11 @@ class StrategyMeasurementRequest(BaseModel):
     repeat_contact_rate: float = Field(ge=0, le=1)
 
 
+class SimulationRequest(BaseModel):
+    customer_text: str = Field(min_length=1)
+    agent_response: str = Field(min_length=1)
+
+
 @router.get("/script-experiments")
 def script_experiments() -> dict:
     from app.services.rank1.script_experiments import list_experiments
@@ -199,6 +204,27 @@ def record_strategy_measurement(strategy_id: str, baseline: StrategyMeasurementR
     if not any(item["strategy_id"] == strategy_id for item in service.build_strategy_board(service.load_or_run())["strategies"]):
         raise HTTPException(404, "Strategy not found")
     return record(service.outputs_dir / "strategy_measurements.json", strategy_id, baseline.model_dump(), observed.model_dump())
+
+
+@router.get("/knowledge-graph")
+def knowledge_graph() -> dict:
+    from app.services.rank1.knowledge_graph import build_knowledge_graph
+    return build_knowledge_graph(service.load_or_run())
+
+
+@router.get("/calls/{call_id}/transparency")
+def call_transparency(call_id: str) -> dict:
+    from app.services.rank1.rank3 import transparency_report
+    call = service.load_or_run()["call_details"].get(call_id)
+    if call is None:
+        raise HTTPException(404, "Call not found")
+    return transparency_report(call)
+
+
+@router.post("/simulate-call")
+def simulate_call(payload: SimulationRequest) -> dict:
+    from app.services.rank1.rank3 import simulate_call as simulate
+    return simulate(payload.customer_text, payload.agent_response)
 
 
 @router.post("/ask-ci/chat", response_model=AskCiChatResponse)
