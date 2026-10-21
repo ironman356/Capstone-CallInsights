@@ -2579,7 +2579,7 @@ button { cursor: pointer; }
   .strategy-edit-footer button { flex: 1; }
 }
 
-/* Story Dashboard 1. */
+/* Issue Deep Dive and approach comparison. */
 .results-main { align-content: start; padding-top: 12px; gap: 12px; }
 .results-main .workspace-heading p { margin-top: 4px; }
 .compare-dashboard { --compare-a: #6ee7c8; --compare-b: #b9b0ff; --compare-c: #ffc66b; --compare-d: #7ac8ff; display: grid; gap: 14px; min-width: 0; align-content: start; }
@@ -2790,7 +2790,7 @@ button { cursor: pointer; }
   .results-transcript-meta { grid-column: 1; grid-row: 3; }
 }
 
-/* Story Dashboard 2: Approach × Issue Matrix. */
+/* Approach Effectiveness Matrix. */
 .matrix-dashboard { display: grid; gap: 16px; min-width: 0; }
 .matrix-summary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .matrix-summary-card { min-height: 0; padding: 16px 18px; }
@@ -2914,7 +2914,7 @@ button { cursor: pointer; }
   .matrix-detail-heading { align-items: flex-start; flex-direction: column; }
 }
 
-/* Story Dashboard 3: Approach Portfolio Map. */
+/* Approach Portfolio. */
 .portfolio-dashboard { display: grid; gap: 16px; min-width: 0; }
 .portfolio-summary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .portfolio-summary-card { min-height: 0; padding: 16px 18px; }
@@ -2985,7 +2985,19 @@ button { cursor: pointer; }
 .portfolio-bubble.mixed { background: color-mix(in srgb, var(--warning) 24%, var(--panel)); border-color: color-mix(in srgb, var(--warning) 58%, var(--line)); }
 .portfolio-bubble.negative { background: color-mix(in srgb, var(--risk) 28%, var(--panel)); border-color: color-mix(in srgb, var(--risk) 62%, var(--line)); }
 .portfolio-bubble:hover,
-.portfolio-bubble.selected { z-index: 4; transform: translate(-50%, -50%) scale(1.1); border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent), 0 14px 34px rgba(0, 0, 0, 0.24); }
+.portfolio-bubble.selected { z-index: 4; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent), 0 14px 34px rgba(0, 0, 0, 0.24); }
+.matrix-dashboard button:focus-visible,
+.portfolio-dashboard button:focus-visible,
+.portfolio-dashboard select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.portfolio-bubble:focus-visible { z-index: 5; }
+@media (hover: hover) and (pointer: fine) {
+  .portfolio-bubble:hover { transform: translate(-50%, -50%) scale(1.1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-bubble { transition: none; }
+  .portfolio-bubble:hover { transform: translate(-50%, -50%); }
+  .matrix-cell:hover, .matrix-cell.selected { transform: none; }
+}
 .portfolio-bubble strong,
 .portfolio-bubble span { display: block; }
 .portfolio-bubble strong { font-size: 0.78rem; }

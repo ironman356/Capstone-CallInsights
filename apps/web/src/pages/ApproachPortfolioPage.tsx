@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from "react";
+import { usesApproach } from "../approachComparison";
 import type { CallCard, DashboardIssue } from "../types";
 import { compareCallRecency, titleCase } from "../utils";
 
@@ -182,7 +183,7 @@ export default function ApproachPortfolioPage({ issues, calls, onOpenCall }: App
   const opportunityCount = points.filter((point) => point.impact >= 0 && point.x < 50).length;
   const frictionCount = points.filter((point) => point.impact < 0 && point.x >= 50).length;
   const evidenceCalls = calls
-    .filter((call) => call.behaviors.includes(selected.behavior))
+    .filter((call) => (!issue || call.issue === issue) && usesApproach(call, selected.behavior))
     .sort((left, right) => -compareCallRecency(left, right))
     .slice(0, 2);
   const issueScores = issues
@@ -194,7 +195,7 @@ export default function ApproachPortfolioPage({ issues, calls, onOpenCall }: App
     : ["Context-specific wins", "Proven standards", "Experimental", "Consistent friction"];
 
   return (
-    <section className="portfolio-dashboard" aria-label="Story Dashboard 3 — Approach Portfolio Map">
+    <section className="portfolio-dashboard" aria-label="Approach Portfolio">
       <div className="portfolio-summary-grid">
         <article className="panel-card portfolio-summary-card"><span>Approaches mapped</span><strong>{APPROACHES.length}</strong></article>
         <article className="panel-card portfolio-summary-card"><span>{mode === "adoption" ? "Scale candidates" : "Proven standards"}</span><strong>{scaleCount}</strong></article>
@@ -289,8 +290,8 @@ export default function ApproachPortfolioPage({ issues, calls, onOpenCall }: App
           <div className="portfolio-detail-metrics">
             <article><span>Modeled {config.label}</span><strong>{displayImpact(metric, selectedPoint.impact)}</strong></article>
             <article><span>Prototype usage</span><strong>{selected.usage}%</strong></article>
-            <article><span>Cross-issue consistency</span><strong>{selected.consistency}%</strong></article>
-            <article><span>Evidence confidence</span><strong>{selected.confidence}</strong></article>
+            <article><span>Modeled consistency</span><strong>{selected.consistency}%</strong></article>
+            <article><span>Modeled confidence</span><strong>{selected.confidence}</strong></article>
           </div>
 
           <div className="portfolio-explanation">
@@ -318,9 +319,10 @@ export default function ApproachPortfolioPage({ issues, calls, onOpenCall }: App
 
           <div className="portfolio-evidence">
             <div className="portfolio-section-heading">
-              <h4>Supporting calls</h4>
+              <h4>Example calls</h4>
               <span>{evidenceCalls.length} linked</span>
             </div>
+            <p>Observed examples of this approach; modeled impact is not calculated from these calls.</p>
             {evidenceCalls.length ? evidenceCalls.map((call) => (
               <button type="button" className="evidence-row" key={call.call_id} onClick={() => onOpenCall(call.call_id)}>
                 <strong>{call.call_id}</strong>

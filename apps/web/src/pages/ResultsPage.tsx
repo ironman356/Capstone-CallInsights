@@ -2,6 +2,7 @@ import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties
 import { createPortal } from "react-dom";
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
+import { usesApproach } from "../approachComparison";
 import type { CallCard, DashboardIssue } from "../types";
 import { compareCallRecency, phraseContext, titleCase } from "../utils";
 
@@ -86,7 +87,7 @@ function median(values: number[]) {
 }
 
 function hasHoldOrTransfer(call: CallCard) {
-  return call.behaviors.some((behavior) => behavior === "placed on hold" || behavior === "transferred / escalated");
+  return usesApproach(call, "placed on hold") || usesApproach(call, "transferred / escalated");
 }
 
 function isFirstContactResolved(call: CallCard) {
@@ -220,7 +221,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
   ] : [];
 
   return (
-    <section className="results-layout" aria-label="Story Dashboard 1">
+    <section className="results-layout" aria-label="Issue Deep Dive">
       <div className={`panel-card results-column ${!issue ? "results-awaiting-selection" : ""}`}>
         <h3>Issues</h3>
         <div className="results-list results-issues">
@@ -280,7 +281,7 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
           </div>
           <div className="results-stats-scroll">
             <table className="results-stats-table">
-              <thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Vs avg</th><th scope="col">Vs best</th><th scope="col">Vs worst</th></tr></thead>
+              <thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Vs baseline</th><th scope="col">Vs best</th><th scope="col">Vs worst</th></tr></thead>
               <tbody>
                 {statRows.map((row) => {
                   const sorted = [...row.values].sort((left, right) => left.value - right.value);
@@ -291,13 +292,14 @@ export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPagePr
                   const bestDifference = row.value - best.value;
                   const worstDifference = row.value - worst.value;
                   const tone = (value: number) => value === 0 ? "neutral" : (value > 0) === row.higherIsBetter ? "positive" : "negative";
+                  const deltaSuffix = row.suffix === "%" ? " pp" : row.suffix;
                   return (
                     <tr key={row.label}>
                       <th scope="row">{row.label}</th>
                       <td><strong>{formatStat(row.value, row.suffix)}</strong></td>
-                      <td><strong className={`results-delta ${tone(difference)}`}>{formatDelta(difference, row.suffix)}</strong><span>{direction} Avg</span></td>
-                      <td><strong className={`results-delta ${tone(bestDifference)}`}>{formatDelta(bestDifference, row.suffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(best.approach)}>{titleCase(best.approach)}</button></td>
-                      <td><strong className={`results-delta ${tone(worstDifference)}`}>{formatDelta(worstDifference, row.suffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(worst.approach)}>{titleCase(worst.approach)}</button></td>
+                      <td><strong className={`results-delta ${tone(difference)}`}>{formatDelta(difference, deltaSuffix)}</strong><span>{direction} {row.label === "Calls" ? "approach average" : "issue baseline"}</span></td>
+                      <td><strong className={`results-delta ${tone(bestDifference)}`}>{formatDelta(bestDifference, deltaSuffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(best.approach)}>{titleCase(best.approach)}</button></td>
+                      <td><strong className={`results-delta ${tone(worstDifference)}`}>{formatDelta(worstDifference, deltaSuffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(worst.approach)}>{titleCase(worst.approach)}</button></td>
                     </tr>
                   );
                 })}

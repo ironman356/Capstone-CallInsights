@@ -134,18 +134,18 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     kicker: "",
   },
   results: {
-    title: "Story Dashboard 1",
-    description: "Issue list → Approaches → Statistics",
+    title: "Issue Deep Dive",
+    description: "Explore an issue, inspect agent approaches, and read supporting transcripts.",
     kicker: "",
   },
   "approach-matrix": {
-    title: "Story Dashboard 2",
-    description: "Approaches × Issues → Outcome impact",
+    title: "Approach Effectiveness Matrix",
+    description: "Compare approach outcomes across issues and inspect the evidence behind each signal.",
     kicker: "",
   },
   "approach-portfolio": {
-    title: "Story Dashboard 3",
-    description: "Approach portfolio → Scale, investigate, or discourage",
+    title: "Approach Portfolio",
+    description: "Explore modeled adoption, consistency, and outcome impact to prioritize approaches.",
     kicker: "",
   },
   overview: {
@@ -211,10 +211,10 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 };
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
-  ["results", "Story Dashboard 1", ""],
+  ["results", "Issue Deep Dive", "Explore approaches and evidence within an issue"],
   ["compare-approaches", "Compare approaches", "Outcomes, call mix, and evidence side by side"],
-  ["approach-matrix", "Story Dashboard 2", ""],
-  ["approach-portfolio", "Story Dashboard 3", ""],
+  ["approach-matrix", "Approach Effectiveness Matrix", "Compare approach outcomes across issues"],
+  ["approach-portfolio", "Approach Portfolio", "Prioritize approaches using modeled signals"],
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],

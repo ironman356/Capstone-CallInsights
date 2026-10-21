@@ -53,8 +53,8 @@ function format(value: number, suffix = "") {
   return `${Math.round(value * 10) / 10}${suffix}`;
 }
 
-function formatDelta(value: number) {
-  return `${value > 0 ? "+" : ""}${format(value, " pts")}`;
+function formatDelta(value: number, suffix = " pp") {
+  return `${value > 0 ? "+" : ""}${format(value, suffix)}`;
 }
 
 function prototypeDelta(approach: string, issue: string) {
@@ -91,8 +91,11 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
     const matching = issueCalls.filter((call) => call.behaviors.includes(approach));
     const comparison = issueCalls.filter((call) => !call.behaviors.includes(approach));
     const observedDelta = matching.length && comparison.length ? rate(matching) - rate(comparison) : null;
-    const isPrototype = matching.length > 0 && (observedDelta === null || Math.abs(observedDelta) < 0.1);
-    const delta = matching.length ? isPrototype ? prototypeDelta(approach, issue.issue) : observedDelta : null;
+    const isPrototype = matching.length > 0 && observedDelta === null;
+    const baseline = rate(issueCalls);
+    const delta = isPrototype
+      ? Math.max(0, Math.min(100, baseline + prototypeDelta(approach, issue.issue))) - baseline
+      : observedDelta;
     return {
       key: `${approach}::${issue.issue}`,
       approach,
@@ -129,7 +132,7 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
     .sort((left, right) => right[1] - left[1])[0] : null;
 
   return (
-    <section className="matrix-dashboard" aria-label="Story Dashboard 2 — Approach by Issue Matrix">
+    <section className="matrix-dashboard" aria-label="Approach Effectiveness Matrix">
       <div className="matrix-summary-grid">
         <article className="panel-card matrix-summary-card">
           <span>Approaches observed</span>
@@ -154,7 +157,7 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
           <div>
             <p className="section-kicker">Cross-issue effectiveness</p>
             <h3>Where each approach helps—or falls short</h3>
-            <p>Cells show first-contact resolution difference by issue. When demo calls have no usable variance, a labeled prototype estimate fills the gap.</p>
+            <p>Cells show first-contact resolution differences in percentage points by issue. When an approach has no comparison group, a labeled prototype estimate fills the gap.</p>
           </div>
           <div className="matrix-legend" aria-label="Matrix legend">
             <span><i className="strong" /> Strong</span>
@@ -167,7 +170,7 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
 
         {prototypeCells.length ? (
           <div className="matrix-prototype-note">
-            <strong>Prototype mode:</strong> {prototypeCells.length} observed intersections use modeled lift because the generated dataset has no outcome contrast.
+            <strong>Prototype mode:</strong> {prototypeCells.length} observed intersections use modeled lift because no calls without the approach are available for comparison.
           </div>
         ) : null}
 
@@ -194,7 +197,8 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
                           type="button"
                           className={`matrix-cell ${tone(cell.assessment)} ${selectedKey === cell.key ? "selected" : ""}`}
                           onClick={() => setSelectedKey(cell.key)}
-                          aria-label={`${titleCase(approach)} for ${titleCase(issue.issue)}: ${cell.delta === null ? cell.assessment : formatDelta(cell.delta)}`}
+                          aria-pressed={selectedKey === cell.key}
+                          aria-label={`${titleCase(approach)} for ${titleCase(issue.issue)}: ${cell.delta === null ? cell.assessment : formatDelta(cell.delta)}${cell.isPrototype ? ", modeled prototype" : ""}`}
                         >
                           <strong>{cell.delta === null ? "—" : formatDelta(cell.delta)}</strong>
                           <span>{cell.matching.length ? `${cell.isPrototype ? "Prototype · " : ""}${cell.matching.length} calls` : "Not seen"}</span>
@@ -227,7 +231,7 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
                   ? selected.matching.length
                     ? "Every call for this issue used the approach, so there is no comparison group yet."
                     : "This approach was not observed for the selected issue."
-                  : `${selected.isPrototype ? "The prototype model estimates" : "Observed calls show"} ${titleCase(selected.approach)} at ${format(Math.abs(selected.delta), " points")} ${selected.delta >= 0 ? "higher" : "lower"} first-contact resolution for ${selected.issue}.`}
+                  : `${selected.isPrototype ? "The prototype model estimates" : "Observed calls show"} ${titleCase(selected.approach)} at ${format(Math.abs(selected.delta), " percentage points")} ${selected.delta >= 0 ? "higher" : "lower"} first-contact resolution for ${selected.issue}.`}
               </p>
               {companion ? (
                 <p className="matrix-companion">
@@ -249,12 +253,12 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
               <article>
                 <span>Sentiment shift</span>
                 <strong>{selectedSentiment === null ? "n/a" : format(selectedSentiment, " pts")}</strong>
-                {selectedSentiment !== null && comparisonSentiment !== null ? <small>{formatDelta(selectedSentiment - comparisonSentiment)} vs without</small> : null}
+                {selectedSentiment !== null && comparisonSentiment !== null ? <small>{formatDelta(selectedSentiment - comparisonSentiment, " pts")} vs without</small> : null}
               </article>
               <article>
                 <span>Average length</span>
                 <strong>{selectedTurns === null ? "n/a" : format(selectedTurns, " turns")}</strong>
-                {selectedTurns !== null && comparisonTurns !== null ? <small>{formatDelta(selectedTurns - comparisonTurns).replace(" pts", " turns")} vs without</small> : null}
+                {selectedTurns !== null && comparisonTurns !== null ? <small>{formatDelta(selectedTurns - comparisonTurns, " turns")} vs without</small> : null}
               </article>
             </div>
           </div>

@@ -36,17 +36,17 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     highlights: ["Separate overlapping calls", "Resolution intervals", "Issue mix", "Transcript quick reads"],
   },
   results: {
-    title: "Story Dashboard 1",
+    title: "Issue Deep Dive",
     summary: "Shows issues, their observed agent approaches, and statistics.",
     highlights: ["Issue list", "Approaches", "Statistics"],
   },
   "approach-matrix": {
-    title: "Story Dashboard 2",
+    title: "Approach Effectiveness Matrix",
     summary: "Compares each observed agent approach across customer issues.",
     highlights: ["Approach × issue matrix", "FCR impact", "Call evidence"],
   },
   "approach-portfolio": {
-    title: "Story Dashboard 3",
+    title: "Approach Portfolio",
     summary: "Positions approaches by adoption, reliability, and modeled outcome impact.",
     highlights: ["Portfolio map", "Quadrant decisions", "Approach evidence"],
   },
