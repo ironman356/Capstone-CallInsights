@@ -107,7 +107,7 @@
     "title": "Improve hardship / forbearance",
     "issue_slug": "hardship-forbearance",
     "issue": "hardship / forbearance",
-    "status": "Proposed",
+    "status": "Evaluating",
     "owner": "QA",
     "hypothesis": "Standardize the strongest behaviors for hardship / forbearance and monitor the next recalibration cycle for KPI movement.",
     "kpi_focus": [
@@ -121,14 +121,14 @@
     ],
     "notes": "Hardship / Forbearance appeared in 14 calls with unresolved as the most common outcome.",
     "created_at": "2026-04-09T12:51:06Z",
-    "updated_at": "2026-04-27T07:39:01Z"
+    "updated_at": "2026-09-17T16:04:28Z"
   },
   {
     "strategy_id": "STRAT-004",
     "title": "Improve late fee dispute",
     "issue_slug": "late-fee-dispute",
     "issue": "late fee dispute",
-    "status": "Proposed",
+    "status": "Accepted",
     "owner": "Training",
     "hypothesis": "Standardize the strongest behaviors for late fee dispute and monitor the next recalibration cycle for KPI movement.",
     "kpi_focus": [
@@ -142,7 +142,7 @@
     ],
     "notes": "Late Fee Dispute appeared in 12 calls with unresolved as the most common outcome.",
     "created_at": "2026-04-09T12:51:06Z",
-    "updated_at": "2026-04-25T04:22:39Z"
+    "updated_at": "2026-10-01T15:46:02Z"
   },
   {
     "strategy_id": "STRAT-005",

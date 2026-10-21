@@ -128,6 +128,17 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertIn("strategy_board", payload)
         self.assertIn("governance", payload)
 
+    def test_solution_graph_endpoint_has_grounded_signal_counts(self) -> None:
+        response = self.client.get("/api/rank1/solutions")
+        self.assertEqual(response.status_code, 200)
+        payload = response.json()
+        self.assertGreater(payload["call_count"], 0)
+        for cluster in payload["clusters"]:
+            for signal in cluster["signals"]:
+                self.assertEqual(signal["support"] + signal["comparison_count"], cluster["count"])
+                self.assertEqual(signal["resolved"] + signal["other"], signal["support"])
+                self.assertTrue(all(e["quotes"] for e in signal["examples"]))
+
     def test_strategy_create_and_update_endpoints_work(self) -> None:
         dashboard = self.client.get("/api/rank1/dashboard").json()
         issue_slug = dashboard["issues"][0]["slug"]

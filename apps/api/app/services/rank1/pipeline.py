@@ -1169,6 +1169,16 @@ class Rank1PipelineService:
             )
         return insights
 
+    def build_solution_story(self, bundle: dict) -> dict:
+        # Kept for older workspace clients. Detailed analysis uses /solutions.
+        calls = bundle["calls"]
+        baseline = round(100 * sum(c["outcome"] == "resolved" for c in calls) / len(calls), 1) if calls else 0
+        return {"story": {"issue": "All calls", "call_count": len(calls),
+                          "baseline_resolution_rate": baseline, "headline": "Open Story → Solution for measured results.",
+                          "lead_behavior": None, "lead_delta": 0},
+                "working": [], "not_working": [], "techniques": [],
+                "disclaimer": "Legacy contrast ranking retired; use /solutions for guarded evidence."}
+
     def build_recalibration_summary(self, bundle: dict) -> dict:
         top_issue = bundle["issues"][0] if bundle["issues"] else None
         low_issue = bundle["issues"][-1] if bundle["issues"] else None
@@ -1639,6 +1649,7 @@ class Rank1PipelineService:
             "ask_ci": self.build_ask_ci(bundle),
             "reports": self.build_report_summary(bundle),
             "governance": self.build_governance_summary(bundle),
+            "solution_story": self.build_solution_story(bundle),
         }
 
     def build_llm_batch_tasks(self, calls: list[dict]) -> list[dict]:
