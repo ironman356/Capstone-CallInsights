@@ -702,6 +702,9 @@ class Rank1PipelineService:
         if not transcript_text and normalized_turns:
             transcript_text = "\n".join(f"{turn['speaker']}: {turn['text']}" for turn in normalized_turns)
 
+        if not transcript_text:
+            raise ValueError(f"Transcript content is required for {source_name}")
+
         transcript_text = redact_transcript_text(transcript_text)
         normalized_turns = [
             {**turn, "text": redact_transcript_text(str(turn["text"]))}
@@ -712,17 +715,26 @@ class Rank1PipelineService:
         return {
             "call_id": call_id,
             "source_file": source_name,
-            "timestamp_start": record.get("timestamp_start"),
-            "timestamp_end": record.get("timestamp_end"),
-            "agent_id": record.get("agent_id"),
-            "queue": record.get("queue"),
-            "team": record.get("team"),
+            "timestamp_start": self._optional_metadata(record.get("timestamp_start")),
+            "timestamp_end": self._optional_metadata(record.get("timestamp_end")),
+            "agent_id": self._optional_metadata(record.get("agent_id")),
+            "queue": self._optional_metadata(record.get("queue")),
+            "team": self._optional_metadata(record.get("team")),
             "metadata": record.get("metadata", {}),
             "transcript_text": transcript_text,
             "turns": normalized_turns,
             "turn_count": len(normalized_turns),
             "redaction_applied": True,
         }
+
+    @staticmethod
+    def _optional_metadata(value: object) -> str | None:
+        if value is None:
+            return None
+        normalized = str(value).strip()
+        if len(normalized) > 200:
+            raise ValueError("Metadata values must be 200 characters or fewer")
+        return normalized or None
 
     def ingest_calls(self) -> list[dict]:
         if not self.raw_dir.exists():
