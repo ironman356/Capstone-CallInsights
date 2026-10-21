@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Background, Controls, MarkerType, Position, ReactFlow, type Edge, type Node } from "@xyflow/react";
-import { ArrowRight, FlaskConical, Network, RefreshCw } from "lucide-react";
+import { ArrowRight, Expand, FlaskConical, Minimize, Network, RefreshCw } from "lucide-react";
 import "@xyflow/react/dist/style.css";
 import "./solutionStory.css";
 import { api } from "../api";
@@ -21,7 +21,7 @@ function StoryGraph({ cluster, signals, selected, onSelect }: {
     const base = { background: "var(--panel-strong)", color: "var(--text)", border: "1px solid var(--line-strong)", borderRadius: 18, padding: 18, width: 235, textAlign: "left" as const };
     const nodes: Node[] = [{ id: "issue", position: { x: 0, y: 215 }, sourcePosition: Position.Right, style: { ...base, borderColor: "#7ac8ff" }, data: { label: <><small>01 / CUSTOMER PROBLEM</small><h3>{cluster.issue}</h3><span>{cluster.count} calls · {cluster.baseline}% resolved</span></> } }];
     const edges: Edge[] = [];
-    signals.slice(0, 5).forEach((s, index) => {
+    signals.forEach((s, index) => {
       nodes.push({ id: s.id, position: { x: 340, y: index * 155 }, sourcePosition: Position.Right, targetPosition: Position.Left, style: { ...base, width: 275, borderColor: tone(s), boxShadow: s.id === selected?.id ? `0 0 0 3px ${tone(s)}55` : undefined }, data: { label: <><small>02 / {s.kind.toUpperCase()}</small><h3>{s.label}</h3><span>{s.support} calls · {deltaLabel(s.delta)}</span><em>{s.status}</em></> } });
       edges.push({ id: `in-${s.id}`, source: "issue", target: s.id, style: { stroke: "#7ac8ff", strokeWidth: 1.7 }, markerEnd: { type: MarkerType.ArrowClosed, color: "#7ac8ff" } });
       for (const [target, count, color] of [["resolved", s.resolved, "#6ee7b7"], ["other", s.other, "#fb927d"]] as const) {
@@ -32,8 +32,8 @@ function StoryGraph({ cluster, signals, selected, onSelect }: {
       { id: "other", position: { x: 765, y: 415 }, targetPosition: Position.Left, style: { ...base, borderColor: "#fb927d" }, data: { label: <><small>03 / CALL OUTCOME</small><h3>Not recorded as resolved</h3><span>{cluster.count - cluster.resolved} unique calls</span><em>Follow-up, callback, escalation or unresolved</em></> } });
     return { nodes, edges };
   }, [cluster, signals, selected]);
-  return <div className="discovery-canvas" aria-label="Interactive issue to behavior to outcome graph">
-    <ReactFlow key={`${cluster.slug}-${signals.slice(0, 5).map(s => s.id).join()}`} nodes={nodes} edges={edges} fitView fitViewOptions={{ padding: .15 }} minZoom={.35} maxZoom={1.6} nodesDraggable={false} nodesConnectable={false} onNodeClick={(_, node) => { if (signals.some(s => s.id === node.id)) onSelect(node.id); }}>
+  return <div className="discovery-canvas discovery-network-canvas" aria-label="Interactive issue to behavior to outcome graph">
+    <ReactFlow key={`${cluster.slug}-${signals.map(s => s.id).join()}`} nodes={nodes} edges={edges} fitView fitViewOptions={{ padding: .12 }} minZoom={.2} maxZoom={2.2} nodesDraggable nodesConnectable={false} onNodeClick={(_, node) => { if (signals.some(s => s.id === node.id)) onSelect(node.id); }}>
       <Background color="var(--line-strong)" gap={24} /><Controls showInteractive={false} />
     </ReactFlow>
   </div>;
@@ -49,6 +49,7 @@ export default function SolutionStoryPage({ workspace, onOpenCall, onNavigate }:
   const [evidenceMode, setEvidenceMode] = useState("all");
   const [search, setSearch] = useState("");
   const [graphView, setGraphView] = useState("transcript");
+  const [networkExpanded, setNetworkExpanded] = useState(false);
   if (query.isLoading) return <div className="panel-card"><h3>Comparing language models across your calls…</h3><p>Building grouped validation results and evidence paths. The first request also loads the local semantic model.</p></div>;
   if (query.error || !query.data) return <div className="panel-card" role="alert"><h3>Solution analysis could not load</h3><p>{query.error instanceof Error ? query.error.message : "No response"}</p><button className="ghost-button" onClick={() => void query.refetch()}>Retry</button></div>;
   const report = query.data;
@@ -56,7 +57,6 @@ export default function SolutionStoryPage({ workspace, onOpenCall, onNavigate }:
   if (!cluster) return <div className="panel-card">No clusters available. Load transcripts to begin.</div>;
   const signals = cluster.signals.filter(s => (kind === "all" || s.kind === kind) && s.label.toLowerCase().includes(search.toLowerCase()));
   const selected = signals.find(s => s.id === selectedId) ?? signals[0];
-  const graphSignals = selected && !signals.slice(0, 5).includes(selected) ? [selected, ...signals.slice(0, 4)] : signals;
   const examples = selected ? evidenceMode === "counter" ? selected.counterexamples : selected.examples : [];
   const winner = report.benchmark.models[0];
   const conversation = report.conversations?.clusters.find(c => c.slug === cluster.slug);
@@ -86,11 +86,12 @@ export default function SolutionStoryPage({ workspace, onOpenCall, onNavigate }:
       <div className="discovery-table-wrap"><table><thead><tr><th>Exact agent line</th><th>Resolved with it</th><th>Resolved without it</th><th>Reading</th></tr></thead><tbody>{exactLines.map(l => <tr key={l.text}><td className="exact-line-cell">“{l.text}”</td><td>{l.resolved}/{l.support} ({l.rate}%)</td><td>{l.without_count ? `${l.without_resolved}/${l.without_count} (${l.without_rate}%)` : "No comparator"}</td><td>{!l.without_count ? "Cannot isolate effect" : l.rate > (l.without_rate ?? 0) ? "Higher observed rate; unvalidated" : l.rate < (l.without_rate ?? 0) ? "Lower observed rate; unvalidated" : "Same observed rate"}</td></tr>)}</tbody></table></div>
     </section>
     <details open={graphView === "signals"} className="panel-card"><summary>Behavior map and statistical evidence</summary>
-    <section className="discovery-graph-panel panel-card">
+    <section className={`discovery-graph-panel panel-card ${networkExpanded ? "network-expanded" : ""}`}>
       <div className="panel-heading"><div><p className="section-kicker">01 / Follow the paths</p><h3>{cluster.issue}</h3></div><span>{cluster.baseline}% cluster resolution</span></div>
+      <div className="network-actions"><button className="ghost-button" onClick={() => setNetworkExpanded(value => !value)}>{networkExpanded ? <Minimize size={15} /> : <Expand size={15} />}{networkExpanded ? "Exit large graph" : "Open large graph"}</button></div>
       <div className="discovery-legend"><span className="positive">Higher resolution</span><span className="negative">Lower resolution</span><span className="uncertain">Uncertain / limited comparison</span></div>
-      {signals.length ? <StoryGraph cluster={cluster} signals={graphSignals} selected={selected} onSelect={id => { setSelectedId(id); setEvidenceMode("all"); }} /> : <p className="empty-copy">No repeated signals match this filter. Try another signal family or cluster.</p>}
-      <p className="discovery-note">Showing up to five paths. Line width represents call count. Calls may share several paths; the graph describes association. Escalation or follow-up can be an appropriate outcome.</p>
+      {signals.length ? <StoryGraph cluster={cluster} signals={signals} selected={selected} onSelect={id => { setSelectedId(id); setEvidenceMode("all"); }} /> : <p className="empty-copy">No repeated signals match this filter. Try another signal family or cluster.</p>}
+      <p className="discovery-note">Every matching response is shown. Select a response to drill into the evidence cards below, drag any node to arrange the map, and use the large-graph view for presentation. Line width represents call count; the graph describes association, not proof of causation.</p>
     </section>
     <div className="discovery-detail-grid">
       <section className="panel-card"><p className="section-kicker">02 / Compare responses</p><h3>What looks helpful—and what is unclear</h3><div className="discovery-signal-list">

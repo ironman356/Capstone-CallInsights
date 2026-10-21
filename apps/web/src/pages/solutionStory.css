@@ -12,6 +12,10 @@
 .discovery-legend span::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 7px; border-radius: 50%; background: #efc66d; }
 .discovery-legend .positive::before { background: #6ee7b7; }.discovery-legend .negative::before { background: #fb927d; }
 .discovery-canvas { height: 650px; border-radius: 16px; border: 1px solid var(--line); background: var(--bg); overflow: hidden; }
+.discovery-network-canvas { height: min(78vh, 980px); min-height: 720px; }
+.network-actions { display: flex; justify-content: flex-end; margin: 0 0 12px; }
+.network-expanded { position: fixed; inset: 18px; z-index: 50; overflow: auto; box-shadow: 0 24px 80px #0009; }
+.network-expanded .discovery-network-canvas { height: calc(100vh - 220px); max-height: none; min-height: 720px; }
 .discovery-canvas .react-flow__node h3 { margin: 9px 0; font-size: 17px; }.discovery-canvas .react-flow__node small { color: var(--accent-alt); letter-spacing: .08em; font-size: 10px; }.discovery-canvas .react-flow__node span, .discovery-canvas .react-flow__node em { display: block; font-size: 12px; font-style: normal; line-height: 1.4; }.discovery-canvas .react-flow__node em { color: var(--muted); margin-top: 5px; }
 .discovery-canvas .react-flow__controls-button { background: var(--bg-soft); color: var(--text); border-color: var(--line); }.discovery-canvas .react-flow__controls-button svg { fill: currentColor; }
 .discovery-note, .discovery-page .panel-card > p, .discovery-methods p { color: var(--muted); line-height: 1.6; }
