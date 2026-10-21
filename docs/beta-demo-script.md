@@ -99,15 +99,24 @@
 2. Story Dashboard 2 and Story Dashboard 3.
 3. `apps/web/src/pages/ResultsPage.tsx`, `ApproachMatrixPage.tsx`, `ApproachPortfolioPage.tsx`.
 
-## 11:30–13:30 — Anshul screen share: individual contribution
-
-**Replace before presenting.**
+## 11:30–13:30 — Anshul screen share: hybrid ML + LLM modeling
 
 **Say:**
 
-“I’m Anshul. I implemented **[exact feature]**. It solves **[specific user or system problem]**. It connects to **[frontend/API/pipeline component]** through **[endpoint/data artifact/function]**. I will show **[exact file and function]**.”
+“I’m Anshul. I expanded the hybrid topic-classification pipeline with five supervised-ML and LLM approaches. These include logistic-regression and SVM candidate retrieval with LLM reranking, ensemble LLM arbitration, normalization-based classification, and embedding + ML + LLM consensus.”
 
-**Show on Anshul’s screen:** `[running feature]`, then `[exact page/file]`, then `[exact function/test]`. End by saying exactly how the feature consumes or produces data for the shared application.
+“I also added deterministic unit tests, CLI support to train and evaluate the strategies, cached prediction outputs, and end-to-end held-out benchmark reporting. The strongest evaluated strategy was SVM top-k plus LLM reranking: 95.17% macro-F1 and 93.48% accuracy across the 28-call test set.”
+
+“These approaches feed the shared comparison data. Alex’s model views compare them, and Prachi’s Story → Solution workflow makes their transcript evidence inspectable.”
+
+**Show on Anshul’s screen:**
+
+1. `evaluation/hybrid_topics.py`: the SVM top-k + LLM reranking strategy and one other hybrid strategy.
+2. `evaluation/run_hybrid_topics.py`: the CLI strategy choices and runner wiring.
+3. `tests/test_hybrid_topics.py`: a deterministic test for candidate reranking or consensus behavior.
+4. `apps/web/src/modelApproachData.ts`: the 95.17% macro-F1 / 93.48% accuracy comparison row.
+
+**Close with:** “This code produces reproducible predictions and benchmark rows for the same shared product—not an isolated experiment.”
 
 ## 13:30–15:30 — Abdul screen share: individual contribution
 
@@ -155,7 +164,8 @@
 - [x] Architecture/data flow and code layout.
 - [x] Alpha models are framed as association discovery; Beta is the Story → Solution investigation workflow.
 - [x] Every member has a timed screen-share handoff: live feature, own code, integration explanation, and next speaker.
-- [ ] Replace Anshul and Abdul placeholders with verified feature, file, function, and test details before presenting.
+- [x] Anshul’s hybrid-model feature, code, benchmark, and own-screen handoff are verified.
+- [ ] Replace Abdul’s placeholder with verified feature, file, function, and test details before presenting.
 - [x] LOC/commit slide, with temporary AI split clearly labeled.
 - [x] Prachi code proof centers `SolutionStoryPage.tsx`, `TranscriptStoryGraph.tsx`, `solutions.py`, and `conversation_paths.py`.
 - [x] Shared engineering screen covers GitLab board, branch graph, versioning, build/test, and published API documentation.
