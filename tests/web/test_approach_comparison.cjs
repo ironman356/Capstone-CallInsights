@@ -10,7 +10,7 @@ vm.runInNewContext(ts.transpileModule(
   fs.readFileSync(path.resolve(__dirname, '../../apps/web/src/approachComparison.ts'), 'utf8'),
   { compilerOptions: { target: ts.ScriptTarget.ES2023, module: ts.ModuleKind.CommonJS } },
 ).outputText, { exports: out.exports });
-const { callApproaches, compareCohorts, summarizeApproach } = out.exports;
+const { callApproaches, compareCohorts, relativeIssueMix, summarizeApproach } = out.exports;
 const call = (id, behaviors, outcome, turn_count, shift) => ({ call_id: id, behaviors, outcome, turn_count, sentiments: { shift } });
 const calls = [
   call('a', ['showed empathy', 'used empathy'], 'resolved', 10, 0.5),
@@ -60,4 +60,15 @@ assert.equal(included.groups[3].length, 2);
 const three = compareCohorts(multiCalls, selections.slice(0, 3), true);
 assert.equal(three.groups.length, 3);
 assert.equal(three.shared.length, 3);
-console.log('Comparison checks passed: aliases, shared calls, measured outcomes, missing values, and uncertainty bounds.');
+assert.equal(relativeIssueMix(20, 20, true).width, 50, 'Baseline is half full');
+assert.equal(relativeIssueMix(10, 20, false).width, 25, 'Half the baseline share is quarter full');
+assert.equal(relativeIssueMix(40, 20, false).width, 100, 'Twice the baseline share fills the bar');
+assert.equal(relativeIssueMix(60, 20, false).width, 100, 'Large ratios stay inside the track');
+assert.equal(relativeIssueMix(60, 20, false).ratio, 3, 'Capping must preserve the actual ratio');
+assert.equal(relativeIssueMix(0, 20, false).width, 0);
+assert.equal(relativeIssueMix(0, 0, true).width, 50, 'Zero baseline remains anchored');
+assert.equal(relativeIssueMix(20, 0, false).ratio, null, 'Cannot divide by a zero baseline');
+assert.equal(relativeIssueMix(20, 0, false).width, null);
+assert.equal(relativeIssueMix(null, 20, false).width, null, 'Missing cohort is not a measured zero');
+assert.equal(relativeIssueMix(20, null, false).width, null);
+console.log('Comparison checks passed: aliases, cohorts, outcomes, uncertainty, and relative issue mix scaling.');

@@ -10,6 +10,12 @@ export const canonicalApproach = (label: string) => ALIASES[label] ?? label;
 export const callApproaches = (call: CallCard) => [...new Set(call.behaviors.map(canonicalApproach))];
 export const usesApproach = (call: CallCard, approach: string) => callApproaches(call).includes(canonicalApproach(approach));
 
+export function relativeIssueMix(share: number | null, baseline: number | null, isBaseline: boolean) {
+  if (share === null || baseline === null) return { width: null, ratio: null };
+  const ratio = baseline > 0 ? share / baseline : null;
+  return { width: isBaseline ? 50 : ratio === null ? null : Math.min(100, ratio * 50), ratio };
+}
+
 export function compareCohorts(calls: CallCard[], approaches: string[], excludeShared: boolean) {
   const selected = approaches.map(canonicalApproach);
   const matches = calls.map((call) => {

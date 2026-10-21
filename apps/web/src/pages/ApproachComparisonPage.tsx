@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ArrowLeftRight, ArrowUpRight, Plus, X } from "lucide-react";
 import { api } from "../api";
-import { callApproaches, compareCohorts, summarizeApproach, usesApproach } from "../approachComparison";
+import { callApproaches, compareCohorts, relativeIssueMix, summarizeApproach, usesApproach } from "../approachComparison";
 import type { CallCard, DashboardIssue } from "../types";
 import { compareCallRecency, titleCase } from "../utils";
 
@@ -72,6 +72,8 @@ export default function ApproachComparisonPage({ issues, calls, onOpenCall }: {
   const [selected, setSelected] = useState(["offered next steps", "transferred / escalated"]);
   const [excludeShared, setExcludeShared] = useState(true);
   const [rankingMetric, setRankingMetric] = useState("resolution");
+  const [showMixNames, setShowMixNames] = useState(false);
+  const [mixBaseline, setMixBaseline] = useState("");
   const scrollPosition = useRef(0);
   useLayoutEffect(() => {
     window.scrollTo({ top: scrollPosition.current, behavior: "instant" });
@@ -92,6 +94,7 @@ export default function ApproachComparisonPage({ issues, calls, onOpenCall }: {
   const scoped = calls.filter((call) => !issue || call.issue === issue);
   const { groups, shared } = compareCohorts(scoped, approaches, excludeShared);
   const summaries = groups.map(summarizeApproach);
+  const baselineIndex = mixBaseline ? Math.max(0, approaches.indexOf(mixBaseline)) : -1;
   const metricRows = [
     { label: "Calls", values: summaries.map((item) => item.count), unit: "", deltaUnit: "", higher: null },
     { label: "Resolution", values: summaries.map((item) => item.resolution), unit: "%", deltaUnit: " pp", higher: true },
@@ -131,8 +134,8 @@ export default function ApproachComparisonPage({ issues, calls, onOpenCall }: {
       {excludeShared && shared.length > 0 && groups.every((group) => !group.length) ? <button type="button" className="compare-include-shared" onClick={() => setExcludeShared(false)}>No exclusive calls. Include shared calls</button> : null}
     </section>
 
-    <section className="panel-card compare-metrics"><div className="compare-section-heading"><h3>Comparison</h3><span>Differences vs A</span></div>
-      <div className="compare-table-scroll"><table><thead><tr><th scope="col">Measure</th>{approaches.map((approach, index) => <th scope="col" className={`compare-${SIDES[index]}-text`} key={approach} title={titleCase(approach)}>{SIDES[index].toUpperCase()}</th>)}</tr></thead>
+    <section className="panel-card compare-metrics"><div className="compare-section-heading"><h3>Comparison</h3><span>Differences vs A · {titleCase(approaches[0])}</span></div>
+      <div className="compare-table-scroll"><table><thead><tr><th scope="col">Measure</th>{approaches.map((approach, index) => <th scope="col" className={`compare-${SIDES[index]}-text`} key={approach}>{SIDES[index].toUpperCase()}<small>{titleCase(approach)}</small></th>)}</tr></thead>
         <tbody>{metricRows.map((row) => <tr key={row.label}><th scope="row">{row.label}</th>{row.values.map((value, index) => {
           const delta = value === null || row.values[0] === null ? null : Math.round((value - row.values[0]) * 10) / 10;
           const sampleCount = row.label === "Sentiment change" ? summaries[index].sentiment.count : row.label === "Average length" ? summaries[index].turns.count : null;
@@ -146,11 +149,30 @@ export default function ApproachComparisonPage({ issues, calls, onOpenCall }: {
     </div>
 
     <div className="compare-bottom-grid">
-      <section className="panel-card"><div className="compare-section-heading"><h3>Issue mix</h3></div>
-        <div className="compare-mix-legend">{summaries.map((summary, index) => <span className={`compare-${SIDES[index]}-text`} key={index}>{SIDES[index].toUpperCase()} · {summary.count} calls</span>)}</div>
-        {issueMix.length ? issueMix.map((item) => <div className="compare-mix-row" key={item.label}><strong>{titleCase(item.label)}</strong><div>
-          {item.counts.map((count, index) => { const total = summaries[index].count; const percent = total ? count / total * 100 : 0; return <div className={`compare-mix-track compare-${SIDES[index]}`} key={index}><span style={{ width: `${percent}%` }} /><small>{SIDES[index].toUpperCase()} {count} · {number(percent, "%")}</small></div>; })}
-        </div></div>) : <p className="compare-empty">No comparison calls.</p>}
+      <section className="panel-card"><div className="compare-section-heading"><h3>Issue mix</h3><label className="compare-overlap"><input type="checkbox" checked={showMixNames} onChange={(event) => setShowMixNames(event.target.checked)} />Show approach names</label></div>
+        <label className="compare-mix-baseline">Bar scale<select value={baselineIndex < 0 ? "" : approaches[baselineIndex]} onChange={(event) => setMixBaseline(event.target.value)}>
+          <option value="">Actual percentages</option>
+          {approaches.map((approach, index) => <option key={approach} value={approach}>Baseline: {SIDES[index].toUpperCase()} · {titleCase(approach)}</option>)}
+        </select></label>
+        {baselineIndex >= 0 ? <p className="compare-mix-note">{SIDES[baselineIndex].toUpperCase()} is half full for each issue. Other bars show their issue share relative to it; full = 2× baseline. A zero baseline share cannot be compared.</p> : null}
+        <div className="compare-mix-legend">{summaries.map((summary, index) => <span className={`compare-${SIDES[index]}-text`} key={index}>{showMixNames ? titleCase(approaches[index]) : SIDES[index].toUpperCase()} · {summary.count} calls</span>)}</div>
+        {issueMix.length ? issueMix.map((item) => {
+          const baselineTotal = baselineIndex >= 0 ? summaries[baselineIndex].count : 0;
+          const baselineShare = baselineTotal ? item.counts[baselineIndex] / baselineTotal * 100 : null;
+          return <div className="compare-mix-row" key={item.label}><strong>{titleCase(item.label)}</strong><div>
+            {item.counts.map((count, index) => {
+              const total = summaries[index].count;
+              const percent = total ? count / total * 100 : null;
+              const scaled = baselineIndex >= 0 ? relativeIssueMix(percent, baselineShare, index === baselineIndex) : { width: percent, ratio: null };
+              return <div className={`compare-mix-track compare-${SIDES[index]} ${baselineIndex >= 0 ? "relative" : ""}`} key={index}>
+                {scaled.width !== null ? <span style={{ width: `${scaled.width}%` }} /> : null}
+                <small>{showMixNames ? titleCase(approaches[index]) : SIDES[index].toUpperCase()} · {count} · {number(percent, "%")}
+                  {baselineIndex >= 0 ? index === baselineIndex ? " · baseline" : scaled.ratio === null ? " · not comparable" : ` · ${number(scaled.ratio, "× baseline")}${scaled.ratio > 2 ? " · bar capped at 2×" : ""}` : ""}
+                </small>
+              </div>;
+            })}
+          </div></div>;
+        }) : <p className="compare-empty">No comparison calls.</p>}
       </section>
       <section className="panel-card"><div className="compare-section-heading"><h3>Approaches</h3><label><span className="sr-only">Rank approaches by</span><select value={rankingMetric} onChange={(event) => setRankingMetric(event.target.value)}><option value="resolution">Resolution</option><option value="sentiment">Sentiment</option><option value="length">Call length</option></select></label></div>
         <div className="compare-ranking">{ranked.map(({ approach, summary }) => <div key={approach}><div><strong title={OUTCOME_LINKED.has(approach) ? "This label is partly derived from call outcomes." : undefined}>{titleCase(approach)}</strong><small>{summary.count} calls · {number(rankingMetric === "sentiment" ? summary.sentiment.value : rankingMetric === "length" ? summary.turns.value : summary.resolution, rankingMetric === "resolution" ? "% resolved" : rankingMetric === "length" ? " turns" : " sentiment")}</small></div>

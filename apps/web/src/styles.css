@@ -2618,6 +2618,7 @@ button { cursor: pointer; }
 .compare-metrics table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 .compare-metrics th, .compare-metrics td { padding: 11px 14px; border-bottom: 1px solid var(--line); }
 .compare-metrics thead th { font-size: 0.78rem; }
+.compare-metrics thead th small { overflow-wrap: anywhere; }
 .compare-metrics th:first-child { padding-left: 0; width: 28%; }
 .compare-metrics td { width: calc(72% / var(--compare-count)); }
 .compare-metrics th small, .compare-metrics td span { display: block; margin-top: 4px; font-size: 0.72rem; font-weight: 400; color: var(--muted); }
@@ -2661,10 +2662,13 @@ button { cursor: pointer; }
 .compare-excerpt strong { color: var(--compare-color); }
 .compare-bottom-grid { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 18px; align-items: start; }
 .compare-mix-legend { display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 0.75rem; margin-bottom: 14px; }
+.compare-mix-baseline { display: grid; gap: 6px; margin-bottom: 12px; color: var(--muted); font-size: 0.75rem; }
+.compare-dashboard .compare-mix-note { margin-bottom: 12px; color: var(--muted); font-size: 0.72rem; line-height: 1.5; }
 .compare-mix-row { display: grid; grid-template-columns: minmax(120px, 0.65fr) minmax(0, 1fr); align-items: center; gap: 12px; margin: 13px 0; font-size: 0.75rem; }
-.compare-mix-track { position: relative; height: 20px; margin: 3px 0; background: var(--surface); }
+.compare-mix-track { position: relative; min-height: 20px; margin: 3px 0; background: var(--surface); }
 .compare-mix-track > span { position: absolute; inset: 0 auto 0 0; background: color-mix(in srgb, var(--compare-color) 25%, transparent); border-left: 2px solid var(--compare-color); }
-.compare-mix-track > small { position: relative; padding-left: 8px; font-size: 0.68rem; line-height: 20px; }
+.compare-mix-track > small { position: relative; display: block; padding: 3px 8px; font-size: 0.68rem; line-height: 1.4; overflow-wrap: anywhere; }
+.compare-mix-track.relative::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; border-left: 1px dashed var(--muted); pointer-events: none; }
 .compare-ranking { display: grid; }
 .compare-ranking > div { display: grid; grid-template-columns: minmax(0, 1fr) repeat(var(--compare-count), 30px); gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; }
 .compare-ranking small { display: block; margin-top: 4px; color: var(--muted); font-size: 0.72rem; }
