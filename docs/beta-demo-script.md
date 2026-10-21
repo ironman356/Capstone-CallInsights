@@ -2,19 +2,19 @@
 
 ## Before staff arrive
 
-- Screen 1 (Prachi): running web app at `http://127.0.0.1:4173` and API at `http://127.0.0.1:8000/docs`.
+- Screen 1 (Prachi): `https://localhost:4174/solutions`, with **Story → Solution** open and one issue cluster selected; API docs at `http://127.0.0.1:8000/docs`.
 - Screen 2 (Alex): Story Dashboard open; VS Code tabs open for `ResultsPage.tsx`, `ApproachMatrixPage.tsx`, and `ApproachPortfolioPage.tsx`.
 - Screen 3 (shared or another team member): GitLab Issues/board, branch graph, merge requests, and the test command/result.
-- Preload one representative issue, one transcript, one strategy, and Swagger UI. Do not rerun the pipeline live unless it has been tested immediately beforehand.
+- Preload the **Behavior map**, **Script route explorer**, one supporting transcript, and Swagger UI. Do not rerun the pipeline live unless it has been tested immediately beforehand.
 - Do not claim a deployed server, authentication, a database, or production SPS integration unless it is running and can be shown.
 
 ## 0:00–1:30 — Prachi: purpose and Beta status
 
 **Say:**
 
-“Good [morning/afternoon]. We are Call Insights. It helps mortgage-servicing managers turn a large transcript corpus into evidence they can act on. Instead of reviewing calls one by one, a manager can identify a recurring issue, inspect the supporting call, see the extracted behavior and outcome, and create an action plan.”
+“Good [morning/afternoon]. We are Call Insights. It helps mortgage-servicing managers understand which agent behaviors are associated with calls resolving quickly, then inspect the exact evidence behind that result.”
 
-“Our Beta is a working local web product. A new user can open the workspace, explore the populated demo corpus, drill into transcript evidence, use the Story Dashboard, create or update an action plan, and inspect the API documentation without developer assistance.”
+“Our Beta is a working local web product. A manager can start with an issue, see what appears to work or not work, inspect the exact words and supporting calls, follow branching conversation routes, and turn the evidence into a testable action.”
 
 **Show:** title slide, then Project Description and Beta State slides.
 
@@ -24,9 +24,9 @@
 
 “At the end of Alpha, our major deliverable was the Hybrid LLM + ML Model Approaches tab. It compares modeling approaches on the same benchmark.”
 
-“In Beta, we made the results usable. We added the three Story Dashboard views: issue-to-approach-to-statistics, the approach/issue matrix, and the approach map. We also connected evidence links, action-plan workflow, alerts, evidence packs, and API documentation.”
+“Those Alpha models identified agent behaviors associated with higher resolution rates. But a manager still needed to ask: which exact words should I look at, what happened next, and which calls support the result?”
 
-“The important shift is from ‘which model performed best?’ to ‘what should an operations manager investigate, and which calls support that conclusion?’”
+“In Beta, we built the Story → Solution workflow. It turns an issue into specific behaviors, observed outcomes, exact transcript lines, supporting calls, branching conversation routes, and a concrete hypothesis to test.”
 
 **Show:** Alpha → Beta and Beta Storytelling Tabs slides.
 
@@ -34,47 +34,54 @@
 
 **Say:**
 
-“This is the current local architecture. Raw transcripts are read by the Python analysis pipeline. The pipeline redacts direct identifiers, extracts turns, segments calls, classifies issue, behavior, sentiment, and outcome, and writes processed JSON/JSONL artifacts.”
+“This is the current local architecture. The existing transcript and model services supply evidence through FastAPI; React turns that evidence into an investigation workflow rather than exposing raw model output.”
 
-“FastAPI reads those artifacts and exposes validated endpoints. The React application calls those endpoints and presents the Overview, Issue Explorer, Call Drilldown, Story Dashboard, strategies, reports, and governance views.”
+“The important Beta path is: issue cluster → candidate response → observed outcome comparison → exact call evidence → conversation route → testable action. The frontend consumes validated API responses; it does not read model files directly.”
 
 “For the SPS environment, the same evidence-first flow is intended to sit behind SPS servicing systems, a secure server/API layer, LLM services, and an audit trail. That production integration is future validation work; it is not what we are claiming to run locally today.”
 
-**Show:** Architecture and Technology/Code Layout slides. Point to `apps/web/src/api.ts`, `apps/api/app/api/rank1.py`, and `apps/api/app/services/rank1/pipeline.py`.
+**Show:** Architecture and Technology/Code Layout slides. Point to `apps/web/src/pages/SolutionStoryPage.tsx`, `apps/web/src/pages/TranscriptStoryGraph.tsx`, `apps/api/app/services/rank1/solutions.py`, and `apps/api/app/services/rank1/conversation_paths.py`.
 
-## 5:00–8:00 — Prachi: end-to-end product workflow
+## 5:00–8:00 — Prachi: Story → Solution workflow
 
 **Say while navigating:**
 
-“We start in the Overview. This is the operating picture: current issue volume, outcomes, and leading patterns.”
+“We start with an issue cluster. The Behavior map shows all matching response paths, not a summary table. Edge thickness represents observed call count.”
 
-“I will select an issue. The Issue Explorer narrows to supporting evidence, associated behaviors, outcomes, and representative calls.”
+“I click one response. The product narrows to its observed resolution comparison, exact supporting lines, and the calls that contain it. Green means higher observed resolution, red means lower, and amber means the comparison is limited or uncertain.”
 
-“Now I will open one call. The drilldown shows the transcript alongside the derived issue, segments, behaviors, sentiment, and outcome. This is the evidence trail that keeps the dashboard from being a black box.”
+“Now I open one supporting call. A manager can read the actual conversation, not just accept a model score.”
 
-“From evidence, we can create or update an action plan. The strategy state persists locally, so the workflow survives a refresh.”
+“Next is the Script route explorer. One click reveals the next observed reply and comparable reply routes. Clicking a newly revealed route expands its own branch, so the manager can follow the conversation as a decision tree rather than a flat transcript.”
 
-**Show:** Overview → Issue Explorer → Call Drilldown → Action Plans. If a strategy action is risky, show an existing strategy instead of editing live.
+“The Conversation Guide then compares exact responses, customer reactions, alternatives in similar contexts, and recorded outcomes. The result becomes a coaching or experiment hypothesis; it is not presented as causal proof.”
 
-## 8:00–10:00 — Prachi: code and API proof
+**Show:** Story → Solution → Behavior map → select a response → supporting transcript → Script route explorer → expand two routes → Conversation Guide → existing experiment/action-plan state.
+
+## 8:00–10:00 — Prachi: code and model proof
 
 **Say:**
 
-“My main contribution is the analysis and integration layer. In `pipeline.py`, the ingestion and enrichment flow turns transcript text into the structured signals we just saw. In `rank1.py`, each HTTP route is thin: it validates a request, calls the service, and returns a structured response.”
+“My Beta contribution is the story and drilldown experience that turns model output into an investigation workflow.”
 
-“The API is published locally through FastAPI. This Swagger page documents and allows us to exercise the same endpoints used by the web app.”
+“`SolutionStoryPage.tsx` owns issue filters, the behavior map, selected evidence, exact-line comparison, and the handoff from a model signal to a transcript.”
+
+“`TranscriptStoryGraph.tsx` implements both the conversation drilldown and the Script route explorer. The route explorer reveals the next observed turn and up to three comparable routes every time a card is clicked.”
+
+“On the backend, `solutions.py` evaluates behavior, verb, sequence and timing, word and character TF-IDF, Naive Bayes, random forest, and semantic retrieval when available. `conversation_paths.py` prepares the exact-line and route evidence used by the UI.”
 
 **Show:**
 
-1. `apps/api/app/services/rank1/pipeline.py`: `ingest_calls`, `enrich_calls`, or `build_triple_engine`.
-2. `apps/api/app/api/rank1.py`: `/workspace`, `/alerts`, `/evidence-packs`, or `/knowledge-graph`.
-3. `http://127.0.0.1:8000/docs`.
+1. `apps/web/src/pages/SolutionStoryPage.tsx`: behavior map and selected evidence.
+2. `apps/web/src/pages/TranscriptStoryGraph.tsx`: `RouteExplorer` and `nextRoutes`.
+3. `apps/api/app/services/rank1/solutions.py` and `conversation_paths.py`.
+4. `http://127.0.0.1:8000/docs`: local API contract.
 
 ## 10:00–13:00 — Alex: Story Dashboard
 
 **Say:**
 
-“I’m Alex. I built the Story Dashboard frontend so a manager can understand modeling results as an evidence-backed narrative.”
+“I’m Alex. I built the Story Dashboard frontend so a manager can understand and compare the Alpha modeling results as an evidence-backed narrative.”
 
 “Story Dashboard 1 starts with an issue, connects it to approaches, and shows the measured statistics. The evidence links below the statistics take the user back to the supporting transcript context.”
 
@@ -82,7 +89,7 @@
 
 “Story Dashboard 3 is the approach map. It gives the user a navigable view of the relationships instead of requiring them to read a raw model table.”
 
-“These screens receive their data through the shared application state and API layer, so they remain connected to the same transcript evidence used in the rest of the product.”
+“Together with the new Story → Solution tab, these screens take the product from model comparison, to a clear evidence story, to a transcript-level investigation.”
 
 **Show:**
 
@@ -114,9 +121,9 @@
 
 **Say:**
 
-“For Rank 2, the Beta includes issue and transcript exploration, strategy workflow, evidence packs, alert monitoring, voice-transcript intake, and strategy measurement endpoints.”
+“For Beta, our priority was making the validated modeling output usable. The product now includes issue and transcript exploration, Story → Solution drilldowns, strategy workflow, evidence packs, alerts, voice-transcript intake, and strategy measurement endpoints.”
 
-“For Rank 3, we have working local services for an evidence knowledge graph with persisted annotations, risk scoring, strategy recommendation logic, call simulation, and transparency output. The next validation step is evaluating modeling techniques in Anthony’s environment and connecting the validated results to the Story Dashboard.”
+“The next validation gate is evaluating the approaches in Anthony’s environment and deciding which techniques are accurate enough to carry into the existing SPS story dashboard. Our local story and drilldown workflow is ready to show that validated evidence.”
 
 “We do not describe an SPS production deployment as complete. Our current deliverable is the local, working Beta and the infrastructure needed to validate it in that environment.”
 
@@ -138,15 +145,15 @@
 
 **Say exactly:**
 
-“To summarize: Alpha gave us comparable modeling approaches. Beta turns those results into a working evidence-to-action product with transcript drilldown, Story Dashboard navigation, operational workflows, published API documentation, and a foundation for Rank 3 validation. We are done. What questions do you have?”
+“To summarize: Alpha identified agent behaviors associated with faster call resolution. Beta makes that result usable: a manager can see what appears to work, what does not, the exact words and calls behind it, and the conversation routes that follow. We are done. What questions do you have?”
 
 ## Rubric checklist
 
 - [x] Brief project description, users, value, and local Beta state.
 - [x] Architecture/data flow and code layout.
-- [x] Alpha-to-Beta comparison.
+- [x] Alpha models are framed as association discovery; Beta is the Story → Solution investigation workflow.
 - [x] One contribution slot per member; Anshul/Abdul require final facts.
 - [x] LOC/commit slide, with temporary AI split clearly labeled.
-- [x] Live product, code, GitLab, tests, and Swagger screen plan.
+- [x] Prachi code proof centers `SolutionStoryPage.tsx`, `TranscriptStoryGraph.tsx`, `solutions.py`, and `conversation_paths.py`.
 - [ ] Verify deployment/release tag, CI pipeline, GitLab estimates/spend, and authentication claims before presenting.
 - [x] Explicit conclusion and request for questions.
