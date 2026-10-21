@@ -2,13 +2,15 @@
 
 ## Before staff arrive
 
-- Screen 1 (Prachi): `https://localhost:4174/solutions`, with **Story → Solution** open and one issue cluster selected; API docs at `http://127.0.0.1:8000/docs`.
-- Screen 2 (Alex): Story Dashboard open; VS Code tabs open for `ResultsPage.tsx`, `ApproachMatrixPage.tsx`, and `ApproachPortfolioPage.tsx`.
-- Screen 3 (shared or another team member): GitLab Issues/board, branch graph, merge requests, and the test command/result.
+- Prachi shares `https://localhost:4174/solutions`; preload **Behavior map**, **Script route explorer**, and VS Code with `SolutionStoryPage.tsx` and `TranscriptStoryGraph.tsx`.
+- Alex shares the Alpha Model Approaches / Story Dashboard and VS Code with `ResultsPage.tsx`, `ApproachMatrixPage.tsx`, and `ApproachPortfolioPage.tsx`.
+- Anshul shares only their implemented feature and the exact source file/test they own. Do not use another person’s screen for this handoff.
+- Abdul shares only their implemented workflow and the exact component/API/storage code they own. Do not use another person’s screen for this handoff.
+- Keep a fifth shared screen ready for GitLab Issues, the branch graph, merge requests, build/test result, Swagger, and version/tag evidence.
 - Preload the **Behavior map**, **Script route explorer**, one supporting transcript, and Swagger UI. Do not rerun the pipeline live unless it has been tested immediately beforehand.
 - Do not claim a deployed server, authentication, a database, or production SPS integration unless it is running and can be shown.
 
-## 0:00–1:30 — Prachi: purpose and Beta status
+## 0:00–2:00 — Prachi: top-down purpose and Beta status
 
 **Say:**
 
@@ -18,7 +20,7 @@
 
 **Show:** title slide, then Project Description and Beta State slides.
 
-## 1:30–3:00 — Prachi: Alpha to Beta
+## 2:00–3:30 — Prachi: Alpha to Beta
 
 **Say:**
 
@@ -30,7 +32,7 @@
 
 **Show:** Alpha → Beta and Beta Storytelling Tabs slides.
 
-## 3:00–5:00 — Prachi: architecture and technical layout
+## 3:30–4:30 — Prachi: architecture and technical layout
 
 **Say:**
 
@@ -42,7 +44,7 @@
 
 **Show:** Architecture and Technology/Code Layout slides. Point to `apps/web/src/pages/SolutionStoryPage.tsx`, `apps/web/src/pages/TranscriptStoryGraph.tsx`, `apps/api/app/services/rank1/solutions.py`, and `apps/api/app/services/rank1/conversation_paths.py`.
 
-## 5:00–8:00 — Prachi: Story → Solution workflow
+## 4:30–7:30 — Prachi screen share: Story → Solution workflow
 
 **Say while navigating:**
 
@@ -58,7 +60,7 @@
 
 **Show:** Story → Solution → Behavior map → select a response → supporting transcript → Script route explorer → expand two routes → Conversation Guide → existing experiment/action-plan state.
 
-## 8:00–10:00 — Prachi: code and model proof
+## 7:30–9:00 — Prachi screen share: code and model proof
 
 **Say:**
 
@@ -77,7 +79,7 @@
 3. `apps/api/app/services/rank1/solutions.py` and `conversation_paths.py`.
 4. `http://127.0.0.1:8000/docs`: local API contract.
 
-## 10:00–13:00 — Alex: Story Dashboard
+## 9:00–11:30 — Alex screen share: Story Dashboard
 
 **Say:**
 
@@ -97,7 +99,7 @@
 2. Story Dashboard 2 and Story Dashboard 3.
 3. `apps/web/src/pages/ResultsPage.tsx`, `ApproachMatrixPage.tsx`, `ApproachPortfolioPage.tsx`.
 
-## 13:00–14:30 — Anshul: placeholder handoff
+## 11:30–13:30 — Anshul screen share: individual contribution
 
 **Replace before presenting.**
 
@@ -105,9 +107,9 @@
 
 “I’m Anshul. I implemented **[exact feature]**. It solves **[specific user or system problem]**. It connects to **[frontend/API/pipeline component]** through **[endpoint/data artifact/function]**. I will show **[exact file and function]**.”
 
-**Show:** `[exact page/file]`, then `[exact function/test]`.
+**Show on Anshul’s screen:** `[running feature]`, then `[exact page/file]`, then `[exact function/test]`. End by saying exactly how the feature consumes or produces data for the shared application.
 
-## 14:30–16:00 — Abdul: placeholder handoff
+## 13:30–15:30 — Abdul screen share: individual contribution
 
 **Confirm with Abdul before presenting.**
 
@@ -115,9 +117,9 @@
 
 “I’m Abdul. I implemented the action-plan workflow improvements: **[confirm exact work]**. This lets a manager **[specific task]** and persists the result through **[API/storage path]**. I will show **[exact file and function]**.”
 
-**Show:** action-plan interaction, then `[exact component path]` and `[test or API route]`.
+**Show on Abdul’s screen:** the action-plan interaction, then `[exact component path]`, `[persistence/API function]`, and `[test or API route]`. End by saying exactly how it connects to transcript evidence or the strategy lifecycle.
 
-## 16:00–17:30 — Rank 2 and Rank 3 status
+## 15:30–17:00 — Prachi screen share: integration and final-release readiness
 
 **Say:**
 
@@ -127,9 +129,9 @@
 
 “We do not describe an SPS production deployment as complete. Our current deliverable is the local, working Beta and the infrastructure needed to validate it in that environment.”
 
-**Show:** Rank 3 Readiness slide and, only if tested, `/knowledge-graph`, `/simulate-call`, and a transparency endpoint in Swagger.
+**Show:** Validation Readiness slide and, only if tested, `/knowledge-graph`, `/simulate-call`, and a transparency endpoint in Swagger.
 
-## 17:30–19:00 — Software practices and repository proof
+## 17:00–19:00 — Shared engineering screen: practices and repository proof
 
 **Say:**
 
@@ -152,8 +154,10 @@
 - [x] Brief project description, users, value, and local Beta state.
 - [x] Architecture/data flow and code layout.
 - [x] Alpha models are framed as association discovery; Beta is the Story → Solution investigation workflow.
-- [x] One contribution slot per member; Anshul/Abdul require final facts.
+- [x] Every member has a timed screen-share handoff: live feature, own code, integration explanation, and next speaker.
+- [ ] Replace Anshul and Abdul placeholders with verified feature, file, function, and test details before presenting.
 - [x] LOC/commit slide, with temporary AI split clearly labeled.
 - [x] Prachi code proof centers `SolutionStoryPage.tsx`, `TranscriptStoryGraph.tsx`, `solutions.py`, and `conversation_paths.py`.
+- [x] Shared engineering screen covers GitLab board, branch graph, versioning, build/test, and published API documentation.
 - [ ] Verify deployment/release tag, CI pipeline, GitLab estimates/spend, and authentication claims before presenting.
 - [x] Explicit conclusion and request for questions.
