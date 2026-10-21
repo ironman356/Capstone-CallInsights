@@ -133,6 +133,16 @@ class ScriptOutcomeRequest(BaseModel):
     source_reference: str = Field(min_length=3, max_length=200)
 
 
+class VoiceTranscriptRequest(BaseModel):
+    transcript_text: str = Field(min_length=1)
+    source_reference: str = Field(min_length=1, max_length=200)
+
+
+class StrategyMeasurementRequest(BaseModel):
+    resolution_rate: float = Field(ge=0, le=1)
+    repeat_contact_rate: float = Field(ge=0, le=1)
+
+
 @router.get("/script-experiments")
 def script_experiments() -> dict:
     from app.services.rank1.script_experiments import list_experiments
@@ -169,6 +179,26 @@ def observe_script(experiment_id: str, assignment_id: str, payload: ScriptOutcom
         return record_outcome(service.outputs_dir / "script_experiments.json", experiment_id, assignment_id, payload.model_dump())
     except ValueError as exc:
         raise HTTPException(422, str(exc)) from exc
+
+
+@router.post("/voice-transcripts")
+def intake_voice_transcript(payload: VoiceTranscriptRequest) -> dict:
+    from app.services.rank1.rank2 import intake_voice_transcript as intake
+    return intake(payload.transcript_text, payload.source_reference)
+
+
+@router.get("/evidence-packs")
+def get_evidence_pack(issue_slug: str | None = None, outcome: str | None = None) -> dict:
+    from app.services.rank1.rank2 import build_evidence_pack
+    return build_evidence_pack(service.load_or_run(), issue_slug, outcome)
+
+
+@router.post("/strategies/{strategy_id}/measurements")
+def record_strategy_measurement(strategy_id: str, baseline: StrategyMeasurementRequest, observed: StrategyMeasurementRequest) -> dict:
+    from app.services.rank1.rank2 import record_strategy_measurement as record
+    if not any(item["strategy_id"] == strategy_id for item in service.build_strategy_board(service.load_or_run())["strategies"]):
+        raise HTTPException(404, "Strategy not found")
+    return record(service.outputs_dir / "strategy_measurements.json", strategy_id, baseline.model_dump(), observed.model_dump())
 
 
 @router.post("/ask-ci/chat", response_model=AskCiChatResponse)

@@ -144,6 +144,11 @@ class Rank1ApiTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("alerts", response.json())
 
+    def test_rank_two_voice_intake_endpoint_redacts_text(self) -> None:
+        response = self.client.post("/api/rank1/voice-transcripts", json={"transcript_text": "Customer: 801-555-0199", "source_reference": "sample-audio"})
+        self.assertEqual(response.status_code, 200)
+        self.assertIn("[REDACTED_PHONE]", response.json()["transcript_text"])
+
     def test_strategy_create_and_update_endpoints_work(self) -> None:
         dashboard = self.client.get("/api/rank1/dashboard").json()
         issue_slug = dashboard["issues"][0]["slug"]
