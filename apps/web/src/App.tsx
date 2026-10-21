@@ -10,6 +10,7 @@ import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import ModelApproachesPage from "./pages/ModelApproachesPage";
 import ApproachMatrixPage from "./pages/ApproachMatrixPage";
+import ApproachComparisonPage from "./pages/ApproachComparisonPage";
 import ApproachPortfolioPage from "./pages/ApproachPortfolioPage";
 import ResultsPage from "./pages/ResultsPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
@@ -127,6 +128,11 @@ function StrategyDeadlineEditor({
 }
 
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
+  "compare-approaches": {
+    title: "Compare approaches",
+    description: "Compare up to four approaches.",
+    kicker: "",
+  },
   results: {
     title: "Story Dashboard 1",
     description: "Issue list → Approaches → Statistics",
@@ -206,6 +212,7 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["results", "Story Dashboard 1", ""],
+  ["compare-approaches", "Compare approaches", "Outcomes, call mix, and evidence side by side"],
   ["approach-matrix", "Story Dashboard 2", ""],
   ["approach-portfolio", "Story Dashboard 3", ""],
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
@@ -665,7 +672,7 @@ function App() {
           <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
         </div>
       </aside>
-      <main className={`dashboard-main ${["results", "approach-matrix", "approach-portfolio"].includes(page) ? "results-main" : ""}`}>
+      <main className={`dashboard-main ${["results", "compare-approaches", "approach-matrix", "approach-portfolio"].includes(page) ? "results-main" : ""}`}>
         <section className="workspace-header">
           <div className="workspace-heading">
             {pageMeta.kicker ? <p className="section-kicker">{pageMeta.kicker}</p> : null}
@@ -716,6 +723,9 @@ function App() {
         {error ? <div className="flash-banner error">{error}</div> : null}
         <ReactActivity mode={page === "results" ? "visible" : "hidden"}>
           <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
+        </ReactActivity>
+        <ReactActivity mode={page === "compare-approaches" ? "visible" : "hidden"}>
+          <ApproachComparisonPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
         </ReactActivity>
         {page === "approach-matrix" ? <ApproachMatrixPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
         {page === "approach-portfolio" ? <ApproachPortfolioPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}

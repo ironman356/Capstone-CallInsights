@@ -30,6 +30,11 @@ interface IntentRoute {
 }
 
 const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights: string[] }> = {
+  "compare-approaches": {
+    title: "Compare approaches",
+    summary: "Compares two to four approaches using observed call outcomes and transcript evidence.",
+    highlights: ["Separate overlapping calls", "Resolution intervals", "Issue mix", "Transcript quick reads"],
+  },
   results: {
     title: "Story Dashboard 1",
     summary: "Shows issues, their observed agent approaches, and statistics.",
