@@ -2427,9 +2427,12 @@ button { cursor: pointer; }
 .model-readable-chart { min-width: 0; overflow-x: auto; }
 .model-chart-panel { min-width: 0; }
 .model-readable-chart:focus-visible,
-.model-metric-help summary:focus-visible { outline: 2px solid var(--accent-alt); outline-offset: 3px; }
-.model-metric-help summary { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 4px; }
-.model-metric-help p { min-width: 180px; max-width: 250px; white-space: normal; text-transform: none; font-weight: 400; letter-spacing: normal; line-height: 1.5; color: var(--text); }
+.model-metric-info:focus-visible { outline: 2px solid var(--accent-alt); outline-offset: 3px; }
+.model-metric-help { position: relative; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.model-metric-info { display: inline-flex; align-items: center; justify-content: center; padding: 4px; border: 0; border-radius: 4px; background: transparent; color: var(--muted); cursor: help; }
+.model-metric-info:hover, .model-metric-info:focus-visible { color: var(--text); }
+.model-metric-tooltip { position: absolute; z-index: 5; top: 100%; right: 0; width: 230px; padding: 12px; border: 1px solid var(--line-strong); border-radius: 10px; background: var(--panel-strong); box-shadow: var(--shadow); color: var(--text); font-size: 0.8rem; font-weight: 400; letter-spacing: normal; line-height: 1.5; text-align: left; text-transform: none; white-space: normal; visibility: hidden; }
+.model-metric-help:hover .model-metric-tooltip, .model-metric-help:focus-within .model-metric-tooltip { visibility: visible; }
 .model-metric-guide { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-bottom: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
 .model-metric-guide strong,
 .model-metric-guide > span:last-child { flex-basis: 100%; }

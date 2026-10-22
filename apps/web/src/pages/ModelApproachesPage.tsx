@@ -1,4 +1,4 @@
-import { BrainCircuit, CheckCircle2, Database, FlaskConical, GitCompareArrows, ShieldAlert, Sparkles, Target } from "lucide-react";
+import { BrainCircuit, CheckCircle2, Database, FlaskConical, GitCompareArrows, HelpCircle, ShieldAlert, Sparkles, Target } from "lucide-react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Text, Tooltip, XAxis, YAxis } from "recharts";
 import { approachExtractionResults, benchmarkSummary, modelApproaches, type ModelFamily } from "../modelApproachData";
 
@@ -39,10 +39,13 @@ const METRIC_HELP = {
 function MetricHeader({ metric }: { metric: keyof typeof METRIC_HELP }) {
   const definition = METRIC_HELP[metric];
   return (
-    <details className="model-metric-help">
-      <summary>{definition.label}<span className="sr-only"> — explanation</span></summary>
-      <p>{definition.description}</p>
-    </details>
+    <span className="model-metric-help">
+      <span>{definition.label}</span>
+      <button type="button" className="model-metric-info" aria-label={`What is ${definition.label}?`} aria-describedby={`metric-help-${metric}`}>
+        <HelpCircle size={15} aria-hidden="true" />
+      </button>
+      <span className="model-metric-tooltip" id={`metric-help-${metric}`} role="tooltip">{definition.description}</span>
+    </span>
   );
 }
 
@@ -116,7 +119,7 @@ export default function ModelApproachesPage() {
           <span><b>Macro-F1:</b> balanced performance across issue categories.</span>
           <span><b>Accuracy:</b> how many individual predictions were correct.</span>
           <span><b>Multi-issue:</b> whether all problems in a call were found correctly.</span>
-          <span>Higher is better. These are saved benchmark results, not live scores. Select a score heading for more detail.</span>
+          <span>Higher is better. These are saved benchmark results, not live scores. Hover over or focus a question mark for more detail.</span>
         </div>
         <div className="model-table-scroll">
           <table className="model-results-table">
