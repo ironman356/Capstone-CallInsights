@@ -21,6 +21,7 @@ pages:
     - Set-Location ../..
     - New-Item -ItemType Directory -Force -Path public/app | Out-Null
     - Copy-Item -Path apps/web/dist/* -Destination public/app -Recurse -Force
+    - Copy-Item -Path docs/assets -Destination public/assets -Recurse -Force
     - Copy-Item -Path docs/beta-demo.html -Destination public/index.html -Force
     - Copy-Item -Path docs/beta-demo-script.md -Destination public/beta-demo-script.md -Force
   artifacts:
