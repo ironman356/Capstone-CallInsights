@@ -153,11 +153,11 @@
 
 “We used feature branches and merge requests to isolate work, and GitLab Issues to track tasks, ownership, labels, estimates, and time spent. We use Python unit/API tests, and FastAPI publishes the endpoint contract through Swagger.”
 
-“Here is the branch graph, the active/recent issue board, and the test suite. The deck’s LOC is a current-main Git-blame count after fetching every GitLab branch; commit totals combine all fetched GitLab refs and each contributor’s known author identities. Git cannot infer AI use, so only Anshul’s self-reported split is final; the other declarations must be confirmed before grading.”
+“Here is the branch graph, the active/recent issue board, and the test suite. The deck’s LOC is a current-main Git-blame count after fetching every GitLab branch; commit totals combine all fetched GitLab refs and each contributor’s known author identities. The handwritten and AI-assisted columns use our team-reported 60% / 40% estimate for each member’s current-main LOC. Git cannot infer AI use.”
 
 **Show:** GitLab board, branch graph, a recent merge request, `python -m unittest tests.test_rank1_api tests.test_rank3_services`, and Swagger.
 
-**Must verify before presenting:** CI pipeline status, release tag/version, Issue labels, estimates/spend, and whether the web app is deployed. Do not claim any missing item.
+**Must verify before presenting:** the current CI pipeline is green, GitLab Issues show labels and estimates/spend, and the local demo path is running. The published release tag is `v0.2.0-beta.2`; show the successful Pages artifact, not a live Pages URL, because the course GitLab instance does not host Pages.
 
 ## 19:00–20:00 - close
 
@@ -176,5 +176,5 @@
 - [x] LOC/commit slide uses current main blame attribution and all fetched GitLab branches; AI declarations are explicitly separated from Git-derived data.
 - [x] Prachi code proof centers `SolutionStoryPage.tsx`, `TranscriptStoryGraph.tsx`, `solutions.py`, and `conversation_paths.py`.
 - [x] Shared engineering screen covers GitLab board, branch graph, versioning, build/test, and published API documentation.
-- [ ] Verify deployment/release tag, CI pipeline, GitLab estimates/spend, and authentication claims before presenting.
+- [ ] Confirm the current CI pipeline, GitLab Issue labels and estimates/spend, and local demo startup immediately before presenting. The release tag, published release, and Pages artifact are complete; do not claim a live GitLab Pages site.
 - [x] Explicit conclusion and request for questions.
