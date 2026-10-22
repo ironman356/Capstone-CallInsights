@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import Response
+from pydantic import BaseModel, Field, StrictBool
 
 from app.schemas.rank1 import (
     AskCiChatRequest,
@@ -102,6 +103,137 @@ def run_pipeline() -> PipelineRunResponse:
 def get_workspace() -> WorkspaceResponse:
     workspace = service.build_workspace()
     return WorkspaceResponse(**workspace)
+
+
+@router.get("/alerts")
+def get_alerts() -> dict:
+    from app.services.rank1.alerts import load_alerts
+    alerts = load_alerts(service.outputs_dir / "alerts.json", service.load_or_run())
+    return {"alerts": alerts}
+
+
+@router.post("/alerts/{alert_id}/dismiss")
+def dismiss_alert(alert_id: str) -> dict:
+    from app.services.rank1.alerts import dismiss_alert as dismiss
+    try:
+        return dismiss(service.outputs_dir / "alerts.json", alert_id, service.load_or_run())
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
+@router.get("/solutions")
+def get_solutions() -> dict:
+    from app.services.rank1.solutions import build_solution_report
+    return build_solution_report(service.load_or_run())
+
+
+class ScriptExperimentRequest(BaseModel):
+    issue_slug: str = Field(min_length=1, max_length=200)
+
+
+class ScriptAssignmentRequest(BaseModel):
+    unit_id: str = Field(pattern=r"^[A-Za-z0-9_-]{3,80}$")
+
+
+class ScriptOutcomeRequest(BaseModel):
+    resolved: StrictBool
+    repeat_contact_7d: StrictBool
+    delivered: StrictBool
+    source_reference: str = Field(min_length=3, max_length=200)
+
+
+class VoiceTranscriptRequest(BaseModel):
+    transcript_text: str = Field(min_length=1)
+    source_reference: str = Field(min_length=1, max_length=200)
+
+
+class StrategyMeasurementRequest(BaseModel):
+    resolution_rate: float = Field(ge=0, le=1)
+    repeat_contact_rate: float = Field(ge=0, le=1)
+
+
+class SimulationRequest(BaseModel):
+    customer_text: str = Field(min_length=1)
+    agent_response: str = Field(min_length=1)
+
+
+@router.get("/script-experiments")
+def script_experiments() -> dict:
+    from app.services.rank1.script_experiments import list_experiments
+    return list_experiments(service.outputs_dir / "script_experiments.json")
+
+
+@router.post("/script-experiments")
+def create_script_experiment(payload: ScriptExperimentRequest) -> dict:
+    from app.services.rank1.script_experiments import create_experiment
+    report = get_solutions()
+    cluster = next((c for c in report["conversations"]["clusters"] if c["slug"] == payload.issue_slug), None)
+    if cluster is None:
+        raise HTTPException(404, "Cluster not found")
+    baseline = next(c["baseline"] for c in report["clusters"] if c["slug"] == payload.issue_slug)
+    try:
+        return create_experiment(service.outputs_dir / "script_experiments.json", cluster, baseline)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@router.post("/script-experiments/{experiment_id}/assignments")
+def assign_script(experiment_id: str, payload: ScriptAssignmentRequest) -> dict:
+    from app.services.rank1.script_experiments import assign
+    try:
+        return assign(service.outputs_dir / "script_experiments.json", experiment_id, payload.unit_id)
+    except ValueError as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
+@router.post("/script-experiments/{experiment_id}/assignments/{assignment_id}/outcome")
+def observe_script(experiment_id: str, assignment_id: str, payload: ScriptOutcomeRequest) -> dict:
+    from app.services.rank1.script_experiments import record_outcome
+    try:
+        return record_outcome(service.outputs_dir / "script_experiments.json", experiment_id, assignment_id, payload.model_dump())
+    except ValueError as exc:
+        raise HTTPException(422, str(exc)) from exc
+
+
+@router.post("/voice-transcripts")
+def intake_voice_transcript(payload: VoiceTranscriptRequest) -> dict:
+    from app.services.rank1.rank2 import intake_voice_transcript as intake
+    return intake(payload.transcript_text, payload.source_reference)
+
+
+@router.get("/evidence-packs")
+def get_evidence_pack(issue_slug: str | None = None, outcome: str | None = None) -> dict:
+    from app.services.rank1.rank2 import build_evidence_pack
+    return build_evidence_pack(service.load_or_run(), issue_slug, outcome)
+
+
+@router.post("/strategies/{strategy_id}/measurements")
+def record_strategy_measurement(strategy_id: str, baseline: StrategyMeasurementRequest, observed: StrategyMeasurementRequest) -> dict:
+    from app.services.rank1.rank2 import record_strategy_measurement as record
+    if not any(item["strategy_id"] == strategy_id for item in service.build_strategy_board(service.load_or_run())["strategies"]):
+        raise HTTPException(404, "Strategy not found")
+    return record(service.outputs_dir / "strategy_measurements.json", strategy_id, baseline.model_dump(), observed.model_dump())
+
+
+@router.get("/knowledge-graph")
+def knowledge_graph() -> dict:
+    from app.services.rank1.knowledge_graph import build_knowledge_graph
+    return build_knowledge_graph(service.load_or_run())
+
+
+@router.get("/calls/{call_id}/transparency")
+def call_transparency(call_id: str) -> dict:
+    from app.services.rank1.rank3 import transparency_report
+    call = service.load_or_run()["call_details"].get(call_id)
+    if call is None:
+        raise HTTPException(404, "Call not found")
+    return transparency_report(call)
+
+
+@router.post("/simulate-call")
+def simulate_call(payload: SimulationRequest) -> dict:
+    from app.services.rank1.rank3 import simulate_call as simulate
+    return simulate(payload.customer_text, payload.agent_response)
 
 
 @router.post("/ask-ci/chat", response_model=AskCiChatResponse)

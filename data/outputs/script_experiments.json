@@ -1,0 +1,29 @@
+{
+  "experiments": [
+    {
+      "id": "SCRIPT-a7cdb3a19b",
+      "issue_slug": "monthly-payment-right",
+      "issue": "monthly payment right",
+      "created_at": "2026-10-08T16:10:06.025063+00:00",
+      "status": "Local pilot setup; not connected to live calls",
+      "source_call_id": "CALL-0088",
+      "source_turn": 9,
+      "variant_a": "The next step is to complete the hardship package so the review queue can evaluate the account.",
+      "variant_b": "The next step is to complete the hardship package so the review queue can evaluate the account. Before we finish, can you tell me the next step in your own words so I can check that I explained it clearly?",
+      "hypothesis": "Adding one teach-back question improves independently verified resolution without repeat contact within 7 days.",
+      "primary_outcome": "resolved AND no repeat contact on the same issue within 7 days",
+      "randomization": "Independent 50/50 assignment, persisted by pseudonymous customer-issue unit; assign before displaying script.",
+      "planning_n_per_arm": 388,
+      "planning_assumptions": "Illustration: 40% baseline, +10 percentage points, two-sided alpha .05, 80% power, independent complete observations. Recalculate for agent clustering and attrition.",
+      "required_fields": [
+        "pseudonymous customer-issue unit",
+        "assignment timestamp and arm (automatic)",
+        "script delivery confirmed",
+        "resolved (independent QA/CRM)",
+        "repeat contact within 7 days",
+        "outcome source reference"
+      ],
+      "assignments": []
+    }
+  ]
+}

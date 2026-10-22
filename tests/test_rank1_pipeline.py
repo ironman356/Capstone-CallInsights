@@ -29,6 +29,21 @@ class Rank1PipelineTests(unittest.TestCase):
         self.assertIn("call_details", bundle)
         self.assertGreater(len(bundle["calls"]), 0)
 
+    def test_normalized_record_redacts_direct_identifiers(self) -> None:
+        service = Rank1PipelineService()
+        record = {"transcript_text": "Customer: Reach me at 801-555-0199 about my payment."}
+        normalized = service._normalize_record(record, "fixture.jsonl", 1)
+        self.assertNotIn("801-555-0199", normalized["transcript_text"])
+        self.assertEqual(normalized["turns"][0]["text"], "Reach me at [REDACTED_PHONE] about my payment.")
+        self.assertTrue(normalized["redaction_applied"])
+
+    def test_normalized_record_rejects_missing_transcript_and_invalid_metadata(self) -> None:
+        service = Rank1PipelineService()
+        with self.assertRaisesRegex(ValueError, "Transcript content is required"):
+            service._normalize_record({}, "empty.jsonl", 1)
+        with self.assertRaisesRegex(ValueError, "Metadata values"):
+            service._normalize_record({"transcript_text": "Customer: Help.", "agent_id": "x" * 201}, "large.jsonl", 1)
+
     def test_classify_outcome_detects_escalation(self) -> None:
         text = "Agent: Please hold while I connect you to a supervisor for escalation."
         self.assertEqual(classify_outcome(text), "escalated")

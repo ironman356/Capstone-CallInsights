@@ -50,6 +50,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     summary: "Positions approaches by adoption, reliability, and modeled outcome impact.",
     highlights: ["Portfolio map", "Quadrant decisions", "Approach evidence"],
   },
+  solutions: {
+    title: "Story → Solution",
+    summary: "Connects issues, agent responses and call outcomes through evidence.",
+    highlights: ["Interactive graph", "Quoted turns", "Method comparison"],
+  },
   overview: {
     title: "Overview",
     summary: "Tracks KPIs, call drivers, outcomes, and service trends.",

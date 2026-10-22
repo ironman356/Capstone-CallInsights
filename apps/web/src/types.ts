@@ -165,6 +165,24 @@ export interface WorkspacePayload {
   ask_ci: Array<{ question: string; answer: string; evidence_call_ids: string[] }>;
   reports: ReportSummary;
   governance: GovernanceSummary;
+  solution_story: {
+    story: { issue: string; call_count: number; baseline_resolution_rate: number; headline: string; lead_behavior: string | null; lead_delta: number };
+    working: SolutionSignal[];
+    not_working: SolutionSignal[];
+    techniques: Array<{ name: string; status: string; detail: string }>;
+    disclaimer: string;
+  };
+}
+
+export interface SolutionSignal {
+  behavior: string;
+  support: number;
+  success_rate: number;
+  comparison_rate: number;
+  delta: number;
+  lift: number;
+  evidence_call_ids: string[];
+  verdict: string;
 }
 
 export interface StrategyCreateInput {

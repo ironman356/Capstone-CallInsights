@@ -19,6 +19,9 @@ from sklearn.pipeline import FeatureUnion, Pipeline
 from sklearn.preprocessing import Normalizer
 from sklearn.svm import LinearSVC
 
+from evaluation.evaluate_hybrid_results import evaluate as evaluate_hybrid_predictions
+from evaluation.hybrid_topics import load_jsonl
+
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 API_ROOT = REPO_ROOT / "apps" / "api"
@@ -167,6 +170,34 @@ def _linear_svm_model(name: str) -> Pipeline:
     model.name = name  # type: ignore[attr-defined]
     return model
 
+def build_hybrid_topic_classifiers() -> dict[str, Pipeline]:
+    """Return unfitted supervised models used by the hybrid topic strategies."""
+
+    return {
+        "logistic_regression": _char_word_model("char_word_tfidf_linear"),
+        "linear_svm": _linear_svm_model("char_tfidf_linear_svm"),
+    }
+
+
+def fit_hybrid_topic_classifiers(
+    texts: list[str],
+    labels: list[str],
+) -> dict[str, Pipeline]:
+    """Fit the LR and SVM classifiers used by the hybrid topic strategies."""
+
+    if len(texts) != len(labels):
+        raise ValueError("Training texts and labels must have the same length")
+    if len(texts) < 2:
+        raise ValueError("At least two labeled examples are required")
+    if len(set(labels)) < 2:
+        raise ValueError("At least two topic labels are required")
+
+    classifiers = build_hybrid_topic_classifiers()
+    for classifier in classifiers.values():
+        classifier.fit(texts, labels)
+
+    return classifiers
+
 
 def _complement_nb_model(name: str) -> Pipeline:
     model = Pipeline(
@@ -312,8 +343,71 @@ def _effectiveness(rows: list[dict]) -> list[dict]:
         )
     return sorted(results, key=lambda item: (-item["resolution_rate"], -item["sample_size"], item["approach"]))
 
+def _parse_hybrid_result_paths(specifications: list[str]) -> dict[str, Path]:
+    paths: dict[str, Path] = {}
 
-def run_benchmark(path: Path) -> dict:
+    for specification in specifications:
+        strategy_id, separator, raw_path = specification.partition("=")
+
+        if not separator or not strategy_id.strip() or not raw_path.strip():
+            raise ValueError(
+                "Hybrid results must use STRATEGY_ID=PATH format"
+            )
+
+        if strategy_id in paths:
+            raise ValueError(
+                f"Hybrid results contain duplicate strategy: {strategy_id}"
+            )
+
+        path = Path(raw_path)
+        if not path.exists():
+            raise ValueError(f"Hybrid prediction file does not exist: {path}")
+
+        paths[strategy_id] = path
+
+    return paths
+
+
+def _evaluate_hybrid_prediction_files(
+    calls: list[dict],
+    prediction_paths: dict[str, Path],
+) -> list[dict]:
+    test_calls = [call for call in calls if call["split"] == "test"]
+    results = []
+
+    for strategy_id, prediction_path in prediction_paths.items():
+        predictions = load_jsonl(prediction_path)
+
+        observed_methods = {
+            str(row["modeling_method"])
+            for row in predictions
+            if not row.get("error") and row.get("modeling_method")
+        }
+        expected_method = f"llm_segmentation_{strategy_id}"
+
+        if observed_methods and observed_methods != {expected_method}:
+            raise ValueError(
+                f"{prediction_path} does not contain predictions from "
+                f"{expected_method}"
+            )
+
+        metrics = evaluate_hybrid_predictions(test_calls, predictions)
+
+        results.append(
+            {
+                "approach": strategy_id,
+                "prediction_file": str(prediction_path),
+                "evaluation_scope": "end_to_end_call",
+                "macro_f1": metrics["aligned_segment_macro_f1"],
+                "accuracy": metrics["aligned_segment_accuracy"],
+                **metrics,
+            }
+        )
+
+    return sorted(results, key=lambda item: -item["macro_f1"])
+
+
+def run_benchmark(path: Path,hybrid_prediction_paths: dict[str, Path] | None = None,) -> dict:
     calls, segments = _load_segments(path)
     train = [row for row in segments if row["split"] == "train"]
     test = [row for row in segments if row["split"] == "test"]
@@ -380,6 +474,7 @@ def run_benchmark(path: Path) -> dict:
             "outcome_distribution": dict(sorted(Counter(row["outcome"] for row in segments).items())),
         },
         "issue_mapping": sorted(issue_results, key=lambda item: -item["macro_f1"]),
+        "hybrid_issue_mapping": _evaluate_hybrid_prediction_files(calls, hybrid_prediction_paths or {},),
         "approach_extraction": sorted(approach_results, key=lambda item: -item["macro_f1"]),
         "resolution_attribution": {
             "segment_evidence_gate": segment_outcomes,
@@ -407,6 +502,29 @@ def _write_markdown(path: Path, results: dict) -> None:
             f"{item['paraphrase_same_accuracy']:.3f} | {item['shared_vocabulary_different_accuracy']:.3f} | "
             f"{item['multiple_problems_exact_sequence_accuracy']:.3f} | {item['one_long_problem_exact_sequence_accuracy']:.3f} | {item['runtime_seconds']:.3f} |"
         )
+    hybrid_results = results["hybrid_issue_mapping"]
+    if hybrid_results:
+        lines.extend(
+            [
+                "",
+                "## Hybrid Issue Mapping (End-to-End)",
+                "",
+                "These methods perform both LLM segmentation and topic assignment; "
+                "they are reported separately from models evaluated with gold segment boundaries.",
+                "",
+                "| Method | Macro F1 | Accuracy | Call coverage | Issue-count accuracy | Exact sequence | Unknown rate | Valid evidence |",
+                "|---|---:|---:|---:|---:|---:|---:|---:|",
+            ]
+        )
+        for item in hybrid_results:
+            lines.append(
+                f"| {item['approach']} | {item['macro_f1']:.3f} | "
+                f"{item['accuracy']:.3f} | {item['call_coverage']:.3f} | "
+                f"{item['issue_count_accuracy']:.3f} | "
+                f"{item['exact_issue_sequence_accuracy']:.3f} | "
+                f"{item['unknown_rate']:.3f} | "
+                f"{item['valid_evidence_rate']:.3f} |"
+            )
     lines.extend(
         [
             "",
@@ -447,8 +565,16 @@ def main() -> int:
     parser.add_argument("--input", type=Path, default=Path("data/evaluation/call_insights_benchmark.jsonl"))
     parser.add_argument("--json-output", type=Path, default=Path("data/evaluation/benchmark_results.json"))
     parser.add_argument("--markdown-output", type=Path, default=Path("docs/evaluation-results.md"))
+    parser.add_argument("--hybrid-results", action="append", default=[], metavar="STRATEGY_ID=PATH", help="Cached hybrid prediction JSONL to evaluate; repeat for each strategy.",)
     args = parser.parse_args()
-    results = run_benchmark(args.input)
+    try:
+        hybrid_prediction_paths = _parse_hybrid_result_paths(
+            args.hybrid_results
+        )
+    except ValueError as exc:
+        parser.error(str(exc))
+
+    results = run_benchmark(args.input, hybrid_prediction_paths=hybrid_prediction_paths,)
     args.json_output.parent.mkdir(parents=True, exist_ok=True)
     args.json_output.write_text(json.dumps(results, indent=2) + "\n", encoding="utf-8")
     _write_markdown(args.markdown_output, results)

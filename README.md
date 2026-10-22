@@ -78,6 +78,8 @@ The adaptive backend persists issue memory in `data/outputs/adaptive_issue_memor
 
 ## Important Docs
 
+- [Story → Solution methods, research, and measured results](docs/solution-discovery.md)
+
 - [UI implementation doc](c:/Users/Prachi/OneDrive/Documents/callinsight/docs/ui-implementation.md)
 - [Prototype evaluation guide](c:/Users/Prachi/OneDrive/Documents/callinsight/docs/prototype-evaluation-guide.md)
 - [System overview](c:/Users/Prachi/OneDrive/Documents/callinsight/docs/system-overview.md)

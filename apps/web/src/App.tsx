@@ -13,6 +13,7 @@ import ApproachMatrixPage from "./pages/ApproachMatrixPage";
 import ApproachComparisonPage from "./pages/ApproachComparisonPage";
 import ApproachPortfolioPage from "./pages/ApproachPortfolioPage";
 import ResultsPage from "./pages/ResultsPage";
+import SolutionStoryPage from "./pages/SolutionStoryPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
 import { compareCallRecency } from "./utils";
@@ -163,6 +164,11 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
     description: "Review representative calls, transcript details, and signal extraction for specific interactions.",
     kicker: "Call Review",
   },
+  solutions: {
+    title: "Story → Solution",
+    description: "Compare response behaviors within an issue cluster, inspect evidence, and turn promising signals into a valid test.",
+    kicker: "Solution Discovery",
+  },
   strategies: {
     title: "Action Plans",
     description: "Manage improvement plans, ownership, and progress against the issues driving performance.",
@@ -218,6 +224,7 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
+  ["solutions", "Story → Solution", "What works, what does not, and how to validate it"],
   ["strategies", "Action Plans", "Improvement plans and ownership tracking"],
   ["learning", "Monitoring", "Trend movement, model monitoring, and controls"],
   ["model-approaches", "Model Approaches", "Side-by-side benchmark methods and measured results"],
@@ -1265,6 +1272,17 @@ function App() {
               navigate("issues");
             }}
             onOpenCall={openCall}
+          />
+        ) : null}
+
+        {page === "solutions" ? (
+          <SolutionStoryPage
+            workspace={workspace}
+            onNavigate={navigate}
+            onOpenCall={(callId) => {
+              setSelectedCallId(callId);
+              navigate("calls");
+            }}
           />
         ) : null}
 

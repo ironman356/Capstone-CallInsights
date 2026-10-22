@@ -33,7 +33,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.7143,
       "all_calls_exact_sequence_accuracy": 0.75,
-      "runtime_seconds": 0.0042
+      "runtime_seconds": 0.0028
     },
     {
       "approach": "char_word_tfidf_linear",
@@ -47,7 +47,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.4286,
       "all_calls_exact_sequence_accuracy": 0.4643,
-      "runtime_seconds": 0.1022
+      "runtime_seconds": 0.0811
     },
     {
       "approach": "char_tfidf_linear_svm",
@@ -61,7 +61,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.3571,
       "all_calls_exact_sequence_accuracy": 0.5,
-      "runtime_seconds": 0.0553
+      "runtime_seconds": 0.0641
     },
     {
       "approach": "word_tfidf_ridge",
@@ -75,7 +75,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.4286,
       "all_calls_exact_sequence_accuracy": 0.4643,
-      "runtime_seconds": 0.0946
+      "runtime_seconds": 0.0241
     },
     {
       "approach": "lsa_semantic_linear",
@@ -89,7 +89,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.4286,
       "all_calls_exact_sequence_accuracy": 0.4286,
-      "runtime_seconds": 0.0685
+      "runtime_seconds": 0.0423
     },
     {
       "approach": "word_tfidf_centroid",
@@ -103,7 +103,7 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.3571,
       "all_calls_exact_sequence_accuracy": 0.3929,
-      "runtime_seconds": 0.0196
+      "runtime_seconds": 0.0145
     },
     {
       "approach": "word_tfidf_complement_nb",
@@ -117,21 +117,21 @@
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.3571,
       "all_calls_exact_sequence_accuracy": 0.3571,
-      "runtime_seconds": 0.0136
+      "runtime_seconds": 0.011
     },
     {
       "approach": "char_tfidf_sgd_huber",
-      "accuracy": 0.5,
-      "macro_f1": 0.4288,
-      "paraphrase_same_accuracy": 0.5613,
-      "shared_vocabulary_different_accuracy": 0.8418,
+      "accuracy": 0.4783,
+      "macro_f1": 0.4081,
+      "paraphrase_same_accuracy": 0.4903,
+      "shared_vocabulary_different_accuracy": 0.8588,
       "paraphrase_pairs": 155,
       "confound_pairs": 177,
       "single_problem_exact_sequence_accuracy": 0.3571,
       "one_long_problem_exact_sequence_accuracy": 1.0,
       "multiple_problems_exact_sequence_accuracy": 0.2857,
       "all_calls_exact_sequence_accuracy": 0.3214,
-      "runtime_seconds": 0.0395
+      "runtime_seconds": 0.0458
     },
     {
       "approach": "current_keyphrase_pipeline",
@@ -145,7 +145,99 @@
       "one_long_problem_exact_sequence_accuracy": 0.0,
       "multiple_problems_exact_sequence_accuracy": 0.0,
       "all_calls_exact_sequence_accuracy": 0.0,
-      "runtime_seconds": 0.0065
+      "runtime_seconds": 0.0111
+    }
+  ],
+  "hybrid_issue_mapping": [
+    {
+      "approach": "svm_top_k_llm_reranking",
+      "prediction_file": "data/evaluation/hybrid_svm_rerank_test.jsonl",
+      "evaluation_scope": "end_to_end_call",
+      "macro_f1": 0.9517,
+      "accuracy": 0.9348,
+      "gold_calls": 28,
+      "evaluated_calls": 28,
+      "failed_or_missing_calls": 0,
+      "call_coverage": 1.0,
+      "issue_count_accuracy": 1.0,
+      "exact_issue_sequence_accuracy": 0.8929,
+      "aligned_segment_accuracy": 0.9348,
+      "aligned_segment_macro_f1": 0.9517,
+      "unknown_rate": 0.0435,
+      "valid_evidence_rate": 1.0,
+      "aligned_segments": 46
+    },
+    {
+      "approach": "ml_ensemble_vote_llm_arbitration",
+      "prediction_file": "data/evaluation/hybrid_ensemble_test.jsonl",
+      "evaluation_scope": "end_to_end_call",
+      "macro_f1": 0.8986,
+      "accuracy": 0.8478,
+      "gold_calls": 28,
+      "evaluated_calls": 28,
+      "failed_or_missing_calls": 0,
+      "call_coverage": 1.0,
+      "issue_count_accuracy": 1.0,
+      "exact_issue_sequence_accuracy": 0.75,
+      "aligned_segment_accuracy": 0.8478,
+      "aligned_segment_macro_f1": 0.8986,
+      "unknown_rate": 0.1087,
+      "valid_evidence_rate": 1.0,
+      "aligned_segments": 46
+    },
+    {
+      "approach": "logistic_regression_top_k_llm_reranking",
+      "prediction_file": "data/evaluation/hybrid_lr_rerank_test.jsonl",
+      "evaluation_scope": "end_to_end_call",
+      "macro_f1": 0.8789,
+      "accuracy": 0.7826,
+      "gold_calls": 28,
+      "evaluated_calls": 28,
+      "failed_or_missing_calls": 0,
+      "call_coverage": 1.0,
+      "issue_count_accuracy": 1.0,
+      "exact_issue_sequence_accuracy": 0.6429,
+      "aligned_segment_accuracy": 0.7826,
+      "aligned_segment_macro_f1": 0.8789,
+      "unknown_rate": 0.2174,
+      "valid_evidence_rate": 1.0,
+      "aligned_segments": 46
+    },
+    {
+      "approach": "embedding_supervised_ml_llm_consensus",
+      "prediction_file": "data/evaluation/hybrid_embedding_supervised_consensus_test.jsonl",
+      "evaluation_scope": "end_to_end_call",
+      "macro_f1": 0.487,
+      "accuracy": 0.3478,
+      "gold_calls": 28,
+      "evaluated_calls": 28,
+      "failed_or_missing_calls": 0,
+      "call_coverage": 1.0,
+      "issue_count_accuracy": 1.0,
+      "exact_issue_sequence_accuracy": 0.1786,
+      "aligned_segment_accuracy": 0.3478,
+      "aligned_segment_macro_f1": 0.487,
+      "unknown_rate": 0.6522,
+      "valid_evidence_rate": 1.0,
+      "aligned_segments": 46
+    },
+    {
+      "approach": "llm_normalization_logistic_regression",
+      "prediction_file": "data/evaluation/hybrid_normalized_lr_test.jsonl",
+      "evaluation_scope": "end_to_end_call",
+      "macro_f1": 0.0939,
+      "accuracy": 0.0652,
+      "gold_calls": 28,
+      "evaluated_calls": 28,
+      "failed_or_missing_calls": 0,
+      "call_coverage": 1.0,
+      "issue_count_accuracy": 1.0,
+      "exact_issue_sequence_accuracy": 0.0714,
+      "aligned_segment_accuracy": 0.0652,
+      "aligned_segment_macro_f1": 0.0939,
+      "unknown_rate": 0.9348,
+      "valid_evidence_rate": 1.0,
+      "aligned_segments": 46
     }
   ],
   "approach_extraction": [
@@ -153,31 +245,31 @@
       "approach": "char_tfidf_linear_svm",
       "accuracy": 0.8043,
       "macro_f1": 0.7594,
-      "runtime_seconds": 0.0597
+      "runtime_seconds": 0.0722
     },
     {
       "approach": "char_word_tfidf_linear",
       "accuracy": 0.7391,
       "macro_f1": 0.6969,
-      "runtime_seconds": 0.0749
+      "runtime_seconds": 0.0629
     },
     {
       "approach": "char_tfidf_sgd_huber",
-      "accuracy": 0.6739,
-      "macro_f1": 0.582,
-      "runtime_seconds": 0.0418
+      "accuracy": 0.6522,
+      "macro_f1": 0.5806,
+      "runtime_seconds": 0.0414
     },
     {
       "approach": "word_tfidf_ridge",
       "accuracy": 0.6087,
       "macro_f1": 0.5473,
-      "runtime_seconds": 0.0292
+      "runtime_seconds": 0.022
     },
     {
       "approach": "lsa_semantic_linear",
       "accuracy": 0.6087,
       "macro_f1": 0.5318,
-      "runtime_seconds": 0.0276
+      "runtime_seconds": 0.0247
     },
     {
       "approach": "word_tfidf_centroid",
@@ -189,7 +281,7 @@
       "approach": "word_tfidf_complement_nb",
       "accuracy": 0.5435,
       "macro_f1": 0.4636,
-      "runtime_seconds": 0.0115
+      "runtime_seconds": 0.0097
     },
     {
       "approach": "taxonomy_keyword_rules",

@@ -12,6 +12,10 @@ apps/web/certs/
 # MacOS
 .DS_Store
 
+# Local runtime and render artifacts
+*.log
+tmp/
+
 # IDEs
 .idea/
 .vscode/

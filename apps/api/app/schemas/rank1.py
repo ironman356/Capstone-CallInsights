@@ -139,3 +139,4 @@ class WorkspaceResponse(BaseModel):
     ask_ci: list[dict]
     reports: dict
     governance: GovernanceResponse
+    solution_story: dict

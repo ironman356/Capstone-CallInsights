@@ -15,6 +15,7 @@ from uuid import uuid4
 
 from app.core.config import settings
 from app.services.rank1.adaptive import AdaptiveIssueMemory, HuggingFaceAdaptiveEngine
+from app.services.rank1.redaction import redact_transcript_text
 
 
 @dataclass(frozen=True)
@@ -701,20 +702,39 @@ class Rank1PipelineService:
         if not transcript_text and normalized_turns:
             transcript_text = "\n".join(f"{turn['speaker']}: {turn['text']}" for turn in normalized_turns)
 
+        if not transcript_text:
+            raise ValueError(f"Transcript content is required for {source_name}")
+
+        transcript_text = redact_transcript_text(transcript_text)
+        normalized_turns = [
+            {**turn, "text": redact_transcript_text(str(turn["text"]))}
+            for turn in normalized_turns
+        ]
+
         call_id = str(record.get("call_id") or f"CALL-{index:04d}")
         return {
             "call_id": call_id,
             "source_file": source_name,
-            "timestamp_start": record.get("timestamp_start"),
-            "timestamp_end": record.get("timestamp_end"),
-            "agent_id": record.get("agent_id"),
-            "queue": record.get("queue"),
-            "team": record.get("team"),
+            "timestamp_start": self._optional_metadata(record.get("timestamp_start")),
+            "timestamp_end": self._optional_metadata(record.get("timestamp_end")),
+            "agent_id": self._optional_metadata(record.get("agent_id")),
+            "queue": self._optional_metadata(record.get("queue")),
+            "team": self._optional_metadata(record.get("team")),
             "metadata": record.get("metadata", {}),
             "transcript_text": transcript_text,
             "turns": normalized_turns,
             "turn_count": len(normalized_turns),
+            "redaction_applied": True,
         }
+
+    @staticmethod
+    def _optional_metadata(value: object) -> str | None:
+        if value is None:
+            return None
+        normalized = str(value).strip()
+        if len(normalized) > 200:
+            raise ValueError("Metadata values must be 200 characters or fewer")
+        return normalized or None
 
     def ingest_calls(self) -> list[dict]:
         if not self.raw_dir.exists():
@@ -1170,6 +1190,16 @@ class Rank1PipelineService:
                 }
             )
         return insights
+
+    def build_solution_story(self, bundle: dict) -> dict:
+        # Kept for older workspace clients. Detailed analysis uses /solutions.
+        calls = bundle["calls"]
+        baseline = round(100 * sum(c["outcome"] == "resolved" for c in calls) / len(calls), 1) if calls else 0
+        return {"story": {"issue": "All calls", "call_count": len(calls),
+                          "baseline_resolution_rate": baseline, "headline": "Open Story → Solution for measured results.",
+                          "lead_behavior": None, "lead_delta": 0},
+                "working": [], "not_working": [], "techniques": [],
+                "disclaimer": "Legacy contrast ranking retired; use /solutions for guarded evidence."}
 
     def build_recalibration_summary(self, bundle: dict) -> dict:
         top_issue = bundle["issues"][0] if bundle["issues"] else None
@@ -1641,6 +1671,7 @@ class Rank1PipelineService:
             "ask_ci": self.build_ask_ci(bundle),
             "reports": self.build_report_summary(bundle),
             "governance": self.build_governance_summary(bundle),
+            "solution_story": self.build_solution_story(bundle),
         }
 
     def build_llm_batch_tasks(self, calls: list[dict]) -> list[dict]:
