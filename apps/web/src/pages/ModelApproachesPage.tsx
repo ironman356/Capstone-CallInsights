@@ -1,5 +1,5 @@
-import { BrainCircuit, CheckCircle2, Database, FlaskConical, GitCompareArrows, ShieldAlert, Sparkles, Target } from "lucide-react";
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { BrainCircuit, CheckCircle2, Database, FlaskConical, GitCompareArrows, HelpCircle, ShieldAlert, Sparkles, Target } from "lucide-react";
+import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Text, Tooltip, XAxis, YAxis } from "recharts";
 import { approachExtractionResults, benchmarkSummary, modelApproaches, type ModelFamily } from "../modelApproachData";
 
 const FAMILY_COLORS: Record<ModelFamily, string> = {
@@ -9,6 +9,11 @@ const FAMILY_COLORS: Record<ModelFamily, string> = {
   Rules: "#ffc66b",
   Legacy: "#ff8b72",
 };
+
+const METRIC_COLORS = {
+  macroF1: "#6ee7c8",
+  multiIssue: "#7ac8ff",
+} as const;
 
 const TOOLTIP_STYLE = {
   background: "var(--tooltip-bg)",
@@ -25,12 +30,34 @@ function seconds(value: number | null) {
   return value === null ? "API dependent" : `${value.toFixed(3)}s`;
 }
 
+const METRIC_HELP = {
+  macroF1: { label: "Macro-F1", description: "Balances missed issues and incorrect predictions for each category, then averages the scores so every category counts equally." },
+  accuracy: { label: "Accuracy", description: "The percentage of individual issue predictions that match the correct answer." },
+  multiIssue: { label: "Multi-issue", description: "Measures whether the model gets all issues in a call correct, rather than only some of them." },
+};
+
+function MetricHeader({ metric }: { metric: keyof typeof METRIC_HELP }) {
+  const definition = METRIC_HELP[metric];
+  return (
+    <span className="model-metric-help">
+      <span>{definition.label}</span>
+      <button type="button" className="model-metric-info" aria-label={`What is ${definition.label}?`} aria-describedby={`metric-help-${metric}`}>
+        <HelpCircle size={15} aria-hidden="true" />
+      </button>
+      <span className="model-metric-tooltip" id={`metric-help-${metric}`} role="tooltip">{definition.description}</span>
+    </span>
+  );
+}
+
+function ModelNameTick({ x = 0, y = 0, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+  return <Text x={x - 10} y={y} width={220} textAnchor="end" verticalAnchor="middle" fill="var(--text)" fontSize={12}>{payload?.value ?? ""}</Text>;
+}
+
 export default function ModelApproachesPage() {
   const chartData = modelApproaches.map((approach) => ({
-    name: approach.name.replace("Character", "Char").replace("Taxonomy keyword", "Taxonomy"),
+    name: approach.name,
     macroF1: Math.round(approach.macroF1 * 1000) / 10,
     multiIssue: Math.round(approach.multiIssue * 1000) / 10,
-    fill: FAMILY_COLORS[approach.family],
   }));
 
   return (
@@ -57,16 +84,17 @@ export default function ModelApproachesPage() {
             <div><p className="section-kicker">Topic Mapping</p><h3>Macro-F1 and multi-issue accuracy</h3></div>
             <BrainCircuit size={19} />
           </div>
-          <div className="model-chart-box">
-            <ResponsiveContainer width="100%" height={390}>
-              <BarChart data={chartData} margin={{ top: 8, right: 12, left: 0, bottom: 90 }}>
-                <CartesianGrid vertical={false} stroke="rgba(122,148,190,0.14)" />
-                <XAxis dataKey="name" interval={0} angle={-35} textAnchor="end" tickLine={false} axisLine={false} />
-                <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} tickLine={false} axisLine={false} />
+          <p className="model-chart-note">Bar colors represent the metric. Model family is shown in the comparison table below.</p>
+          <div className="model-readable-chart" role="region" aria-label="Topic mapping chart; scroll horizontally on small screens" tabIndex={0}>
+            <ResponsiveContainer width="100%" minWidth={620} height={modelApproaches.length * 58 + 76}>
+              <BarChart data={chartData} layout="vertical" margin={{ top: 8, right: 20, left: 10, bottom: 8 }}>
+                <CartesianGrid horizontal={false} stroke="rgba(122,148,190,0.14)" />
+                <XAxis type="number" domain={[0, 100]} tickFormatter={(value) => `${value}%`} tick={{ fill: "var(--muted)" }} tickLine={false} axisLine={false} />
+                <YAxis type="category" dataKey="name" width={240} interval={0} tick={<ModelNameTick />} tickLine={false} axisLine={false} />
                 <Tooltip contentStyle={TOOLTIP_STYLE} formatter={(value) => `${Number(value).toFixed(1)}%`} />
                 <Legend verticalAlign="top" height={34} />
-                <Bar dataKey="macroF1" name="Macro-F1" fill="#6ee7c8" radius={[7, 7, 0, 0]} />
-                <Bar dataKey="multiIssue" name="Multi-issue exact" fill="#7ac8ff" radius={[7, 7, 0, 0]} />
+                <Bar dataKey="macroF1" name="Macro-F1" fill={METRIC_COLORS.macroF1} radius={[0, 5, 5, 0]} />
+                <Bar dataKey="multiIssue" name="Multi-issue exact" fill={METRIC_COLORS.multiIssue} radius={[0, 5, 5, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -86,9 +114,16 @@ export default function ModelApproachesPage() {
 
       <article className="panel-card model-table-panel">
         <div className="panel-heading"><div><p className="section-kicker">Full Comparison</p><h3>All topic-modelling approaches</h3></div><GitCompareArrows size={19} /></div>
+        <div className="model-metric-guide" role="note">
+          <strong>How to read the main scores</strong>
+          <span><b>Macro-F1:</b> balanced performance across issue categories.</span>
+          <span><b>Accuracy:</b> how many individual predictions were correct.</span>
+          <span><b>Multi-issue:</b> whether all problems in a call were found correctly.</span>
+          <span>Higher is better. These are saved benchmark results, not live scores. Hover over or focus a question mark for more detail.</span>
+        </div>
         <div className="model-table-scroll">
           <table className="model-results-table">
-            <thead><tr><th>Method</th><th>Family</th><th>Macro-F1</th><th>Accuracy</th><th>Paraphrase</th><th>Confound split</th><th>Multi-issue</th><th>Runtime</th></tr></thead>
+            <thead><tr><th>Method</th><th>Family</th><th><MetricHeader metric="macroF1" /></th><th><MetricHeader metric="accuracy" /></th><th>Paraphrase</th><th>Confound split</th><th><MetricHeader metric="multiIssue" /></th><th>Runtime</th></tr></thead>
             <tbody>
               {modelApproaches.map((approach) => (
                 <tr key={approach.id}>
