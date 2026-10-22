@@ -1,0 +1,369 @@
+import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { createPortal } from "react-dom";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../api";
+import { usesApproach } from "../approachComparison";
+import type { CallCard, DashboardIssue } from "../types";
+import { compareCallRecency, phraseContext, titleCase } from "../utils";
+
+interface ResultsPageProps {
+  issues: DashboardIssue[];
+  calls: CallCard[];
+  onOpenCall: (callId: string) => void;
+}
+
+interface StatRow {
+  label: string;
+  value: number;
+  average: number;
+  higherIsBetter: boolean;
+  suffix: string;
+  values: Array<{ approach: string; value: number }>;
+}
+
+function PhraseCallLink({ callId, phrase, speaker, onOpenCall }: {
+  callId: string; phrase: string; speaker: string; onOpenCall: (callId: string) => void;
+}) {
+  const tooltipId = useId();
+  const [position, setPosition] = useState<CSSProperties | null>(null);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
+  function hidePreview() {
+    clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => setPosition(null), 150);
+  }
+  const callQuery = useQuery({
+    queryKey: ["call", callId],
+    queryFn: () => api.getCall(callId),
+    enabled: position !== null,
+    staleTime: 60_000,
+  });
+  const context = callQuery.data ? phraseContext(callQuery.data, phrase, speaker) : null;
+  function showPreview(button: HTMLButtonElement) {
+    clearTimeout(hideTimer.current);
+    const rect = button.getBoundingClientRect();
+    setPosition({
+      left: Math.max(12, Math.min(rect.left, window.innerWidth - 372)),
+      ...(rect.top > 240 ? { bottom: window.innerHeight - rect.top + 8 } : { top: rect.bottom + 8 }),
+    });
+  }
+  return (
+    <span className="results-phrase-call" onMouseLeave={hidePreview}>
+      <button type="button" className="results-approach-link"
+        aria-describedby={position ? tooltipId : undefined}
+        onMouseEnter={(event) => showPreview(event.currentTarget)}
+        onFocus={(event) => showPreview(event.currentTarget)}
+        onBlur={() => setPosition(null)}
+        onKeyDown={(event) => { if (event.key === "Escape") setPosition(null); }}
+        onClick={() => { setPosition(null); onOpenCall(callId); }}
+      >{callId}</button>
+      {position ? createPortal(
+        <span id={tooltipId} role="tooltip" className="results-phrase-preview" style={position}
+          onMouseEnter={() => clearTimeout(hideTimer.current)} onMouseLeave={hidePreview}>
+          <strong>{callId}</strong>
+          {callQuery.isPending ? "Loading transcript…" : callQuery.isError ? "Couldn’t load preview. Open the call to view its transcript."
+            : context ? <span>{context.before}<mark>{context.match}</mark>{context.after}</span>
+              : "No matching excerpt found. Open the call to view its transcript."}
+        </span>, document.body,
+      ) : null}
+    </span>
+  );
+}
+
+function formatStat(value: number, suffix: string) {
+  const rounded = Math.round(value * 10) / 10;
+  return `${rounded}${suffix}`;
+}
+
+function formatDelta(value: number, suffix: string) {
+  return `${value > 0 ? "+" : ""}${formatStat(value, suffix)}`;
+}
+
+function median(values: number[]) {
+  if (!values.length) return null;
+  const sorted = [...values].sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : (sorted[middle - 1] + sorted[middle]) / 2;
+}
+
+function hasHoldOrTransfer(call: CallCard) {
+  return usesApproach(call, "placed on hold") || usesApproach(call, "transferred / escalated");
+}
+
+function isFirstContactResolved(call: CallCard) {
+  return call.first_contact_resolved ?? call.outcome === "resolved";
+}
+
+export default function ResultsPage({ issues, calls, onOpenCall }: ResultsPageProps) {
+  const [selectedIssue, setSelectedIssue] = useState<string | null>(null);
+  const [selectedApproach, setSelectedApproach] = useState<string | null>(null);
+  const scrollPosition = useRef(0);
+  useLayoutEffect(() => {
+    window.scrollTo({ top: scrollPosition.current, behavior: "instant" });
+    return () => { scrollPosition.current = window.scrollY; };
+  }, []);
+  const issue = issues.find((item) => item.slug === selectedIssue);
+  const now = Date.now();
+  const weekStart = now - 7 * 24 * 60 * 60 * 1000;
+  const issueActivity = new Map<string, { dated: number; recent: number }>();
+  for (const call of calls) {
+    const activity = issueActivity.get(call.issue) ?? { dated: 0, recent: 0 };
+    const start = Date.parse(call.timestamp_start ?? "");
+    const timestamp = Number.isNaN(start) ? Date.parse(call.timestamp_end ?? "") : start;
+    if (!Number.isNaN(timestamp)) {
+      activity.dated++;
+      if (timestamp >= weekStart && timestamp <= now) activity.recent++;
+    }
+    issueActivity.set(call.issue, activity);
+  }
+  const phrasesQuery = useQuery({
+    queryKey: ["common-phrases", issue?.issue, selectedApproach],
+    queryFn: () => api.getCommonPhrases(issue!.issue, selectedApproach!),
+    enabled: Boolean(issue && selectedApproach),
+  });
+  const issueCalls = issue ? calls.filter((call) => call.issue === issue.issue) : [];
+  const approaches = [...new Set(issueCalls.flatMap((call) => call.behaviors))].sort();
+  const outcomeLabels = [...new Set(issueCalls.map((call) => call.outcome))].sort();
+  const approachMetrics = approaches.map((approach) => {
+    const matchingCalls = issueCalls.filter((call) => call.behaviors.includes(approach));
+    const turnCounts = matchingCalls.map((call) => call.turn_count).filter((count): count is number => typeof count === "number");
+    const sentimentShifts = matchingCalls.map((call) => call.sentiments.shift).filter((shift): shift is number => typeof shift === "number");
+    return {
+      approach,
+      calls: matchingCalls.length,
+      averageTurns: turnCounts.length ? turnCounts.reduce((sum, count) => sum + count, 0) / turnCounts.length : null,
+      medianTurns: median(turnCounts),
+      sentimentImprovement: sentimentShifts.length ? sentimentShifts.reduce((sum, shift) => sum + shift, 0) / sentimentShifts.length : null,
+      holdTransferRate: matchingCalls.filter(hasHoldOrTransfer).length / matchingCalls.length * 100,
+      firstContactResolutionRate: matchingCalls.filter(isFirstContactResolved).length / matchingCalls.length * 100,
+      outcomeRates: Object.fromEntries(outcomeLabels.map((outcome) => [
+        outcome,
+        matchingCalls.filter((call) => call.outcome === outcome).length / matchingCalls.length * 100,
+      ])),
+    };
+  }).sort((left, right) =>
+    right.firstContactResolutionRate - left.firstContactResolutionRate
+    || right.calls - left.calls
+    || left.approach.localeCompare(right.approach),
+  );
+  const selectedMetrics = approachMetrics.find((metrics) => metrics.approach === selectedApproach);
+  const recentApproachCalls = selectedApproach
+    ? issueCalls.filter((call) => call.behaviors.includes(selectedApproach)).sort((left, right) => -compareCallRecency(left, right)).slice(0, 5)
+    : [];
+  const issueTurnCounts = issueCalls.map((call) => call.turn_count).filter((count): count is number => typeof count === "number");
+  const issueSentimentShifts = issueCalls.map((call) => call.sentiments.shift).filter((shift): shift is number => typeof shift === "number");
+  const issueAverageTurns = issueTurnCounts.length
+    ? issueTurnCounts.reduce((sum, count) => sum + count, 0) / issueTurnCounts.length
+    : null;
+  const statRows: StatRow[] = selectedMetrics ? [
+    {
+      label: "Calls",
+      value: selectedMetrics.calls,
+      average: approachMetrics.reduce((sum, metrics) => sum + metrics.calls, 0) / approachMetrics.length,
+      higherIsBetter: true,
+      suffix: "",
+      values: approachMetrics.map((metrics) => ({ approach: metrics.approach, value: metrics.calls })),
+    },
+    ...(selectedMetrics.averageTurns !== null && issueAverageTurns !== null ? [{
+      label: "Average call length",
+      value: selectedMetrics.averageTurns,
+      average: issueAverageTurns,
+      higherIsBetter: false,
+      suffix: " turns",
+      values: approachMetrics
+        .filter((metrics) => metrics.averageTurns !== null)
+        .map((metrics) => ({ approach: metrics.approach, value: metrics.averageTurns as number })),
+    }] : []),
+    ...(selectedMetrics.medianTurns !== null && issueTurnCounts.length ? [{
+      label: "Median call length",
+      value: selectedMetrics.medianTurns,
+      average: median(issueTurnCounts) as number,
+      higherIsBetter: false,
+      suffix: " turns",
+      values: approachMetrics
+        .filter((metrics) => metrics.medianTurns !== null)
+        .map((metrics) => ({ approach: metrics.approach, value: metrics.medianTurns as number })),
+    }] : []),
+    ...(selectedMetrics.sentimentImprovement !== null && issueSentimentShifts.length ? [{
+      label: "Sentiment improvement",
+      value: selectedMetrics.sentimentImprovement,
+      average: issueSentimentShifts.reduce((sum, shift) => sum + shift, 0) / issueSentimentShifts.length,
+      higherIsBetter: true,
+      suffix: " pts",
+      values: approachMetrics
+        .filter((metrics) => metrics.sentimentImprovement !== null)
+        .map((metrics) => ({ approach: metrics.approach, value: metrics.sentimentImprovement as number })),
+    }] : []),
+    {
+      label: "Hold / transfer rate",
+      value: selectedMetrics.holdTransferRate,
+      average: issueCalls.filter(hasHoldOrTransfer).length / issueCalls.length * 100,
+      higherIsBetter: false,
+      suffix: "%",
+      values: approachMetrics.map((metrics) => ({ approach: metrics.approach, value: metrics.holdTransferRate })),
+    },
+    {
+      label: "First-contact resolution",
+      value: selectedMetrics.firstContactResolutionRate,
+      average: issueCalls.filter(isFirstContactResolved).length / issueCalls.length * 100,
+      higherIsBetter: true,
+      suffix: "%",
+      values: approachMetrics.map((metrics) => ({ approach: metrics.approach, value: metrics.firstContactResolutionRate })),
+    },
+    ...outcomeLabels.map((outcome) => ({
+      label: `${titleCase(outcome)} rate`,
+      value: selectedMetrics.outcomeRates[outcome],
+      average: issueCalls.filter((call) => call.outcome === outcome).length / issueCalls.length * 100,
+      higherIsBetter: outcome === "resolved",
+      suffix: "%",
+      values: approachMetrics.map((metrics) => ({ approach: metrics.approach, value: metrics.outcomeRates[outcome] })),
+    })),
+  ] : [];
+
+  return (
+    <section className="results-layout" aria-label="Issue Deep Dive">
+      <div className={`panel-card results-column ${!issue ? "results-awaiting-selection" : ""}`}>
+        <h3>Issues</h3>
+        <div className="results-list results-issues">
+          {issues.map((item) => (
+            <button
+              key={item.slug}
+              type="button"
+              className={item.slug === selectedIssue ? "active" : ""}
+              aria-pressed={item.slug === selectedIssue}
+              onClick={() => { setSelectedIssue(item.slug); setSelectedApproach(null); }}
+            >
+              <span className="results-issue-name">{titleCase(item.issue)}</span>
+              <span className="results-approach-usage">
+                <strong>{item.count} total</strong>
+                <span title={`${issueActivity.get(item.issue)?.dated ?? 0} of ${item.count} calls have dates. Past week means the last seven days.`}>
+                  {issueActivity.get(item.issue)?.dated ? issueActivity.get(item.issue)!.recent : "—"} past week
+                </span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {issue ? (
+        <div className={`panel-card results-column ${!selectedMetrics ? "results-awaiting-selection" : ""}`}>
+          <h3>Approaches</h3>
+          <div className="results-list results-approaches">
+            {approachMetrics.map((metrics) => (
+              <button
+                key={metrics.approach}
+                type="button"
+                className={metrics.approach === selectedApproach ? "active" : ""}
+                aria-pressed={metrics.approach === selectedApproach}
+                onClick={() => setSelectedApproach(metrics.approach)}
+              >
+                <span className="results-approach-name">
+                  <strong>{titleCase(metrics.approach)}</strong>
+                </span>
+                <span className="results-approach-usage">
+                  <strong>{metrics.calls} {metrics.calls === 1 ? "call" : "calls"}</strong>
+                  <span>{formatStat(metrics.calls / issueCalls.length * 100, "%")} usage</span>
+                  <span>{formatStat(metrics.firstContactResolutionRate, "%")} resolution</span>
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {selectedMetrics ? (
+        <>
+        <div className="results-detail-stack">
+        <div className="panel-card results-column">
+          <div className="results-statistics-heading">
+            <h3>Statistics</h3>
+            <p className="results-selected-approach">{titleCase(selectedApproach!)}</p>
+          </div>
+          <div className="results-stats-scroll">
+            <table className="results-stats-table">
+              <thead><tr><th scope="col">Metric</th><th scope="col">Selected</th><th scope="col">Vs baseline</th><th scope="col">Vs best</th><th scope="col">Vs worst</th></tr></thead>
+              <tbody>
+                {statRows.map((row) => {
+                  const sorted = [...row.values].sort((left, right) => left.value - right.value);
+                  const best = row.higherIsBetter ? sorted.at(-1)! : sorted[0];
+                  const worst = row.higherIsBetter ? sorted[0] : sorted.at(-1)!;
+                  const difference = row.value - row.average;
+                  const direction = difference > 0 ? "Above" : difference < 0 ? "Below" : "At";
+                  const bestDifference = row.value - best.value;
+                  const worstDifference = row.value - worst.value;
+                  const tone = (value: number) => value === 0 ? "neutral" : (value > 0) === row.higherIsBetter ? "positive" : "negative";
+                  const deltaSuffix = row.suffix === "%" ? " pp" : row.suffix;
+                  return (
+                    <tr key={row.label}>
+                      <th scope="row">{row.label}</th>
+                      <td><strong>{formatStat(row.value, row.suffix)}</strong></td>
+                      <td><strong className={`results-delta ${tone(difference)}`}>{formatDelta(difference, deltaSuffix)}</strong><span>{direction} {row.label === "Calls" ? "approach average" : "issue baseline"}</span></td>
+                      <td><strong className={`results-delta ${tone(bestDifference)}`}>{formatDelta(bestDifference, deltaSuffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(best.approach)}>{titleCase(best.approach)}</button></td>
+                      <td><strong className={`results-delta ${tone(worstDifference)}`}>{formatDelta(worstDifference, deltaSuffix)}</strong><button type="button" className="results-approach-link" onClick={() => setSelectedApproach(worst.approach)}>{titleCase(worst.approach)}</button></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+          <section className="panel-card results-common-phrases" aria-label="Common transcript phrases" aria-busy={phrasesQuery.isFetching}>
+            <h4>Common phrases</h4>
+            {phrasesQuery.isPending ? <p role="status">Finding shared wording…</p>
+              : phrasesQuery.isError ? <p role="alert">Couldn’t load phrases. <button type="button" className="results-approach-link" onClick={() => phrasesQuery.refetch()}>Try again</button></p>
+              : phrasesQuery.data.phrases.length ? (
+                <div className="results-phrase-list">
+                  {phrasesQuery.data.phrases.map((phrase) => (
+                    <article className="results-phrase" key={`${phrase.speaker}:${phrase.text}`}>
+                      <div><q>{phrase.text}</q></div>
+                      <span>{phrase.call_ids.length} of {phrasesQuery.data.call_count} calls</span>
+                      <div className="results-phrase-evidence">
+                        {phrase.call_ids.slice(0, 3).map((callId) => (
+                          <PhraseCallLink key={callId} callId={callId} phrase={phrase.text} speaker={phrase.speaker} onOpenCall={onOpenCall} />
+                        ))}
+                        {phrase.call_ids.length > 3 ? (
+                          <details key={`${selectedIssue}:${selectedApproach}`}>
+                            <summary className="results-approach-link">
+                              <span className="results-phrase-expand">+{phrase.call_ids.length - 3} more</span>
+                              <span className="results-phrase-collapse">Show fewer</span>
+                            </summary>
+                            <div>
+                              {phrase.call_ids.slice(3).map((callId) => (
+                                <PhraseCallLink key={callId} callId={callId} phrase={phrase.text} speaker={phrase.speaker} onOpenCall={onOpenCall} />
+                              ))}
+                            </div>
+                          </details>
+                        ) : null}
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : <p>No shared phrases found in at least two matching calls.</p>}
+          </section>
+        </div>
+          <section className="panel-card results-transcripts" aria-label="Recent transcripts">
+            <div className="results-transcripts-heading">
+              <h4>Recent transcripts</h4>
+              <span>Showing {recentApproachCalls.length} of {selectedMetrics.calls}</span>
+            </div>
+            <div className="results-transcript-list">
+              {recentApproachCalls.map((call) => {
+                const visibleApproaches = [selectedApproach!, ...call.behaviors.filter((behavior) => behavior !== selectedApproach)].slice(0, 4);
+                const remainingApproaches = call.behaviors.length - visibleApproaches.length;
+                return (
+                  <button type="button" className="evidence-row" key={call.call_id} onClick={() => onOpenCall(call.call_id)}>
+                    <strong>{call.call_id}</strong>
+                    <span className="results-transcript-approaches">
+                      {visibleApproaches.map(titleCase).join(" · ")}{remainingApproaches > 0 ? ` · +${remainingApproaches} more` : ""}
+                    </span>
+                    <span className="results-transcript-meta">{titleCase(call.outcome)} · {call.turn_count ?? "Unknown"} turns</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        </>
+      ) : null}
+    </section>
+  );
+}

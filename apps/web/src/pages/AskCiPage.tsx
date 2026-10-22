@@ -30,20 +30,30 @@ interface IntentRoute {
 }
 
 const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights: string[] }> = {
+  "compare-approaches": {
+    title: "Compare approaches",
+    summary: "Compares two to four approaches using observed call outcomes and transcript evidence.",
+    highlights: ["Separate overlapping calls", "Resolution intervals", "Issue mix", "Transcript quick reads"],
+  },
+  results: {
+    title: "Issue Deep Dive",
+    summary: "Shows issues, their observed agent approaches, and statistics.",
+    highlights: ["Issue list", "Approaches", "Statistics"],
+  },
+  "approach-matrix": {
+    title: "Approach Effectiveness Matrix",
+    summary: "Compares each observed agent approach across customer issues.",
+    highlights: ["Approach × issue matrix", "FCR impact", "Call evidence"],
+  },
+  "approach-portfolio": {
+    title: "Approach Portfolio",
+    summary: "Positions approaches by adoption, reliability, and modeled outcome impact.",
+    highlights: ["Portfolio map", "Quadrant decisions", "Approach evidence"],
+  },
   solutions: {
     title: "Story → Solution",
     summary: "Connects issues, agent responses and call outcomes through evidence.",
     highlights: ["Interactive graph", "Quoted turns", "Method comparison"],
-  },
-  "model-approaches": {
-    title: "Model Approaches",
-    summary: "Compares topic mapping approaches on the frozen benchmark.",
-    highlights: ["Topic metrics", "Approach extraction"],
-  },
-  field: {
-    title: "Field Mode",
-    summary: "Shows the phone-first issue field.",
-    highlights: ["Issue field", "Camera controls"],
   },
   overview: {
     title: "Overview",
@@ -69,6 +79,11 @@ const PAGE_GUIDES: Record<PageKey, { title: string; summary: string; highlights:
     title: "Monitoring",
     summary: "Shows refresh status, controls, and operating checks.",
     highlights: ["Trend refresh", "Control checks", "Policy rules"],
+  },
+  "model-approaches": {
+    title: "Model Approaches",
+    summary: "Compares the methods used to identify issue topics and agent approaches.",
+    highlights: ["Benchmark results", "Method comparison", "Evaluation notes"],
   },
   "ask-ci": {
     title: "Ask CI",

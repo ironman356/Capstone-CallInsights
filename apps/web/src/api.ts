@@ -48,6 +48,10 @@ export const api = {
     }),
   getIssue: (issueSlug: string) => request<IssueDetail>(`/issues/${issueSlug}`),
   getCall: (callId: string) => request<CallDetail>(`/calls/${callId}`),
+  getCommonPhrases: (issue: string, approach: string) =>
+    request<{ call_count: number; phrases: Array<{ text: string; speaker: string; call_ids: string[] }> }>(
+      `/common-phrases?${new URLSearchParams({ issue, approach })}`,
+    ),
   getStrategies: () => request<StrategyBoard>("/strategies"),
   createStrategy: (payload: StrategyCreateInput) =>
     request<StrategyRecord>("/strategies", {

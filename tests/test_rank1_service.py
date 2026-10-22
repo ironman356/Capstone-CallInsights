@@ -91,6 +91,7 @@ class Rank1ServiceTests(unittest.TestCase):
         bundle = self.service.build_triple_engine(calls)
         self.assertEqual(bundle["overview"]["issue_counts"]["payment confusion"], 1)
         self.assertEqual(bundle["calls"][0]["behaviors"], [])
+        self.assertFalse(bundle["calls"][0]["first_contact_resolved"])
 
     def test_run_writes_all_expected_artifacts(self) -> None:
         bundle = self.service.run()

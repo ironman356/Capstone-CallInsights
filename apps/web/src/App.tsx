@@ -1,4 +1,4 @@
-import { startTransition, useEffect, useMemo, useRef, useState } from "react";
+import { Activity as ReactActivity, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -9,9 +9,14 @@ import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import ModelApproachesPage from "./pages/ModelApproachesPage";
+import ApproachMatrixPage from "./pages/ApproachMatrixPage";
+import ApproachComparisonPage from "./pages/ApproachComparisonPage";
+import ApproachPortfolioPage from "./pages/ApproachPortfolioPage";
+import ResultsPage from "./pages/ResultsPage";
 import SolutionStoryPage from "./pages/SolutionStoryPage";
 import { UiDesignLabPage } from "./pages/UiDesignLabPage";
 import type { CallCard, StrategyCreateInput, StrategyRecord, WorkspacePayload } from "./types";
+import { compareCallRecency } from "./utils";
 
 type ThemeMode = "light" | "dark";
 
@@ -124,6 +129,26 @@ function StrategyDeadlineEditor({
 }
 
 const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
+  "compare-approaches": {
+    title: "Compare approaches",
+    description: "Compare up to four approaches.",
+    kicker: "",
+  },
+  results: {
+    title: "Issue Deep Dive",
+    description: "Explore an issue, inspect agent approaches, and read supporting transcripts.",
+    kicker: "",
+  },
+  "approach-matrix": {
+    title: "Approach Effectiveness Matrix",
+    description: "Compare approach outcomes across issues and inspect the evidence behind each signal.",
+    kicker: "",
+  },
+  "approach-portfolio": {
+    title: "Approach Portfolio",
+    description: "Explore modeled adoption, consistency, and outcome impact to prioritize approaches.",
+    kicker: "",
+  },
   overview: {
     title: "Overview",
     description: "Executive view of call drivers, outcomes, sentiment movement, and active action plans.",
@@ -193,6 +218,10 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
+  ["results", "Issue Deep Dive", "Explore approaches and evidence within an issue"],
+  ["compare-approaches", "Compare approaches", "Outcomes, call mix, and evidence side by side"],
+  ["approach-matrix", "Approach Effectiveness Matrix", "Compare approach outcomes across issues"],
+  ["approach-portfolio", "Approach Portfolio", "Prioritize approaches using modeled signals"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
   ["solutions", "Story → Solution", "What works, what does not, and how to validate it"],
@@ -204,23 +233,6 @@ const NAV_ITEMS: Array<[PageKey, string, string]> = [
   ["governance", "Governance", "Architecture, controls, and audit review"],
   ["reports", "Reports", "Leadership-ready summary and export package"],
 ];
-
-function compareCallRecency(left: CallCard, right: CallCard) {
-  const leftDate = Date.parse(left.timestamp_start ?? left.timestamp_end ?? "");
-  const rightDate = Date.parse(right.timestamp_start ?? right.timestamp_end ?? "");
-  if (!Number.isNaN(leftDate) && !Number.isNaN(rightDate)) {
-    return leftDate - rightDate;
-  }
-  if (!Number.isNaN(leftDate)) {
-    return -1;
-  }
-  if (!Number.isNaN(rightDate)) {
-    return 1;
-  }
-  const leftSequence = Number(left.call_id.match(/\d+$/)?.[0] ?? 0);
-  const rightSequence = Number(right.call_id.match(/\d+$/)?.[0] ?? 0);
-  return leftSequence - rightSequence || left.call_id.localeCompare(right.call_id);
-}
 
 function App() {
   const queryClient = useQueryClient();
@@ -400,6 +412,7 @@ function App() {
       await Promise.all([
         queryClient.invalidateQueries({ queryKey: ["issue"] }),
         queryClient.invalidateQueries({ queryKey: ["call"] }),
+        queryClient.invalidateQueries({ queryKey: ["common-phrases"] }),
       ]);
     } catch (refreshError) {
       setError(refreshError instanceof Error ? refreshError.message : "Unable to refresh workspace");
@@ -642,9 +655,9 @@ function App() {
         </div>
         <nav className="dashboard-nav">
           {NAV_ITEMS.map(([key, label, description]) => (
-            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key as PageKey)}>
+            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key)} aria-current={page === key ? "page" : undefined}>
               <strong>{label}</strong>
-              <span>{description}</span>
+              {description ? <span>{description}</span> : null}
             </button>
           ))}
         </nav>
@@ -666,10 +679,10 @@ function App() {
           <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
         </div>
       </aside>
-      <main className="dashboard-main">
+      <main className={`dashboard-main ${["results", "compare-approaches", "approach-matrix", "approach-portfolio"].includes(page) ? "results-main" : ""}`}>
         <section className="workspace-header">
           <div className="workspace-heading">
-            <p className="section-kicker">{pageMeta.kicker}</p>
+            {pageMeta.kicker ? <p className="section-kicker">{pageMeta.kicker}</p> : null}
             <h2>{pageMeta.title}</h2>
             <p>{pageMeta.description}</p>
           </div>
@@ -715,6 +728,14 @@ function App() {
         ) : null}
         {message ? <div className="flash-banner success">{message}</div> : null}
         {error ? <div className="flash-banner error">{error}</div> : null}
+        <ReactActivity mode={page === "results" ? "visible" : "hidden"}>
+          <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
+        </ReactActivity>
+        <ReactActivity mode={page === "compare-approaches" ? "visible" : "hidden"}>
+          <ApproachComparisonPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
+        </ReactActivity>
+        {page === "approach-matrix" ? <ApproachMatrixPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
+        {page === "approach-portfolio" ? <ApproachPortfolioPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} /> : null}
         {page === "overview" ? (
           <section className="grid-page overview-page">
             <div className="panel-card span-two">

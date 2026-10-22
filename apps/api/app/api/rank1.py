@@ -20,6 +20,7 @@ from app.schemas.rank1 import (
     WorkspaceResponse,
 )
 from app.services.rank1.pipeline import Rank1PipelineService
+from app.services.rank1.phrases import common_phrases
 
 router = APIRouter(prefix="/rank1", tags=["rank1"])
 service = Rank1PipelineService()
@@ -49,6 +50,14 @@ def get_issue_detail(issue_slug: str) -> IssueDetailResponse:
         outcome_breakdown=issue["outcome_breakdown"],
         evidence_calls=issue["representative_calls"],
     )
+
+
+@router.get("/common-phrases")
+def get_common_phrases(issue: str, approach: str) -> dict:
+    bundle = service.load_or_run()
+    calls = [call for call in bundle["call_details"].values()
+             if call["issue"] == issue and approach in call["behaviors"]]
+    return {"call_count": len(calls), "phrases": common_phrases(calls)}
 
 
 @router.get("/calls/{call_id}", response_model=CallDetailResponse)
