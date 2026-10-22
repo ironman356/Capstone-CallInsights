@@ -10,9 +10,9 @@
 - Preload the **Behavior map**, **Script route explorer**, one supporting transcript, and Swagger UI. Do not rerun the pipeline live unless it has been tested immediately beforehand.
 - Do not claim a deployed server, authentication, a database, or production SPS integration unless it is running and can be shown.
 
-## 0:00–2:00 — Prachi: top-down purpose and Beta status
+## 0:00–2:00 - Prachi: top-down purpose and Beta status
 
-**Say:**
+**Speaker notes:**
 
 “Good [morning/afternoon]. We are Call Insights. It helps mortgage-servicing managers understand which agent behaviors are associated with calls resolving quickly, then inspect the exact evidence behind that result.”
 
@@ -20,9 +20,9 @@
 
 **Show:** title slide, then Project Description and Beta State slides.
 
-## 2:00–3:30 — Prachi: Alpha to Beta
+## 2:00–3:30 - Prachi: Alpha to Beta
 
-**Say:**
+**Speaker notes:**
 
 “At the end of Alpha, our major deliverable was the Hybrid LLM + ML Model Approaches tab. It compares modeling approaches on the same benchmark.”
 
@@ -32,9 +32,9 @@
 
 **Show:** Alpha → Beta and Beta Storytelling Tabs slides.
 
-## 3:30–4:30 — Prachi: architecture and technical layout
+## 3:30–4:30 - Prachi: architecture and technical layout
 
-**Say:**
+**Speaker notes:**
 
 “This is the current local architecture. The existing transcript and model services supply evidence through FastAPI; React turns that evidence into an investigation workflow rather than exposing raw model output.”
 
@@ -44,9 +44,9 @@
 
 **Show:** Architecture and Technology/Code Layout slides. Point to `apps/web/src/pages/SolutionStoryPage.tsx`, `apps/web/src/pages/TranscriptStoryGraph.tsx`, `apps/api/app/services/rank1/solutions.py`, and `apps/api/app/services/rank1/conversation_paths.py`.
 
-## 4:30–7:30 — Prachi screen share: Story → Solution workflow
+## 4:30–7:30 - Prachi screen share: Story → Solution workflow
 
-**Say while navigating:**
+**Speaker notes while navigating:**
 
 “We start with an issue cluster. The Behavior map shows all matching response paths, not a summary table. Edge thickness represents observed call count.”
 
@@ -60,9 +60,9 @@
 
 **Show:** Story → Solution → Behavior map → select a response → supporting transcript → Script route explorer → expand two routes → Conversation Guide → existing experiment/action-plan state.
 
-## 7:30–9:00 — Prachi screen share: code and model proof
+## 7:30–9:00 - Prachi screen share: code and model proof
 
-**Say:**
+**Speaker notes:**
 
 “My Beta contribution is the story and drilldown experience that turns model output into an investigation workflow.”
 
@@ -79,9 +79,9 @@
 3. `apps/api/app/services/rank1/solutions.py` and `conversation_paths.py`.
 4. `http://127.0.0.1:8000/docs`: local API contract.
 
-## 9:00–11:30 — Alex screen share: Story Dashboard
+## 9:00–11:30 - Alex screen share: Story Dashboard
 
-**Say:**
+**Speaker notes:**
 
 “I’m Alex. I built the Story Dashboard frontend so a manager can understand and compare the Alpha modeling results as an evidence-backed narrative.”
 
@@ -99,9 +99,9 @@
 2. Story Dashboard 2 and Story Dashboard 3.
 3. `apps/web/src/pages/ResultsPage.tsx`, `ApproachMatrixPage.tsx`, `ApproachPortfolioPage.tsx`, and `approachComparison.ts`.
 
-## 11:30–13:30 — Anshul screen share: hybrid ML + LLM modeling
+## 11:30–13:30 - Anshul screen share: hybrid ML + LLM modeling
 
-**Say:**
+**Speaker notes:**
 
 “I’m Anshul. I expanded the hybrid topic-classification pipeline with five supervised-ML and LLM approaches. These include logistic-regression and SVM candidate retrieval with LLM reranking, ensemble LLM arbitration, normalization-based classification, and embedding + ML + LLM consensus.”
 
@@ -116,11 +116,11 @@
 3. `tests/test_hybrid_topics.py`: a deterministic test for candidate reranking or consensus behavior.
 4. `apps/web/src/modelApproachData.ts`: the 95.17% macro-F1 / 93.48% accuracy comparison row.
 
-**Close with:** “This code produces reproducible predictions and benchmark rows for the same shared product—not an isolated experiment.”
+**Close with:** “This code produces reproducible predictions and benchmark rows for the same shared product-not an isolated experiment.”
 
-## 13:30–15:30 — Abdul screen share: workflow foundation and model-approaches UI
+## 13:30–15:30 - Abdul screen share: workflow foundation and model-approaches UI
 
-**Say:**
+**Speaker notes:**
 
 “I’m Abdul. I established the React/FastAPI monorepo foundation and built workflow improvements including action-plan drag-and-drop status changes, persisted deadlines, edit dialogs, and evidence-link updates.”
 
@@ -135,9 +135,9 @@
 
 **Close with:** “My frontend workflows keep model comparisons and manager actions connected to the same application state and evidence routes.”
 
-## 15:30–17:00 — Prachi screen share: integration and final-release readiness
+## 15:30–17:00 - Prachi screen share: integration and final-release readiness
 
-**Say:**
+**Speaker notes:**
 
 “For Beta, our priority was making the validated modeling output usable. The product now includes issue and transcript exploration, Story → Solution drilldowns, strategy workflow, evidence packs, alerts, voice-transcript intake, and strategy measurement endpoints.”
 
@@ -147,9 +147,9 @@
 
 **Show:** Validation Readiness slide and, only if tested, `/knowledge-graph`, `/simulate-call`, and a transparency endpoint in Swagger.
 
-## 17:00–19:00 — Shared engineering screen: practices and repository proof
+## 17:00–19:00 - Shared engineering screen: practices and repository proof
 
-**Say:**
+**Speaker notes:**
 
 “We used feature branches and merge requests to isolate work, and GitLab Issues to track tasks, ownership, labels, estimates, and time spent. We use Python unit/API tests, and FastAPI publishes the endpoint contract through Swagger.”
 
@@ -159,9 +159,9 @@
 
 **Must verify before presenting:** CI pipeline status, release tag/version, Issue labels, estimates/spend, and whether the web app is deployed. Do not claim any missing item.
 
-## 19:00–20:00 — close
+## 19:00–20:00 - close
 
-**Say exactly:**
+**Closing words:**
 
 “To summarize: Alpha identified agent behaviors associated with faster call resolution. Beta makes that result usable: a manager can see what appears to work, what does not, the exact words and calls behind it, and the conversation routes that follow. We are done. What questions do you have?”
 
