@@ -217,11 +217,11 @@ const PAGE_META: Record<PageKey, { title: string; description: string; kicker: s
 };
 
 const NAV_ITEMS: Array<[PageKey, string, string]> = [
+  ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["results", "Issue Deep Dive", "Explore approaches and evidence within an issue"],
   ["compare-approaches", "Compare approaches", "Outcomes, call mix, and evidence side by side"],
   ["approach-matrix", "Approach Effectiveness Matrix", "Compare approach outcomes across issues"],
   ["approach-portfolio", "Approach Portfolio", "Prioritize approaches using modeled signals"],
-  ["overview", "Overview", "Top KPIs, call drivers, and operating picture"],
   ["issues", "Issues", "Recurring customer problems and supporting evidence"],
   ["calls", "Calls", "Representative calls, transcripts, and call detail"],
   ["solutions", "Story → Solution", "What works, what does not, and how to validate it"],
