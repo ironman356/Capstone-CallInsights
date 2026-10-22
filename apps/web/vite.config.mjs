@@ -14,6 +14,8 @@ const httpsConfig = fs.existsSync(pfxPath)
 
 export default defineConfig({
   plugins: [react()],
+  // Relative asset paths allow the compiled UI to run from GitLab Pages at /app/.
+  base: "./",
   server: {
     host: "0.0.0.0",
     port: 4173,

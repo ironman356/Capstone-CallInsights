@@ -1,0 +1,44 @@
+image: node:20
+
+stages:
+  - test
+  - deploy
+
+frontend-build:
+  stage: test
+  script:
+    - cd apps/web
+    - npm ci
+    - npm run build
+  rules:
+    - if: $CI_COMMIT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+pages:
+  stage: deploy
+  script:
+    - cd apps/web
+    - npm ci
+    - npm run build
+    - cd ../..
+    - mkdir -p public/app
+    - cp -r apps/web/dist/. public/app/
+    - cp docs/beta-demo.html public/index.html
+    - cp docs/beta-demo-script.md public/beta-demo-script.md
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+beta-release:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - echo "Publishing the GitLab Beta release"
+  release:
+    name: "Call Insights Beta $CI_COMMIT_TAG"
+    tag_name: $CI_COMMIT_TAG
+    description: "Beta release with the GitLab Pages presentation and compiled web interface. API- and LLM-backed workflows remain connected to the SPS backend deployment."
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+$/
