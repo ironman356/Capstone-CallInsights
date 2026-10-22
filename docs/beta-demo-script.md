@@ -91,13 +91,13 @@
 
 “Story Dashboard 3 is the approach map. It gives the user a navigable view of the relationships instead of requiring them to read a raw model table.”
 
-“Together with the new Story → Solution tab, these screens take the product from model comparison, to a clear evidence story, to a transcript-level investigation.”
+“I also added comparison views, phrase and transcript context, evidence filtering, navigation, and clearer issue-level statistics. Together with the new Story → Solution tab, these screens take the product from model comparison, to a clear evidence story, to a transcript-level investigation.”
 
 **Show:**
 
 1. Story Dashboard 1, then click an evidence link.
 2. Story Dashboard 2 and Story Dashboard 3.
-3. `apps/web/src/pages/ResultsPage.tsx`, `ApproachMatrixPage.tsx`, `ApproachPortfolioPage.tsx`.
+3. `apps/web/src/pages/ResultsPage.tsx`, `ApproachMatrixPage.tsx`, `ApproachPortfolioPage.tsx`, and `approachComparison.ts`.
 
 ## 11:30–13:30 — Anshul screen share: hybrid ML + LLM modeling
 
@@ -118,15 +118,22 @@
 
 **Close with:** “This code produces reproducible predictions and benchmark rows for the same shared product—not an isolated experiment.”
 
-## 13:30–15:30 — Abdul screen share: individual contribution
-
-**Confirm with Abdul before presenting.**
+## 13:30–15:30 — Abdul screen share: workflow foundation and model-approaches UI
 
 **Say:**
 
-“I’m Abdul. I implemented the action-plan workflow improvements: **[confirm exact work]**. This lets a manager **[specific task]** and persists the result through **[API/storage path]**. I will show **[exact file and function]**.”
+“I’m Abdul. I established the React/FastAPI monorepo foundation and built workflow improvements including action-plan drag-and-drop status changes, persisted deadlines, edit dialogs, and evidence-link updates.”
 
-**Show on Abdul’s screen:** the action-plan interaction, then `[exact component path]`, `[persistence/API function]`, and `[test or API route]`. End by saying exactly how it connects to transcript evidence or the strategy lifecycle.
+“I also added Model Approaches charts, metric-help tooltips, navigation, comparison screens, and evidence-view links. These features connect a manager’s workflow actions and model comparisons to the shared application state and API.”
+
+**Show on Abdul’s screen:**
+
+1. `ModelApproachesPage.tsx` and `ApproachComparisonPage.tsx`: charts, metrics, and navigation.
+2. `ApproachViewLinks.tsx` and `approachComparison.ts`: evidence-view linking and comparison data.
+3. `App.tsx`: action-plan drag-and-drop, deadlines, editing, or evidence-link interaction that has been tested immediately before the presentation.
+4. `apps/api/app/api/rank1.py`: the shared API boundary used by the workflow.
+
+**Close with:** “My frontend workflows keep model comparisons and manager actions connected to the same application state and evidence routes.”
 
 ## 15:30–17:00 — Prachi screen share: integration and final-release readiness
 
@@ -146,7 +153,7 @@
 
 “We used feature branches and merge requests to isolate work, and GitLab Issues to track tasks, ownership, labels, estimates, and time spent. We use Python unit/API tests, and FastAPI publishes the endpoint contract through Swagger.”
 
-“Here is the branch graph, the active/recent issue board, and the test suite. The presentation deck also contains current-main LOC and all-repository commit totals. The AI-assisted split is marked as temporary until every contributor confirms their declaration.”
+“Here is the branch graph, the active/recent issue board, and the test suite. The deck’s LOC is a current-main Git-blame count after fetching every GitLab branch; commit totals combine all fetched GitLab refs and each contributor’s known author identities. Git cannot infer AI use, so only Anshul’s self-reported split is final; the other declarations must be confirmed before grading.”
 
 **Show:** GitLab board, branch graph, a recent merge request, `python -m unittest tests.test_rank1_api tests.test_rank3_services`, and Swagger.
 
@@ -165,8 +172,8 @@
 - [x] Alpha models are framed as association discovery; Beta is the Story → Solution investigation workflow.
 - [x] Every member has a timed screen-share handoff: live feature, own code, integration explanation, and next speaker.
 - [x] Anshul’s hybrid-model feature, code, benchmark, and own-screen handoff are verified.
-- [ ] Replace Abdul’s placeholder with verified feature, file, function, and test details before presenting.
-- [x] LOC/commit slide, with temporary AI split clearly labeled.
+- [x] Abdul’s merged workflow-foundation and Model Approaches UI contribution has a verified own-screen handoff and code paths.
+- [x] LOC/commit slide uses current main blame attribution and all fetched GitLab branches; AI declarations are explicitly separated from Git-derived data.
 - [x] Prachi code proof centers `SolutionStoryPage.tsx`, `TranscriptStoryGraph.tsx`, `solutions.py`, and `conversation_paths.py`.
 - [x] Shared engineering screen covers GitLab board, branch graph, versioning, build/test, and published API documentation.
 - [ ] Verify deployment/release tag, CI pipeline, GitLab estimates/spend, and authentication claims before presenting.
