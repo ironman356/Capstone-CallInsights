@@ -9,6 +9,7 @@ import AskCiPage from "./pages/AskCiPage";
 import FieldModePage from "./pages/FieldModePage";
 import LiveIncidentCommandPage from "./pages/LiveIncidentCommandPage";
 import ModelApproachesPage from "./pages/ModelApproachesPage";
+import ApproachViewLinks from "./components/ApproachViewLinks";
 import ApproachMatrixPage from "./pages/ApproachMatrixPage";
 import ApproachComparisonPage from "./pages/ApproachComparisonPage";
 import ApproachPortfolioPage from "./pages/ApproachPortfolioPage";
@@ -728,6 +729,7 @@ function App() {
         ) : null}
         {message ? <div className="flash-banner success">{message}</div> : null}
         {error ? <div className="flash-banner error">{error}</div> : null}
+        <ApproachViewLinks currentPage={page} onNavigate={navigate} />
         <ReactActivity mode={page === "results" ? "visible" : "hidden"}>
           <ResultsPage issues={dashboard.issues} calls={dashboard.calls} onOpenCall={openCall} />
         </ReactActivity>
