@@ -78,6 +78,7 @@ export default function LiveIncidentCommandPage({
   const [hologramMomentIndex, setHologramMomentIndex] = useState(0);
   const [isNarratingHologram, setIsNarratingHologram] = useState(false);
   const [handoffStatus, setHandoffStatus] = useState<"agent" | "transferred">("agent");
+  const [showCommandTools, setShowCommandTools] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const narrationTimersRef = useRef<number[]>([]);
@@ -284,10 +285,10 @@ export default function LiveIncidentCommandPage({
       <div className="incident-command-hero panel-card">
         <div className="incident-command-hero-copy">
           <p className="section-kicker">Live Incident Command</p>
-          <h3>Run the leadership demo like an operations war room instead of a dashboard tour.</h3>
+          <h3>Supervise an AI voice call with context, evidence, and a safe human handoff.</h3>
           <p>
-            This page compresses the meeting brief, change detection, evidence-to-action routing, structured Ask CI
-            answers, and a tablet AR field mode into one command surface.
+            This Beta view makes the agent's state and the supervisor's decision visible without interrupting the
+            customer conversation.
           </p>
           <div className="incident-command-pills">
             <span className="brief-pill"><Sparkles size={14} /> 3 risks, 2 trends, 1 action</span>
@@ -304,6 +305,10 @@ export default function LiveIncidentCommandPage({
             <Bot size={16} />
             Generate guided answer
           </button>
+          <button type="button" className="ghost-button" onClick={() => setShowCommandTools((current) => !current)}>
+            <Compass size={16} />
+            {showCommandTools ? "Hide briefing tools" : "More briefing tools"}
+          </button>
             <button type="button" className="ghost-button" onClick={() => setArMode((current) => !current)}>
               <Crosshair size={16} />
               {isHandheldArReady ? (arMode ? "Hide AR field mode" : "Launch AR field mode") : "AR field mode is mobile only"}
@@ -319,7 +324,7 @@ export default function LiveIncidentCommandPage({
         </div>
       </div>
 
-      <div className="incident-command-grid">
+      <div className={`incident-command-grid ${showCommandTools ? "show-tools" : ""}`}>
         <article className="panel-card incident-brief-card">
           <div className="panel-heading">
             <div>
@@ -807,8 +812,29 @@ function narrateHologramMoment(message: string) {
   }
   window.speechSynthesis.cancel();
   const utterance = new SpeechSynthesisUtterance(message);
-  utterance.rate = 0.98;
+  const voice = selectNaturalEnglishVoice(window.speechSynthesis.getVoices());
+  if (voice) {
+    utterance.voice = voice;
+    utterance.lang = voice.lang;
+  } else {
+    utterance.lang = "en-US";
+  }
+  // A calmer pace makes the handoff read like an operator briefing rather than a system alert.
+  utterance.rate = 0.91;
+  utterance.pitch = 1;
+  utterance.volume = 1;
   window.speechSynthesis.speak(utterance);
+}
+
+function selectNaturalEnglishVoice(voices: SpeechSynthesisVoice[]) {
+  const englishVoices = voices.filter((voice) => voice.lang.toLowerCase().startsWith("en"));
+  const preferredVoiceNames = ["samantha", "ava", "jenny", "aria", "zira", "google us english", "google uk english"];
+  return (
+    englishVoices.find((voice) => preferredVoiceNames.some((name) => voice.name.toLowerCase().includes(name))) ??
+    englishVoices.find((voice) => voice.localService) ??
+    englishVoices[0] ??
+    voices[0]
+  );
 }
 
 function stopHologramNarration(timerRef: React.MutableRefObject<number[]>) {

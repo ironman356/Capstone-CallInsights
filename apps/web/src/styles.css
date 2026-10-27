@@ -1589,7 +1589,16 @@ button { cursor: pointer; }
 }
 
 .incident-command-page {
-  gap: 16px;
+  gap: 20px;
+}
+
+/* Live Command is recording-first in Beta: the handoff comes before optional briefing detail. */
+.incident-command-page > .incident-ar-panel {
+  order: 2;
+}
+
+.incident-command-page > .incident-command-grid {
+  order: 3;
 }
 
 .incident-command-hero {
@@ -1663,6 +1672,16 @@ button { cursor: pointer; }
 
 .incident-command-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.incident-command-grid:not(.show-tools) > .incident-brief-card,
+.incident-command-grid:not(.show-tools) > .incident-change-card,
+.incident-command-grid:not(.show-tools) > .incident-guided-card {
+  display: none;
+}
+
+.incident-command-grid:not(.show-tools) > .incident-evidence-card {
+  grid-column: 1 / -1;
 }
 
 .incident-brief-layout {
