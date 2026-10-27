@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   Sparkles,
   TrendingDown,
+  Volume2,
   Workflow,
 } from "lucide-react";
 import { api } from "../api";
@@ -32,6 +33,14 @@ interface GuidedCard {
   proof: string[];
   nextAction: string;
   actions: AskCiChatAction[];
+}
+
+interface HandoffMoment {
+  state: string;
+  title: string;
+  narration: string;
+  operatorCue: string;
+  tone: "ready" | "review" | "handoff";
 }
 
 const GUIDED_PROMPTS = [
@@ -66,8 +75,11 @@ export default function LiveIncidentCommandPage({
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [selectedArIssueSlug, setSelectedArIssueSlug] = useState(topIssue?.slug ?? "");
   const [decisionHologramOpen, setDecisionHologramOpen] = useState(true);
+  const [hologramMomentIndex, setHologramMomentIndex] = useState(0);
+  const [isNarratingHologram, setIsNarratingHologram] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const narrationTimersRef = useRef<number[]>([]);
 
   const issues = workspace.dashboard.issues.slice(0, 5);
   const selectedIssue = useMemo(
@@ -98,6 +110,11 @@ export default function LiveIncidentCommandPage({
     () => findCallById(workspace.dashboard.calls, selectedArIssue?.representative_calls[0]?.call_id) ?? selectedEvidenceCall,
     [selectedArIssue, selectedEvidenceCall, workspace.dashboard.calls],
   );
+  const handoffMoments = useMemo(
+    () => buildHandoffMoments(selectedArIssue, arJourneyCall, arStrategyDraft, decisionReadiness),
+    [arJourneyCall, arStrategyDraft, decisionReadiness, selectedArIssue],
+  );
+  const activeHandoffMoment = handoffMoments[hologramMomentIndex] ?? handoffMoments[0];
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -118,6 +135,12 @@ export default function LiveIncidentCommandPage({
       window.removeEventListener("resize", updateHandheldMode);
     };
   }, []);
+
+  useEffect(() => {
+    setHologramMomentIndex(0);
+  }, [selectedArIssueSlug]);
+
+  useEffect(() => () => stopHologramNarration(narrationTimersRef), []);
 
   useEffect(() => {
     if (!selectedIssueSlug && topIssue?.slug) {
@@ -224,6 +247,28 @@ export default function LiveIncidentCommandPage({
       return;
     }
     setCameraEnabled(true);
+  }
+
+  function runNarratedHandoff() {
+    stopHologramNarration(narrationTimersRef);
+    setDecisionHologramOpen(true);
+    setHologramMomentIndex(0);
+    setIsNarratingHologram(true);
+    handoffMoments.forEach((moment, index) => {
+      const timer = window.setTimeout(() => {
+        setHologramMomentIndex(index);
+        narrateHologramMoment(moment.narration);
+        if (index === handoffMoments.length - 1) {
+          setIsNarratingHologram(false);
+        }
+      }, index * 4300);
+      narrationTimersRef.current.push(timer);
+    });
+  }
+
+  function stopNarratedHandoff() {
+    stopHologramNarration(narrationTimersRef);
+    setIsNarratingHologram(false);
   }
 
   return (
@@ -507,7 +552,7 @@ export default function LiveIncidentCommandPage({
               </button>
               <button type="button" className="ghost-button" onClick={() => setDecisionHologramOpen((current) => !current)} disabled={!arMode}>
                 <Sparkles size={16} />
-                {decisionHologramOpen ? "Hide decision hologram" : "Show decision hologram"}
+                {decisionHologramOpen ? "Hide handoff hologram" : "Show handoff hologram"}
               </button>
             </div>
             {cameraError ? <div className="flash-banner error">{cameraError}</div> : null}
@@ -526,7 +571,7 @@ export default function LiveIncidentCommandPage({
                     <div className="incident-ar-overlay" />
                     <div className="incident-ar-guidance">
                       <strong>Point your tablet or phone at a table or wall.</strong>
-                      <span>Tap a cluster, then use the decision hologram to review its evidence, action, and guardrail together.</span>
+                      <span>Tap a cluster, then run the narrated handoff to see the voice agent state, evidence, and supervisor checkpoint.</span>
                     </div>
                     {issues.map((issue, index) => {
                       const position = CONSTELLATION_POSITIONS[index] ?? CONSTELLATION_POSITIONS[CONSTELLATION_POSITIONS.length - 1];
@@ -555,22 +600,28 @@ export default function LiveIncidentCommandPage({
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.96, y: 10 }}
                           transition={{ duration: 0.18 }}
-                          aria-label="Decision hologram"
+                          aria-label="Live voice-agent handoff hologram"
                         >
                           <div className="decision-hologram-head">
-                            <span className="incident-brief-label">Decision hologram</span>
-                            <span className={`decision-readiness ${decisionReadiness.tone}`}>{decisionReadiness.label}</span>
+                            <span className="incident-brief-label">Live agent handoff</span>
+                            <span className={`decision-readiness ${activeHandoffMoment.tone}`}>{activeHandoffMoment.state}</span>
                           </div>
-                          <strong>{titleCase(selectedArIssue.issue)}</strong>
-                          <p>{arStrategyDraft?.title ?? "Review the evidence before proposing an intervention."}</p>
+                          <strong>{activeHandoffMoment.title}</strong>
+                          <p>{activeHandoffMoment.narration}</p>
                           <div className="decision-hologram-metrics">
-                            <div><span>Observed evidence</span><strong>{decisionReadiness.evidenceCount} calls</strong></div>
-                            <div><span>Representative call</span><strong>{arJourneyCall?.call_id ?? "Unavailable"}</strong></div>
+                            <div><span>Live intent</span><strong>{titleCase(selectedArIssue.issue)}</strong></div>
+                            <div><span>Source call</span><strong>{arJourneyCall?.call_id ?? "Unavailable"}</strong></div>
                           </div>
-                          <p className="decision-hologram-guardrail">{decisionReadiness.guardrail}</p>
+                          <p className="decision-hologram-guardrail"><strong>Supervisor cue:</strong> {activeHandoffMoment.operatorCue}</p>
                           <div className="decision-hologram-actions">
-                            {arJourneyCall ? <button type="button" className="ghost-button small" onClick={() => onOpenCall(arJourneyCall.call_id)}>Inspect call</button> : null}
-                            <button type="button" className="primary-button small" onClick={() => onNavigate("strategies")}>Open pilot</button>
+                            <button type="button" className="ghost-button small" onClick={isNarratingHologram ? stopNarratedHandoff : runNarratedHandoff}>
+                              <Volume2 size={14} />
+                              {isNarratingHologram ? "Stop narration" : "Run narrated handoff"}
+                            </button>
+                            {activeHandoffMoment.tone === "handoff" ? <button type="button" className="primary-button small" onClick={() => arJourneyCall && onOpenCall(arJourneyCall.call_id)}>Review handoff</button> : null}
+                          </div>
+                          <div className="hologram-progress" aria-label={`Handoff step ${hologramMomentIndex + 1} of ${handoffMoments.length}`}>
+                            {handoffMoments.map((moment, index) => <button key={moment.state} type="button" className={index === hologramMomentIndex ? "active" : ""} onClick={() => { stopNarratedHandoff(); setHologramMomentIndex(index); }} aria-label={`Show ${moment.state}`} />)}
                           </div>
                         </motion.section>
                       ) : null}
@@ -680,6 +731,65 @@ function buildDecisionReadiness(issue: DashboardIssue | null, strategy: ReturnTy
     evidenceCount,
     guardrail: "The pattern is directional but the sample is limited. Review each linked call before scaling the intervention.",
   };
+}
+
+function buildHandoffMoments(
+  issue: DashboardIssue | null,
+  call: CallCard | RepresentativeCall | null,
+  strategy: ReturnType<typeof buildStrategyDraft> | null,
+  readiness: ReturnType<typeof buildDecisionReadiness>,
+): HandoffMoment[] {
+  const issueName = titleCase(issue?.issue ?? "the caller's request");
+  const sourceCall = call?.call_id ?? "the selected call";
+  const risk = estimateEscalationRisk(call);
+  return [
+    {
+      state: "Listening",
+      title: `The voice agent is identifying ${issueName}`,
+      narration: `The agent has identified ${issueName} as the caller's likely need and is keeping the conversation grounded in the current call context.`,
+      operatorCue: "No action yet. The supervisor can see the active intent instead of guessing what the agent understood.",
+      tone: "ready",
+    },
+    {
+      state: "Grounding response",
+      title: "The agent is preparing an evidence-backed explanation",
+      narration: `The agent is drawing from the observed pattern behind ${sourceCall} and will use the approved response path before offering a next step.`,
+      operatorCue: "Monitor whether the explanation addresses the caller's actual question before the agent advances.",
+      tone: "ready",
+    },
+    {
+      state: "Understanding check",
+      title: "The agent must confirm that the customer is clear",
+      narration: `The agent should now check understanding. ${risk.label}; a negative or uncertain response should stop the automated path.`,
+      operatorCue: "Intervene if the customer repeats the concern, rejects the explanation, or asks for a human.",
+      tone: "review",
+    },
+    {
+      state: "Human handoff ready",
+      title: "A supervisor can take over without restarting the conversation",
+      narration: `${readiness.guardrail} The prepared handoff includes the active issue, source call ${sourceCall}, and the proposed next action: ${strategy?.title ?? "review the evidence before committing to a next action"}.`,
+      operatorCue: "Tap Review handoff to open the source call, then accept, modify, or override the agent's path.",
+      tone: "handoff",
+    },
+  ];
+}
+
+function narrateHologramMoment(message: string) {
+  if (typeof window === "undefined" || !("speechSynthesis" in window)) {
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(message);
+  utterance.rate = 0.98;
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopHologramNarration(timerRef: React.MutableRefObject<number[]>) {
+  timerRef.current.forEach((timer) => window.clearTimeout(timer));
+  timerRef.current = [];
+  if (typeof window !== "undefined" && "speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
 }
 
 function GuidedActionButton({

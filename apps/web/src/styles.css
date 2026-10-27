@@ -2590,12 +2590,16 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .decision-readiness { padding: 5px 7px; border-radius: 999px; font-size: .65rem; font-weight: 700; white-space: nowrap; }
 .decision-readiness.ready { color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
 .decision-readiness.review { color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.decision-readiness.handoff { color: var(--risk); background: color-mix(in srgb, var(--risk) 12%, transparent); }
 .decision-hologram-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .decision-hologram-metrics div { display: grid; gap: 3px; padding: 9px; border-radius: 9px; background: var(--surface); }
 .decision-hologram-metrics span { color: var(--muted); font-size: .66rem; }
 .decision-hologram-metrics strong { overflow: hidden; font-size: .75rem; text-overflow: ellipsis; white-space: nowrap; }
 .decision-hologram-guardrail { padding-top: 10px; border-top: 1px solid var(--line); }
 .decision-hologram .primary-button.small { min-height: 30px; padding: 6px 9px; }
+.hologram-progress { display: flex; gap: 6px; }
+.hologram-progress button { width: 100%; height: 4px; padding: 0; border: 0; border-radius: 999px; background: var(--line-strong); }
+.hologram-progress button.active { background: var(--accent); }
 @media (max-width: 560px) {
   .incident-ar-canvas { min-height: 680px; }
   .decision-hologram { top: auto; bottom: 106px; }
