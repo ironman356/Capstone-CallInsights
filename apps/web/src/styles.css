@@ -2495,6 +2495,167 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
   .hero-panel { grid-template-columns: 1fr; }
 }
 
+/* AR uses the same quiet product palette as the workspace. Depth communicates
+   spatial relationships; the decision hologram communicates the next action. */
+.incident-command-page { gap: 20px; }
+.incident-command-hero { background: var(--panel); }
+.incident-command-hero-copy h3 { letter-spacing: -.05em; }
+.incident-command-hero-actions,
+.incident-evidence-callout,
+.incident-evidence-subpanel,
+.incident-strategy-draft,
+.incident-ar-card,
+.incident-brief-item,
+.incident-brief-recommendation,
+.incident-change-item,
+.incident-guided-block,
+.incident-guided-shell {
+  border-color: var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+.incident-command-status,
+.incident-evidence-callout,
+.incident-brief-recommendation,
+.incident-ar-desktop-note {
+  background: var(--surface-accent);
+  border-color: color-mix(in srgb, var(--accent) 18%, var(--line));
+}
+.incident-brief-item.tone-risk,
+.incident-change-item.tone-risk { background: color-mix(in srgb, var(--risk) 7%, var(--surface)); }
+.incident-brief-item.tone-warning,
+.incident-change-item.tone-warning { background: color-mix(in srgb, var(--warn) 8%, var(--surface)); }
+.incident-brief-item.tone-info,
+.incident-change-item.tone-stable { background: color-mix(in srgb, var(--accent) 6%, var(--surface)); }
+.incident-issue-pill { border-radius: 10px; }
+.incident-issue-pill.active { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+.incident-ar-panel { background: var(--panel); }
+.incident-ar-toolbar { grid-template-columns: repeat(auto-fit, minmax(170px, max-content)); }
+.incident-ar-canvas {
+  min-height: 620px;
+  border-radius: 16px;
+  border-color: var(--line);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 34%),
+    var(--surface);
+  background-size: 44px 44px, 44px 44px, auto, auto;
+}
+.incident-ar-overlay {
+  background: linear-gradient(180deg, rgba(255,255,255,.12), color-mix(in srgb, var(--text) 28%, transparent));
+}
+:root[data-theme="dark"] .incident-ar-overlay { background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.35)); }
+.incident-ar-guidance {
+  border-radius: 11px;
+  border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.incident-ar-guidance span { color: var(--muted); }
+.incident-ar-node {
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  box-shadow: 0 10px 24px rgba(0,0,0,.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.incident-ar-node.active { background: var(--surface-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent), 0 14px 26px rgba(0,0,0,.12); }
+.incident-ar-node.tone-risk { border-color: color-mix(in srgb, var(--risk) 52%, var(--line)); box-shadow: 0 10px 24px color-mix(in srgb, var(--risk) 15%, transparent); }
+.incident-ar-node.tone-warning { border-color: color-mix(in srgb, var(--warn) 55%, var(--line)); box-shadow: 0 10px 24px color-mix(in srgb, var(--warn) 15%, transparent); }
+.incident-ar-node.tone-stable { border-color: color-mix(in srgb, var(--success) 52%, var(--line)); box-shadow: 0 10px 24px color-mix(in srgb, var(--success) 15%, transparent); }
+.incident-journey-fill { background: var(--accent); }
+
+.decision-hologram {
+  position: absolute;
+  z-index: 3;
+  top: 18px;
+  right: 18px;
+  display: grid;
+  gap: 10px;
+  width: min(330px, calc(100% - 36px));
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  box-shadow: 0 16px 40px rgba(0,0,0,.16);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.decision-hologram-head,
+.decision-hologram-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.decision-hologram > strong { font-size: 1rem; letter-spacing: -.025em; }
+.decision-hologram > p { margin: 0; color: var(--muted); font-size: .8rem; line-height: 1.45; }
+.decision-readiness { padding: 5px 7px; border-radius: 999px; font-size: .65rem; font-weight: 700; white-space: nowrap; }
+.decision-readiness.ready { color: var(--success); background: color-mix(in srgb, var(--success) 12%, transparent); }
+.decision-readiness.review { color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.decision-hologram-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.decision-hologram-metrics div { display: grid; gap: 3px; padding: 9px; border-radius: 9px; background: var(--surface); }
+.decision-hologram-metrics span { color: var(--muted); font-size: .66rem; }
+.decision-hologram-metrics strong { overflow: hidden; font-size: .75rem; text-overflow: ellipsis; white-space: nowrap; }
+.decision-hologram-guardrail { padding-top: 10px; border-top: 1px solid var(--line); }
+.decision-hologram .primary-button.small { min-height: 30px; padding: 6px 9px; }
+@media (max-width: 560px) {
+  .incident-ar-canvas { min-height: 680px; }
+  .decision-hologram { top: auto; bottom: 106px; }
+  .incident-ar-node { transform: translate(-50%, -50%) scale(.84); }
+}
+
+/* Standalone Field Mode is the same product surface as Live Command, adapted
+   for a handheld canvas rather than a separate sci-fi visual language. */
+.field-shell {
+  background: var(--bg);
+  color: var(--text);
+}
+.field-empty-state,
+.field-launchpad,
+.field-card,
+.field-zone,
+.field-guidance,
+.field-compare-summary {
+  border-color: var(--line);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.field-empty-state,
+.field-launchpad { border-radius: 16px; }
+.field-launchpad { min-height: calc(100vh - 110px); }
+.field-launchpad-copy p,
+.field-empty-state p,
+.field-card p,
+.field-zone span,
+.field-guidance span,
+.field-muted-copy { color: var(--muted); }
+.field-stage { border-radius: 16px; border-color: var(--line); background: var(--surface); }
+.field-overlay {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.08), color-mix(in srgb, var(--text) 24%, transparent)),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--accent) 6%, transparent) 1px, transparent 1px);
+  background-size: auto, 48px 48px, 48px 48px;
+}
+.field-guidance { border-radius: 11px; background: color-mix(in srgb, var(--panel) 92%, transparent); }
+.field-node { border-radius: 16px; border-color: var(--line-strong); background: color-mix(in srgb, var(--panel) 92%, transparent); box-shadow: 0 10px 24px rgba(0,0,0,.12); }
+.field-node span { color: var(--muted); }
+.field-node.tone-high { border-color: color-mix(in srgb, var(--risk) 58%, var(--line)); }
+.field-node.tone-medium { border-color: color-mix(in srgb, var(--warn) 58%, var(--line)); }
+.field-node.tone-low { border-color: color-mix(in srgb, var(--success) 58%, var(--line)); }
+.field-node.active { background: var(--surface-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent), 0 12px 24px rgba(0,0,0,.12); }
+.field-zone { border-radius: 12px; }
+.field-zone em, .field-card-head, .field-filter-grid span, .field-compare-select span { color: var(--accent); }
+.field-zone-watch { background: color-mix(in srgb, var(--accent) 6%, var(--surface)); }
+.field-zone-act-now { background: color-mix(in srgb, var(--risk) 7%, var(--surface)); }
+.field-zone-resolved { background: color-mix(in srgb, var(--success) 7%, var(--surface)); }
+.field-card { border-radius: 14px; }
+.field-timeline-step { border-color: var(--line); border-radius: 10px; background: var(--surface); color: var(--text); }
+.field-timeline-step.active { border-color: color-mix(in srgb, var(--accent) 38%, var(--line)); background: var(--surface-accent); }
+.field-timeline-track { background: var(--surface-strong); }
+.field-timeline-fill { background: var(--accent); }
+.field-filter-grid select, .field-compare-select select { border-color: var(--line); border-radius: 9px; background: var(--bg-soft); color: var(--text); }
+
 .model-approaches-page {
   display: grid;
   gap: 16px;

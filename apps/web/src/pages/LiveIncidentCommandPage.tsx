@@ -65,6 +65,7 @@ export default function LiveIncidentCommandPage({
   const [cameraEnabled, setCameraEnabled] = useState(false);
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [selectedArIssueSlug, setSelectedArIssueSlug] = useState(topIssue?.slug ?? "");
+  const [decisionHologramOpen, setDecisionHologramOpen] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
 
@@ -83,6 +84,14 @@ export default function LiveIncidentCommandPage({
   const strategyDraft = useMemo(
     () => (selectedIssue ? buildStrategyDraft(workspace.strategy_board.strategies, selectedIssue) : null),
     [selectedIssue, workspace.strategy_board.strategies],
+  );
+  const arStrategyDraft = useMemo(
+    () => (selectedArIssue ? buildStrategyDraft(workspace.strategy_board.strategies, selectedArIssue) : null),
+    [selectedArIssue, workspace.strategy_board.strategies],
+  );
+  const decisionReadiness = useMemo(
+    () => buildDecisionReadiness(selectedArIssue, arStrategyDraft),
+    [arStrategyDraft, selectedArIssue],
   );
   const selectedEvidenceCall = selectedIssue?.representative_calls[0] ?? workspace.dashboard.calls[0] ?? null;
   const arJourneyCall = useMemo(
@@ -496,6 +505,10 @@ export default function LiveIncidentCommandPage({
                 <Compass size={16} />
                 Open governance map
               </button>
+              <button type="button" className="ghost-button" onClick={() => setDecisionHologramOpen((current) => !current)} disabled={!arMode}>
+                <Sparkles size={16} />
+                {decisionHologramOpen ? "Hide decision hologram" : "Show decision hologram"}
+              </button>
             </div>
             {cameraError ? <div className="flash-banner error">{cameraError}</div> : null}
 
@@ -513,7 +526,7 @@ export default function LiveIncidentCommandPage({
                     <div className="incident-ar-overlay" />
                     <div className="incident-ar-guidance">
                       <strong>Point your tablet or phone at a table or wall.</strong>
-                      <span>Tap a floating issue cluster to inspect evidence and the recommended action path.</span>
+                      <span>Tap a cluster, then use the decision hologram to review its evidence, action, and guardrail together.</span>
                     </div>
                     {issues.map((issue, index) => {
                       const position = CONSTELLATION_POSITIONS[index] ?? CONSTELLATION_POSITIONS[CONSTELLATION_POSITIONS.length - 1];
@@ -534,6 +547,34 @@ export default function LiveIncidentCommandPage({
                         </motion.button>
                       );
                     })}
+                    <AnimatePresence initial={false}>
+                      {decisionHologramOpen && selectedArIssue ? (
+                        <motion.section
+                          className="decision-hologram"
+                          initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.96, y: 10 }}
+                          transition={{ duration: 0.18 }}
+                          aria-label="Decision hologram"
+                        >
+                          <div className="decision-hologram-head">
+                            <span className="incident-brief-label">Decision hologram</span>
+                            <span className={`decision-readiness ${decisionReadiness.tone}`}>{decisionReadiness.label}</span>
+                          </div>
+                          <strong>{titleCase(selectedArIssue.issue)}</strong>
+                          <p>{arStrategyDraft?.title ?? "Review the evidence before proposing an intervention."}</p>
+                          <div className="decision-hologram-metrics">
+                            <div><span>Observed evidence</span><strong>{decisionReadiness.evidenceCount} calls</strong></div>
+                            <div><span>Representative call</span><strong>{arJourneyCall?.call_id ?? "Unavailable"}</strong></div>
+                          </div>
+                          <p className="decision-hologram-guardrail">{decisionReadiness.guardrail}</p>
+                          <div className="decision-hologram-actions">
+                            {arJourneyCall ? <button type="button" className="ghost-button small" onClick={() => onOpenCall(arJourneyCall.call_id)}>Inspect call</button> : null}
+                            <button type="button" className="primary-button small" onClick={() => onNavigate("strategies")}>Open pilot</button>
+                          </div>
+                        </motion.section>
+                      ) : null}
+                    </AnimatePresence>
                   </div>
 
                   <div className="incident-ar-sidepanel">
@@ -583,10 +624,10 @@ export default function LiveIncidentCommandPage({
 
                     <div className="incident-ar-card">
                       <span className="incident-brief-label">Recommended action</span>
-                      <strong>{strategyDraft?.title ?? "No draft available"}</strong>
-                      <p>{strategyDraft?.hypothesis ?? "Select an issue to generate a strategy recommendation."}</p>
+                      <strong>{arStrategyDraft?.title ?? "No draft available"}</strong>
+                      <p>{arStrategyDraft?.hypothesis ?? "Select an issue to generate a strategy recommendation."}</p>
                       <div className="detail-tags">
-                        {strategyDraft?.kpi_focus.map((kpi) => (
+                        {arStrategyDraft?.kpi_focus.map((kpi) => (
                           <span className="data-tag muted" key={kpi}>{kpi}</span>
                         ))}
                       </div>
@@ -612,6 +653,33 @@ export default function LiveIncidentCommandPage({
       </article>
     </section>
   );
+}
+
+function buildDecisionReadiness(issue: DashboardIssue | null, strategy: ReturnType<typeof buildStrategyDraft> | null) {
+  const evidenceCount = issue?.count ?? 0;
+  const hasRepresentativeCall = Boolean(issue?.representative_calls[0]);
+  if (!strategy || !hasRepresentativeCall) {
+    return {
+      label: "Evidence review needed",
+      tone: "review",
+      evidenceCount,
+      guardrail: "Do not launch a change yet. First inspect a representative call and define the outcome measure.",
+    };
+  }
+  if (evidenceCount >= 8) {
+    return {
+      label: "Ready for a measured pilot",
+      tone: "ready",
+      evidenceCount,
+      guardrail: "This is a testable recommendation, not a causal claim. Track the named KPIs against a comparable control group.",
+    };
+  }
+  return {
+    label: "Pilot with close review",
+    tone: "review",
+    evidenceCount,
+    guardrail: "The pattern is directional but the sample is limited. Review each linked call before scaling the intervention.",
+  };
 }
 
 function GuidedActionButton({
