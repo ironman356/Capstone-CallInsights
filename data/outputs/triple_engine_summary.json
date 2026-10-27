@@ -8,7 +8,7 @@
       },
       {
         "label": "Issue Types",
-        "value": 15,
+        "value": 16,
         "tone": "info"
       },
       {
@@ -33,11 +33,12 @@
       "fall further behind": 7,
       "funds were wired": 3,
       "insurance even though": 9,
-      "mortgage payment jumped": 6,
+      "mortgage payment jumped": 1,
       "monthly payment right": 10,
       "title company needs": 10,
       "escrow side accurate": 5,
       "bank shows": 6,
+      "escrow": 5,
       "good through date": 7,
       "payment online": 7,
       "escrow analysis raised": 8,
@@ -1385,120 +1386,6 @@
       ]
     },
     {
-      "slug": "mortgage-payment-jumped",
-      "issue": "mortgage payment jumped",
-      "count": 6,
-      "summary": "Mortgage Payment Jumped appeared in 6 calls; the most common outcome was escalated.",
-      "top_behaviors": [
-        {
-          "behavior": "completed verification",
-          "count": 6
-        },
-        {
-          "behavior": "showed empathy",
-          "count": 6
-        },
-        {
-          "behavior": "used empathy",
-          "count": 6
-        },
-        {
-          "behavior": "offered next steps",
-          "count": 4
-        },
-        {
-          "behavior": "set explicit next steps",
-          "count": 4
-        }
-      ],
-      "outcome_breakdown": {
-        "escalated": 2,
-        "resolved": 2,
-        "follow-up needed": 2
-      },
-      "average_shift": 0.0,
-      "evidence_pack": {
-        "issue": "mortgage payment jumped",
-        "time_window": "demo corpus",
-        "sample_size": 6,
-        "outcomes": {
-          "escalated": 2,
-          "resolved": 2,
-          "follow-up needed": 2
-        },
-        "avg_sentiment_shift": 0.0,
-        "representative_call_ids": [
-          "CALL-0007",
-          "CALL-0012",
-          "CALL-0017",
-          "CALL-0037",
-          "CALL-0047"
-        ]
-      },
-      "representative_calls": [
-        {
-          "call_id": "CALL-0007",
-          "source_file": "transcript_007.txt",
-          "summary": "Mortgage Payment Jumped call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 1.0,
-            "mid": 0.333,
-            "closing": 1.0,
-            "shift": 0.0
-          },
-          "outcome": "escalated"
-        },
-        {
-          "call_id": "CALL-0012",
-          "source_file": "transcript_012.txt",
-          "summary": "Mortgage Payment Jumped call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 1.0,
-            "mid": 0.333,
-            "closing": 1.0,
-            "shift": 0.0
-          },
-          "outcome": "resolved"
-        },
-        {
-          "call_id": "CALL-0017",
-          "source_file": "transcript_017.txt",
-          "summary": "Mortgage Payment Jumped call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 1.0,
-            "mid": 0.333,
-            "closing": 1.0,
-            "shift": 0.0
-          },
-          "outcome": "follow-up needed"
-        },
-        {
-          "call_id": "CALL-0037",
-          "source_file": "transcript_037.txt",
-          "summary": "Mortgage Payment Jumped call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 1.0,
-            "mid": 0.333,
-            "closing": 1.0,
-            "shift": 0.0
-          },
-          "outcome": "follow-up needed"
-        },
-        {
-          "call_id": "CALL-0047",
-          "source_file": "transcript_047.txt",
-          "summary": "Mortgage Payment Jumped call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
-          "sentiments": {
-            "opening": 1.0,
-            "mid": 0.333,
-            "closing": 1.0,
-            "shift": 0.0
-          },
-          "outcome": "escalated"
-        }
-      ]
-    },
-    {
       "slug": "bank-shows",
       "issue": "bank shows",
       "count": 6,
@@ -1845,6 +1732,120 @@
       ]
     },
     {
+      "slug": "escrow",
+      "issue": "escrow",
+      "count": 5,
+      "summary": "Escrow appeared in 5 calls; the most common outcome was resolved.",
+      "top_behaviors": [
+        {
+          "behavior": "completed verification",
+          "count": 5
+        },
+        {
+          "behavior": "showed empathy",
+          "count": 5
+        },
+        {
+          "behavior": "used empathy",
+          "count": 5
+        },
+        {
+          "behavior": "explained policy clearly",
+          "count": 4
+        },
+        {
+          "behavior": "prevented repeat explanation",
+          "count": 4
+        }
+      ],
+      "outcome_breakdown": {
+        "resolved": 2,
+        "follow-up needed": 2,
+        "escalated": 1
+      },
+      "average_shift": 0.0,
+      "evidence_pack": {
+        "issue": "escrow",
+        "time_window": "demo corpus",
+        "sample_size": 5,
+        "outcomes": {
+          "resolved": 2,
+          "follow-up needed": 2,
+          "escalated": 1
+        },
+        "avg_sentiment_shift": 0.0,
+        "representative_call_ids": [
+          "CALL-0012",
+          "CALL-0017",
+          "CALL-0037",
+          "CALL-0047",
+          "CALL-0072"
+        ]
+      },
+      "representative_calls": [
+        {
+          "call_id": "CALL-0012",
+          "source_file": "transcript_012.txt",
+          "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "resolved"
+        },
+        {
+          "call_id": "CALL-0017",
+          "source_file": "transcript_017.txt",
+          "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "follow-up needed"
+        },
+        {
+          "call_id": "CALL-0037",
+          "source_file": "transcript_037.txt",
+          "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "follow-up needed"
+        },
+        {
+          "call_id": "CALL-0047",
+          "source_file": "transcript_047.txt",
+          "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "escalated"
+        },
+        {
+          "call_id": "CALL-0072",
+          "source_file": "transcript_072.txt",
+          "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "resolved"
+        }
+      ]
+    },
+    {
       "slug": "funds-were-wired",
       "issue": "funds were wired",
       "count": 3,
@@ -2019,6 +2020,64 @@
           "outcome": "escalated"
         }
       ]
+    },
+    {
+      "slug": "mortgage-payment-jumped",
+      "issue": "mortgage payment jumped",
+      "count": 1,
+      "summary": "Mortgage Payment Jumped appeared in 1 calls; the most common outcome was escalated.",
+      "top_behaviors": [
+        {
+          "behavior": "completed verification",
+          "count": 1
+        },
+        {
+          "behavior": "offered next steps",
+          "count": 1
+        },
+        {
+          "behavior": "set explicit next steps",
+          "count": 1
+        },
+        {
+          "behavior": "showed empathy",
+          "count": 1
+        },
+        {
+          "behavior": "transferred / escalated",
+          "count": 1
+        }
+      ],
+      "outcome_breakdown": {
+        "escalated": 1
+      },
+      "average_shift": 0.0,
+      "evidence_pack": {
+        "issue": "mortgage payment jumped",
+        "time_window": "demo corpus",
+        "sample_size": 1,
+        "outcomes": {
+          "escalated": 1
+        },
+        "avg_sentiment_shift": 0.0,
+        "representative_call_ids": [
+          "CALL-0007"
+        ]
+      },
+      "representative_calls": [
+        {
+          "call_id": "CALL-0007",
+          "source_file": "transcript_007.txt",
+          "summary": "Mortgage Payment Jumped call that ended as escalated. Observed agent behaviors: completed verification, offered next steps, set explicit next steps. Sentiment shift was +0.000 from opening to close.",
+          "sentiments": {
+            "opening": 1.0,
+            "mid": 0.333,
+            "closing": 1.0,
+            "shift": 0.0
+          },
+          "outcome": "escalated"
+        }
+      ]
     }
   ],
   "calls": [
@@ -2026,6 +2085,10 @@
       "call_id": "CALL-0001",
       "source_file": "transcript_001.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2044,12 +2107,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0002",
       "source_file": "transcript_002.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2065,12 +2136,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0003",
       "source_file": "transcript_003.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2088,12 +2167,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0004",
       "source_file": "transcript_004.txt",
       "issue": "funds were wired",
+      "issues": [
+        "funds were wired",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2111,12 +2198,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0005",
       "source_file": "transcript_005.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2135,12 +2230,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0006",
       "source_file": "transcript_006.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2156,12 +2259,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0007",
       "source_file": "transcript_007.txt",
       "issue": "mortgage payment jumped",
+      "issues": [
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2178,12 +2289,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0008",
       "source_file": "transcript_008.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2202,12 +2321,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0009",
       "source_file": "transcript_009.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2227,12 +2354,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0010",
       "source_file": "transcript_010.txt",
       "issue": "escrow side accurate",
+      "issues": [
+        "escrow side accurate",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2247,12 +2382,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0011",
       "source_file": "transcript_011.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2270,12 +2413,21 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0012",
       "source_file": "transcript_012.txt",
-      "issue": "mortgage payment jumped",
+      "issue": "escrow",
+      "issues": [
+        "escrow",
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2287,18 +2439,26 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Mortgage Payment Jumped call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 1.0,
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0013",
       "source_file": "transcript_013.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2318,12 +2478,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0014",
       "source_file": "transcript_014.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2339,12 +2507,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0015",
       "source_file": "transcript_015.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2361,12 +2537,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0016",
       "source_file": "transcript_016.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2384,12 +2568,21 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0017",
       "source_file": "transcript_017.txt",
-      "issue": "mortgage payment jumped",
+      "issue": "escrow",
+      "issues": [
+        "escrow",
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2403,18 +2596,26 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Mortgage Payment Jumped call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 1.0,
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0018",
       "source_file": "transcript_018.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2432,12 +2633,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0019",
       "source_file": "transcript_019.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2454,12 +2663,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0020",
       "source_file": "transcript_020.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2476,12 +2693,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0021",
       "source_file": "transcript_021.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2500,12 +2725,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0022",
       "source_file": "transcript_022.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2520,12 +2753,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0023",
       "source_file": "transcript_023.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2543,12 +2784,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0024",
       "source_file": "transcript_024.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2565,12 +2814,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0025",
       "source_file": "transcript_025.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2590,12 +2847,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0026",
       "source_file": "transcript_026.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2610,12 +2875,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0027",
       "source_file": "transcript_027.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2632,12 +2905,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0028",
       "source_file": "transcript_028.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2657,12 +2938,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0029",
       "source_file": "transcript_029.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2682,12 +2971,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0030",
       "source_file": "transcript_030.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2703,12 +3000,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0031",
       "source_file": "transcript_031.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2726,12 +3031,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0032",
       "source_file": "transcript_032.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2749,12 +3062,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0033",
       "source_file": "transcript_033.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2774,12 +3095,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0034",
       "source_file": "transcript_034.txt",
       "issue": "funds were wired",
+      "issues": [
+        "funds were wired",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2795,12 +3124,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0035",
       "source_file": "transcript_035.txt",
       "issue": "escrow side accurate",
+      "issues": [
+        "escrow side accurate",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2817,12 +3154,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0036",
       "source_file": "transcript_036.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2840,12 +3185,21 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0037",
       "source_file": "transcript_037.txt",
-      "issue": "mortgage payment jumped",
+      "issue": "escrow",
+      "issues": [
+        "escrow",
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2858,18 +3212,26 @@
         "showed empathy",
         "used empathy"
       ],
-      "summary": "Mortgage Payment Jumped call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Escrow call that ended as follow-up needed. Observed agent behaviors: completed verification, explained policy clearly, failed to address concern. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 1.0,
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0038",
       "source_file": "transcript_038.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2887,12 +3249,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0039",
       "source_file": "transcript_039.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -2910,12 +3280,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0040",
       "source_file": "transcript_040.txt",
       "issue": "escrow side accurate",
+      "issues": [
+        "escrow side accurate",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -2934,12 +3312,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0041",
       "source_file": "transcript_041.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -2959,12 +3345,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0042",
       "source_file": "transcript_042.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -2979,12 +3373,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0043",
       "source_file": "transcript_043.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3001,12 +3403,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0044",
       "source_file": "transcript_044.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3023,12 +3433,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0045",
       "source_file": "transcript_045.txt",
       "issue": "escrow side accurate",
+      "issues": [
+        "escrow side accurate",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3048,12 +3466,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0046",
       "source_file": "transcript_046.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3068,12 +3494,21 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0047",
       "source_file": "transcript_047.txt",
-      "issue": "mortgage payment jumped",
+      "issue": "escrow",
+      "issues": [
+        "escrow",
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3085,18 +3520,26 @@
         "transferred or escalated",
         "used empathy"
       ],
-      "summary": "Mortgage Payment Jumped call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Escrow call that ended as escalated. Observed agent behaviors: completed verification, explained servicing timeline, offered next steps. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 1.0,
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0048",
       "source_file": "transcript_048.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3116,12 +3559,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0049",
       "source_file": "transcript_049.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3142,12 +3593,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0050",
       "source_file": "transcript_050.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3163,12 +3622,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0051",
       "source_file": "transcript_051.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3186,12 +3653,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0052",
       "source_file": "transcript_052.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3208,12 +3683,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0053",
       "source_file": "transcript_053.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3233,12 +3716,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0054",
       "source_file": "transcript_054.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3254,12 +3745,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0055",
       "source_file": "transcript_055.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3276,12 +3775,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0056",
       "source_file": "transcript_056.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3298,12 +3805,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0057",
       "source_file": "transcript_057.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3324,12 +3839,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0058",
       "source_file": "transcript_058.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3345,12 +3868,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0059",
       "source_file": "transcript_059.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3367,12 +3898,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0060",
       "source_file": "transcript_060.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3391,12 +3930,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0061",
       "source_file": "transcript_061.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3415,12 +3962,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0062",
       "source_file": "transcript_062.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3436,12 +3991,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0063",
       "source_file": "transcript_063.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3458,12 +4021,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0064",
       "source_file": "transcript_064.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3480,12 +4051,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0065",
       "source_file": "transcript_065.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3505,12 +4084,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0066",
       "source_file": "transcript_066.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3525,12 +4112,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0067",
       "source_file": "transcript_067.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3548,12 +4143,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0068",
       "source_file": "transcript_068.txt",
       "issue": "assistance options",
+      "issues": [
+        "assistance options",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3570,12 +4173,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0069",
       "source_file": "transcript_069.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3595,12 +4206,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0070",
       "source_file": "transcript_070.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3615,12 +4234,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0071",
       "source_file": "transcript_071.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3637,12 +4264,21 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0072",
       "source_file": "transcript_072.txt",
-      "issue": "mortgage payment jumped",
+      "issue": "escrow",
+      "issues": [
+        "escrow",
+        "mortgage payment jumped",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3654,18 +4290,26 @@
         "stabilized borrower",
         "used empathy"
       ],
-      "summary": "Mortgage Payment Jumped call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
+      "summary": "Escrow call that ended as resolved. Observed agent behaviors: completed verification, explained policy clearly, explained servicing timeline. Sentiment shift was +0.000 from opening to close.",
       "sentiments": {
         "opening": 1.0,
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0073",
       "source_file": "transcript_073.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3684,12 +4328,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0074",
       "source_file": "transcript_074.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3705,12 +4357,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0075",
       "source_file": "transcript_075.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3727,12 +4387,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0076",
       "source_file": "transcript_076.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3749,12 +4417,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0077",
       "source_file": "transcript_077.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3775,12 +4451,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0078",
       "source_file": "transcript_078.txt",
       "issue": "assistance options",
+      "issues": [
+        "assistance options",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3798,12 +4482,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0079",
       "source_file": "transcript_079.txt",
       "issue": "good through date",
+      "issues": [
+        "good through date",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3821,12 +4513,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0080",
       "source_file": "transcript_080.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3843,12 +4543,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0081",
       "source_file": "transcript_081.txt",
       "issue": "bank shows",
+      "issues": [
+        "bank shows",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3868,12 +4576,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0082",
       "source_file": "transcript_082.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3889,12 +4605,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0083",
       "source_file": "transcript_083.txt",
       "issue": "assistance options",
+      "issues": [
+        "assistance options",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -3911,12 +4635,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0084",
       "source_file": "transcript_084.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -3934,12 +4666,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0085",
       "source_file": "transcript_085.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -3959,12 +4699,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0086",
       "source_file": "transcript_086.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -3980,12 +4728,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0087",
       "source_file": "transcript_087.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -4002,12 +4758,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0088",
       "source_file": "transcript_088.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -4027,12 +4791,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0089",
       "source_file": "transcript_089.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -4051,12 +4823,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0090",
       "source_file": "transcript_090.txt",
       "issue": "escrow side accurate",
+      "issues": [
+        "escrow side accurate",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -4074,12 +4854,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0091",
       "source_file": "transcript_091.txt",
       "issue": "marked late",
+      "issues": [
+        "marked late",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -4098,12 +4886,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0092",
       "source_file": "transcript_092.txt",
       "issue": "escrow statement",
+      "issues": [
+        "escrow statement",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -4121,12 +4917,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0093",
       "source_file": "transcript_093.txt",
       "issue": "monthly payment right",
+      "issues": [
+        "monthly payment right",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -4145,12 +4949,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0094",
       "source_file": "transcript_094.txt",
       "issue": "title company needs",
+      "issues": [
+        "title company needs",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -4166,12 +4978,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0095",
       "source_file": "transcript_095.txt",
       "issue": "escrow already paid",
+      "issues": [
+        "escrow already paid",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -4188,12 +5008,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0096",
       "source_file": "transcript_096.txt",
       "issue": "payment online",
+      "issues": [
+        "payment online",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -4210,12 +5038,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0097",
       "source_file": "transcript_097.txt",
       "issue": "escrow analysis raised",
+      "issues": [
+        "escrow analysis raised",
+        "already called once"
+      ],
       "outcome": "follow-up needed",
       "behaviors": [
         "completed verification",
@@ -4235,12 +5071,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0098",
       "source_file": "transcript_098.txt",
       "issue": "fall further behind",
+      "issues": [
+        "fall further behind",
+        "already called once"
+      ],
       "outcome": "callback requested",
       "behaviors": [
         "completed verification",
@@ -4258,12 +5102,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0099",
       "source_file": "transcript_099.txt",
       "issue": "funds were wired",
+      "issues": [
+        "funds were wired",
+        "already called once"
+      ],
       "outcome": "escalated",
       "behaviors": [
         "completed verification",
@@ -4281,12 +5133,20 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 12,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     },
     {
       "call_id": "CALL-0100",
       "source_file": "transcript_100.txt",
       "issue": "insurance even though",
+      "issues": [
+        "insurance even though",
+        "already called once"
+      ],
       "outcome": "resolved",
       "behaviors": [
         "completed verification",
@@ -4303,7 +5163,11 @@
         "mid": 0.333,
         "closing": 1.0,
         "shift": 0.0
-      }
+      },
+      "turn_count": 14,
+      "first_contact_resolved": false,
+      "timestamp_start": null,
+      "timestamp_end": null
     }
   ],
   "top_patterns": [

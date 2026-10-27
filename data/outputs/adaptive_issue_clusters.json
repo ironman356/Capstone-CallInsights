@@ -2,7 +2,7 @@
   {
     "cluster_id": "ISSUE-0001",
     "label": "marked late",
-    "count": 28,
+    "count": 35,
     "call_ids": [
       "CALL-0001",
       "CALL-0006",
@@ -15,12 +15,12 @@
       "CALL-0006",
       "CALL-0036"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0002",
     "label": "escrow statement",
-    "count": 24,
+    "count": 30,
     "call_ids": [
       "CALL-0002",
       "CALL-0022",
@@ -33,12 +33,12 @@
       "CALL-0062",
       "CALL-0067"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0003",
     "label": "fall further behind",
-    "count": 28,
+    "count": 35,
     "call_ids": [
       "CALL-0003",
       "CALL-0013",
@@ -51,12 +51,12 @@
       "CALL-0013",
       "CALL-0018"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0004",
     "label": "funds were wired",
-    "count": 12,
+    "count": 15,
     "call_ids": [
       "CALL-0004",
       "CALL-0034",
@@ -69,12 +69,12 @@
       "CALL-0099",
       "CALL-0004"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0005",
     "label": "insurance even though",
-    "count": 36,
+    "count": 45,
     "call_ids": [
       "CALL-0005",
       "CALL-0015",
@@ -87,12 +87,12 @@
       "CALL-0100",
       "CALL-0005"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0006",
-    "label": "mortgage payment jumped",
-    "count": 24,
+    "label": "escrow",
+    "count": 30,
     "call_ids": [
       "CALL-0007",
       "CALL-0012",
@@ -105,12 +105,12 @@
       "CALL-0017",
       "CALL-0037"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:38Z"
   },
   {
     "cluster_id": "ISSUE-0007",
     "label": "monthly payment right",
-    "count": 40,
+    "count": 50,
     "call_ids": [
       "CALL-0008",
       "CALL-0023",
@@ -123,12 +123,12 @@
       "CALL-0088",
       "CALL-0093"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0008",
     "label": "title company needs",
-    "count": 40,
+    "count": 50,
     "call_ids": [
       "CALL-0009",
       "CALL-0019",
@@ -141,12 +141,12 @@
       "CALL-0089",
       "CALL-0094"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0009",
     "label": "escrow side accurate",
-    "count": 20,
+    "count": 25,
     "call_ids": [
       "CALL-0010",
       "CALL-0035",
@@ -159,12 +159,12 @@
       "CALL-0045",
       "CALL-0090"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0010",
     "label": "bank shows",
-    "count": 24,
+    "count": 30,
     "call_ids": [
       "CALL-0011",
       "CALL-0016",
@@ -177,12 +177,12 @@
       "CALL-0021",
       "CALL-0041"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:38Z"
   },
   {
     "cluster_id": "ISSUE-0011",
     "label": "good through date",
-    "count": 28,
+    "count": 35,
     "call_ids": [
       "CALL-0014",
       "CALL-0024",
@@ -195,12 +195,12 @@
       "CALL-0024",
       "CALL-0029"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:38Z"
   },
   {
     "cluster_id": "ISSUE-0012",
     "label": "payment online",
-    "count": 28,
+    "count": 35,
     "call_ids": [
       "CALL-0026",
       "CALL-0031",
@@ -213,12 +213,12 @@
       "CALL-0031",
       "CALL-0046"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0013",
     "label": "escrow analysis raised",
-    "count": 32,
+    "count": 40,
     "call_ids": [
       "CALL-0027",
       "CALL-0032",
@@ -231,12 +231,12 @@
       "CALL-0027",
       "CALL-0032"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0014",
     "label": "escrow already paid",
-    "count": 24,
+    "count": 30,
     "call_ids": [
       "CALL-0050",
       "CALL-0060",
@@ -249,12 +249,12 @@
       "CALL-0065",
       "CALL-0070"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:39Z"
   },
   {
     "cluster_id": "ISSUE-0015",
     "label": "assistance options",
-    "count": 12,
+    "count": 15,
     "call_ids": [
       "CALL-0068",
       "CALL-0078",
@@ -267,6 +267,6 @@
       "CALL-0083",
       "CALL-0068"
     ],
-    "last_seen_at": "2026-10-21T12:20:38Z"
+    "last_seen_at": "2026-10-27T09:53:38Z"
   }
 ]
