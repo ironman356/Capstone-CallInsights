@@ -2328,6 +2328,32 @@ button { cursor: pointer; }
   }
 }
 
+/* Tablet control surface used beside the AR prism simulation. */
+.live-call-console {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, var(--line));
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel) 94%, var(--surface-accent));
+  box-shadow: var(--shadow);
+}
+.live-call-console.transferred { border-color: color-mix(in srgb, var(--success) 55%, var(--line)); }
+.live-call-console-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.live-call-console-head > div { display: grid; gap: 3px; }
+.live-call-console-head strong { font-size: 1rem; letter-spacing: -.02em; }
+.live-call-status { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: .68rem; font-weight: 650; text-align: right; }
+.live-call-status i { width: 7px; height: 7px; border-radius: 50%; background: var(--success); box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 14%, transparent); }
+.live-call-wave { display: flex; align-items: center; gap: 3px; min-height: 54px; padding: 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg-soft); overflow: hidden; }
+.live-call-wave i { display: block; width: 3px; min-height: 5px; border-radius: 999px; background: var(--accent); animation: voice-activity 1.4s ease-in-out infinite alternate; }
+.live-call-wave i:nth-child(3n) { animation-delay: -.4s; }.live-call-wave i:nth-child(4n) { animation-delay: -.8s; }
+.live-call-wave span { margin-left: 6px; color: var(--muted); font-size: .69rem; white-space: nowrap; }
+.live-call-cue { display: grid; gap: 5px; padding: 11px; border-radius: 10px; background: color-mix(in srgb, var(--warn) 12%, var(--surface)); }
+.live-call-cue span { color: var(--warn); font-size: .67rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+.live-call-cue p { margin: 0; color: var(--text); font-size: .78rem; line-height: 1.45; }
+@keyframes voice-activity { from { transform: scaleY(.42); opacity: .5; } to { transform: scaleY(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .live-call-wave i { animation: none; } }
+
 /* Product polish: quiet, desktop-native visual system.  Kept at the end so it
    applies consistently to every existing workspace without changing behavior. */
 :root {

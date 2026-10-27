@@ -77,6 +77,7 @@ export default function LiveIncidentCommandPage({
   const [decisionHologramOpen, setDecisionHologramOpen] = useState(true);
   const [hologramMomentIndex, setHologramMomentIndex] = useState(0);
   const [isNarratingHologram, setIsNarratingHologram] = useState(false);
+  const [handoffStatus, setHandoffStatus] = useState<"agent" | "transferred">("agent");
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const narrationTimersRef = useRef<number[]>([]);
@@ -138,6 +139,7 @@ export default function LiveIncidentCommandPage({
 
   useEffect(() => {
     setHologramMomentIndex(0);
+    setHandoffStatus("agent");
   }, [selectedArIssueSlug]);
 
   useEffect(() => () => stopHologramNarration(narrationTimersRef), []);
@@ -269,6 +271,12 @@ export default function LiveIncidentCommandPage({
   function stopNarratedHandoff() {
     stopHologramNarration(narrationTimersRef);
     setIsNarratingHologram(false);
+  }
+
+  function completeHandoff() {
+    stopNarratedHandoff();
+    setHologramMomentIndex(handoffMoments.length - 1);
+    setHandoffStatus("transferred");
   }
 
   return (
@@ -618,7 +626,7 @@ export default function LiveIncidentCommandPage({
                               <Volume2 size={14} />
                               {isNarratingHologram ? "Stop narration" : "Run narrated handoff"}
                             </button>
-                            {activeHandoffMoment.tone === "handoff" ? <button type="button" className="primary-button small" onClick={() => arJourneyCall && onOpenCall(arJourneyCall.call_id)}>Review handoff</button> : null}
+                            {activeHandoffMoment.tone === "handoff" ? <button type="button" className="primary-button small" onClick={completeHandoff}>{handoffStatus === "transferred" ? "Handoff complete" : "Hand off to human"}</button> : null}
                           </div>
                           <div className="hologram-progress" aria-label={`Handoff step ${hologramMomentIndex + 1} of ${handoffMoments.length}`}>
                             {handoffMoments.map((moment, index) => <button key={moment.state} type="button" className={index === hologramMomentIndex ? "active" : ""} onClick={() => { stopNarratedHandoff(); setHologramMomentIndex(index); }} aria-label={`Show ${moment.state}`} />)}
@@ -629,6 +637,25 @@ export default function LiveIncidentCommandPage({
                   </div>
 
                   <div className="incident-ar-sidepanel">
+                    <div className={`live-call-console ${handoffStatus === "transferred" ? "transferred" : ""}`}>
+                      <div className="live-call-console-head">
+                        <div><span className="incident-brief-label">Call Insights</span><strong>Live call</strong></div>
+                        <span className="live-call-status"><i />{handoffStatus === "transferred" ? "Human supervising" : "AI voice agent active"}</span>
+                      </div>
+                      <div className="live-call-wave" aria-label="Simulated voice activity">
+                        {[18, 34, 23, 50, 72, 43, 62, 28, 46, 76, 39, 22, 55, 31, 47, 20].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+                        <span>Live context: {arJourneyCall?.call_id ?? "No source call"}</span>
+                      </div>
+                      <div className="live-call-cue">
+                        <span>Supervisor cue</span>
+                        <p>{handoffStatus === "transferred" ? "The complete call context, current intent, and evidence path are now available to the human supervisor." : activeHandoffMoment.operatorCue}</p>
+                      </div>
+                      {handoffStatus === "transferred" ? (
+                        <button type="button" className="primary-button" onClick={() => arJourneyCall && onOpenCall(arJourneyCall.call_id)}>Open handoff packet</button>
+                      ) : (
+                        <button type="button" className="primary-button" onClick={completeHandoff}>Hand off to human</button>
+                      )}
+                    </div>
                     <div className="incident-ar-card">
                       <span className="incident-brief-label">Issue constellation</span>
                       <strong>{selectedArIssue ? titleCase(selectedArIssue.issue) : "No issue selected"}</strong>
