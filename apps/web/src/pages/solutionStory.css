@@ -1,6 +1,6 @@
 .discovery-page { display: grid; gap: 20px; min-width: 0; }
 .discovery-page h3 { margin-top: 0; }
-.discovery-hero { display: flex; justify-content: space-between; gap: 32px; padding: 32px; background: radial-gradient(ellipse at right, #18564755, transparent 65%), var(--panel); }
+.discovery-hero { display: flex; justify-content: space-between; gap: 32px; padding: 32px; background: var(--panel); }
 .discovery-hero h2 { font-family: var(--font-display); font-size: clamp(28px, 3.2vw, 48px); letter-spacing: -.04em; line-height: 1.08; margin: 12px 0; }
 .discovery-hero p { max-width: 720px; color: var(--muted); line-height: 1.6; }
 .discovery-summary { min-width: 140px; display: grid; gap: 3px; align-content: center; border-left: 1px solid var(--line); padding-left: 30px; }

@@ -28,6 +28,10 @@ The `Live Incident Command` page includes a touch-first `AR Field Mode` with:
 - `Recommended Action`
   - The current issue cluster immediately maps to a suggested action-plan draft
   - KPI tags keep the business story anchored in measurable outcomes
+- `Live Voice-Agent Handoff Hologram`
+  - A selected issue projects the AI voice agent's visible state: listening, grounded response, understanding check, and human-handoff-ready.
+  - A browser-narrated Beta sequence makes the state transition recordable on a tablet without requiring a live telephony integration.
+  - It keeps the active intent, source call, supervisor cue, and one-tap source-call handoff together so the spatial view supports oversight rather than serving as visual decoration.
 
 ## Why this fits the product
 
@@ -36,6 +40,17 @@ The `Live Incident Command` page includes a touch-first `AR Field Mode` with:
 - It is easy to explain in business terms during a demo.
 - It works on a tablet or phone without special hardware.
 - It naturally links evidence calls to action plans.
+
+## Why the Live Voice-Agent Handoff Hologram is useful
+
+The hologram is a compact supervision surface for a supervisor reviewing an AI voice-agent call. It does not claim that the agent is certain or autonomous. Instead, it keeps the four facts needed before the agent continues or a person takes over together in the same view:
+
+1. **What the agent believes**: the active customer intent.
+2. **What the agent is doing next**: listening, grounded explanation, or understanding check.
+3. **What the supervisor can inspect**: the representative source call and relevant evidence.
+4. **When a human must intervene**: an explicit handoff-ready state with a supervisor cue.
+
+This is appropriate for AR because the tablet view is being used for a shared review and spatial comparison of issue clusters, not to replace a normal dashboard. AR decision-support research identifies spatial context and data-context associations as the relevant advantage, while trustworthy AI guidance calls for understandable evidence, sufficient confidence, and human oversight. The application therefore treats the hologram as a route to evidence and a human handoff, never as an autonomous decision.
 
 ## Implementation approach
 

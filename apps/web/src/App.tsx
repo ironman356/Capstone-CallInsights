@@ -239,7 +239,7 @@ function App() {
   const queryClient = useQueryClient();
   const [theme, setTheme] = useState<ThemeMode>(() => {
     const stored = window.localStorage.getItem("ci-theme");
-    return stored === "light" || stored === "dark" ? stored : "dark";
+    return stored === "light" || stored === "dark" ? stored : "light";
   });
   const [page, setPage] = useState<PageKey>(() => pageFromPath(window.location.pathname));
   const [issueFilter, setIssueFilter] = useState("");
@@ -651,8 +651,8 @@ function App() {
       <aside className="dashboard-sidebar">
         <div className="brand-block">
           <p className="brand-kicker">Call Insights</p>
-          <h1>Servicing performance, clearly organized.</h1>
-          <p>Track call drivers, resolution quality, customer friction, and action plans in one management dashboard.</p>
+          <h1>Call intelligence for better servicing.</h1>
+          <p>Understand the patterns behind customer calls, then turn the evidence into a clear next action.</p>
         </div>
         <nav className="dashboard-nav">
           {NAV_ITEMS.map(([key, label, description]) => (
