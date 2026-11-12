@@ -129,91 +129,74 @@ function StrategyDeadlineEditor({
   );
 }
 
-const PAGE_META: Record<PageKey, { title: string; description: string; kicker: string }> = {
+const PAGE_META: Record<PageKey, { title: string; description: string }> = {
   "compare-approaches": {
     title: "Compare approaches",
     description: "Compare up to four approaches.",
-    kicker: "",
   },
   results: {
     title: "Issue Deep Dive",
     description: "Explore an issue, inspect agent approaches, and read supporting transcripts.",
-    kicker: "",
   },
   "approach-matrix": {
     title: "Approach Effectiveness Matrix",
     description: "Compare approach outcomes across issues and inspect the evidence behind each signal.",
-    kicker: "",
   },
   "approach-portfolio": {
     title: "Approach Portfolio",
     description: "Explore modeled adoption, consistency, and outcome impact to prioritize approaches.",
-    kicker: "",
   },
   overview: {
     title: "Overview",
     description: "Executive view of call drivers, outcomes, sentiment movement, and active action plans.",
-    kicker: "Executive Summary",
   },
   issues: {
     title: "Issues",
     description: "Track recurring customer problems, supporting evidence, and patterns across calls.",
-    kicker: "Issue Analysis",
   },
   calls: {
     title: "Calls",
     description: "Review representative calls, transcript details, and signal extraction for specific interactions.",
-    kicker: "Call Review",
   },
   solutions: {
     title: "Story → Solution",
     description: "Compare response behaviors within an issue cluster, inspect evidence, and turn promising signals into a valid test.",
-    kicker: "Solution Discovery",
   },
   strategies: {
     title: "Action Plans",
     description: "Manage improvement plans, ownership, and progress against the issues driving performance.",
-    kicker: "Action Management",
   },
   learning: {
     title: "Monitoring",
     description: "See refresh status, control checks, and the operating health of the analytics workflow.",
-    kicker: "Controls & Monitoring",
   },
   "model-approaches": {
     title: "Model Approaches",
     description: "Compare topic-mapping and agent-approach extraction methods on the same frozen benchmark.",
-    kicker: "Model Evaluation",
   },
   "ask-ci": {
     title: "Ask CI",
     description: "Use the assistant to find the right page, explain a metric, or navigate directly to supporting detail.",
-    kicker: "Assistant",
   },
   "live-command": {
     title: "Live Incident Command",
     description: "Leadership-ready incident room with executive brief, change detection, evidence routing, guided answers, and AR field mode.",
-    kicker: "Incident Room",
   },
   field: {
     title: "Field Mode",
     description: "Phone-first issue field with camera-gated AR controls.",
-    kicker: "Field",
   },
   governance: {
     title: "Governance",
     description: "Review architecture, evidence policy, and control surfaces in one governed workspace.",
-    kicker: "Governance",
   },
   "visual-lab": {
     title: "Visual Lab",
     description: "Design exploration workspace.",
-    kicker: "Design Lab",
   },
   reports: {
     title: "Reports",
     description: "Leadership-ready export package with totals, highlights, and issue-level reporting.",
-    kicker: "Reporting",
   },
 };
 
@@ -711,7 +694,6 @@ function App() {
       <main className={`dashboard-main ${["results", "compare-approaches", "approach-matrix", "approach-portfolio"].includes(page) ? "results-main" : ""}`}>
         <section className="workspace-header">
           <div className="workspace-heading">
-            {pageMeta.kicker ? <p className="section-kicker">{pageMeta.kicker}</p> : null}
             <h2>{pageMeta.title}</h2>
             <p>{pageMeta.description}</p>
           </div>
@@ -725,7 +707,6 @@ function App() {
         {page === "overview" ? (
           <section className="hero-panel overview-hero">
             <div className="hero-copy">
-              <p className="section-kicker">Executive Overview</p>
               <h2>See what customers are calling about, which responses are working, and where teams need support.</h2>
               <p>This dashboard brings together call drivers, resolution results, sentiment movement, and active action plans for servicing leadership.</p>
               <div className="hero-briefs">

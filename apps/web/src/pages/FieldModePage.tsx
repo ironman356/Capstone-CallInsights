@@ -326,7 +326,6 @@ export default function FieldModePage({ workspace, onNavigate, onOpenIssue, onOp
       {!cameraEnabled ? (
         <div className="field-launchpad">
           <div className="field-launchpad-copy">
-            <span className="section-kicker">Field Mode</span>
             <h1>Turn on the camera to open the issue field.</h1>
             <p>No balls, timeline, or AR controls render until camera access is explicitly enabled.</p>
           </div>

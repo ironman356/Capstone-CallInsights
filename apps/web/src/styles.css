@@ -3037,8 +3037,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 }
 
 /* Issue Deep Dive and approach comparison. */
-.results-main { container-type: inline-size; align-content: start; padding-top: 12px; gap: 12px; }
-.results-main .workspace-heading p { margin-top: 4px; }
+.results-main { container-type: inline-size; }
 .compare-dashboard { --compare-a: #6ee7c8; --compare-b: #b9b0ff; --compare-c: #ffc66b; --compare-d: #7ac8ff; display: grid; gap: 14px; min-width: 0; align-content: start; }
 .compare-dashboard h3, .compare-dashboard h4, .compare-dashboard p { margin: 0; }
 .compare-dashboard h3 { font-family: var(--font-display); font-size: 1.05rem; }
@@ -3242,11 +3241,6 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 .results-delta.neutral { color: var(--muted); }
 :root[data-theme="light"] .results-delta.positive { color: #087f5b; }
 :root[data-theme="light"] .results-delta.negative { color: #c92a2a; }
-
-@media (min-width: 901px) {
-  .results-main .workspace-header { flex-direction: row; }
-  .results-main .workspace-actions { justify-content: flex-end; }
-}
 
 @container (min-width: 42rem) {
   .results-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -3533,8 +3527,7 @@ button svg, .legend-dot, .panel-heading > svg, .policy-item > svg, .brief-pill >
 :where(h1, h2, h3, h4, p, strong, .data-tag, .brief-pill, .sidebar-summary-row) { overflow-wrap: anywhere; }
 :where(.panel-card, .panel, .subpanel, .hero-copy, .hero-side, .detail-stack-grid, .call-review-layout, .learning-grid, .report-grid, .workspace-header) > * { min-width: 0; }
 .section-kicker { text-transform: none; letter-spacing: .025em; font-size: .75rem; line-height: 1.4; }
-.workspace-heading .section-kicker { margin: 0 0 6px; }
-.workspace-heading > p:last-child { margin-top: 8px; max-width: 64ch; }
+.workspace-heading > p { margin-top: 8px; max-width: 64ch; }
 .hero-panel, .panel-card, .panel, .subpanel, .metric-card, .nav-card,
 .brief-pill, .issue-list-card, .call-list-card, .pattern-card, .strategy-card,
 .qa-card, .policy-item, .transcript-turn, .segment-pill, .data-tag, .evidence-row, .kpi-toggle {
@@ -3552,6 +3545,7 @@ button svg, .legend-dot, .panel-heading > svg, .policy-item > svg, .brief-pill >
 .metric-card { min-width: 0; }
 .metric-card strong, .line-row strong, .table-row-dashboard, .results-stats-table { font-variant-numeric: tabular-nums; }
 .metric-card strong { line-height: 1.25; margin-top: 8px; overflow-wrap: normal; white-space: nowrap; }
+.ask-ci-metric strong { white-space: normal; overflow-wrap: anywhere; }
 .hero-metrics { align-items: stretch; }
 .brief-pill { align-items: flex-start; }
 .brief-pill svg { margin-top: 2px; }
