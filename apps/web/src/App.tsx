@@ -35,11 +35,11 @@ const CALLS_PER_PAGE = 14;
 const KPI_OPTIONS = ["AHT", "FCR", "Repeat Calls", "Escalation Rate", "Sentiment"];
 const OUTCOME_COLORS = ["#69d2ff", "#8ce99a", "#ffc96c", "#ff8d72", "#b7a1ff"];
 const TONE_COLORS: Record<string, string> = {
-  neutral: "#7cc6ff",
-  info: "#6ad5c2",
-  risk: "#ff8a66",
-  stable: "#84d66e",
-  warning: "#ffc857",
+  neutral: "var(--accent)",
+  info: "var(--accent-alt)",
+  risk: "var(--risk)",
+  stable: "var(--success)",
+  warning: "var(--warn)",
 };
 
 function formatStrategyDate(value: string) {
@@ -287,6 +287,7 @@ function App() {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#161617" : "#f4f7fb");
     window.localStorage.setItem("ci-theme", theme);
   }, [theme]);
 
@@ -699,7 +700,7 @@ function App() {
             </div>
             <div className="sidebar-summary-row">
               <span>Last refresh</span>
-              <strong>{generatedAt}</strong>
+              <strong><time dateTime={generatedAt} title={generatedAt}>{new Date(generatedAt).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</time></strong>
             </div>
           </div>
           <div className="sidebar-controls">
@@ -777,9 +778,9 @@ function App() {
               </div>
               <div className="chart-box">
                 <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={issueVolumeData}>
+                  <BarChart data={issueVolumeData} margin={{ top: 8, right: 8, left: 16, bottom: 0 }}>
                     <CartesianGrid vertical={false} stroke="rgba(122,148,190,0.14)" />
-                    <XAxis dataKey="issue" tickLine={false} axisLine={false} interval={0} angle={-12} textAnchor="end" height={64} />
+                    <XAxis dataKey="issue" tick={{ fontSize: 12, fill: "var(--muted)" }} tickMargin={10} tickLine={false} axisLine={false} interval={0} angle={-12} textAnchor="end" height={64} />
                     <YAxis tickLine={false} axisLine={false} />
                     <Tooltip contentStyle={tooltipStyle} />
                     <Bar dataKey="count" radius={[10, 10, 0, 0]}>
@@ -900,9 +901,9 @@ function App() {
                 </div>
                 <BrainCircuit size={18} />
               </div>
-              <input className="dashboard-input" placeholder="Filter issues" value={issueFilter} onChange={(event) => setIssueFilter(event.target.value)} />
+              <input className="dashboard-input" placeholder="Filter issues" aria-label="Filter issues" value={issueFilter} onChange={(event) => setIssueFilter(event.target.value)} />
               <div className="issue-list">
-                {issueCards.map((issue) => (
+                {issueCards.length ? issueCards.map((issue) => (
                   <button key={issue.slug} type="button" className={`issue-list-card ${issue.slug === selectedIssueSlug ? "active" : ""}`} onClick={() => setSelectedIssueSlug(issue.slug)}>
                     <div>
                       <strong>{issue.issue}</strong>
@@ -910,7 +911,7 @@ function App() {
                     </div>
                     <span>{issue.count}</span>
                   </button>
-                ))}
+                )) : <p className="empty-state">{dashboard.issues.length ? "No issues match this search. Try a different term." : "No issues loaded. Refresh view to check for new analysis."}</p>}
               </div>
             </div>
             <div className="panel-card span-two">
@@ -1019,7 +1020,7 @@ function App() {
                     <span>{(call.issues ?? [call.issue]).join(" · ")}</span>
                     <p>{call.summary}</p>
                   </button>
-                )) : <p className="empty-state">No calls match this issue search.</p>}
+                )) : <p className="empty-state">{dashboard.calls.length ? "No calls match this issue search." : "No calls indexed. Refresh view to check for new transcripts."}</p>}
               </div>
             </div>
             <div className="panel-card span-two">
@@ -1107,6 +1108,7 @@ function App() {
                       <strong>{stage.name}</strong>
                       <span>{stage.count}</span>
                     </div>
+                    {!workspace.strategy_board.strategies.some(strategy => strategy.status === stage.name) ? <p className="empty-state kanban-empty">No plans in this stage</p> : null}
                     {workspace.strategy_board.strategies.filter((strategy) => strategy.status === stage.name).map((strategy) => {
                       const deadline = deadlineState(strategy);
                       return (

@@ -28,7 +28,7 @@ export function formatValue(value: number | string): string {
     return value;
   }
   if (Number.isInteger(value)) {
-    return value.toString();
+    return value.toLocaleString();
   }
   return value.toFixed(3);
 }
@@ -46,7 +46,7 @@ export function compareCallRecency(left: CallCard, right: CallCard) {
 
 export function titleCase(value: string): string {
   return value
-    .split(/[\s/-]+/)
+    .split(/[\s/_-]+/)
     .filter(Boolean)
     .map((part) => part[0].toUpperCase() + part.slice(1))
     .join(" ");

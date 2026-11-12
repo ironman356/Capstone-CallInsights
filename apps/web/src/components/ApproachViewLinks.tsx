@@ -16,10 +16,10 @@ export default function ApproachViewLinks({ currentPage, onNavigate }: {
   if (!VIEWS.some((view) => view.page === currentPage)) return null;
 
   return (
-    <nav className="panel-card approach-view-links" aria-label="Related modelling and analysis views">
-      <h3>Explore related views</h3>
+    <details className="panel-card approach-view-links">
+      <summary>Explore related views</summary>
       <p>Model Approaches evaluates AI methods. The other views explore agent behaviors found in calls.</p>
-      <div className="approach-view-links-grid">
+      <nav className="approach-view-links-grid" aria-label="Related modelling and analysis views">
         {VIEWS.map((view) => (
           <a
             key={view.page}
@@ -36,7 +36,7 @@ export default function ApproachViewLinks({ currentPage, onNavigate }: {
             {view.page === currentPage ? <small>Current page</small> : null}
           </a>
         ))}
-      </div>
-    </nav>
+      </nav>
+    </details>
   );
 }

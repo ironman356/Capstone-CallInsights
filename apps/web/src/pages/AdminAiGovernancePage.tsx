@@ -14,7 +14,7 @@ export default function AdminAiGovernancePage({ workspace }: AdminAiGovernancePa
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   return (
-    <div className="admin-page" style={{ display: 'grid', gap: '32px' }}>
+    <div className="admin-page">
       <section className="layout-grid" style={{ marginTop: 0 }}>
         <article className="panel">
           <div className="section-heading">
