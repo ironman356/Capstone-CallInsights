@@ -1,6 +1,6 @@
 import { Activity as ReactActivity, startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
+import { Activity, ArrowRight, BrainCircuit, FileDown, GitBranchPlus, Menu, Pencil, RefreshCw, ShieldCheck, Sparkles, Target, X } from "lucide-react";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { api } from "./api";
 import { pageFromPath, pathFromPage, type PageKey } from "./navigation";
@@ -242,6 +242,8 @@ function App() {
     return stored === "light" || stored === "dark" ? stored : "light";
   });
   const [page, setPage] = useState<PageKey>(() => pageFromPath(window.location.pathname));
+  const [navigationOpen, setNavigationOpen] = useState(false);
+  const navigationToggleRef = useRef<HTMLButtonElement>(null);
   const [issueFilter, setIssueFilter] = useState("");
   const [callIssueFilter, setCallIssueFilter] = useState("");
   const [callIssueSort, setCallIssueSort] = useState<"issue-asc" | "issue-desc" | "recent" | "oldest">("issue-asc");
@@ -289,7 +291,10 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
-    const onPopState = () => setPage(pageFromPath(window.location.pathname));
+    const onPopState = () => {
+      setPage(pageFromPath(window.location.pathname));
+      setNavigationOpen(false);
+    };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
@@ -648,36 +653,58 @@ function App() {
     <div className="dashboard-shell">
       <div className="dashboard-glow dashboard-glow-one" />
       <div className="dashboard-glow dashboard-glow-two" />
-      <aside className="dashboard-sidebar">
+      <aside className="dashboard-sidebar" onKeyDown={(event) => {
+        if (event.key === "Escape" && navigationOpen) {
+          setNavigationOpen(false);
+          navigationToggleRef.current?.focus();
+        }
+      }}>
         <div className="brand-block">
           <p className="brand-kicker">Call Insights</p>
           <h1>Call intelligence for better servicing.</h1>
           <p>Understand the patterns behind customer calls, then turn the evidence into a clear next action.</p>
+          <button
+            ref={navigationToggleRef}
+            type="button"
+            className="ghost-button navigation-toggle"
+            aria-expanded={navigationOpen}
+            aria-controls="workspace-navigation"
+            onClick={() => setNavigationOpen(!navigationOpen)}
+          >
+            {navigationOpen ? <X size={18} /> : <Menu size={18} />}
+            {navigationOpen ? "Close menu" : "Menu"}
+          </button>
         </div>
-        <nav className="dashboard-nav">
-          {NAV_ITEMS.map(([key, label, description]) => (
-            <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => navigate(key)} aria-current={page === key ? "page" : undefined}>
-              <strong>{label}</strong>
-              {description ? <span>{description}</span> : null}
-            </button>
-          ))}
-        </nav>
-        <div className="sidebar-summary">
-          <div className="sidebar-summary-row">
-            <span>Top issue</span>
-            <strong>{topIssue?.issue ?? "n/a"}</strong>
+        <div id="workspace-navigation" className={`sidebar-navigation ${navigationOpen ? "is-open" : ""}`}>
+          <nav className="dashboard-nav" aria-label="Main navigation">
+            {NAV_ITEMS.map(([key, label, description]) => (
+              <button key={key} type="button" className={`nav-card ${page === key ? "active" : ""}`} onClick={() => {
+                navigate(key);
+                setNavigationOpen(false);
+                if (navigationToggleRef.current?.offsetParent) navigationToggleRef.current.focus();
+              }} aria-current={page === key ? "page" : undefined}>
+                <strong>{label}</strong>
+                {description ? <span>{description}</span> : null}
+              </button>
+            ))}
+          </nav>
+          <div className="sidebar-summary">
+            <div className="sidebar-summary-row">
+              <span>Top issue</span>
+              <strong>{topIssue?.issue ?? "n/a"}</strong>
+            </div>
+            <div className="sidebar-summary-row">
+              <span>Open action plans</span>
+              <strong>{openActionPlans}</strong>
+            </div>
+            <div className="sidebar-summary-row">
+              <span>Last refresh</span>
+              <strong>{generatedAt}</strong>
+            </div>
           </div>
-          <div className="sidebar-summary-row">
-            <span>Open action plans</span>
-            <strong>{openActionPlans}</strong>
+          <div className="sidebar-controls">
+            <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
           </div>
-          <div className="sidebar-summary-row">
-            <span>Last refresh</span>
-            <strong>{generatedAt}</strong>
-          </div>
-        </div>
-        <div className="sidebar-controls">
-          <button type="button" className="ghost-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>{theme === "dark" ? "Switch to light" : "Switch to dark"}</button>
         </div>
       </aside>
       <main className={`dashboard-main ${["results", "compare-approaches", "approach-matrix", "approach-portfolio"].includes(page) ? "results-main" : ""}`}>

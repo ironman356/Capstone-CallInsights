@@ -175,7 +175,7 @@ export default function ApproachMatrixPage({ issues, calls, onOpenCall }: Approa
         ) : null}
 
         <div className="matrix-scroll">
-          <table className="approach-matrix-table">
+          <table className="approach-matrix-table" style={{ minWidth: `${13.75 + issues.length * 7.375}rem` }}>
             <thead>
               <tr>
                 <th scope="col">Approach</th>
